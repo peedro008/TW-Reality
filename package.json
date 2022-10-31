@@ -1,29 +1,53 @@
 {
-  "name": "back",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -L"
-  },
-  "author": "",
-  "license": "ISC",
+  "name": "trueway_reality",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "aws-sdk": "^2.1190.0",
-    "axios": "^0.22.0",
-    "bcryptjs": "^2.4.3",
-    "dotenv": "^10.0.0",
-    "dynamoDB": "^0.1.4",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.10.0",
-    "mysql2": "^2.3.0",
-    "nodemailer": "^6.7.7",
-    "nodemon": "^2.0.13",
-    "pg": "^8.7.1",
-    "sequelize": "^6.6.5",
-    "sequelize-cli": "^6.4.1",
-    "serverless-sequelize-migrations": "^1.1.1"
+    "@hookform/resolvers": "^2.9.0",
+    "@material-ui/core": "^4.12.4",
+    "@react-pdf/renderer": "^2.1.1",
+    "axios": "^0.27.2",
+    "moment": "^2.29.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.4.0",
+    "react-redux": "^7.2.6",
+    "react-responsive-modal": "^6.2.0",
+    "react-router": "^5.0.0",
+    "react-router-dom": "5.0.0",
+    "react-scripts": "4.0.3",
+    "react-search-field": "^2.0.1",
+    "react-select": "^5.2.1",
+    "redux": "^4.1.2",
+    "redux-localstorage": "^0.4.1",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-promise-middleware": "^6.1.2",
+    "redux-thunk": "^2.4.1",
+    "web-vitals": "^2.1.4"
+ },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
