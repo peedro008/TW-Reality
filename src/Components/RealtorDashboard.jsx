@@ -49,7 +49,7 @@ const RealtorDashboardComponent = ({ Referred,realtors, google, UserId, DATE,com
                       </p>
                     </div>
                     <div className="DashNumberDiv">
-                      <p className="DashNumber">${e.Sells.length * e.ComissionValue
+                      <p className="DashNumber">${e.Sells?.length * e.ComissionValue
                       }</p>
                     </div>
                   </div>
@@ -90,7 +90,7 @@ const RealtorDashboardComponent = ({ Referred,realtors, google, UserId, DATE,com
               <img src={bbill} />
             </div>
             <div className="dashText">
-              <p className="dashCardTitle">{Referred.filter(e=>e.User.id==UserId).length}</p>
+              <p className="dashCardTitle">{Referred?.filter(e=>e.User?.id==UserId).length}</p>
               <p className="dashCardText">Referrals</p>
             </div>
           </div>
@@ -102,7 +102,7 @@ const RealtorDashboardComponent = ({ Referred,realtors, google, UserId, DATE,com
               <img src={bbill} />
             </div>
             <div className="dashText">
-              <p className="dashCardTitle">{realtors.length} </p>
+              <p className="dashCardTitle">{realtors?.length} </p>
               <p className="dashCardText">Realtors</p>
             </div>
           </div>

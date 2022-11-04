@@ -21,6 +21,12 @@ function UserManagementComponent({
   onOpenModal,
   validarEmail,
 }) {
+  let validation =
+    form.password?.length < 8 ||
+    typeof form.password?.length === "undefined" ||
+    !validarEmail(form.email) ||
+    form.name?.length < 6 ||
+    typeof form.name?.length === "undefined";
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -34,7 +40,7 @@ function UserManagementComponent({
             <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF" />
             <p className="PAYbuttonText">Add realtor</p>
           </button>
-         
+
           {userRole == "Admin" ? (
             <button
               className="PAYbutton"
@@ -45,17 +51,23 @@ function UserManagementComponent({
               <p className="PAYbuttonText">Add manager</p>
             </button>
           ) : (
-            <NavLink to="/UserManagement/referred" style={{textDecoration:"none"}}>
-            <button className="PAYbutton"   style={{ marginLeft: "30px" }}>
-            <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF" />
-            <p className="PAYbuttonText">Add referred</p>
-          </button>
-          </NavLink>
+            <NavLink
+              to="/UserManagement/referred"
+              style={{ textDecoration: "none" }}
+            >
+              <button className="PAYbutton" style={{ marginLeft: "30px" }}>
+                <MdAdd
+                  size="1.25em"
+                  className="PAYbuttonIcon"
+                  color="#FFFFFF"
+                />
+                <p className="PAYbuttonText">Add referred</p>
+              </button>
+            </NavLink>
           )}
         </div>
       ) : type == "Realtor" ? (
         <>
-          {" "}
           <div className="managerInputsContainer">
             <div className="managerInputsubContainer" style={{ width: "50vw" }}>
               <div className="inputDiv">
@@ -91,10 +103,7 @@ function UserManagementComponent({
                 ></input>
               </div>
             </div>
-            <div
-              className="managerInputsubContainer"
-              style={{ width: "33vw" }}
-            >
+            <div className="managerInputsubContainer" style={{ width: "33vw" }}>
               <div className="inputDiv">
                 <p className="PAYtitle">Phone</p>
                 <input
@@ -121,6 +130,7 @@ function UserManagementComponent({
             </div>
           </div>
           <BsChevronLeft
+          cursor='pointer'
             color="grey"
             style={{
               minWidth: "30px",
@@ -145,12 +155,10 @@ function UserManagementComponent({
               className="PAYbutton"
               onClick={onSubmitR}
               style={{
-                backgroundColor:
-                  form?.email && !validarEmail(form?.email)
-                    ? "#696f79"
-                    : "#2b4162",
+                backgroundColor: validation && "#586579",
+                cursor: validation && "default",
               }}
-              disabled={form.email && !validarEmail(form?.email) ? true : false}
+              disabled={validation ? true : false}
             >
               <p className="PAYbuttonText">Add Realtor</p>
             </button>
@@ -224,6 +232,7 @@ function UserManagementComponent({
             </div>
           </div>
           <BsChevronLeft
+          cursor='pointer'
             color="grey"
             style={{
               minWidth: "30px",
@@ -248,12 +257,10 @@ function UserManagementComponent({
               className="PAYbutton"
               onClick={onSubmitM}
               style={{
-                backgroundColor:
-                  form?.email && !validarEmail(form?.email)
-                    ? "#696f79"
-                    : "#2b4162",
+                backgroundColor: validation && "#586579",
+                cursor: validation && "default",
               }}
-              disabled={form.email && !validarEmail(form?.email) ? true : false}
+              disabled={validation ? true : false}
             >
               <p className="PAYbuttonText">Add Manager</p>
             </button>

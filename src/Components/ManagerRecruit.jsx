@@ -25,6 +25,9 @@ onCloseModal,
 onOpenModal,validarEmail,
 setForm,
 }) {
+  console.log(form)
+  let validation = (form.password?.length<8 || typeof form.password?.length === 'undefined'||!validarEmail(form.email)||form.name?.length < 6  || typeof form.name?.length === 'undefined' || typeof form.ComissionValue?.length === 'undefined'||form.ComissionValue?.length < 2 );
+
   return (
     <div className="genericDiv">
     <div className="genericHeader">
@@ -106,9 +109,9 @@ setForm,
         <div className="inputDiv">
           <p className="PAYtitle">Referred by</p>
           <input
-            
-            value={RUser.name}
-          
+            disabled={true}
+            value={RUser?.name}
+            style={{backgroundColor:'lightgrey'}}
             className="AQinput"
           ></input>
           
@@ -125,7 +128,10 @@ setForm,
         display: "flex",
       }}
     >
-      <button className="PAYbutton" onClick={onSubmit} style={{backgroundColor:(form.password?.length<8||!validarEmail(form.email)||form.name?.length < 6)&&"#586579"}} disabled={(form.password?.length<8||!validarEmail(form.email)||form.name?.length < 6)?true:false}>
+      <button className="PAYbutton" onClick={() => onSubmit()}
+      style={{backgroundColor: validation &&"#586579", cursor: validation && 'default'}}
+      disabled={validation?true:false}
+      >
         <p className="PAYbuttonText">Add Realtor</p>
       </button>
     </div>
@@ -166,6 +172,7 @@ setForm,
       }}
     />
     <BsChevronLeft
+    cursor='pointer'
       color="grey"
       style={{
         minWidth: "30px",

@@ -77,7 +77,7 @@ function AddRealtorComponent({
           display: "flex",
         }}
       >
-        <button className="PAYbutton" onClick={onSubmit} style={{backgroundColor:(form.password?.length<8||!validarEmail(form.email)||form.name?.length < 6)&&"#586579"}} disabled={(form.password?.length<8||!validarEmail(form.email)||form.name?.length < 6)?true:false}>
+        <button className="PAYbutton" onClick={() => {onSubmit()}} style={{backgroundColor:(form.password?.length<8||!validarEmail(form.email)||form.name?.length < 6)&&"#586579"}} disabled={(form.password?.length<8||!validarEmail(form.email)||form.name?.length < 6)?true:false}>
           <p className="PAYbuttonText">Add Realtor</p>
         </button>
       </div>
@@ -118,6 +118,7 @@ function AddRealtorComponent({
         }}
       />
       <BsChevronLeft
+      cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",

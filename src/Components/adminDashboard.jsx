@@ -18,7 +18,6 @@ const AdminDashboardComponent = ({
       {!next ? (
         <div className="DashContainer">
           <div className="DashSubCont">
-         
             <div className="DashPList1" >
               <div className="DashPListHeader">
                 <p className="DashPListTitle">Producers average sale</p>
@@ -127,6 +126,7 @@ const AdminDashboardComponent = ({
         />
       ) : (
         <BsChevronLeft
+        cursor='pointer'
           color="grey"
           style={{
             minWidth: "40px",
@@ -139,6 +139,9 @@ const AdminDashboardComponent = ({
     
         />
       )}
+
+
+      
     </div>
   );
 };

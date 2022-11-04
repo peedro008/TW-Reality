@@ -5,56 +5,66 @@ import { useDispatch, useSelector } from "react-redux";
 import RealtorDashboardComponent from "../Components/RealtorDashboard";
 
 const RealtorDashboard = () => {
-  const [sellsMonth, setSellsMonth]=useState(null)
-  const [sellsYear, setSellsYear]=useState(null)
-  const Referred
- = useSelector(state=>state.Referred
-)
-  const [comm, setComm]=useState([])
-  const CommissionValue = useSelector(state=>state.CommissionValue)
-  const realtors = useSelector(e=>e.Realtors)
-  const UserId = useSelector(s=>s.UserId)
-  const sells = useSelector(e=>e.Sells)
+  const [sellsMonth, setSellsMonth] = useState(null);
+  const [sellsYear, setSellsYear] = useState(null);
+  const Referred = useSelector((state) => state.Referred);
+  const [comm, setComm] = useState([]);
+  const CommissionValue = useSelector((state) => state.CommissionValue);
+  const realtors = useSelector((e) => e.Realtors);
+  const UserId = useSelector((s) => s.UserId);
+  const sells = useSelector((e) => e.Sells);
   const date = new Date();
   const DATE =
-  date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
-  
-    useEffect(()=>{
-      let temp1=0
-      let temp2=0
-     
-      axios
+    date.getFullYear() +
+    (date.getMonth() + 1 > 9 ? "-" : "-0") +
+    (date.getMonth() + 1) +
+    "-" +
+    date.getDate();
+
+  useEffect(() => {
+    let temp1 = 0;
+    let temp2 = 0;
+
+    axios
       .get(`http://localhost:8080/getIdCommission?id=${UserId}`)
       .then(function (response) {
-        console.log(response.data.filter(e=>e.Sell.ClosingDate.substring(0,7)==DATE.substring(0,7)))
-        setComm([response.data.filter(e=>e.Sell.ClosingDate.substring(0,4)==DATE.substring(0,4)).length*Number(CommissionValue), response.data.filter(e=>e.Sell.ClosingDate.substring(5,7)==DATE.substring(5,7)).length*CommissionValue ])
+        console.log(
+          response.data.filter(
+            (e) => e.Sell.ClosingDate.substring(0, 7) == DATE.substring(0, 7)
+          )
+        );
+        setComm([
+          response.data.filter(
+            (e) => e.Sell.ClosingDate.substring(0, 4) == DATE.substring(0, 4)
+          ).length * Number(CommissionValue),
+          response.data.filter(
+            (e) => e.Sell.ClosingDate.substring(5, 7) == DATE.substring(5, 7)
+          ).length * CommissionValue,
+        ]);
       })
       .catch((error) => {
-       console.log(error)
+        console.log(error);
       });
-  
-     
-     
-      realtors?.map(e=>{
-        e.Sells?.map(f=>{
-          if(f.ClosingDate.substring(5,7)==DATE.substring(5,7)){
-            temp1=temp1+1
-          }
-        })
-      })
 
-      realtors?.map(e=>{
-        e.Sells?.map(f=>{
-          if(f.ClosingDate.substring(0,4)==DATE.substring(0,4)){
-            temp2=temp2+1
-          }
-        })
-      })
+    realtors?.map((e) => {
+      e.Sells?.map((f) => {
+        if (f.ClosingDate.substring(5, 7) == DATE.substring(5, 7)) {
+          temp1 = temp1 + 1;
+        }
+      });
+    });
 
-    setSellsMonth(temp1)
-    setSellsYear(temp2)
+    realtors?.map((e) => {
+      e.Sells?.map((f) => {
+        if (f.ClosingDate.substring(0, 4) == DATE.substring(0, 4)) {
+          temp2 = temp2 + 1;
+        }
+      });
+    });
 
-  },[realtors, DATE,CommissionValue])
+    setSellsMonth(temp1);
+    setSellsYear(temp2);
+  }, [realtors, DATE, CommissionValue]);
 
   const google = useGoogleCharts();
 

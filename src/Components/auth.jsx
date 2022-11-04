@@ -98,12 +98,13 @@ setReset
               <div className="buttonC">
                 <button
                   className="button"
+                  style={{cursor: 'pointer'}}
                   onClick={() => onSubmitHandler(UserName, Password)}
                 >
-                  <p className="buttonT">Sign In</p>{" "}
+                  <p className="buttonT">Sign In</p>
                 </button>
               </div>
-        <p onClick={setOpen1} style={{fontSize:"13px",color:"green", textAlign:"right", alignSelf:"flex-end", marginBlock:"10px", marginRight:"5px", cursor:"pointer", fontFamily:"Montserrat" }}>forgott?</p>
+        <p onClick={setOpen1} style={{fontSize:"13px",color:"#2b4162", textAlign:"right", alignSelf:"flex-end", marginBlock:"10px", marginRight:"5px", cursor:"pointer", fontFamily:"Montserrat" }}>Forgot password?</p>
             </div>
           </div>
         </div>

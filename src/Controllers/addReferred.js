@@ -5,25 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import AddReferredComponent from "../Components/addReferred";
 import { referredGet } from "../Logic/Fetch";
 
-
 function AddReferred() {
   const userId = useSelector((state) => state.UserId);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-   
-  
-  setForm({ ...form, UserRole: "Realtor", UserId: userId })
-
-  }, [])
-  
+    setForm({ ...form, UserRole: "Realtor", UserId: userId });
+  }, []);
 
   const onSubmit = () => {
-
-
     fetch(`http://localhost:8080/AddReferred`, {
       method: "POST",
       headers: {
@@ -36,10 +29,9 @@ function AddReferred() {
           const jsonRes = await res.json();
 
           if (res.status !== 200 && res.status !== 204) {
-
             console.log("error");
           } else {
-            referredGet(dispatch)
+            referredGet(dispatch);
             console.log(jsonRes);
           }
         } catch (err) {
@@ -52,9 +44,13 @@ function AddReferred() {
       });
   };
   function validarEmail(valor) {
-    if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(valor)){
-     return true
-    } else return false
+    if (
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+        valor
+      )
+    ) {
+      return true;
+    } else return false;
   }
   return (
     <AddReferredComponent

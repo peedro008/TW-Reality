@@ -11,18 +11,15 @@ function UserManagement() {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
-  const UserId = useSelector(e=>e.UserId)
-  const userRole = useSelector(e=>e.userRole)
+  const UserId = useSelector((e) => e.UserId);
+  const userRole = useSelector((e) => e.userRole);
   const [Message, setMessage] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [Err, setErr] = useState(false);
-    useEffect(() => {
-   
-  
-  setForm({ ...form, UserId: UserId })
+  useEffect(() => {
+    setForm({ ...form, UserId: UserId });
+  }, []);
 
-  }, [])
-  
   const onSubmitR = () => {
     fetch(`http://localhost:8080/addRealtor`, {
       method: "POST",
@@ -34,20 +31,18 @@ function UserManagement() {
       .then(async (res) => {
         try {
           const jsonRes = await res.json();
-          setMessage(jsonRes.message)
-          if (res.status !== 200&&res.status !== 200) {
-            RealtorsGet(dispatch)
-        
+          setMessage(jsonRes.message);
+          if (res.status !== 200 && res.status !== 200) {
+            RealtorsGet(dispatch);
           } else {
             onOpenModal();
           }
         } catch (err) {
           console.log(err);
         }
-       
       })
-      .then(()=>{
-        onOpenModal()
+      .then(() => {
+        onOpenModal();
       })
       .catch((err) => {
         console.log(err);
@@ -63,21 +58,19 @@ function UserManagement() {
     })
       .then(async (res) => {
         try {
-            const jsonRes = await res.json();
-            setMessage(jsonRes.message)
-            if (res.status !== 200&&res.status !== 200) {
-             RealtorsGet(dispatch)
-          
-            } else {
-              onOpenModal();
-            }
-          } catch (err) {
-            console.log(err);
+          const jsonRes = await res.json();
+          setMessage(jsonRes.message);
+          if (res.status !== 200 && res.status !== 200) {
+            RealtorsGet(dispatch);
+          } else {
+            onOpenModal();
           }
-
+        } catch (err) {
+          console.log(err);
+        }
       })
-      .then(()=>{
-        onOpenModal()
+      .then(() => {
+        onOpenModal();
       })
       .catch((err) => {
         console.log(err);
@@ -105,10 +98,10 @@ function UserManagement() {
       onOpenModal={onOpenModal}
       validarEmail={validarEmail}
       Message={Message}
-setMessage={setMessage}
-Err={Err}
-setErr={setErr}
-userRole={userRole}
+      setMessage={setMessage}
+      Err={Err}
+      setErr={setErr}
+      userRole={userRole}
     />
   );
 }

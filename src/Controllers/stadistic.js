@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import StadisticComponent from "../Components/stadistic";
+import StadisticComponent from "../Components/Stadistic";
 import axios from "axios"
 
 import useGoogleCharts from "../Charts/useGoogleCharts";

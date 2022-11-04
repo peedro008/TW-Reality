@@ -1,10 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Select from "react-select";
+
 import StatsQuoted from "../Charts/stadisticChartQuoted";
 import StatsSold from "../Charts/stadisticsChartSold";
-function StadisticComponent({
 
+function StadisticComponent({
   yearLabel,
   yearOptions,
   monthOptions,
@@ -14,14 +17,16 @@ function StadisticComponent({
   getRSells,
   search,
   getComission,
-Users,
-  google
+  Users,
+  google,
 }) {
+  const stateRed = useSelector((state) => state);
+  // const navigate = useNavigate()
   return (
-    <div className="genericDiv">
+    <div className="genericDiv1">
       <div className="StadCalendarDiv">
         <p className="StadCalendarTitle">{yearLabel}</p>
-        
+
         <div className="StadSelectCont">
           <Select
             options={yearOptions.map((e) => {
@@ -32,23 +37,21 @@ Users,
               setDateSelected(dateSelected.substring(0, 6) + e.value);
             }}
             className="StadSelect"
-          // defaultInputValue={yearOptions[0]}
+            // defaultInputValue={yearOptions[0]}
             placeholder="Year"
           />
-         
-            <Select
-              options={monthOptions}
-              className="StadSelect"
-              placeholder="Month"
-              onChange={(e) => {
-                setYearLabel(e.label + yearLabel.substring(3, yearLabel.length)
-                );
-                setDateSelected(e.value + dateSelected.substring(2, dateSelected.length)
-                );
-              }}
-              
-            />
-        
+
+          <Select
+            options={monthOptions}
+            className="StadSelect"
+            placeholder="Month"
+            onChange={(e) => {
+              setYearLabel(e.label + yearLabel.substring(3, yearLabel.length));
+              setDateSelected(
+                e.value + dateSelected.substring(2, dateSelected.length)
+              );
+            }}
+          />
         </div>
         <button
           onClick={search}
@@ -70,65 +73,139 @@ Users,
         </button>
       </div>
       <div className="StadisticRowName">
-        {
-        
-        Users.length?
-        Users.map((e, i) => {
-          return (
-            <div>
-              <p
-                style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
-                className="StadisticProdName"
-              >
-                {e.name}
-              </p>
-            
-                <div className="StadBox">
-                  <p className="StadBoxTitle">Sales by me</p>
-                  <p className="StadBoxVal">
-                    {e.Sells.length}
-                  </p>
-                </div>
-             
-                <div className="StadBox">
-                  <p className="StadBoxTitle">Sales by my realtors</p>
-                  <p className="StadBoxVal">
+        {Users.length ? (
+          Users.map((e, i) => {
+            return (
+              <div key={i}>
+                <p
+                  // style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
+                  style={{ color: "#2b4162" }}
+                  className="StadisticProdName"
+                >
+                  {e.name}
+                </p>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/salesByMe", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Sales by me</p>
+                    <p className="StadBoxVal">{e.Sells.length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{
+                    pathname: "/salesByRealtors",
+                    state: { aboutProps: e },
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Sales by my realtors</p>
+                    <p className="StadBoxVal">
+                      {e.Referrals.length ? getRSells(e.Referrals) : 0}
+                    </p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/newRealtors", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">New Realtors</p>
+                    <p className="StadBoxVal">{e.Referrals.length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{
+                    pathname: "/myReferrals",
+                    state: {
+                      aboutProps: stateRed.Referred?.filter(
+                        (i) => e.id === i.User?.id
+                      ),
+                      name: e.name},
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">My Referrals</p>
+                    <p className="StadBoxVal">
                       {
-                        e.Referrals.length?
-                        getRSells(e.Referrals):0
+                        stateRed.Referred?.filter((i) => e.id === i.User?.id)
+                          .length
                       }
-                  </p>
-                </div>
-             
-                <div className="StadBox">
-                  <p className="StadBoxTitle">New Realtors</p>
-                  <p className="StadBoxVal">
-                    {e.Referrals.length}
-                  </p>
-                </div>
-             
-                <div className="StadBox">
-                  <p className="StadBoxTitle">Total commission</p>
-                  <p className="StadBoxVal">
-                  {
-                       ( (e.Referrals.length?
-                        getRSells(e.Referrals):0))*Number(e.ComissionValue)
-                      }
-                  </p>
-                </div>
-           
-               
-            </div>
-          );
-        }):
-        <NavLink
-        className="icons"
-        to="/UsersManagement"
-       style={{textDecoration:"none"}}
-      >
-        <p className="REPtype" style={{fontSize:"17px", cursor:"pointer"}}>Add a realtor to start viewing statistics</p></NavLink>
-      
-      }
+                    </p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{
+                    pathname: "/totalCommissionPaid",
+                    state: { aboutProps: stateRed.Commissions.filter(
+                      (us) =>
+                        (us.User.ReferredId === e.id) & (us.payded === true)
+                    ), name: e.name },
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Total commission paid</p>
+                    <p className="StadBoxVal">
+                      {stateRed.Commissions.filter(
+                        (us) =>
+                          (us.User.ReferredId === e.id) & (us.payded === true)
+                      ).length * Number(e.ComissionValue)}
+                    </p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{
+                    pathname: "/totalCommissionUnpaid",
+                    state: { aboutProps: stateRed.Commissions.filter(
+                      (us) =>
+                        (us.User.ReferredId === e.id) & (us.payded === false)
+                    ), name: e.name },
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Total commission unpaid</p>
+                    <p className="StadBoxVal">
+                      {stateRed.Commissions.filter(
+                        (us) =>
+                          (us.User.ReferredId === e.id) & (us.payded === false)
+                      ).length * Number(e.ComissionValue)}
+                    </p>
+                  </div>
+                </NavLink>
+              </div>
+            );
+          })
+        ) : (
+          <NavLink
+            className="icons"
+            to="/UsersManagement"
+            style={{ textDecoration: "none" }}
+          >
+            <p
+              className="REPtype"
+              style={{ fontSize: "17px", cursor: "pointer" }}
+            >
+              Add a realtor to start viewing statistics
+            </p>
+          </NavLink>
+        )}
       </div>
       {/* <div style={{flexDirection:"row", display:"flex", justifyContent:"space-between"}}>
               {(google && quotes.length)? <StatsSold google={google} quotes={quotes} producers={Producers}/>:<></>}

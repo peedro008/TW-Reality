@@ -19,6 +19,7 @@ function AddReferredComponent({
   validarEmail,
   onOpenModal}
 ) {
+  let validation = (!validarEmail(form.email)||form.name?.length < 6  || typeof form.name?.length === 'undefined');
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -88,7 +89,10 @@ function AddReferredComponent({
           display: "flex",
         }}
       >
-        <button className="PAYbutton" onClick={onSubmit}>
+        <button className="PAYbutton" onClick={() => onSubmit()} 
+        style={{backgroundColor: validation &&"#586579", cursor: validation && 'default'}}
+        disabled={validation?true:false}
+        >
           <p className="PAYbuttonText">Add referred</p>
         </button>
       </div>
@@ -129,6 +133,7 @@ function AddReferredComponent({
         }}
       />
       <BsChevronLeft
+      cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",

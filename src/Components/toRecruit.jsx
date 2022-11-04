@@ -1,7 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function ToRecruitComponent({ Referred, Name, Users }) {
+function ToRecruitComponent({ Referred, Users, UserId }) {
+
+  // const thisUsers = Users?.filter((e) => (e.ReferredId === UserId) | (e.id === UserId))
+
+  console.log(Referred)
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -15,7 +19,7 @@ function ToRecruitComponent({ Referred, Name, Users }) {
           <p className="subTitt" style={{ marginTop: "2vh" }}>
           Referred list
         </p>
-            <table class="table5" style={{ marginTop: "2vh" }}>
+            <table className="table5" style={{ marginTop: "2vh" }}>
               <tbody>
                 <tr>
                   <th scope="col" className="column1">
@@ -34,9 +38,9 @@ function ToRecruitComponent({ Referred, Name, Users }) {
                     <p className="REPtype">Company</p>
                   </th>
                 </tr>
-                {Referred?.map((e) => {
+                {Referred?.map((e, i) => {
                   return (
-                    <tr>
+                    <tr key={i}>
                       <td className="ClientName" scope="row">
                         <NavLink
                           style={{ textDecoration: "none" }}
@@ -72,7 +76,7 @@ function ToRecruitComponent({ Referred, Name, Users }) {
           <p className="subTitt" style={{ marginTop: "2vh" }}>
           Realtors list
         </p>
-            <table class="table5" style={{ marginTop: "2vh" }}>
+            <table className="table5" style={{ marginTop: "2vh" }}>
               <tbody>
                 <tr>
                   <th scope="col" className="column1">
@@ -97,13 +101,11 @@ function ToRecruitComponent({ Referred, Name, Users }) {
                     <p className="REPtype">Sales</p>
                   </th>
                 </tr>
-                {Users?.map((e) => {
+                {Users?.map((e, i) => {
                   return (
-                    <tr>
+                    <tr key={i}>
                       <td className="ClientName" scope="row">
-                       
                           {e.name}
-                       
                       </td>
                       <td className="ClientName" scope="row">
                         {Users.filter(f=>f.id==e.ReferredId)[0]?.name}

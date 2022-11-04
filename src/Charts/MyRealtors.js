@@ -1,27 +1,25 @@
-import { useEffect, useState } from "react";
-import axios from "axios"
+import React, { useEffect, useState } from "react";
 import spinnerr from "../assets/spinnerr.gif"
 function MyRealtors ({google, realtors}) {
   const [chart, setChart] = useState(null);
-  const [producers, setProducers]= useState([])
-  const [modify, setModify]= useState([])
   const [dato, setDato]= useState([])
-  const [quotes, setQuotes]= useState([])
   const [time, setTime]= useState(false)
-  const date = new Date();
-  const DATE =
-    date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
+
+  // const [producers, setProducers]= useState([])
+  // const [modify, setModify]= useState([])
+  // const [quotes, setQuotes]= useState([])
+  // const date = new Date();
+  // const DATE = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
   
-       
       useEffect(()=>{
         let pes = []
-          realtors?.map((e, index)=>{
-            
+          realtors?.map((e, index)=>{ 
             pes.push(
               [e.name, e.Sells.length, e.Referrals.length])
           })
           setDato(pes)
       }, [])
+
   useEffect(() => {
     setTimeout(()=>{
       setTime(true)

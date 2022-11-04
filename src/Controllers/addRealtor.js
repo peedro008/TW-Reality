@@ -5,22 +5,17 @@ import { useSelector } from "react-redux";
 import AddRealtorComponent from "../Components/addRealtor";
 
 function AddRealtor() {
-
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
   // useEffect(() => {
-   
-  
+
   // setForm({ ...form, UserRole: "Realtor", UserId: userId })
 
   // }, [])
-  
 
   const onSubmit = () => {
-
-
     fetch(`http://localhost:8080/addRealtor`, {
       method: "POST",
       headers: {
@@ -47,9 +42,13 @@ function AddRealtor() {
       });
   };
   function validarEmail(valor) {
-    if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(valor)){
-     return true
-    } else return false
+    if (
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+        valor
+      )
+    ) {
+      return true;
+    } else return false;
   }
   return (
     <AddRealtorComponent

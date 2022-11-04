@@ -3,22 +3,22 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import ManagerRecruitComponent from "../Components/ManagerRecruit";
-import {FetchAll, RealtorsGet, referredGet}from "../Logic/Fetch"
+import { FetchAll, RealtorsGet, referredGet } from "../Logic/Fetch";
 function ManagerRecruit(props) {
   const [form, setForm] = useState({});
-  const dispatch = useDispatch()
-  const [show, setShow] = useState(false)
+  const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   let data = props.location.aboutProps;
-  const RUser = data.User
+  const RUser = data?.User;
   useEffect(() => {
     setForm({
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      UserId: data.UserId,
+      name: data?.name,
+      email: data?.email,
+      phone: data?.phone,
+      UserId: data?.UserId,
     });
   }, [data]);
 
@@ -35,24 +35,18 @@ function ManagerRecruit(props) {
           try {
             const jsonRes = await res.json();
 
-            if (res.status !== 200&&res.status !== 200) {
-              dispatch(RealtorsGet)
-              dispatch(referredGet)
+            if (res.status !== 200 && res.status !== 200) {
+              dispatch(RealtorsGet);
+              dispatch(referredGet);
               console.log("error");
             } else {
               console.log(jsonRes);
-             
             }
           } catch (err) {
             console.log(err);
           }
-         
-        
-      
-         
         })
-        .then(()=>{
-        
+        .then(() => {
           onOpenModal();
         })
         .catch((err) => {
@@ -71,9 +65,9 @@ function ManagerRecruit(props) {
   }
   return (
     <ManagerRecruitComponent
-    FetchAll={FetchAll}
-    dispatch={dispatch}
-    validarEmail={validarEmail}
+      FetchAll={FetchAll}
+      dispatch={dispatch}
+      validarEmail={validarEmail}
       form={form}
       open={open}
       onSubmit={onSubmit}
@@ -82,7 +76,7 @@ function ManagerRecruit(props) {
       setForm={setForm}
       RUser={RUser}
       show={show}
-setShow={setShow}
+      setShow={setShow}
     />
   );
 }

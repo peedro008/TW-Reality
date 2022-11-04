@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import axios from "axios"
 import spinnerr from "../assets/spinnerr.gif"
 function StatsQuoted ({google, quotes, producers}) {

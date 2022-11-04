@@ -14,6 +14,13 @@ import CommissionManagement from "../Controllers/CommissionManagement";
 import ToRecruit from "../Controllers/toRecruit";
 import UserManagement from "../Controllers/UserManagement";
 import AddReferred from "../Controllers/addReferred";
+import ManagerGraficsControl from "../Controllers/ManagerGrafics";
+import StadisticInfo from "../Components/stadisticInfo/SalesByMe";
+import SalesByRealtors from "../Components/stadisticInfo/SalesByRealtors";
+import MyReferrals from "../Components/stadisticInfo/MyReferrals";
+import NewRealtors from "../Components/stadisticInfo/NewRealtors";
+import TotalCommisionPaid from "../Components/stadisticInfo/TotalCommissionPaid";
+import TotalCommisionUnpaid from "../Components/stadisticInfo/TotalCommissionUnpaid";
 
 
 const ManagerRouter = () => {
@@ -25,11 +32,19 @@ const ManagerRouter = () => {
     <Router>
       <Route component={ManagerNav} />
       <Route exact path='/' component={ManagerDashboard}/>
+      <Route exact path='/managerGrafics' component={ManagerGraficsControl}/>
       <Route exact path='/management/ManagerRecruit' component={ManagerRecruit}/>
       <Route exact path='/UsersManagement' component={UserManagement}/>
       <Route exact path='/AddSell' component={AddSell}/>
       <Route exact path='/management' component={ToRecruit}/>
       <Route exact path="/UserManagement/referred" component={AddReferred}/>
+
+      <Route exact path='/salesByMe' component={StadisticInfo}/>
+       <Route exact path='/salesByRealtors' component={SalesByRealtors}/>
+       <Route exact path='/myReferrals' component={MyReferrals}/>
+       <Route exact path='/newRealtors' component={NewRealtors}/>
+       <Route exact path='/totalCommissionPaid' component={TotalCommisionPaid}/>
+       <Route exact path='/totalCommissionUnpaid' component={TotalCommisionUnpaid}/>
     </Router>
   );
 };

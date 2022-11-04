@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import "../Css/css.css";
 
 import Select from "react-select";
@@ -12,14 +12,20 @@ import { Controller } from "react-hook-form";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 function AddSellComponent({
   DATE,
-    form,
-    setForm,
-    open,
-    onSubmit,
-    options,
-    onCloseModal,
-    onOpenModal
+  form,
+  setForm,
+  open,
+  onSubmit,
+  options,
+  onCloseModal,
+  onOpenModal,
 }) {
+  let validation =
+    typeof form.Value?.length === "undefined" ||
+    typeof form.UserId === "undefined" ||
+    form.ClientName?.length < 6 ||
+    typeof form.ClientName?.length === "undefined";
+
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -28,7 +34,7 @@ function AddSellComponent({
 
       <div className="managerInputsContainer">
         <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-        <div className="inputDiv">
+          <div className="inputDiv">
             <p className="PAYtitle">Client Name</p>
             <input
               placeholder="Client Name"
@@ -37,9 +43,7 @@ function AddSellComponent({
               }}
               className="AQinput"
             ></input>
-            <p className="FORMerror">
-      
-            </p>
+            <p className="FORMerror"></p>
           </div>
           <div className="inputDiv">
             <p className="PAYtitle">Address</p>
@@ -50,47 +54,45 @@ function AddSellComponent({
               }}
               className="AQinput"
             ></input>
-            <p className="FORMerror">
-        
-            </p>
+            <p className="FORMerror"></p>
           </div>
           <div className="inputDiv">
             <p className="PAYtitle">Closing Date</p>
             <input
-            type={"date"}
-            defaultValue={DATE}
+              type={"date"}
+              defaultValue={DATE}
               onChange={(e) => {
                 setForm({ ...form, ClosingDate: e.target.value });
               }}
               placeholder="ClosingDate"
               className="AQinput"
             ></input>
-           
           </div>
           <div className="inputDiv">
             <p className="PAYtitle">Property Value</p>
             <input
+              type="number"
               onChange={(e) => {
                 setForm({ ...form, Value: e.target.value });
               }}
               placeholder="Property Value"
               className="AQinput"
             ></input>
-            <p className="FORMerror">{form.Value?"":"Property value is mandatory"}</p>
+            <p className="FORMerror">
+              {form.Value ? "" : "Property value is mandatory"}
+            </p>
           </div>
         </div>
         <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-        <div className="inputDiv">
+          <div className="inputDiv">
             <p className="PAYtitle">Realtor name</p>
             <Select
-                  
-                  onChange={(val) => setForm({...form,UserId: val.value})}
-                 
-                  options={options}
-                  name={"Realtor Name"}
-                  className="PAYselect"
-                  placeholder="Select Realtor"
-                />
+              onChange={(val) => setForm({ ...form, UserId: val.value })}
+              options={options}
+              name={"Realtor Name"}
+              className="PAYselect"
+              placeholder="Select Realtor"
+            />
           </div>
         </div>
       </div>
@@ -103,7 +105,15 @@ function AddSellComponent({
           display: "flex",
         }}
       >
-        <button className="PAYbutton" onClick={onSubmit} >
+        <button
+          className="PAYbutton"
+          onClick={onSubmit}
+          style={{
+            backgroundColor: validation && "#586579",
+            cursor: validation && "default",
+          }}
+          disabled={validation ? true : false}
+        >
           <p className="PAYbuttonText">Add Sell</p>
         </button>
       </div>
@@ -124,10 +134,7 @@ function AddSellComponent({
 
           <button className="modalButton">
             {" "}
-            <NavLink
-              style={{ textDecoration: "none", color: "#000" }}
-              to={"/"}
-            >
+            <NavLink style={{ textDecoration: "none", color: "#000" }} to={"/"}>
               Continue
             </NavLink>
           </button>
@@ -144,6 +151,7 @@ function AddSellComponent({
         }}
       />
       <BsChevronLeft
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",
@@ -157,7 +165,7 @@ function AddSellComponent({
         onClick={() => window.history.go(-1)}
       />
     </div>
-  )
+  );
 }
 
-export default AddSellComponent
+export default AddSellComponent;

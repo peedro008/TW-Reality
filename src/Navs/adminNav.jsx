@@ -1,12 +1,8 @@
 import React from "react";
-import {  NavLink } from "react-router-dom";
-import "../Css/css.css"
-
-
-import { FiGrid } from "react-icons/fi";
-
-import { FiUser } from "react-icons/fi";
-import { VscGraph } from "react-icons/vsc";
+import { NavLink } from "react-router-dom";
+import "../Css/css.css";
+import { FiGrid, FiBarChart2 } from "react-icons/fi";
+import { MdManageAccounts } from "react-icons/md";
 // import Manager from "./manager"
 import { FaRegMoneyBillAlt, FaWallet } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
@@ -23,10 +19,9 @@ function AdminNav() {
   const Role = useSelector((state) => state.userRole);
 
   const logOut = () => {
-    localStorage.clear()
+    localStorage.clear();
     window.history.pushState("", "", "/");
     dispatch(logout());
-    
   };
   return (
     <div style={{ display: "flex" }}>
@@ -46,14 +41,19 @@ function AdminNav() {
             <FiLogOut
               size="20px"
               className="NAicon"
-              style={{ alignSelf: "center" }}
+              style={{ alignSelf: "center", cursor: "pointer" }}
             />
           </button>
         </div>
       </div>
 
       <div className="sidebar">
-      <img className="image" src={logo} alt={"logo"} style={{backgroundColor:"#2b4162"}}/>
+        <img
+          className="image"
+          src={logo}
+          alt={"logo"}
+          style={{ backgroundColor: "#2b4162" }}
+        />
         <div className="NAcontainer">
           <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
             <FiGrid
@@ -63,7 +63,16 @@ function AdminNav() {
             />
           </NavLink>
         </div>
-                <div className="NAcontainer">
+        <div className="NAcontainer">
+          <NavLink className="icons" to="/adminGrafics" activeClassName="NAavtive" exact>
+            <FiBarChart2
+              className="NAicon"
+              color="#868ba5"
+              activeClassName="NAactive"
+            />
+          </NavLink>
+        </div>
+        <div className="NAcontainer">
           <NavLink
             className="icons"
             to="/CommissionManagement"
@@ -73,19 +82,36 @@ function AdminNav() {
           </NavLink>
         </div>
         <span />
+
+        <div className="NAcontainer">
+          <NavLink
+            className="icons"
+            to="/adminManagement"
+            activeClassName="NAavtive"
+          >
+            <MdManageAccounts
+              style={{ height: "25px", width: "25px" }}
+              size="35px"
+              color="#868ba5"
+            />
+          </NavLink>
+        </div>
+
         <div className="NAcontainer">
           <NavLink
             className="icons"
             to="/UsersManagement"
             activeClassName="NAavtive"
           >
-            <MdAdd  style={{height:"25px", width:"25px"}} size="35px" color="#868ba5" />
+            <MdAdd
+              style={{ height: "25px", width: "25px" }}
+              size="35px"
+              color="#868ba5"
+            />
           </NavLink>
         </div>
         <span />
-        
-
-       </div>
+      </div>
     </div>
   );
 }
