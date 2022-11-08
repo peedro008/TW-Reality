@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import spinnerr from "../assets/spinnerr.gif";
+import spinnerr from "../assets/loadingIcon.gif";
 
 function RealtorsManager({ google, realtors, Referred }) {
   const [chart, setChart] = useState(null);
@@ -10,15 +10,7 @@ function RealtorsManager({ google, realtors, Referred }) {
   const [datoCom, setDatoCom] = useState([]);
   const [time, setTime] = useState(false);
 
-  // const date = new Date();
-  // const DATE = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
-
   const stateRed = useSelector((state) => state);
-
-  // let commision = stateRed.Commissions.filter(
-  //   (us) =>
-  //     (us.User.ReferredId === e.id) & (us.payded === true)
-  // ).length * Number(e.ComissionValue)
 
   useEffect(() => {
     let dataSale = [];
@@ -26,13 +18,8 @@ function RealtorsManager({ google, realtors, Referred }) {
     let dataRef = [];
     let dataCom = [];
 
-    realtors?.map((e, index) => {
-      dataSale.push([
-        e.name,
-        e.Sells.length,
-        // e.Referrals.length,
-        // Referred.filter((f) => f.User?.id == e.id).length,
-      ]);
+    realtors?.map((e) => {
+      dataSale.push([e.name, e.Sells.length]);
       dataRec.push([e.name, e.Referrals.length]);
       dataRef.push([e.name, Referred.filter((f) => f.User?.id == e.id).length]);
       dataCom.push([
@@ -41,11 +28,11 @@ function RealtorsManager({ google, realtors, Referred }) {
           .length * Number(e.ComissionValue),
       ]);
     });
-    setDatoSale(dataSale);
-    setDatoRec(dataRec);
-    setDatoRef(dataRef);
-    setDatoCom(dataCom)
-    console.log(dataCom);
+
+    setDatoSale(dataSale.filter(e => e[1] !== 0));
+    setDatoRec(dataRec.filter(e => e[1] !== 0));
+    setDatoRef(dataRef.filter(e => e[1] !== 0));
+    setDatoCom(dataCom.filter(e => e[1] !== 0));
   }, []);
 
   useEffect(() => {
@@ -167,7 +154,7 @@ function RealtorsManager({ google, realtors, Referred }) {
         <img
           src={spinnerr}
           style={{
-            width: "100px",
+            width: "150px",
             position: "absolute",
             right: "65vw",
             top: "40vh",

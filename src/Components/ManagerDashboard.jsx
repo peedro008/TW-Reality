@@ -24,7 +24,7 @@ function ManagerDashboardComponent({
   const UserId = useSelector((state) => state.UserId);
   const stateRed = useSelector((state) => state);
   const thisUsers = Users?.filter(
-    (e) => (e.ReferredId === UserId) | (e.id === UserId)
+    (e) => (e.managerId === UserId) | (e.id === UserId)
   );
   // const navigate = useNavigate()
   return (
@@ -157,7 +157,7 @@ function ManagerDashboardComponent({
                     pathname: "/totalCommissionPaid",
                     state: { aboutProps: stateRed.Commissions.filter(
                       (us) =>
-                        (us.User.ReferredId === e.id) & (us.payded === true)
+                        (us.commisionTo === e.id) & (us.payded === true)
                     ), name: e.name },
                   }}
                   style={{ textDecoration: "none" }}
@@ -167,7 +167,7 @@ function ManagerDashboardComponent({
                     <p className="StadBoxVal">
                       {stateRed.Commissions.filter(
                         (us) =>
-                          (us.User.ReferredId === e.id) & (us.payded === true)
+                          (us.commisionTo === e.id) & (us.payded === true)
                       ).length * Number(e.ComissionValue)}
                     </p>
                   </div>
@@ -178,8 +178,7 @@ function ManagerDashboardComponent({
                   to={{
                     pathname: "/totalCommissionUnpaid",
                     state: { aboutProps: stateRed.Commissions.filter(
-                      (us) =>
-                        (us.User.ReferredId === e.id) & (us.payded === false)
+                      (us) => (us.commisionTo === e.id) & (us.payded === false)
                     ), name: e.name },
                   }}
                   style={{ textDecoration: "none" }}
@@ -189,7 +188,7 @@ function ManagerDashboardComponent({
                     <p className="StadBoxVal">
                       {stateRed.Commissions.filter(
                         (us) =>
-                          (us.User.ReferredId === e.id) & (us.payded === false)
+                          (us.commisionTo === e.id) & (us.payded === false)
                       ).length * Number(e.ComissionValue)}
                     </p>
                   </div>

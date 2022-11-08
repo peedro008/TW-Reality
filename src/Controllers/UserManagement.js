@@ -12,13 +12,21 @@ function UserManagement() {
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
   const UserId = useSelector((e) => e.UserId);
+  const Managers = useSelector((e) => e.Users.filter(e => e.UserRole === 'Manager'));
   const userRole = useSelector((e) => e.userRole);
   const [Message, setMessage] = useState("");
   const dispatch = useDispatch();
   const [Err, setErr] = useState(false);
+
   useEffect(() => {
-    setForm({ ...form, UserId: UserId });
+    setForm({ ...form, UserId: UserId, managerId: UserId });
   }, []);
+
+  const options = Managers.map((e) => ({
+    value: e.id,
+    label: e.name,
+  }));
+  
 
   const onSubmitR = () => {
     fetch(`http://localhost:8080/addRealtor`, {
@@ -102,6 +110,7 @@ function UserManagement() {
       Err={Err}
       setErr={setErr}
       userRole={userRole}
+      options= {options}
     />
   );
 }

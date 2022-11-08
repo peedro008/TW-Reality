@@ -1,76 +1,95 @@
 import React, { useEffect, useState } from "react";
 import mask from "../assets/mask.png";
 import { NavLink } from "react-router-dom";
-import RealtorsAdmin from "../Charts/RealtorsAdmin";
 import { BiSearchAlt2 } from "react-icons/bi";
-// import Select from "react-select";
-// import RealtorsAdminBig from "../Charts/RealtorsAdminBig";
+import RealtorsAdminBig from "../Charts/RealtorsAdminBig";
+import Select from "react-select";
+
 function AdminGrafics({
   Referred,
   google,
   Name,
-  UserId,
   Users,
   selected,
   setSelected,
 }) {
-  // const [graficType, setGraficType] = useState(1)
+  const [graficType, setGraficType] = useState("Sales");
 
   const [Search, setSearch] = useState("");
   const [thisUsers, setThisUsers] = useState(Users);
 
-  // const thisUsers = Users?.filter(
-  //   (e) => (e.ReferredId === UserId) | (e.id === UserId)
-  // );
-
   useEffect(() => {
-    setThisUsers(Users?.filter(e => e.name.toLowerCase().includes(Search.toLowerCase())))
-  }, [Search])
+    setThisUsers(
+      Users?.filter((e) => e.name.toLowerCase().includes(Search.toLowerCase()))
+    );
+  }, [Search]);
 
   const options = [
-    { value: 1, label: 'Sales' },
-    { value: 2, label: 'Referred' },
-    { value: 3, label: 'Realtors Referred' }
-  ]
+    { value: "Sales", label: "Sales" },
+    { value: "Referred", label: "Referred" },
+    { value: "Recruited", label: "Recruited" },
+  ];
 
   return (
-    <div className="genericDiv1">
+    <div className="genericDivAdminGrafic">
       <div className="genericHeader">
         <p className="genericTitle">{`Welcome ${Name} `}</p>
         {!selected ? (
           <>
-          <p className="subTitt">Referred list</p>
-          <div style={{width:"20vw", minWidth:'500px',height:"35px", display:"flex", flexDirection:"row", alignItems:"center"}}>
-          <BiSearchAlt2 size={"20px"} style={{marginRight:"10px"}}/>  <input
-          onChange={e=>setSearch(e.target.value)}
-          style={{height:"25px", borderColor:"transparent", borderRadius:"10px", paddingInline:"8px"}}
+            <p className="subTitt">Referred list</p>
+            <div
+              style={{
+                width: "20vw",
+                minWidth: "500px",
+                height: "35px",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <BiSearchAlt2
+                size={"20px"}
+                style={{ marginRight: "10px", marginTop: "10px" }}
+              />
+              <input
+                placeholder="Name"
+                onChange={(e) => setSearch(e.target.value)}
+                style={{
+                  height: "25px",
+                  borderColor: "transparent",
+                  borderRadius: "10px",
+                  paddingInline: "8px",
+                  marginTop: "10px",
+                  width: "200px",
+                }}
               ></input>
-        </div>
-        </>
+              <Select
+                options={options}
+                onChange={(e) => setGraficType(e.value)}
+                className="StadSelectGrafic"
+                // defaultInputValue={yearOptions[0]}
+                placeholder="Type"
+              />
+            </div>
+          </>
         ) : (
           <p className="subTitt" style={{ fontSize: "15px", color: "#000" }}>
             Information about: {selected.name}
           </p>
         )}
       </div>
-      {/* <Select
-         options={options}
-            onChange={(e) => setGraficType(e.value)}
-            className="StadSelectGrafic"
-            // defaultInputValue={yearOptions[0]}
-            placeholder="Type"
-          /> */}
+
       <div
         className="DashContainer"
         style={{ maxWidth: "90%", flexDirection: "row" }}
       >
         {!selected ? (
           google && (
-            <RealtorsAdmin
+            <RealtorsAdminBig
               google={google}
               Referred={Referred}
               realtors={thisUsers}
-              // graficType={graficType}
+              graficType={graficType}
             />
           )
         ) : (
@@ -301,7 +320,7 @@ function AdminGrafics({
           // }}
         >
           <div className="DashPListHeader">
-            <p className="DashPListTitle">Top Realtors Referred</p>
+            <p className="DashPListTitle">Top Recruited</p>
             {/* <p className="DashPListSTitle">Descending</p> */}
           </div>
           <div className="DashPListDivider" />
@@ -341,50 +360,49 @@ function AdminGrafics({
           </div>
           {/* {Users?.filter((e) => (e.ReferredId === UserId) | (e.id === UserId)) */}
           {Users?.sort(function (a, b) {
-              return b.Referrals.length - a.Referrals.length;
-            })
-            ?.map((e) => {
-              return (
+            return b.Referrals.length - a.Referrals.length;
+          })?.map((e) => {
+            return (
+              <div
+                className="DashPListRow1"
+                style={{
+                  marginBottom: "7px",
+                  cursor: "pointer",
+                  backgroundColor: selected.id == e.id ? "#8498a9" : "#fff",
+                }}
+                onClick={() => {
+                  selected.id == e.id ? setSelected(false) : setSelected(e);
+                }}
+              >
                 <div
-                  className="DashPListRow1"
                   style={{
-                    marginBottom: "7px",
-                    cursor: "pointer",
-                    backgroundColor: selected.id == e.id ? "#8498a9" : "#fff",
-                  }}
-                  onClick={() => {
-                    selected.id == e.id ? setSelected(false) : setSelected(e);
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
                   }}
                 >
-                  <div
+                  <div className="DashPListCircle">
+                    <img src={mask} />
+                  </div>
+
+                  <p
+                    className="DashPListItemText"
                     style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
+                      color: selected.id == e.id ? "#000" : "#656a86",
                     }}
                   >
-                    <div className="DashPListCircle">
-                      <img src={mask} />
-                    </div>
-
-                    <p
-                      className="DashPListItemText"
-                      style={{
-                        color: selected.id == e.id ? "#000" : "#656a86",
-                      }}
-                    >
-                      {e.name}
-                    </p>
-                  </div>
-                  <div className="DashNumberDiv">
-                    <p className="DashNumber">&nbsp;{e.Referrals.length}</p>
-                    <p className="DashNumber">
-                      {Referred.filter((f) => f.UserId == e.id).length}
-                    </p>
-                  </div>
+                    {e.name}
+                  </p>
                 </div>
-              );
-            })}
+                <div className="DashNumberDiv">
+                  <p className="DashNumber">&nbsp;{e.Referrals.length}</p>
+                  <p className="DashNumber">
+                    {Referred.filter((f) => f.UserId == e.id).length}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

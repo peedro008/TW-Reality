@@ -86,7 +86,7 @@ function ManagerNav({ onSearch }) {
         <div className="NAcontainer">
           <NavLink
             className="icons"
-            to="/management"
+            to="/realtorsListManager"
             activeClassName="NAavtive"
           >
             <MdManageAccounts

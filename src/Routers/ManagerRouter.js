@@ -10,8 +10,6 @@ import ManagerRecruit from "../Controllers/ManagerRecruit";
 import AddSell from "../Controllers/addSell";
 import { useDispatch } from "react-redux";
 import { FetchAll } from "../Logic/Fetch";
-import CommissionManagement from "../Controllers/CommissionManagement";
-import ToRecruit from "../Controllers/toRecruit";
 import UserManagement from "../Controllers/UserManagement";
 import AddReferred from "../Controllers/addReferred";
 import ManagerGraficsControl from "../Controllers/ManagerGrafics";
@@ -21,6 +19,7 @@ import MyReferrals from "../Components/stadisticInfo/MyReferrals";
 import NewRealtors from "../Components/stadisticInfo/NewRealtors";
 import TotalCommisionPaid from "../Components/stadisticInfo/TotalCommissionPaid";
 import TotalCommisionUnpaid from "../Components/stadisticInfo/TotalCommissionUnpaid";
+import RealtorsListManagerControl from "../Controllers/realtorsListManagerControl";
 
 
 const ManagerRouter = () => {
@@ -36,7 +35,7 @@ const ManagerRouter = () => {
       <Route exact path='/management/ManagerRecruit' component={ManagerRecruit}/>
       <Route exact path='/UsersManagement' component={UserManagement}/>
       <Route exact path='/AddSell' component={AddSell}/>
-      <Route exact path='/management' component={ToRecruit}/>
+      <Route exact path='/realtorsListManager' component={RealtorsListManagerControl}/>
       <Route exact path="/UserManagement/referred" component={AddReferred}/>
 
       <Route exact path='/salesByMe' component={StadisticInfo}/>

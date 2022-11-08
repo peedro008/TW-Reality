@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../Css/css.css";
 
 import Select from "react-select";
@@ -18,14 +18,26 @@ function AddSellComponent({
   onSubmit,
   options,
   onCloseModal,
-  onOpenModal,
+  Users,
 }) {
   let validation =
     typeof form.Value?.length === "undefined" ||
     typeof form.UserId === "undefined" ||
-    form.ClientName?.length < 6 ||
+    form.ClientName?.length < 3 ||
     typeof form.ClientName?.length === "undefined";
 
+    // useEffect(() => {
+    //   setForm({...form, managerId: UserId.managerId})
+    // }, [form?.UserId])
+    useEffect(() => {
+
+      let manId = Users.filter(e => e.id === form.UserId)[0]?.managerId
+      let refId = Users.filter(e => e.id === form.UserId)[0]?.ReferredId
+      
+      setForm({...form, managerId: manId, ReferredId: refId })
+
+    }, [form.UserId])
+    
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -94,6 +106,16 @@ function AddSellComponent({
               placeholder="Select Realtor"
             />
           </div>
+          {/* <div className="inputDiv">
+            <p className="PAYtitle">Manager</p>
+            <Select
+              onChange={(val) => setForm({ ...form, managerId: val.value })}
+              options={options}
+              name={"Realtor Name"}
+              className="PAYselect"
+              placeholder="Select Realtor"
+            />
+          </div> */}
         </div>
       </div>
 

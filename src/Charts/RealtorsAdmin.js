@@ -10,7 +10,7 @@ function RealtorsAdmin({ google, realtors, Referred }) {
 
   // const date = new Date();
   // const DATE = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
-  // console.log(realtors)
+ 
   useEffect(() => {
 
     let dataSale = [];
@@ -83,7 +83,7 @@ function RealtorsAdmin({ google, realtors, Referred }) {
           bar: { groupWidth: "10%", borderRadius: "20px" },
           vAxis: { format: "0" },
           hAxis: { format: "0" },
-          chartArea: { width: "80%", height: "80%" },
+          chartArea: { width: "95%", height: "80%" },
         };
 
         var options2 = {
@@ -98,7 +98,7 @@ function RealtorsAdmin({ google, realtors, Referred }) {
           bar: { groupWidth: "10%", borderRadius: "20px" },
           vAxis: { format: "0" },
           hAxis: { format: "0" },
-          chartArea: { width: "80%", height: "80%" },
+          chartArea: { width: "95%", height: "80%" },
         };
 
         var options3 = {
@@ -113,7 +113,7 @@ function RealtorsAdmin({ google, realtors, Referred }) {
           bar: { groupWidth: "10%", borderRadius: "20px" },
           vAxis: { format: "0" },
           hAxis: { format: "0" },
-          chartArea: { width: "80%", height: "80%" },
+          chartArea: { width: "95%", height: "80%" },
         };
       
 
@@ -160,7 +160,7 @@ function RealtorsAdmin({ google, realtors, Referred }) {
         
           style={{
             height: "35vh",
-            width: 'auto',
+            width: '40vw',
             
           }}
           id="saleChart"
@@ -169,7 +169,7 @@ function RealtorsAdmin({ google, realtors, Referred }) {
         <div
           style={{
             height: "35vh",
-            width: '100%',
+            width: '40vw',
             
           }}
           id="recChart"

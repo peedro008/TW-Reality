@@ -21,7 +21,7 @@ function StadisticComponent({
   google,
 }) {
   const stateRed = useSelector((state) => state);
-  // const navigate = useNavigate()
+  console.log(stateRed.Commissions)
   return (
     <div className="genericDiv1">
       <div className="StadCalendarDiv">
@@ -152,7 +152,7 @@ function StadisticComponent({
                     pathname: "/totalCommissionPaid",
                     state: { aboutProps: stateRed.Commissions.filter(
                       (us) =>
-                        (us.User.ReferredId === e.id) & (us.payded === true)
+                        (us.commisionTo === e.id) & (us.payded === true)
                     ), name: e.name },
                   }}
                   style={{ textDecoration: "none" }}
@@ -162,7 +162,7 @@ function StadisticComponent({
                     <p className="StadBoxVal">
                       {stateRed.Commissions.filter(
                         (us) =>
-                          (us.User.ReferredId === e.id) & (us.payded === true)
+                          (us.commisionTo === e.id) & (us.payded === true)
                       ).length * Number(e.ComissionValue)}
                     </p>
                   </div>
@@ -174,7 +174,7 @@ function StadisticComponent({
                     pathname: "/totalCommissionUnpaid",
                     state: { aboutProps: stateRed.Commissions.filter(
                       (us) =>
-                        (us.User.ReferredId === e.id) & (us.payded === false)
+                        (us.commisionTo === e.id) & (us.payded === false)
                     ), name: e.name },
                   }}
                   style={{ textDecoration: "none" }}
@@ -184,7 +184,7 @@ function StadisticComponent({
                     <p className="StadBoxVal">
                       {stateRed.Commissions.filter(
                         (us) =>
-                          (us.User.ReferredId === e.id) & (us.payded === false)
+                          (us.commisionTo === e.id) & (us.payded === false)
                       ).length * Number(e.ComissionValue)}
                     </p>
                   </div>

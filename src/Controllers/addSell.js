@@ -16,14 +16,19 @@ function AddSell() {
     value: e.id,
     label: e.name,
   }));
-  let cero = (date.getDate() < 10) ? '0' : ''; 
-  console.log(cero)
-  
+  let cero = date.getDate() < 10 ? "0" : "";
+  console.log(form);
+
   const DATE =
-    date.getFullYear() + "-" + (date.getMonth() + 1) + `-${cero}` + date.getDate();
+    date.getFullYear() +
+    "-" +
+    (date.getMonth() + 1) +
+    `-${cero}` +
+    date.getDate();
   useEffect(() => {
     setForm({ ...form, ClosingDate: DATE });
   }, []);
+  
   const onSubmit = () => {
     fetch(`http://localhost:8080/addSell`, {
       method: "POST",
@@ -62,6 +67,7 @@ function AddSell() {
       onOpenModal={onOpenModal}
       DATE={DATE}
       options={options}
+      Users={Users}
     />
   );
 }

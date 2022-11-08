@@ -3,6 +3,7 @@ import { BsChevronLeft } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
 import Modal from "react-responsive-modal";
 import { NavLink } from "react-router-dom";
+import Select from "react-select";
 
 function UserManagementComponent({
   userRole,
@@ -15,18 +16,19 @@ function UserManagementComponent({
   onSubmitR,
   onCloseModal,
   Message,
-  setMessage,
   Err,
   setErr,
-  onOpenModal,
   validarEmail,
+  options,
 }) {
   let validation =
     form.password?.length < 8 ||
     typeof form.password?.length === "undefined" ||
     !validarEmail(form.email) ||
     form.name?.length < 6 ||
-    typeof form.name?.length === "undefined";
+    typeof form.name?.length === "undefined" || typeof form.ComissionValue?.length === "undefined";
+
+  console.log(form);
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -127,10 +129,20 @@ function UserManagementComponent({
                   className="AQinput"
                 ></input>
               </div>
+              <div className="inputDiv">
+                <p className="PAYtitle">Manager</p>
+                <Select
+                  options={options}
+                  onChange={(e) => setForm({ ...form, managerId: e.value })}
+                  className="SelectAddRealtor"
+                  // defaultInputValue={yearOptions[0]}
+                  placeholder='Name'
+                />
+              </div>
             </div>
           </div>
           <BsChevronLeft
-          cursor='pointer'
+            cursor="pointer"
             color="grey"
             style={{
               minWidth: "30px",
@@ -232,7 +244,7 @@ function UserManagementComponent({
             </div>
           </div>
           <BsChevronLeft
-          cursor='pointer'
+            cursor="pointer"
             color="grey"
             style={{
               minWidth: "30px",

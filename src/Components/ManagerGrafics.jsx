@@ -13,7 +13,7 @@ function ManagerGrafics({
   setSelected,
 }) {
   const thisUsers = Users?.filter(
-    (e) => (e.ReferredId === UserId) | (e.id === UserId)
+    (e) => (e.managerId === UserId) | (e.id === UserId)
   );
 
   return (
@@ -268,7 +268,7 @@ function ManagerGrafics({
           // }}
         >
           <div className="DashPListHeader">
-            <p className="DashPListTitle">Top Realtors Referred</p>
+            <p className="DashPListTitle">Top Recruited</p>
             {/* <p className="DashPListSTitle">Descending</p> */}
           </div>
 
@@ -307,13 +307,13 @@ function ManagerGrafics({
               </p>
             </div>
           </div>
-          {Users?.filter((e) => (e.ReferredId === UserId) | (e.id === UserId))
-            .sort(function (a, b) {
+          {thisUsers?.sort(function (a, b) {
               return b.Referrals.length - a.Referrals.length;
             })
-            ?.map((e) => {
+            ?.map((e ,i ) => {
               return (
                 <div
+                  key={i}
                   className="DashPListRow1"
                   style={{
                     marginBottom: "7px",
