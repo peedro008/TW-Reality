@@ -3,8 +3,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ManagerRecruitComponent from "../Components/ManagerRecruit";
+import UserEditAdmin from "../Components/UserEditAdmin";
 import { FetchAll, RealtorsGet, referredGet } from "../Logic/Fetch";
-function ManagerRecruit(props) {
+function UserEditController(props) {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
@@ -12,10 +13,11 @@ function ManagerRecruit(props) {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   let data = props.location.aboutProps;
-  const RUser = data?.User;
+  const manId = data?.managerId;
+  const refBy = useSelector((e) => e.Users.filter(e => e.id === data?.ReferredId));
 
   const Users = useSelector((e) => e.Users);
-  const optionsRealtor = Users.filter((f) => f.UserRole == "Realtor" || f.UserRole == "Manager").map((e) => ({
+  const optionsRealtor = Users.map((e) => ({
     value: e.id,
     label: e.name,
   }));
@@ -25,20 +27,14 @@ function ManagerRecruit(props) {
     label: e.name,
   }));
 
-
   useEffect(() => {
-    setForm({
-      name: data?.name,
-      email: data?.email,
-      phone: data?.phone,
-      UserId: data?.UserId,
-    });
+    setForm({...data, password: null});
   }, [data]);
 
   const onSubmit = () => {
-    if (form.password) {
-      fetch(`https://truewayrealtorsapi.com/addRealtor`, {
-        method: "POST",
+    if (form) {
+      fetch(`https://truewayrealtorsapi.com/editUser`, {
+        method: 'POST',
         headers: {
           "Content-Type": "application/json",
         },
@@ -77,7 +73,7 @@ function ManagerRecruit(props) {
     } else return false;
   }
   return (
-    <ManagerRecruitComponent
+    <UserEditAdmin
       FetchAll={FetchAll}
       dispatch={dispatch}
       validarEmail={validarEmail}
@@ -87,7 +83,8 @@ function ManagerRecruit(props) {
       onCloseModal={onCloseModal}
       onOpenModal={onOpenModal}
       setForm={setForm}
-      RUser={RUser}
+      manId={manId}
+      refBy={refBy}
       show={show}
       setShow={setShow}
       optionsRealtor={optionsRealtor}
@@ -96,4 +93,4 @@ function ManagerRecruit(props) {
   );
 }
 
-export default ManagerRecruit;
+export default UserEditController;

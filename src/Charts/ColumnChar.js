@@ -10,7 +10,7 @@ function PozzaChart({ google }) {
   const [time, setTime] = useState(false);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/quotes`)
+      .get(`https://truewayrealtorsapi.com/quotes`)
       .then(function (response) {
         setQuotes(response.data);
       })

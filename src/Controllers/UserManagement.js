@@ -22,14 +22,21 @@ function UserManagement() {
     setForm({ ...form, UserId: UserId, managerId: UserId });
   }, []);
 
-  const options = Managers.map((e) => ({
+  const Users = useSelector((e) => e.Users);
+  const optionsRealtor = Users.map((e) => ({
     value: e.id,
     label: e.name,
   }));
+
+  const optionsManager = Users.filter((f) => f.UserRole == "Manager").map((e) => ({
+    value: e.id,
+    label: e.name,
+  }));
+
   
 
   const onSubmitR = () => {
-    fetch(`http://localhost:8080/addRealtor`, {
+    fetch(`https://truewayrealtorsapi.com/addRealtor`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +64,7 @@ function UserManagement() {
       });
   };
   const onSubmitM = () => {
-    fetch(`http://localhost:8080/addManager`, {
+    fetch(`https://truewayrealtorsapi.com/addManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +117,8 @@ function UserManagement() {
       Err={Err}
       setErr={setErr}
       userRole={userRole}
-      options= {options}
+      optionsRealtor= {optionsRealtor}
+      optionsManager={optionsManager}
     />
   );
 }

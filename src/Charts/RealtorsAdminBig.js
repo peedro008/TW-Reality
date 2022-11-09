@@ -5,10 +5,12 @@ import spinnerr from "../assets/loadingIcon.gif";
 function RealtorsAdminBig({ google, realtors, Referred, graficType }) {
   const [dato, setDato] = useState([]);
   const [time, setTime] = useState(false);
+  const [maxNumber, setmaxNumber] = useState(0)
+  const [color, setColor] = useState("#2b4162")
 
   const realtorsSale = realtors.filter((e) => e.Sells.length !== 0);
-  const realtorsReferrals = realtors.filter((e) => e.Referrals.length !== 0);
-  const realtorsReferred = realtors.filter((e) => e.Referrals.length !== 0);
+  const realtorsRecruited = realtors.filter((e) => e.Referrals.length !== 0);
+  const realtorsReferred = realtors.map(e => Referred.filter((f) => f.UserId == e.id)).filter(e => e.length !== 0)
  
   useEffect(() => {
     let dataSale = [];
@@ -19,32 +21,41 @@ function RealtorsAdminBig({ google, realtors, Referred, graficType }) {
       dataSale.push([e.name, e.Sells.length]);
     });
 
-    realtorsReferrals?.map((e, index) => {
+    realtorsRecruited?.map((e, index) => {
       dataRec.push([e.name, e.Referrals.length]);
     });
 
     realtorsReferred?.map((e, index) => {
-      let Refferidos = Referred.filter((f) => f.User?.id == e.id).length;
-      if (Refferidos !== 0) {
-        dataRef.push([
-          e.name,
-          Referred.filter((f) => f.User?.id == e.id).length,
-        ]);
-      }
+      dataRef.push([e[0].User.name,
+        e.length,
+     ])
     });
 
     if (graficType === "Sales") {
       setDato(dataSale);
+
+      let arrNum = dataSale.map(e => e.slice(1));
+      let arrNumMax = (arrNum.map(e => Math.max(...e)))
+      setmaxNumber(Math.max(...arrNumMax))
+      setColor('#6F52ED')
     } else if (graficType === "Recruited") {
       setDato(dataRec);
+      let arrNum = dataRec.map(e => e.slice(1));
+      let arrNumMax = (arrNum.map(e => Math.max(...e)))
+      setmaxNumber(Math.max(...arrNumMax))
+      setColor("#FF7A00")
     } else {
       setDato(dataRef);
+      let arrNum = dataRef.map(e => e.slice(1));
+      let arrNumMax = (arrNum.map(e => Math.max(...e)))
+      setmaxNumber(Math.max(...arrNumMax))
+      setColor("#33D69F")
     }
-
+    
     // if (graficType === 2) setDato('Hola');
     // if (graficType === 3) setDato(dataRef);
   }, [graficType, realtors]);
-
+  
   useEffect(() => {
     setTime(false);
     setTimeout(() => {
@@ -62,12 +73,12 @@ function RealtorsAdminBig({ google, realtors, Referred, graficType }) {
             fontName: "Gilroy-Regular",
             fontSize: "20",
           },
-          colors: ["#2b4162"],
+          colors: [color],
           backgroundColor: "#EBEFF2",
-          bar: { groupWidth: "10%", borderRadius: "20px" },
-          vAxis: { format: "0" },
+          bar: { groupWidth: "20%", borderRadius: "20px" },
+          vAxis: { format: "0", minValue: 0, maxValue: maxNumber + 2 },
           hAxis: { format: "0" },
-          chartArea: { width: "80%", height: "80%" },
+          chartArea: { width: "70%", height: "80%" },
         };
 
         // Instantiate and draw our chart, passing in some options.
@@ -76,7 +87,7 @@ function RealtorsAdminBig({ google, realtors, Referred, graficType }) {
         );
         Chart.draw(data, options);
       }
-    }, 500);
+    }, 1000);
   }, [dato, realtors]);
 
   return (

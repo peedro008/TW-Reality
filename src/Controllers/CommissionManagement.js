@@ -15,7 +15,7 @@ function CommissionManagement() {
   const dispatch = useDispatch();
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getCommission`)
+      .get(`https://truewayrealtorsapi.com/getCommission`)
       .then(function (response) {
         response.status == 404
           ? dispatch(getCommission([]))
@@ -26,7 +26,7 @@ function CommissionManagement() {
       });
   }, []);
   const onSubmit = () => {
-    fetch(`http://localhost:8080/paycommission`, {
+    fetch(`https://truewayrealtorsapi.com/paycommission`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

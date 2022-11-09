@@ -3,7 +3,8 @@ import AddSellComponent from "../Components/addSell";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-function AddSell() {
+import AddPackage from "../Components/addPackage";
+function AddPackageControl() {
   const userId = useSelector((state) => state.UserId);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -12,11 +13,12 @@ function AddSell() {
   const date = new Date();
 
   const Users = useSelector((e) => e.Users);
-  const options = Users.filter((f) => f.UserRole == "Realtor" ||  f.UserRole == "Manager" ).map((e) => ({
+  const options = Users.map((e) => ({
     value: e.id,
     label: e.name,
   }));
   let cero = date.getDate() < 10 ? "0" : "";
+
   console.log(form);
 
   const DATE =
@@ -58,7 +60,7 @@ function AddSell() {
       });
   };
   return (
-    <AddSellComponent
+    <AddPackage
       form={form}
       setForm={setForm}
       open={open}
@@ -72,4 +74,4 @@ function AddSell() {
   );
 }
 
-export default AddSell;
+export default AddPackageControl;

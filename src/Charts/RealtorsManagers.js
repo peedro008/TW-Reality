@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import spinnerr from "../assets/loadingIcon.gif";
-function Realtors({ google, realtors, Referred }) {
+function RealtorsManagers({ google, realtors, Referred }) {
   const [chart, setChart] = useState(null);
   const [dato, setDato] = useState([]);
   const [time, setTime] = useState(false);
   const [maxNumber, setmaxNumber] = useState(0)
 
-  const realtorsUp = realtors.filter((e) => e.Sells.length !== 0 || e.Referrals.length !== 0);
-
   useEffect(() => {
     let all = [];
-    realtorsUp?.map((e, index) => {
+    realtors?.map((e, index) => {
       all.push([
         e.name,
         e.Sells.length,
@@ -46,10 +44,10 @@ function Realtors({ google, realtors, Referred }) {
           },
           colors: ["#6F52ED", "#FF7A00", "#33D69F"],
           backgroundColor: "#EBEFF2",
-          bar: { groupWidth: "80%", borderRadius: "10px" },
+          bar: { groupWidth: "40%", borderRadius: "10px" },
           vAxis: { format: "0", minValue: maxNumber + 2 },
           hAxis: { format: "0" },
-          chartArea: { width: "80%", height: "80%" },
+          chartArea: { width: "70%", height: "80%" },
         };
 
         // Instantiate and draw our chart, passing in some options.
@@ -83,4 +81,4 @@ function Realtors({ google, realtors, Referred }) {
   );
 }
 
-export default Realtors;
+export default RealtorsManagers;

@@ -4,9 +4,6 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Select from "react-select";
 
-import StatsQuoted from "../Charts/stadisticChartQuoted";
-import StatsSold from "../Charts/stadisticsChartSold";
-
 function StadisticComponent({
   yearLabel,
   yearOptions,
@@ -16,12 +13,10 @@ function StadisticComponent({
   dateSelected,
   getRSells,
   search,
-  getComission,
   Users,
-  google,
 }) {
   const stateRed = useSelector((state) => state);
-  console.log(stateRed.Commissions)
+  console.log(stateRed.Users)
   return (
     <div className="genericDiv1">
       <div className="StadCalendarDiv">

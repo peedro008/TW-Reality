@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { FaPenSquare } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 function ToRecruitComponent({ Referred, Users, UserId }) {
   const [typeList, setTypeList] = useState();
-  const [managerName, setManagerName] = useState()
+  const [managerName, setManagerName] = useState();
   const buttonStyle = {
     height: "30px",
     width: "150px",
     alignSelf: "center",
+    cursor: 'pointer',
     marginBlock: "7px",
     marginTop: "15px",
     marginRight: "20px",
@@ -21,7 +23,6 @@ function ToRecruitComponent({ Referred, Users, UserId }) {
   };
   const managerUser = Users?.filter((e) => e.UserRole === "Manager");
   const realtorUser = Users?.filter((e) => e.UserRole === "Realtor");
-
   return (
     <div className="genericDiv1">
       <div className="genericHeader" style={{ marginBottom: "50px" }}>
@@ -132,6 +133,9 @@ function ToRecruitComponent({ Referred, Users, UserId }) {
                     <th scope="col" className="column1">
                       <p className="REPtype">Sales</p>
                     </th>
+                    <th scope="col" className="column1">
+                      <p className="REPtype">Edit</p>
+                    </th>
                   </tr>
                   {realtorUser?.map((e, i) => {
                     return (
@@ -143,7 +147,10 @@ function ToRecruitComponent({ Referred, Users, UserId }) {
                           {Users.filter((f) => f.id == e.ReferredId)[0]?.name}
                         </td>
                         <td className="ClientName" scope="row">
-                           {managerUser?.filter(m => m.id === e.managerId)[0]?.name} 
+                          {
+                            managerUser?.filter((m) => m.id === e.managerId)[0]
+                              ?.name
+                          }
                         </td>
                         <td className="ClientName" scope="row">
                           {e.email}
@@ -160,6 +167,19 @@ function ToRecruitComponent({ Referred, Users, UserId }) {
                         <td className="ClientName" scope="row">
                           {e.Sells.length}
                         </td>
+                        <th className="ClientName" scope="row">
+                          <NavLink
+                            className="icons"
+                            to={{ pathname: "/editUser", aboutProps: e }}
+                            activeClassName="NAavtive"
+                          >
+                            <FaPenSquare
+                              className="NAicon"
+                              size="20px"
+                              color="#2b4162"
+                            />
+                          </NavLink>
+                        </th>
                       </tr>
                     );
                   })}

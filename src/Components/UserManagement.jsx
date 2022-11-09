@@ -19,7 +19,8 @@ function UserManagementComponent({
   Err,
   setErr,
   validarEmail,
-  options,
+  optionsManager,
+  optionsRealtor
 }) {
   let validation =
     form.password?.length < 8 ||
@@ -33,7 +34,7 @@ function UserManagementComponent({
     <div className="genericDiv">
       <div className="genericHeader">
         <p className="genericTitle">
-          {!type ? "User Management" : "Add " + type}
+          {!type ? "Add User" : "Add " + type}
         </p>
       </div>
       {!type ? (
@@ -44,14 +45,30 @@ function UserManagementComponent({
           </button>
 
           {userRole == "Admin" ? (
+            <>
+            
             <button
               className="PAYbutton"
               style={{ marginLeft: "30px" }}
               onClick={() => setType("Manager")}
-            >
+              >
               <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF" />
               <p className="PAYbuttonText">Add manager</p>
             </button>
+            <NavLink
+              to="/UserManagement/referred"
+              style={{ textDecoration: "none" }}
+            >
+              <button className="PAYbutton" style={{ marginLeft: "30px" }}>
+                <MdAdd
+                  size="1.25em"
+                  className="PAYbuttonIcon"
+                  color="#FFFFFF"
+                />
+                <p className="PAYbuttonText">Add referred</p>
+              </button>
+            </NavLink>
+              </>
           ) : (
             <NavLink
               to="/UserManagement/referred"
@@ -132,7 +149,7 @@ function UserManagementComponent({
               <div className="inputDiv">
                 <p className="PAYtitle">Manager</p>
                 <Select
-                  options={options}
+                  options={optionsManager}
                   onChange={(e) => setForm({ ...form, managerId: e.value })}
                   className="SelectAddRealtor"
                   // defaultInputValue={yearOptions[0]}
@@ -140,6 +157,16 @@ function UserManagementComponent({
                 />
               </div>
             </div>
+            <div className="inputDiv">
+                <p className="PAYtitle">Referred By</p>
+                <Select
+                  options={optionsRealtor}
+                  onChange={(e) => setForm({ ...form, ReferredId: e.value })}
+                  className="SelectAddRealtor"
+                  // defaultInputValue={yearOptions[0]}
+                  placeholder='Name'
+                />
+              </div>
           </div>
           <BsChevronLeft
             cursor="pointer"

@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { BiSearchAlt2 } from "react-icons/bi";
 import RealtorsAdminBig from "../Charts/RealtorsAdminBig";
 import Select from "react-select";
+import Realtors from "../Charts/Realtors";
 
 function AdminGrafics({
   Referred,
@@ -13,8 +14,8 @@ function AdminGrafics({
   selected,
   setSelected,
 }) {
-  const [graficType, setGraficType] = useState("Sales");
-
+  const [graficType, setGraficType] = useState('Sales');
+  const [graficMultiple, setGraficMultiple] = useState(true);
   const [Search, setSearch] = useState("");
   const [thisUsers, setThisUsers] = useState(Users);
 
@@ -25,6 +26,7 @@ function AdminGrafics({
   }, [Search]);
 
   const options = [
+    { value: "All", label: "All" },
     { value: "Sales", label: "Sales" },
     { value: "Referred", label: "Referred" },
     { value: "Recruited", label: "Recruited" },
@@ -65,7 +67,7 @@ function AdminGrafics({
               ></input>
               <Select
                 options={options}
-                onChange={(e) => setGraficType(e.value)}
+                onChange={(e) => {setGraficType(e.value); if(e.value !== 'All') {setGraficMultiple(false)} else {setGraficMultiple(true)}}}
                 className="StadSelectGrafic"
                 // defaultInputValue={yearOptions[0]}
                 placeholder="Type"
@@ -85,12 +87,21 @@ function AdminGrafics({
       >
         {!selected ? (
           google && (
-            <RealtorsAdminBig
+            
+              graficMultiple ?
+              <Realtors
               google={google}
-              Referred={Referred}
-              realtors={thisUsers}
-              graficType={graficType}
-            />
+                Referred={Referred}
+                realtors={thisUsers}
+                graficType={graficType}/>
+                :
+              <RealtorsAdminBig
+                google={google}
+                Referred={Referred}
+                realtors={thisUsers}
+                graficType={graficType}
+              />
+            
           )
         ) : (
           <>
@@ -312,16 +323,9 @@ function AdminGrafics({
 
         <div
           className="DashPList1Grow"
-          // style={{
-          //   position: "absolute",
-          //   right: "50px",
-          //   top: "80px",
-          //   height: "50px",
-          // }}
         >
           <div className="DashPListHeader">
             <p className="DashPListTitle">Top Recruited</p>
-            {/* <p className="DashPListSTitle">Descending</p> */}
           </div>
           <div className="DashPListDivider" />
           <div className="DashPListRow1" style={{ marginBottom: "7px" }}>
@@ -333,7 +337,7 @@ function AdminGrafics({
               }}
             >
               <div className="DashPListCircleWith">
-                {/* <img src={mask} /> */}
+    
               </div>
 
               <p

@@ -13,7 +13,7 @@ function ToRecruit() {
   const dispatch = useDispatch();
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getRealtors`)
+      .get(`https://truewayrealtorsapi.com/getRealtors`)
       .then(function (response) {
         dispatch(getUsers(response.data));
       })

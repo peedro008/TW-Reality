@@ -3,6 +3,7 @@ import mask from "../assets/mask.png";
 import { NavLink } from "react-router-dom";
 import RealtorsAdmin from "../Charts/RealtorsAdmin";
 import RealtorsManager from "../Charts/RealtorsManager";
+import RealtorsManagers from "../Charts/RealtorsManagers";
 function ManagerGrafics({
   Referred,
   google,
@@ -34,7 +35,7 @@ function ManagerGrafics({
       >
         {!selected ? (
           google && (
-            <RealtorsManager
+            <RealtorsManagers
               google={google}
               Referred={Referred}
               realtors={thisUsers}

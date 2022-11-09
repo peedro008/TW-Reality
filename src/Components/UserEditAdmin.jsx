@@ -8,39 +8,42 @@ import { BsChevronLeft } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import ReactSelect from "react-select";
+import Select from "react-select";
 
-function ManagerRecruitComponent({
+function UserEditAdmin({
   show,
   setShow,
   form,
-  RUser,
+  manId,
+  refBy,
   open,
   onSubmit,
   onCloseModal,
   validarEmail,
   setForm,
   optionsRealtor,
-  optionsManager
+  optionsManager,
 }) {
-  const Users = useSelector((e) => e.Users);
   let validation =
-    form.password?.length < 8 ||
-    typeof form.password?.length === "undefined" ||
     !validarEmail(form.email) ||
     form.name?.length < 6 ||
     typeof form.name?.length === "undefined" ||
     typeof form.ComissionValue?.length === "undefined" ||
     form.ComissionValue?.length < 2;
 
-  let manId = RUser?.managerId || RUser?.id;
-  let manName = Users.filter((e) => e.id === manId)[0]?.name;
-  
-console.log(form)
+  let userFiltred = optionsRealtor.filter((e) => e.value === refBy[0].id);
+  let defaultSelect = optionsRealtor.indexOf(userFiltred[0]);
+
+
+  let manFiltred = optionsManager.filter((e) => e.value === manId);
+  let defaultManSelect = optionsManager.indexOf(manFiltred[0]);
+
+  console.log(optionsRealtor);
+  // console.log(defaultManSelect);
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">Add Realtor</p>
+        <p className="genericTitle">Edit Realtor</p>
       </div>
 
       <div className="managerInputsContainer">
@@ -79,7 +82,7 @@ console.log(form)
               <input
                 type={show ? "text" : "password"}
                 onChange={(e) => {
-                  setForm({ ...form, password: e.target.value, managerId: manId });
+                  setForm({ ...form, password: e.target.value });
                 }}
                 placeholder="Password"
                 className="AQinput"
@@ -124,26 +127,27 @@ console.log(form)
             ></input>
             <p className="FORMerror"></p>
           </div>
+
           <div className="inputDiv">
             <p className="PAYtitle">Referred by</p>
-            <ReactSelect
-              onChange={(val) => setForm({ ...form, ReferredId: val.value })}
+            <Select
               options={optionsRealtor}
-              name={"Realtor Name"}
-              className="PAYselect"
-              placeholder="Select Realtor"
+              onChange={(e) => setForm({ ...form, ReferredId: e.value })}
+              className="SelectAddRealtor"
+              defaultValue={optionsRealtor[defaultSelect]}
+              placeholder="Name"
             />
           </div>
         </div>
         <div className="inputDiv">
           <p className="PAYtitle">Manager</p>
-          <ReactSelect
-              onChange={(val) => setForm({ ...form, managerId: val.value })}
-              options={optionsManager}
-              name={"Realtor Name"}
-              className="PAYselect"
-              placeholder="Select Realtor"
-            />
+          <Select
+            options={optionsManager}
+            onChange={(e) => setForm({ ...form, managerId: e.value })}
+            className="SelectAddRealtor"
+            defaultValue={optionsManager[defaultManSelect]}
+            placeholder="Name"
+          />
         </div>
       </div>
 
@@ -157,14 +161,17 @@ console.log(form)
       >
         <button
           className="PAYbutton"
-          onClick={() => onSubmit()}
+          onClick={() => {
+            onSubmit();
+            console.log("Holaaaaa");
+          }}
           style={{
             backgroundColor: validation && "#586579",
             cursor: validation && "default",
           }}
           disabled={validation ? true : false}
         >
-          <p className="PAYbuttonText">Add Realtor</p>
+          <p className="PAYbuttonText">Edit Realtor</p>
         </button>
       </div>
 
@@ -180,7 +187,7 @@ console.log(form)
             }}
           />
 
-          <p className="modalText">Realtor added successfully</p>
+          <p className="modalText">Realtor edited successfully</p>
 
           <button
             onClick={() => {
@@ -220,4 +227,4 @@ console.log(form)
   );
 }
 
-export default ManagerRecruitComponent;
+export default UserEditAdmin;

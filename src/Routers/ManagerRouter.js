@@ -34,10 +34,9 @@ const ManagerRouter = () => {
       <Route exact path='/managerGrafics' component={ManagerGraficsControl}/>
       <Route exact path='/management/ManagerRecruit' component={ManagerRecruit}/>
       <Route exact path='/UsersManagement' component={UserManagement}/>
-      <Route exact path='/AddSell' component={AddSell}/>
+      <Route exact path='/addSell' component={AddSell}/>
       <Route exact path='/realtorsListManager' component={RealtorsListManagerControl}/>
       <Route exact path="/UserManagement/referred" component={AddReferred}/>
-
       <Route exact path='/salesByMe' component={StadisticInfo}/>
        <Route exact path='/salesByRealtors' component={SalesByRealtors}/>
        <Route exact path='/myReferrals' component={MyReferrals}/>

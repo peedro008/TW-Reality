@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 import { Controller } from "react-hook-form";
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-function AddSellComponent({
+function AddPackage({
   DATE,
   form,
   setForm,
@@ -26,22 +26,42 @@ function AddSellComponent({
     form.ClientName?.length < 3 ||
     typeof form.ClientName?.length === "undefined";
 
-    // useEffect(() => {
-    //   setForm({...form, managerId: UserId.managerId})
-    // }, [form?.UserId])
-    useEffect(() => {
+  let optionsPackage = [
+    {
+      value: 1,
+      label: "Marketing",
+    },
+    {
+      value: 2,
+      label: "Transaction Coordinator",
+    },
+    {
+      value: 3,
+      label: "Marketing + Transaction Coordinator",
+    },
+  ];
 
-      let manId = Users.filter(e => e.id === form.UserId)[0]?.managerId
-      let refId = Users.filter(e => e.id === form.UserId)[0]?.ReferredId
-      
-      setForm({...form, managerId: manId, ReferredId: refId })
+  // useEffect(() => {
 
-    }, [form.UserId])
-    
+  //   let manId = Users.filter(e => e.id === form.UserId)[0]?.managerId
+  //   let refId = Users.filter(e => e.id === form.UserId)[0]?.ReferredId
+
+  //   setForm({...form, managerId: manId, ReferredId: refId })
+
+  // }, [form.UserId])
+
+  useEffect(() => {
+    if (form.typeOfPackage === 2) {
+      setForm({ ...form, monthly: false });
+    } else {
+      setForm({ ...form, monthly: true });
+    }
+  }, [form.typeOfPackage]);
+
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">Add Sell</p>
+        <p className="genericTitle">Add Package</p>
       </div>
 
       <div className="managerInputsContainer">
@@ -81,7 +101,7 @@ function AddSellComponent({
             ></input>
           </div>
           <div className="inputDiv">
-            <p className="PAYtitle">Property Value</p>
+            <p className="PAYtitle">Package Value</p>
             <input
               type="number"
               onChange={(e) => {
@@ -91,11 +111,21 @@ function AddSellComponent({
               className="AQinput"
             ></input>
             <p className="FORMerror">
-              {form.Value ? "" : "Property value is mandatory"}
+              {form.Value ? "" : "Package value is mandatory"}
             </p>
           </div>
         </div>
         <div className="managerInputsubContainer" style={{ width: "60vw" }}>
+          <div className="inputDiv">
+            <p className="PAYtitle">Type of Package</p>
+            <Select
+              onChange={(val) => setForm({ ...form, typeOfPackage: val.value })}
+              options={optionsPackage}
+              name={"Realtor Name"}
+              className="PAYselect"
+              placeholder="Select Package"
+            />
+          </div>
           <div className="inputDiv">
             <p className="PAYtitle">Seller</p>
             <Select
@@ -106,16 +136,6 @@ function AddSellComponent({
               placeholder="Select Realtor"
             />
           </div>
-          {/* <div className="inputDiv">
-            <p className="PAYtitle">Manager</p>
-            <Select
-              onChange={(val) => setForm({ ...form, managerId: val.value })}
-              options={options}
-              name={"Realtor Name"}
-              className="PAYselect"
-              placeholder="Select Realtor"
-            />
-          </div> */}
         </div>
       </div>
 
@@ -134,9 +154,10 @@ function AddSellComponent({
             backgroundColor: validation && "#586579",
             cursor: validation && "default",
           }}
-          disabled={validation ? true : false}
+          // disabled={validation ? true : false}
+          disabled={true}
         >
-          <p className="PAYbuttonText">Add Sell</p>
+          <p className="PAYbuttonText">Add Package</p>
         </button>
       </div>
 
@@ -155,7 +176,6 @@ function AddSellComponent({
           <p className="modalText">Sell added successfully</p>
 
           <button className="modalButton">
-            {" "}
             <NavLink style={{ textDecoration: "none", color: "#000" }} to={"/"}>
               Continue
             </NavLink>
@@ -190,4 +210,4 @@ function AddSellComponent({
   );
 }
 
-export default AddSellComponent;
+export default AddPackage;

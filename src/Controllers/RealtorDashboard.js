@@ -26,7 +26,7 @@ const RealtorDashboard = () => {
     let temp2 = 0;
 
     axios
-      .get(`http://localhost:8080/getIdCommission?id=${UserId}`)
+      .get(`https://truewayrealtorsapi.com/getIdCommission?id=${UserId}`)
       .then(function (response) {
         console.log(
           response.data.filter(

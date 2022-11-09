@@ -4,7 +4,7 @@ import "../Css/css.css";
 import { FiGrid, FiBarChart2 } from "react-icons/fi";
 import { MdManageAccounts } from "react-icons/md";
 // import Manager from "./manager"
-import { FaRegMoneyBillAlt, FaWallet } from "react-icons/fa";
+import { FaBox, FaBoxOpen, FaRegMoneyBillAlt, FaWallet } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineFile } from "react-icons/ai";
 import { MdAdd } from "react-icons/md";
@@ -54,17 +54,8 @@ function AdminNav() {
           alt={"logo"}
           style={{ backgroundColor: "#2b4162" }}
         />
-        <div className="NAcontainer">
+         <div className="NAcontainer">
           <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
-            <FiGrid
-              className="NAicon"
-              color="#868ba5"
-              activeClassName="NAactive"
-            />
-          </NavLink>
-        </div>
-        <div className="NAcontainer">
-          <NavLink className="icons" to="/adminGrafics" activeClassName="NAavtive" exact>
             <FiBarChart2
               className="NAicon"
               color="#868ba5"
@@ -73,12 +64,38 @@ function AdminNav() {
           </NavLink>
         </div>
         <div className="NAcontainer">
+          <NavLink className="icons" to="/stadistic" activeClassName="NAavtive" exact>
+            <FiGrid
+              className="NAicon"
+              color="#868ba5"
+              activeClassName="NAactive"
+            />
+          </NavLink>
+        </div>
+        <div className="NAcontainer">
+          <NavLink className="icons" to="/addSell" activeClassName="NAavtive">
+            <FaRegMoneyBillAlt className="NAicon" size="20px" color="#868ba5" />
+          </NavLink>
+        </div>
+       
+        <div className="NAcontainer">
           <NavLink
             className="icons"
             to="/CommissionManagement"
             activeClassName="NAavtive"
           >
             <FaWallet className="NAicon" size="25px" color="#868ba5" />
+          </NavLink>
+        </div>
+
+        <span />
+        <div className="NAcontainer">
+          <NavLink
+            className="icons"
+            to="/addPackage"
+            activeClassName="NAavtive"
+          >
+            <FaBoxOpen className="NAicon" size="25px" color="#868ba5" />
           </NavLink>
         </div>
         <span />
