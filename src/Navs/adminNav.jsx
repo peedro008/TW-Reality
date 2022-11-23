@@ -4,7 +4,14 @@ import "../Css/css.css";
 import { FiGrid, FiBarChart2 } from "react-icons/fi";
 import { MdManageAccounts } from "react-icons/md";
 // import Manager from "./manager"
-import { FaBox, FaBoxOpen, FaRegMoneyBillAlt, FaWallet } from "react-icons/fa";
+import {
+  FaBox,
+  FaBoxes,
+  FaBoxOpen,
+  FaPaperPlane,
+  FaRegMoneyBillAlt,
+  FaWallet,
+} from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineFile } from "react-icons/ai";
 import { MdAdd } from "react-icons/md";
@@ -12,6 +19,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Redux/actions";
 import { BiStats } from "react-icons/bi";
 import logo from "../assets/1logo.jpeg";
+import brokerSumo from "../assets/brokersumo.png";
+import miamiRealtors from "../assets/miamiRealtors.jpg";
+import myRealtorsDash from "../assets/myRealtorsDash.png";
+import kvCore from "../assets/kvCore.png";
+
 function AdminNav() {
   const dispatch = useDispatch();
 
@@ -26,6 +38,51 @@ function AdminNav() {
   return (
     <div style={{ display: "flex" }}>
       <div className="topbar">
+        <div style={{ paddingRight: "40px", display: "flex" }}>
+      
+          <div className="circleLink">
+          <a href="https://www.miamirealtors.com/" target='blank'>
+
+            <img
+              className="imageLink"
+              src={miamiRealtors}
+              alt={"logo"}
+              style={{ backgroundColor: "#2b4162" }}
+              />
+              </a>
+     
+          </div>
+          <div className="circleLink">
+          <a href="https://myrealtordash.clareityiam.net/idp/login" target='blank'>
+            <img
+              className="imageLink"
+              src={myRealtorsDash}
+              alt={"logo"}
+              style={{ backgroundColor: "#2b4162" }}
+            />
+                </a>
+          </div>
+          <div className="circleLink">
+          <a href="https://app.kvcore.com/" target='blank'>
+            <img
+              className="imageLink"
+              src={kvCore}
+              alt={"logo"}
+              style={{ backgroundColor: "#2b4162" }}
+            />
+                </a>
+          </div>
+          <div className="circleLink">
+          <a href="https://www.brokersumo.com/#/dashboard" target='blank'>
+            <img
+              className="imageLink"
+              src={brokerSumo}
+              alt={"logo"}
+              style={{ backgroundColor: "#2b4162" }}
+            />
+                </a>
+          </div>
+        </div>
         <div style={{ paddingRight: "40px", display: "flex" }}>
           <div className="circle">
             <p className="initial">{Name && Name.substring(0, 1)}</p>
@@ -54,7 +111,7 @@ function AdminNav() {
           alt={"logo"}
           style={{ backgroundColor: "#2b4162" }}
         />
-         <div className="NAcontainer">
+        <div className="NAcontainer">
           <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
             <FiBarChart2
               className="NAicon"
@@ -64,7 +121,12 @@ function AdminNav() {
           </NavLink>
         </div>
         <div className="NAcontainer">
-          <NavLink className="icons" to="/stadistic" activeClassName="NAavtive" exact>
+          <NavLink
+            className="icons"
+            to="/stadistic"
+            activeClassName="NAavtive"
+            exact
+          >
             <FiGrid
               className="NAicon"
               color="#868ba5"
@@ -77,7 +139,7 @@ function AdminNav() {
             <FaRegMoneyBillAlt className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
-       
+
         <div className="NAcontainer">
           <NavLink
             className="icons"
@@ -87,7 +149,20 @@ function AdminNav() {
             <FaWallet className="NAicon" size="25px" color="#868ba5" />
           </NavLink>
         </div>
-
+        <div className="NAcontainer">
+          <NavLink
+            className="icons"
+            to="/sells"
+            activeClassName="NAavtive"
+            exact
+          >
+            <FaPaperPlane
+              className="NAicon"
+              color="#868ba5"
+              activeClassName="NAactive"
+            />
+          </NavLink>
+        </div>
         <span />
         <div className="NAcontainer">
           <NavLink
@@ -96,6 +171,17 @@ function AdminNav() {
             activeClassName="NAavtive"
           >
             <FaBoxOpen className="NAicon" size="25px" color="#868ba5" />
+          </NavLink>
+        </div>
+        <span />
+
+        <div className="NAcontainer">
+          <NavLink
+            className="icons"
+            to="/packageManagement"
+            activeClassName="NAavtive"
+          >
+            <FaBoxes className="NAicon" size="25px" color="#868ba5" />
           </NavLink>
         </div>
         <span />

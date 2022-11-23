@@ -12,6 +12,10 @@ import { AiOutlineFile } from "react-icons/ai";
 import { MdAdd } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Redux/actions";
+import brokerSumo from "../assets/brokersumo.png";
+import miamiRealtors from "../assets/miamiRealtors.jpg";
+import myRealtorsDash from "../assets/myRealtorsDash.png";
+import kvCore from "../assets/kvCore.png";
 
 function RealtorNav({ onSearch }) {
   const dispatch = useDispatch();
@@ -28,6 +32,51 @@ function RealtorNav({ onSearch }) {
   return (
     <div style={{ display: "flex" }}>
       <div className="topbar">
+      <div style={{ paddingRight: "40px", display: "flex" }}>
+      
+      <div className="circleLink">
+      <a href="https://www.miamirealtors.com/" target='blank'>
+
+        <img
+          className="imageLink"
+          src={miamiRealtors}
+          alt={"logo"}
+          style={{ backgroundColor: "#2b4162" }}
+          />
+          </a>
+ 
+      </div>
+      <div className="circleLink">
+      <a href="https://myrealtordash.clareityiam.net/idp/login" target='blank'>
+        <img
+          className="imageLink"
+          src={myRealtorsDash}
+          alt={"logo"}
+          style={{ backgroundColor: "#2b4162" }}
+        />
+            </a>
+      </div>
+      <div className="circleLink">
+      <a href="https://app.kvcore.com/" target='blank'>
+        <img
+          className="imageLink"
+          src={kvCore}
+          alt={"logo"}
+          style={{ backgroundColor: "#2b4162" }}
+        />
+            </a>
+      </div>
+      <div className="circleLink">
+      <a href="https://www.brokersumo.com/#/dashboard" target='blank'>
+        <img
+          className="imageLink"
+          src={brokerSumo}
+          alt={"logo"}
+          style={{ backgroundColor: "#2b4162" }}
+        />
+            </a>
+      </div>
+    </div>
         <div style={{ paddingRight: "40px", display: "flex" }}>
           <div className="circle">
             <p className="initial">{Name && Name.substring(0, 1)}</p>

@@ -41,7 +41,7 @@ function UserManagementComponent({
         <div className="PAYbuttonCont" style={{ justifyContent: "flex-start" }}>
           <button className="PAYbutton" onClick={() => setType("Realtor")}>
             <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF" />
-            <p className="PAYbuttonText">Add realtor</p>
+            <p className="PAYbuttonText">Add Realtor</p>
           </button>
 
           {userRole == "Admin" ? (
@@ -53,7 +53,7 @@ function UserManagementComponent({
               onClick={() => setType("Manager")}
               >
               <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF" />
-              <p className="PAYbuttonText">Add manager</p>
+              <p className="PAYbuttonText">Add Manager</p>
             </button>
             <NavLink
               to="/UserManagement/referred"
@@ -65,7 +65,20 @@ function UserManagementComponent({
                   className="PAYbuttonIcon"
                   color="#FFFFFF"
                 />
-                <p className="PAYbuttonText">Add referred</p>
+                <p className="PAYbuttonText">Add Referral</p>
+              </button>
+            </NavLink>
+            <NavLink
+              to="/UserManagement/addAdmin"
+              style={{ textDecoration: "none" }}
+            >
+              <button className="PAYbutton" style={{ marginLeft: "30px" }}>
+                <MdAdd
+                  size="1.25em"
+                  className="PAYbuttonIcon"
+                  color="#FFFFFF"
+                />
+                <p className="PAYbuttonText">Add Admin</p>
               </button>
             </NavLink>
               </>
@@ -80,7 +93,7 @@ function UserManagementComponent({
                   className="PAYbuttonIcon"
                   color="#FFFFFF"
                 />
-                <p className="PAYbuttonText">Add referred</p>
+                <p className="PAYbuttonText">Add Referral</p>
               </button>
             </NavLink>
           )}
@@ -158,7 +171,7 @@ function UserManagementComponent({
               </div>
             </div>
             <div className="inputDiv">
-                <p className="PAYtitle">Referred By</p>
+                <p className="PAYtitle">Referral By</p>
                 <Select
                   options={optionsRealtor}
                   onChange={(e) => setForm({ ...form, ReferredId: e.value })}
@@ -205,7 +218,6 @@ function UserManagementComponent({
         </>
       ) : (
         <>
-          {" "}
           <div className="managerInputsContainer">
             <div className="managerInputsubContainer" style={{ width: "50vw" }}>
               <div className="inputDiv">

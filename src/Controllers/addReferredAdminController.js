@@ -17,7 +17,7 @@ function AddReferredAdminController() {
   }, []);
 
   const onSubmit = () => {
-    fetch(`https://truewayrealtorsapi.com/AddReferred`, {
+    fetch(`http://localhost:8080/AddReferred`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

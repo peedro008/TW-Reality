@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import spinnerr from "../assets/spinnerr.gif";
 import spinnerr from "../assets/loadingIcon.gif";
 
-function RealtorsAdminBig({ google, realtors, Referred, graficType }) {
+function RealtorsAdminBig({ google, realtors, Referred, graficType, goUser }) {
   const [dato, setDato] = useState([]);
   const [time, setTime] = useState(false);
   const [maxNumber, setmaxNumber] = useState(0)
@@ -67,6 +67,7 @@ function RealtorsAdminBig({ google, realtors, Referred, graficType }) {
         data.addRows(dato);
 
         var options = {
+          
           title: graficType,
           fontSize: 13,
           titleTextStyle: {
@@ -81,12 +82,21 @@ function RealtorsAdminBig({ google, realtors, Referred, graficType }) {
           chartArea: { width: "70%", height: "80%" },
         };
 
+
         // Instantiate and draw our chart, passing in some options.
         const Chart = new google.visualization.ColumnChart(
           document.getElementById("Chart")
         );
+        google.visualization.events.addListener(Chart, 'select', selectHandler);
+
+        function selectHandler(e) {
+        var selectedItem = Chart.getSelection()[0];
+        var value = data.getValue(selectedItem.row, 0);
+        goUser(value)
+}
         Chart.draw(data, options);
       }
+
     }, 1000);
   }, [dato, realtors]);
 

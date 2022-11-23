@@ -23,7 +23,7 @@ function AddReferredComponent({
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">Add Referred</p>
+        <p className="genericTitle">Add Referral</p>
       </div>
 
       <div className="managerInputsContainer">
@@ -109,7 +109,7 @@ function AddReferredComponent({
             }}
           />
 
-          <p className="modalText">Referred successfully!</p>
+          <p className="modalText">Add Referral successfully!</p>
 
           <button className="modalButton">
             {" "}

@@ -6,18 +6,23 @@ import AddReferredComponent from "../Components/addReferred";
 import { referredGet } from "../Logic/Fetch";
 
 function AddReferred() {
-  const userId = useSelector((state) => state.UserId);
+  const {UserId, userName} = useSelector((state) => state);
+  const us = useSelector((state) => state.Users)
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
-    setForm({ ...form, UserRole: "Realtor", UserId: userId });
+    setForm({ ...form, UserRole: "Realtor", UserId: UserId, sendEmail: userMail, userNameEmail: userName });
   }, []);
 
+  const userRef = us.filter(e => e.id === UserId)[0].ReferredId
+  const userMail = us.filter(e => e.id === userRef)[0].email
+  console.log(form)
+
   const onSubmit = () => {
-    fetch(`https://truewayrealtorsapi.com/AddReferred`, {
+    fetch(`http://localhost:8080/AddReferred`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,6 +48,8 @@ function AddReferred() {
         console.log(err);
       });
   };
+
+  
   function validarEmail(valor) {
     if (
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(

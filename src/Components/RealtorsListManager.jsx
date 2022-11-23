@@ -32,7 +32,7 @@ function RealtorsListManager({ Referred, Users, UserId }) {
           Realtors
         </button>
         <button onClick={() => setTypeList("Reffered")} style={buttonStyle}>
-          Reffered
+        Referrals
         </button>
       </div>
       <div
@@ -43,16 +43,16 @@ function RealtorsListManager({ Referred, Users, UserId }) {
           <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
             <div style={{ flexDirection: "row", marginLeft: "4%" }}>
               <p className="subTitt" style={{ marginTop: "2vh" }}>
-                Referred list
+              Referral list
               </p>
               <table className="table5" style={{ marginTop: "2vh" }}>
                 <tbody>
                   <tr>
                     <th scope="col" className="column1">
-                      <p className="REPtype">Referred name</p>
+                      <p className="REPtype">Referral name</p>
                     </th>
                     <th scope="col" className="column1">
-                      <p className="REPtype">Referred by</p>
+                      <p className="REPtype">Referral by</p>
                     </th>
                     <th scope="col" className="column1">
                       <p className="REPtype">Email</p>
@@ -111,7 +111,7 @@ function RealtorsListManager({ Referred, Users, UserId }) {
                       <p className="REPtype">Realtor name</p>
                     </th>
                     <th scope="col" className="column1">
-                      <p className="REPtype">Referred by</p>
+                      <p className="REPtype">Referral by</p>
                     </th>
                     <th scope="col" className="column1">
                       <p className="REPtype">Manager</p>

@@ -30,8 +30,8 @@ const ManagerRouter = () => {
   return (
     <Router>
       <Route component={ManagerNav} />
-      <Route exact path='/' component={ManagerDashboard}/>
-      <Route exact path='/managerGrafics' component={ManagerGraficsControl}/>
+      <Route exact path='/' component={ManagerGraficsControl}/>
+      <Route exact path='/managerDashboard' component={ManagerDashboard}/>
       <Route exact path='/management/ManagerRecruit' component={ManagerRecruit}/>
       <Route exact path='/UsersManagement' component={UserManagement}/>
       <Route exact path='/addSell' component={AddSell}/>

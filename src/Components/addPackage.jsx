@@ -1,30 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../Css/css.css";
-
 import Select from "react-select";
 import "react-responsive-modal/styles.css";
 import Isologo_background from "../assets/Isologo_background.png";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
 import { NavLink } from "react-router-dom";
-import { Controller } from "react-hook-form";
-
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { BsChevronLeft } from "react-icons/bs";
+import PackageMarketing from "./packages/PackageMarketing";
+import Offer from "./packages/Offer";
+import Selling from "./packages/Selling";
+import Listing from "./packages/Listing";
 function AddPackage({
-  DATE,
   form,
   setForm,
   open,
-  onSubmit,
-  options,
   onCloseModal,
-  Users,
+  optionsUsers,
+  onSubmit,
+  onSubmitListing,
+  onSubmitOffer,
+  onSubmitSelling,
 }) {
-  let validation =
-    typeof form.Value?.length === "undefined" ||
-    typeof form.UserId === "undefined" ||
-    form.ClientName?.length < 3 ||
-    typeof form.ClientName?.length === "undefined";
+  const [typeOfPackage, setTypeOfPackage] = useState();
+  const [typeOfCoordinator, setTypeOfCoordinator] = useState();
 
   let optionsPackage = [
     {
@@ -35,20 +34,21 @@ function AddPackage({
       value: 2,
       label: "Transaction Coordinator",
     },
+  ];
+  let optionsCoordinator = [
+    {
+      value: 1,
+      label: "Offer",
+    },
+    {
+      value: 2,
+      label: "Selling",
+    },
     {
       value: 3,
-      label: "Marketing + Transaction Coordinator",
+      label: "Listing",
     },
   ];
-
-  // useEffect(() => {
-
-  //   let manId = Users.filter(e => e.id === form.UserId)[0]?.managerId
-  //   let refId = Users.filter(e => e.id === form.UserId)[0]?.ReferredId
-
-  //   setForm({...form, managerId: manId, ReferredId: refId })
-
-  // }, [form.UserId])
 
   useEffect(() => {
     if (form.typeOfPackage === 2) {
@@ -64,102 +64,68 @@ function AddPackage({
         <p className="genericTitle">Add Package</p>
       </div>
 
-      <div className="managerInputsContainer">
-        <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-          <div className="inputDiv">
-            <p className="PAYtitle">Client Name</p>
-            <input
-              placeholder="Client Name"
-              onChange={(e) => {
-                setForm({ ...form, ClientName: e.target.value });
-              }}
-              className="AQinput"
-            ></input>
-            <p className="FORMerror"></p>
-          </div>
-          <div className="inputDiv">
-            <p className="PAYtitle">Address</p>
-            <input
-              placeholder="Address"
-              onChange={(e) => {
-                setForm({ ...form, Address: e.target.value });
-              }}
-              className="AQinput"
-            ></input>
-            <p className="FORMerror"></p>
-          </div>
-          <div className="inputDiv">
-            <p className="PAYtitle">Closing Date</p>
-            <input
-              type={"date"}
-              defaultValue={DATE}
-              onChange={(e) => {
-                setForm({ ...form, ClosingDate: e.target.value });
-              }}
-              placeholder="ClosingDate"
-              className="AQinput"
-            ></input>
-          </div>
-          <div className="inputDiv">
-            <p className="PAYtitle">Package Value</p>
-            <input
-              type="number"
-              onChange={(e) => {
-                setForm({ ...form, Value: e.target.value });
-              }}
-              placeholder="Property Value"
-              className="AQinput"
-            ></input>
-            <p className="FORMerror">
-              {form.Value ? "" : "Package value is mandatory"}
-            </p>
-          </div>
-        </div>
-        <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-          <div className="inputDiv">
-            <p className="PAYtitle">Type of Package</p>
-            <Select
-              onChange={(val) => setForm({ ...form, typeOfPackage: val.value })}
-              options={optionsPackage}
-              name={"Realtor Name"}
-              className="PAYselect"
-              placeholder="Select Package"
-            />
-          </div>
-          <div className="inputDiv">
-            <p className="PAYtitle">Seller</p>
-            <Select
-              onChange={(val) => setForm({ ...form, UserId: val.value })}
-              options={options}
-              name={"Realtor Name"}
-              className="PAYselect"
-              placeholder="Select Realtor"
-            />
-          </div>
+      <div className="managerInputsContainer2">
+        <div className="inputDiv">
+          <p className="PAYtitle">Type of Package</p>
+          <Select
+            onChange={(val) => {
+              setTypeOfPackage(val.label);
+              setTypeOfCoordinator();
+            }}
+            options={optionsPackage}
+            name={"Realtor Name"}
+            className="PAYselect"
+            placeholder="Select Package"
+          />
         </div>
       </div>
 
-      <div
-        style={{
-          position: "absolute",
-          right: "50px",
-          top: "76px",
-          display: "flex",
-        }}
-      >
-        <button
-          className="PAYbutton"
-          onClick={onSubmit}
-          style={{
-            backgroundColor: validation && "#586579",
-            cursor: validation && "default",
-          }}
-          // disabled={validation ? true : false}
-          disabled={true}
-        >
-          <p className="PAYbuttonText">Add Package</p>
-        </button>
-      </div>
+      {typeOfPackage === "Marketing" && (
+        <PackageMarketing
+          form={form}
+          setForm={setForm}
+          optionsUsers={optionsUsers}
+          onSubmit={onSubmit}
+        />
+      )}
+      {typeOfPackage === "Transaction Coordinator" && (
+        <div className="managerInputsContainer2">
+          <div className="inputDiv">
+            <p className="PAYtitle">Type of Transaction coordinator</p>
+            <Select
+              onChange={(val) => setTypeOfCoordinator(val.label)}
+              options={optionsCoordinator}
+              name={"Realtor Name"}
+              className="PAYselect"
+              placeholder="Select Transaction"
+            />
+          </div>
+        </div>
+      )}
+      {typeOfCoordinator === "Offer" && (
+        <Offer
+          form={form}
+          setForm={setForm}
+          optionsUsers={optionsUsers}
+          onSubmit={onSubmitOffer}
+        />
+      )}
+      {typeOfCoordinator === "Selling" && (
+        <Selling
+          form={form}
+          setForm={setForm}
+          optionsUsers={optionsUsers}
+          onSubmit={onSubmitSelling}
+        />
+      )}
+      {typeOfCoordinator === "Listing" && (
+        <Listing
+          form={form}
+          setForm={setForm}
+          optionsUsers={optionsUsers}
+          onSubmit={onSubmitListing}
+        />
+      )}
 
       <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div className="modal">
@@ -184,10 +150,13 @@ function AddPackage({
       </Modal>
       <img
         src={Isologo_background}
+        disabled
         style={{
-          position: "absolute",
+          position: "fixed",
+          pointerEvents: "none",
           right: 0,
           bottom: 0,
+          zIndex: 0,
           width: "428px",
           opacity: "0.5",
         }}

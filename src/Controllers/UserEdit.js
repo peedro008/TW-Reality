@@ -16,6 +16,10 @@ function UserEditController(props) {
   const manId = data?.managerId;
   const refBy = useSelector((e) => e.Users.filter(e => e.id === data?.ReferredId));
 
+  useEffect(() => {
+    if (data === undefined) {window.history.go(-1); console.log('hola')}
+  }, [])
+  
   const Users = useSelector((e) => e.Users);
   const optionsRealtor = Users.map((e) => ({
     value: e.id,
@@ -33,7 +37,7 @@ function UserEditController(props) {
 
   const onSubmit = () => {
     if (form) {
-      fetch(`https://truewayrealtorsapi.com/editUser`, {
+      fetch(`http://localhost:8080/editUser`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

@@ -9,14 +9,9 @@ function AddRealtor() {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
-  // useEffect(() => {
-
-  // setForm({ ...form, UserRole: "Realtor", UserId: userId })
-
-  // }, [])
 
   const onSubmit = () => {
-    fetch(`https://truewayrealtorsapi.com/addRealtor`, {
+    fetch(`http://localhost:8080/addRealtor`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

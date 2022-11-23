@@ -27,7 +27,7 @@ function MyReferrals(props) {
                     <p className="REPtype">Email</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Reffered Time</p>
+                    <p className="REPtype">Referrals Time</p>
                   </th>
                 </tr>
                 {Reffered.map((e, i) => {

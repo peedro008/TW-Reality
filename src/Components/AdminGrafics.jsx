@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import mask from "../assets/mask.png";
 import { NavLink } from "react-router-dom";
 import { BiSearchAlt2 } from "react-icons/bi";
 import RealtorsAdminBig from "../Charts/RealtorsAdminBig";
 import Select from "react-select";
 import Realtors from "../Charts/Realtors";
+import mask from "../assets/mask.png";
+import wbill from "../assets/wbill.png";
+import { BsChevronLeft } from "react-icons/bs";
 
 function AdminGrafics({
   Referred,
@@ -14,10 +16,15 @@ function AdminGrafics({
   selected,
   setSelected,
 }) {
-  const [graficType, setGraficType] = useState('Sales');
+  const [graficType, setGraficType] = useState();
   const [graficMultiple, setGraficMultiple] = useState(true);
   const [Search, setSearch] = useState("");
   const [thisUsers, setThisUsers] = useState(Users);
+
+  function goUser(f) {
+    let newUs = Users?.filter((e) => e.name.toLowerCase().includes(f?.toLowerCase()))
+    setSelected(newUs[0])
+  }
 
   useEffect(() => {
     setThisUsers(
@@ -25,10 +32,14 @@ function AdminGrafics({
     );
   }, [Search]);
 
+  const sumSales = Users.map((e) => e.Sells.length).reduce(
+    (previousValue, currentValue) => previousValue + currentValue
+  );
+
   const options = [
     { value: "All", label: "All" },
     { value: "Sales", label: "Sales" },
-    { value: "Referred", label: "Referred" },
+    { value: "Referral", label: "Referral" },
     { value: "Recruited", label: "Recruited" },
   ];
 
@@ -38,11 +49,11 @@ function AdminGrafics({
         <p className="genericTitle">{`Welcome ${Name} `}</p>
         {!selected ? (
           <>
-            <p className="subTitt">Referred list</p>
             <div
               style={{
                 width: "20vw",
                 minWidth: "500px",
+                marginTop: "20px",
                 height: "35px",
                 display: "flex",
                 flexDirection: "row",
@@ -67,11 +78,99 @@ function AdminGrafics({
               ></input>
               <Select
                 options={options}
-                onChange={(e) => {setGraficType(e.value); if(e.value !== 'All') {setGraficMultiple(false)} else {setGraficMultiple(true)}}}
+                onChange={(e) => {
+                  setGraficType(e.value);
+                  if (e.value !== "All") {
+                    setGraficMultiple(false);
+                  } else {
+                    setGraficMultiple(true);
+                  }
+                }}
                 className="StadSelectGrafic"
                 // defaultInputValue={yearOptions[0]}
                 placeholder="Type"
               />
+            </div>
+            <div className="CardsGraficsContainer">
+              <div
+                className="CardsGrafics"
+                style={{ backgroundColor: " rgba(111, 82, 237, 0.15)" }}
+              >
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={wbill} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">{sumSales}</p>
+                  <p className="dashCardText">Total Sales</p>
+                </div>
+              </div>
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/adminManagement",
+                  aboutProps: { referrals: 'Realtors' },
+                }}
+              >
+              <div
+                className="CardsGrafics"
+                style={{
+                  marginLeft: "20px",
+                  backgroundColor: " rgba(255, 122, 0, 0.15)",
+                }}
+              >
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={mask} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">{Users.length}</p>
+                  <p className="dashCardText">Total Realtors</p>
+                </div>
+              </div>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/adminManagement",
+                  aboutProps: { referrals: 'Referral' },
+                }}
+              >
+                <div
+                  className="CardsGrafics"
+                  style={{
+                    marginLeft: "20px",
+                    backgroundColor: "rgba(51, 214, 159 ,0.15)",
+                  }}
+                >
+                  <div
+                    className="dashCircle"
+                    style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                  >
+                    <img src={mask} />
+                  </div>
+                  <div className="dashText">
+                    <p className="dashCardTitle">{Referred.length}</p>
+                    <p className="dashCardText">Total Referrals</p>
+                  </div>
+                </div>
+              </NavLink>
+              {/* <div className="CardsGrafics" style={{ marginLeft: "20px" }}>
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: 'rgba(239, 239, 239,0.3)' }} 
+              >
+                <img src={bbill} />
+              </div>
+              <div className="dashText">
+                <p className="dashCardTitle"></p>
+                <p className="dashCardText">Packages Sold</p>
+              </div>
+            </div> */}
             </div>
           </>
         ) : (
@@ -86,23 +185,24 @@ function AdminGrafics({
         style={{ maxWidth: "90%", flexDirection: "row" }}
       >
         {!selected ? (
-          google && (
-            
-              graficMultiple ?
-              <Realtors
+          google &&
+          (graficMultiple ? (
+            <Realtors
               google={google}
-                Referred={Referred}
-                realtors={thisUsers}
-                graficType={graficType}/>
-                :
-              <RealtorsAdminBig
-                google={google}
-                Referred={Referred}
-                realtors={thisUsers}
-                graficType={graficType}
-              />
-            
-          )
+              Referred={Referred}
+              realtors={thisUsers}
+              graficType={graficType}
+              goUser={goUser}
+            />
+          ) : (
+            <RealtorsAdminBig
+              google={google}
+              Referred={Referred}
+              realtors={thisUsers}
+              graficType={graficType}
+              goUser={goUser}
+            />
+          ))
         ) : (
           <>
             <div style={{ display: "flex", flexDirection: "column" }}>
@@ -157,6 +257,7 @@ function AdminGrafics({
                 </>
               ) : (
                 <>
+                
                   <p
                     className="subTitt"
                     style={{
@@ -258,7 +359,7 @@ function AdminGrafics({
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Referred name</p>
+                          <p className="REPtype">Referral name</p>
                         </th>
                         <th scope="col" className="column1">
                           <p className="REPtype">Email</p>
@@ -318,12 +419,24 @@ function AdminGrafics({
                 </>
               )}
             </div>
+            <BsChevronLeft
+      cursor='pointer'
+        color="grey"
+        style={{
+          minWidth: "30px",
+          minHeight: "30px",
+          position: "fixed",
+          zIndex: 9,
+          left: "80px",
+          top: "17px",
+          alignSelf: "flex-start",
+        }}
+        onClick={() => setSelected(false)}
+      />
           </>
         )}
 
-        <div
-          className="DashPList1Grow"
-        >
+        <div className="DashPList1Grow">
           <div className="DashPListHeader">
             <p className="DashPListTitle">Top Recruited</p>
           </div>
@@ -336,9 +449,7 @@ function AdminGrafics({
                 alignItems: "center",
               }}
             >
-              <div className="DashPListCircleWith">
-    
-              </div>
+              <div className="DashPListCircleWith"></div>
 
               <p
                 className="DashPListItemText"
@@ -375,7 +486,7 @@ function AdminGrafics({
                   backgroundColor: selected.id == e.id ? "#8498a9" : "#fff",
                 }}
                 onClick={() => {
-                  selected.id == e.id ? setSelected(false) : setSelected(e);
+                  selected.id == e.id ? setSelected(false) : setSelected(e); console.log(e)
                 }}
               >
                 <div

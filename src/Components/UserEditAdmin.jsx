@@ -28,10 +28,10 @@ function UserEditAdmin({
     !validarEmail(form.email) ||
     form.name?.length < 6 ||
     typeof form.name?.length === "undefined" ||
-    typeof form.ComissionValue?.length === "undefined" ||
     form.ComissionValue?.length < 2;
 
-  let userFiltred = optionsRealtor.filter((e) => e.value === refBy[0].id);
+    let userFiltred = optionsRealtor.filter((e) => e.value === refBy[0]?.id);
+    console.log(userFiltred)
   let defaultSelect = optionsRealtor.indexOf(userFiltred[0]);
 
 
@@ -129,7 +129,7 @@ function UserEditAdmin({
           </div>
 
           <div className="inputDiv">
-            <p className="PAYtitle">Referred by</p>
+            <p className="PAYtitle">Referral by</p>
             <Select
               options={optionsRealtor}
               onChange={(e) => setForm({ ...form, ReferredId: e.value })}
@@ -191,7 +191,7 @@ function UserEditAdmin({
 
           <button
             onClick={() => {
-              window.history.back();
+              window.location.reload();
             }}
             className="modalButton"
           >

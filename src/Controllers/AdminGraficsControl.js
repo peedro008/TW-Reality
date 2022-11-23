@@ -19,7 +19,7 @@ function AdminGraficsControl() {
   
   useEffect(() => {
     axios
-      .get(`https://truewayrealtorsapi.com/getRealtors`)
+      .get(`http://localhost:8080/getRealtors`)
       .then(function (response) {
         dispatch(getUsers(response.data));
       })

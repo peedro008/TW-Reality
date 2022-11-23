@@ -9,7 +9,6 @@ import { getUsers } from "../Redux/actions";
 
 function ManagerGraficsControl() {
   const google = useGoogleCharts();
-
   const Referred = useSelector((e) => e.Referred);
   const Users = useSelector((e) => e.Users);
   const Name = useSelector((state) => state.userName);
@@ -19,9 +18,9 @@ function ManagerGraficsControl() {
   
   useEffect(() => {
     axios
-      .get(`https://truewayrealtorsapi.com/getRealtors`)
+      .get(`http://localhost:8080/getRealtors`)
       .then(function (response) {
-        dispatch(getUsers(response.data));
+        dispatch(getUsers(response?.data));
       })
       .catch((error) => {
         dispatch(getUsers([]));

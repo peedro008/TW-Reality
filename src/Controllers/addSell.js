@@ -30,7 +30,7 @@ function AddSell() {
   }, []);
   
   const onSubmit = () => {
-    fetch(`https://truewayrealtorsapi.com/addSell`, {
+    fetch(`http://localhost:8080/addSell`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

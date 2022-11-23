@@ -1,8 +1,7 @@
-import React from "react";
-import mask from "../assets/mask.png";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import RealtorsAdmin from "../Charts/RealtorsAdmin";
-import RealtorsManager from "../Charts/RealtorsManager";
+import mask from "../assets/mask.png";
+import wbill from "../assets/wbill.png";
 import RealtorsManagers from "../Charts/RealtorsManagers";
 function ManagerGrafics({
   Referred,
@@ -13,16 +12,43 @@ function ManagerGrafics({
   selected,
   setSelected,
 }) {
+  const [sumSales, setSumSales] = useState(0)
+  const [sumRef, setSumRef] = useState(0)
   const thisUsers = Users?.filter(
     (e) => (e.managerId === UserId) | (e.id === UserId)
   );
+  console.log(thisUsers)
+  useEffect(() => {
+    if(thisUsers.length !== 0) 
+    {
+      setSumSales(thisUsers?.map((e) => e.Sells?.length).reduce(
+        (previousValue, currentValue) => previousValue + currentValue
+      ))
+  
+      setSumRef(thisReffered?.reduce(
+        (previousValue, currentValue) => previousValue + currentValue
+        ));
+        console.log(sumRef)
+    };
+  }, [thisUsers])
+  
 
+  
+  
+  const thisReffered = thisUsers?.map(e => Referred.filter((f) => f.UserId == e.id).length)
+
+  
+
+    function goUser(f) {
+      let newUs = Users?.filter((e) => e.name?.toLowerCase().includes(f?.toLowerCase()))
+      setSelected(newUs[0])
+    }
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{`Welcome ${Name} `}</p>
         {!selected ? (
-          <p className="subTitt">Referred list</p>
+          <p className="subTitt">My Realtors list</p>
         ) : (
           <p className="subTitt" style={{ fontSize: "15px", color: "#000" }}>
             Information about: {selected.name}
@@ -36,6 +62,7 @@ function ManagerGrafics({
         {!selected ? (
           google && (
             <RealtorsManagers
+              goUser={goUser}
               google={google}
               Referred={Referred}
               realtors={thisUsers}
@@ -196,7 +223,7 @@ function ManagerGrafics({
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Referred name</p>
+                          <p className="REPtype">Referral name</p>
                         </th>
                         <th scope="col" className="column1">
                           <p className="REPtype">Email</p>
@@ -269,7 +296,7 @@ function ManagerGrafics({
           // }}
         >
           <div className="DashPListHeader">
-            <p className="DashPListTitle">Top Recruited</p>
+            <p className="DashPListTitle">Top Agents</p>
             {/* <p className="DashPListSTitle">Descending</p> */}
           </div>
 
@@ -294,6 +321,12 @@ function ManagerGrafics({
               </p>
             </div>
             <div className="DashNumberDiv">
+            <p
+                className="DashNumber"
+                style={{ color: "#000", fontWeight: "600" }}
+              >
+                Sal
+              </p>
               <p
                 className="DashNumber"
                 style={{ color: "#000", fontWeight: "600" }}
@@ -346,8 +379,9 @@ function ManagerGrafics({
                     </p>
                   </div>
                   <div className="DashNumberDiv">
-                    <p className="DashNumber">&nbsp;{e.Referrals.length}</p>
-                    <p className="DashNumber">
+                  <p className="DashNumber" style={{marginLeft: '10px'}}>&nbsp;{e.Sells.length}</p>
+                    <p className="DashNumber" style={{marginLeft: '10px'}}>&nbsp;{e.Referrals.length}</p>
+                    <p className="DashNumber" style={{marginLeft: '20px'}}>
                       {Referred.filter((f) => f.UserId == e.id).length}
                     </p>
                   </div>
@@ -356,6 +390,75 @@ function ManagerGrafics({
             })}
         </div>
       </div>
+      <div className="CardsGraficsContainer">
+              <div
+                className="CardsGrafics"
+                style={{ backgroundColor: " rgba(111, 82, 237, 0.15)" }}
+              >
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={wbill} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">{sumSales}</p>
+                  <p className="dashCardText">Total Sales</p>
+                </div>
+              </div>
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/realtorsListManager",
+                  aboutProps: { referrals: 'Realtors' },
+                }}
+              >
+              <div
+                className="CardsGrafics"
+                style={{
+                  marginLeft: "20px",
+                  backgroundColor: " rgba(255, 122, 0, 0.15)",
+                }}
+              >
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={mask} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">{thisUsers.length}</p>
+                  <p className="dashCardText">Total Realtors</p>
+                </div>
+              </div>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/realtorsListManager",
+                  aboutProps: { referrals: 'Referral' },
+                }}
+              >
+                <div
+                  className="CardsGrafics"
+                  style={{
+                    marginLeft: "20px",
+                    backgroundColor: "rgba(51, 214, 159 ,0.15)",
+                  }}
+                >
+                  <div
+                    className="dashCircle"
+                    style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                  >
+                    <img src={mask} />
+                  </div>
+                  <div className="dashText">
+                    <p className="dashCardTitle">{sumRef}</p>
+                    <p className="dashCardText">Total Referrals</p>
+                  </div>
+                </div>
+              </NavLink>
+            </div>
     </div>
   );
 }

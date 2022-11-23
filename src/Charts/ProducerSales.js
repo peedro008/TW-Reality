@@ -14,7 +14,7 @@ function ProducerSales({ aboutProps, google }) {
 
   useEffect(() => {
     axios
-      .get(`https://truewayrealtorsapi.com/getStatus`)
+      .get(`http://localhost:8080/getStatus`)
       .then(function (response) {
         let paz = response.data;
 
@@ -27,7 +27,7 @@ function ProducerSales({ aboutProps, google }) {
 
   useEffect(() => {
     axios
-      .get(`https://truewayrealtorsapi.com/producerQuotes?UserId=${userId}`)
+      .get(`http://localhost:8080/producerQuotes?UserId=${userId}`)
       .then(function (response) {
         setQuotes(response.data);
       })

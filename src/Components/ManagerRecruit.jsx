@@ -125,7 +125,7 @@ console.log(form)
             <p className="FORMerror"></p>
           </div>
           <div className="inputDiv">
-            <p className="PAYtitle">Referred by</p>
+            <p className="PAYtitle">Referral by</p>
             <ReactSelect
               onChange={(val) => setForm({ ...form, ReferredId: val.value })}
               options={optionsRealtor}

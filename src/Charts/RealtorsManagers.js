@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import spinnerr from "../assets/loadingIcon.gif";
-function RealtorsManagers({ google, realtors, Referred }) {
+function RealtorsManagers({ google, realtors, Referred, goUser }) {
   const [chart, setChart] = useState(null);
   const [dato, setDato] = useState([]);
   const [time, setTime] = useState(false);
@@ -54,6 +54,13 @@ function RealtorsManagers({ google, realtors, Referred }) {
         const newChart = new google.visualization.ColumnChart(
           document.getElementById("Realtors")
         );
+        google.visualization.events.addListener(newChart, 'select', selectHandler);
+
+        function selectHandler(e) {
+        var selectedItem = newChart.getSelection()[0];
+        var value = data.getValue(selectedItem.row, 0);
+        goUser(value)
+}
         newChart.draw(data, options);
 
         setChart(newChart);

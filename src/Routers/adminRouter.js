@@ -16,12 +16,17 @@ import NewRealtors from "../Components/stadisticInfo/NewRealtors";
 import AddReferred from "../Controllers/addReferred";
 import TotalCommisionPaid from "../Components/stadisticInfo/TotalCommissionPaid";
 import TotalCommisionUnpaid from "../Components/stadisticInfo/TotalCommissionUnpaid";
-import ToRecruit from "../Controllers/toRecruit";
 import ManagerRecruit from "../Controllers/ManagerRecruit";
 import AdminGraficsControl from "../Controllers/AdminGraficsControl";
 import UserEditController from "../Controllers/UserEdit";
 import AddSell from "../Controllers/addSell";
 import AddPackageControl from "../Controllers/addPackageControl";
+import PackageManagementControl from "../Controllers/PackageManagementControl";
+import AdminManagementControl from "../Controllers/adminManagementControl";
+import ReferredEditControl from "../Controllers/ReferredEdit";
+import ManagerEditController from "../Controllers/ManagerEdit";
+import SellsControl from "../Controllers/SellsControl";
+import AddAdminControl from "../Controllers/addAdmin";
 
 
 const AdminRouter = () => {
@@ -35,11 +40,16 @@ const AdminRouter = () => {
       <Route exact path='/addSell' component={AddSell}/>
       <Route exact path='/addPackage' component={AddPackageControl}/>
        <Route exact path='/CommissionManagement' component={CommissionManagement}/>
+       <Route exact path='/sells' component={SellsControl}/>
+       <Route exact path='/packageManagement' component={PackageManagementControl}/>
        <Route exact path='/management/ManagerRecruit' component={ManagerRecruit}/>
        <Route exact path='/UsersManagement' component={UserManagement}/>
        <Route exact path="/UserManagement/referred" component={AddReferred}/>
-       <Route exact path='/adminManagement' component={ToRecruit}/>
+       <Route exact path="/UserManagement/addAdmin" component={AddAdminControl}/>
+       <Route exact path='/adminManagement' component={AdminManagementControl}/>
        <Route exact path='/editUser' component={UserEditController}/>
+       <Route exact path='/editReferred' component={ReferredEditControl}/>
+       <Route exact path='/editManager' component={ManagerEditController}/>
        <Route exact path='/salesByMe' component={StadisticInfo}/>
        <Route exact path='/salesByRealtors' component={SalesByRealtors}/>
        <Route exact path='/myReferrals' component={MyReferrals}/>

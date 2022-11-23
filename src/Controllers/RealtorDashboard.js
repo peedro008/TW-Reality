@@ -12,6 +12,7 @@ const RealtorDashboard = () => {
   const CommissionValue = useSelector((state) => state.CommissionValue);
   const realtors = useSelector((e) => e.Realtors);
   const UserId = useSelector((s) => s.UserId);
+  const thisUser = useSelector((s) => s);
   const sells = useSelector((e) => e.Sells);
   const date = new Date();
   const DATE =
@@ -20,19 +21,14 @@ const RealtorDashboard = () => {
     (date.getMonth() + 1) +
     "-" +
     date.getDate();
-
+    let ownRealtors = realtors.filter(e => e.ReferredId === UserId)
   useEffect(() => {
     let temp1 = 0;
     let temp2 = 0;
 
     axios
-      .get(`https://truewayrealtorsapi.com/getIdCommission?id=${UserId}`)
+      .get(`http://localhost:8080/getIdCommission?id=${UserId}`)
       .then(function (response) {
-        console.log(
-          response.data.filter(
-            (e) => e.Sell.ClosingDate.substring(0, 7) == DATE.substring(0, 7)
-          )
-        );
         setComm([
           response.data.filter(
             (e) => e.Sell.ClosingDate.substring(0, 4) == DATE.substring(0, 4)
@@ -46,7 +42,7 @@ const RealtorDashboard = () => {
         console.log(error);
       });
 
-    realtors?.map((e) => {
+      ownRealtors?.map((e) => {
       e.Sells?.map((f) => {
         if (f.ClosingDate.substring(5, 7) == DATE.substring(5, 7)) {
           temp1 = temp1 + 1;
@@ -54,7 +50,7 @@ const RealtorDashboard = () => {
       });
     });
 
-    realtors?.map((e) => {
+    ownRealtors?.map((e) => {
       e.Sells?.map((f) => {
         if (f.ClosingDate.substring(0, 4) == DATE.substring(0, 4)) {
           temp2 = temp2 + 1;
@@ -64,19 +60,20 @@ const RealtorDashboard = () => {
 
     setSellsMonth(temp1);
     setSellsYear(temp2);
-  }, [realtors, DATE, CommissionValue]);
+  }, []);
 
   const google = useGoogleCharts();
 
   return (
     <RealtorDashboardComponent
-      realtors={realtors}
+      realtors={ownRealtors}
       google={google}
       sells={sells}
       DATE={DATE}
       UserId={UserId}
       comm={comm}
       Referred={Referred}
+      thisUser={thisUser}
     />
   );
 };

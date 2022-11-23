@@ -23,7 +23,7 @@ function AddReferredAdmin({
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">Add Referred</p>
+        <p className="genericTitle">Add Referral</p>
       </div>
 
       <div className="managerInputsContainer">
@@ -93,7 +93,7 @@ function AddReferredAdmin({
         style={{backgroundColor: validation &&"#586579", cursor: validation && 'default'}}
         disabled={validation?true:false}
         >
-          <p className="PAYbuttonText">Add referred</p>
+          <p className="PAYbuttonText">Add Referral</p>
         </button>
       </div>
 
@@ -109,7 +109,7 @@ function AddReferredAdmin({
             }}
           />
 
-          <p className="modalText">Referred successfully!</p>
+          <p className="modalText">Referral successfully!</p>
 
           <button className="modalButton">
             {" "}
