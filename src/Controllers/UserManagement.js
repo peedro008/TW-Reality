@@ -15,6 +15,7 @@ function UserManagement() {
   const Managers = useSelector((e) => e.Users.filter(e => e.UserRole === 'Manager'));
   const userRole = useSelector((e) => e.userRole);
   const [Message, setMessage] = useState("");
+  const [error, setError] = useState()
   const dispatch = useDispatch();
   const [Err, setErr] = useState(false);
 
@@ -36,7 +37,7 @@ function UserManagement() {
   
 
   const onSubmitR = () => {
-    fetch(`http://localhost:8080/addRealtor`, {
+    fetch(`https://truewayrealtorsapi.com/addRealtor`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,26 +46,26 @@ function UserManagement() {
     })
       .then(async (res) => {
         try {
-          const jsonRes = await res.json();
-          setMessage(jsonRes.message);
-          if (res.status !== 200 && res.status !== 200) {
+          if (res.status === 200) {
+            onOpenModal();
             RealtorsGet(dispatch);
+          } else if (res.status === 409) {
+            setError('Email already exists');
+            onOpenModal();
           } else {
+            setError('Something was wrong');
             onOpenModal();
           }
         } catch (err) {
           console.log(err);
         }
-      })
-      .then(() => {
-        onOpenModal();
       })
       .catch((err) => {
         console.log(err);
       });
   };
   const onSubmitM = () => {
-    fetch(`http://localhost:8080/addManager`, {
+    fetch(`https://truewayrealtorsapi.com/addManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -73,19 +74,21 @@ function UserManagement() {
     })
       .then(async (res) => {
         try {
-          const jsonRes = await res.json();
-          setMessage(jsonRes.message);
-          if (res.status !== 200 && res.status !== 200) {
+          if (res.status === 200) {
             RealtorsGet(dispatch);
-          } else {
             onOpenModal();
+            console.log('200')
+          } else if (res.status === 409) {
+            setError('Email already exists');
+            onOpenModal();
+          } else {
+            setError('Something was wrong');
+            onOpenModal();
+            console.log(res)
           }
         } catch (err) {
           console.log(err);
         }
-      })
-      .then(() => {
-        onOpenModal();
       })
       .catch((err) => {
         console.log(err);
@@ -115,6 +118,7 @@ function UserManagement() {
       Message={Message}
       setMessage={setMessage}
       Err={Err}
+      error={error}
       setErr={setErr}
       userRole={userRole}
       optionsRealtor= {optionsRealtor}

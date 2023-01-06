@@ -160,7 +160,7 @@ function RealtorsAdmin({ google, realtors, Referred }) {
         
           style={{
             height: "35vh",
-            width: '40vw',
+            width: '80vw',
             
           }}
           id="saleChart"
@@ -169,7 +169,7 @@ function RealtorsAdmin({ google, realtors, Referred }) {
         <div
           style={{
             height: "35vh",
-            width: '40vw',
+            width: '80vw',
             
           }}
           id="recChart"
@@ -178,7 +178,7 @@ function RealtorsAdmin({ google, realtors, Referred }) {
         <div
           style={{
             height: "35vh",
-            width: '40vw',
+            width: '80vw',
             
           }}
           id="refChart"

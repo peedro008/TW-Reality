@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { BiSearchAlt2 } from "react-icons/bi";
 import RealtorsAdminBig from "../Charts/RealtorsAdminBig";
+import Isologo_background from "../assets/Isologo_background.png";
 import Select from "react-select";
 import Realtors from "../Charts/Realtors";
 import mask from "../assets/mask.png";
 import wbill from "../assets/wbill.png";
-import { BsChevronLeft } from "react-icons/bs";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+
 
 function AdminGrafics({
   Referred,
@@ -20,10 +22,20 @@ function AdminGrafics({
   const [graficMultiple, setGraficMultiple] = useState(true);
   const [Search, setSearch] = useState("");
   const [thisUsers, setThisUsers] = useState(Users);
+  const [sumMarketing, setSumMarketing] = useState(0)
+  const [sumTransactionCoord, setSumTransactionCoord] = useState(0)
+  const [sumTransactionCoordActive, setSumTransactionCoordActive] = useState(0)
+  const [styleTable, setStyleTable] = useState("divTable2")
+  const [chevron, setChevron] = useState("bsChevron3")
+  const [circle, setCircle] = useState("circle4")
+  let Screen = window.screen;
+
 
   function goUser(f) {
-    let newUs = Users?.filter((e) => e.name.toLowerCase().includes(f?.toLowerCase()))
-    setSelected(newUs[0])
+    let newUs = Users?.filter((e) =>
+      e.name.toLowerCase().includes(f?.toLowerCase())
+    );
+    setSelected(newUs[0]);
   }
 
   useEffect(() => {
@@ -32,15 +44,42 @@ function AdminGrafics({
     );
   }, [Search]);
 
-  const sumSales = Users.map((e) => e.Sells.length).reduce(
-    (previousValue, currentValue) => previousValue + currentValue
-  );
+  const [sumSales, setSumSales] = useState([])
+  useEffect(() => {
+    {
+      Users.length > 0 &&
+       setSumSales(Users?.map((e) => e.Sells?.length).reduce(
+        (previousValue, currentValue) => previousValue + currentValue))
+    }
+  }, [Users])
+  
+
+  
+  useEffect(() => {
+    if(Users?.length !== 0) 
+    {  
+        let marketing = 0;
+        Users.map(e => marketing = e.PackageMarketings?.length + marketing)
+        setSumMarketing(marketing)
+
+        let transaction = 0;
+        Users?.map(e => e.TransactionCoordinators?.map(f => { if(f.isSold === true) {transaction = transaction + 1}}))
+        setSumTransactionCoord(transaction)
+        
+        let transactionActive = 0;
+        Users?.map(e => e.TransactionCoordinators?.map(f => { if(f.isSold === false) {transactionActive = transactionActive + 1}}))
+        setSumTransactionCoordActive(transactionActive)
+      }
+    }, [])
 
   const options = [
     { value: "All", label: "All" },
     { value: "Sales", label: "Sales" },
     { value: "Referral", label: "Referral" },
     { value: "Recruited", label: "Recruited" },
+    { value: "Package Marketing", label: "Package Marketing" },
+    { value: "Transaction Coord.", label: "Transaction Coord." },
+    { value: "Transaction Coord. Active", label: "Transaction Coord. Active" },
   ];
 
   return (
@@ -74,9 +113,20 @@ function AdminGrafics({
                   paddingInline: "8px",
                   marginTop: "10px",
                   width: "200px",
+                  zIndex: 999
                 }}
               ></input>
               <Select
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                  colorAdjust: 'black',
+                  colorInterpolation:'black',
+                  colorScheme: 'black',
+                  colorRendering:'black',
+                  color:'black'
+                  }),
+                }}
                 options={options}
                 onChange={(e) => {
                   setGraficType(e.value);
@@ -92,8 +142,15 @@ function AdminGrafics({
               />
             </div>
             <div className="CardsGraficsContainer">
+            <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/sells",
+                  aboutProps: { referrals: "Realtors" },
+                }}
+              >
               <div
-                className="CardsGrafics"
+                className="CardsGrafics2"
                 style={{ backgroundColor: " rgba(111, 82, 237, 0.15)" }}
               >
                 <div
@@ -104,32 +161,7 @@ function AdminGrafics({
                 </div>
                 <div className="dashText">
                   <p className="dashCardTitle">{sumSales}</p>
-                  <p className="dashCardText">Total Sales</p>
-                </div>
-              </div>
-              <NavLink
-                style={{ textDecoration: "none" }}
-                to={{
-                  pathname: "/adminManagement",
-                  aboutProps: { referrals: 'Realtors' },
-                }}
-              >
-              <div
-                className="CardsGrafics"
-                style={{
-                  marginLeft: "20px",
-                  backgroundColor: " rgba(255, 122, 0, 0.15)",
-                }}
-              >
-                <div
-                  className="dashCircle"
-                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
-                >
-                  <img src={mask} />
-                </div>
-                <div className="dashText">
-                  <p className="dashCardTitle">{Users.length}</p>
-                  <p className="dashCardText">Total Realtors</p>
+                  <p className="dashCardText">Sales</p>
                 </div>
               </div>
               </NavLink>
@@ -137,11 +169,37 @@ function AdminGrafics({
                 style={{ textDecoration: "none" }}
                 to={{
                   pathname: "/adminManagement",
-                  aboutProps: { referrals: 'Referral' },
+                  aboutProps: { referrals: "Realtors" },
                 }}
               >
                 <div
-                  className="CardsGrafics"
+                  className="CardsGrafics2"
+                  style={{
+                    marginLeft: "20px",
+                    backgroundColor: " rgba(255, 122, 0, 0.15)",
+                  }}
+                >
+                  <div
+                    className="dashCircle"
+                    style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                  >
+                    <img src={mask} />
+                  </div>
+                  <div className="dashText">
+                    <p className="dashCardTitle">{Users?.length}</p>
+                    <p className="dashCardText">Realtors</p>
+                  </div>
+                </div>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/adminManagement",
+                  aboutProps: { referrals: "Referral" },
+                }}
+              >
+                <div
+                  className="CardsGrafics2"
                   style={{
                     marginLeft: "20px",
                     backgroundColor: "rgba(51, 214, 159 ,0.15)",
@@ -154,23 +212,93 @@ function AdminGrafics({
                     <img src={mask} />
                   </div>
                   <div className="dashText">
-                    <p className="dashCardTitle">{Referred.length}</p>
-                    <p className="dashCardText">Total Referrals</p>
+                    <p className="dashCardTitle">{Referred?.length}</p>
+                    <p className="dashCardText">Referrals</p>
                   </div>
                 </div>
               </NavLink>
-              {/* <div className="CardsGrafics" style={{ marginLeft: "20px" }}>
-              <div
-                className="dashCircle"
-                style={{ backgroundColor: 'rgba(239, 239, 239,0.3)' }} 
+
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/packageManagement",
+                  state: { aboutProps: 'Marketing' },
+                }}
+                
               >
-                <img src={bbill} />
+              <div
+                className="CardsGrafics2"
+                style={{
+                  marginLeft: "20px",
+                  backgroundColor: "rgba(220, 76, 100, 0.15)",
+                }}
+              >
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={mask} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">{sumMarketing}</p>
+                  <p className="dashCardText">Marketing</p>
+                </div>
               </div>
-              <div className="dashText">
-                <p className="dashCardTitle"></p>
-                <p className="dashCardText">Packages Sold</p>
+              </NavLink>
+
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/packageManagement",
+                  state: { aboutProps: 'Transaction Coordinator' },
+                }}
+              >
+              <div
+                className="CardsGrafics"
+                style={{
+                  marginLeft: "20px",
+                  backgroundColor: "rgba(51, 45, 45, 0.15)",
+                }}
+              >
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={mask} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">{sumTransactionCoord}</p>
+                  <p className="dashCardText">Transaction Coordinator</p>
+                </div>
               </div>
-            </div> */}
+              </NavLink>
+
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/packageManagement",
+                  state: { aboutProps: 'Transaction Coordinator' },
+                }}
+              >
+              <div
+                className="CardsGrafics"
+                style={{
+                  marginLeft: "20px",
+                  backgroundColor: "rgba(252, 252, 74, 0.15)",
+                }}
+              >
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={mask} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">{sumTransactionCoordActive}</p>
+                  <p className="dashCardText">Transaction C. Active</p>
+                </div>
+              </div>
+              </NavLink>
             </div>
           </>
         ) : (
@@ -191,8 +319,8 @@ function AdminGrafics({
               google={google}
               Referred={Referred}
               realtors={thisUsers}
-              graficType={graficType}
               goUser={goUser}
+              Screen={Screen}
             />
           ) : (
             <RealtorsAdminBig
@@ -201,6 +329,7 @@ function AdminGrafics({
               realtors={thisUsers}
               graficType={graficType}
               goUser={goUser}
+              Screen={Screen}
             />
           ))
         ) : (
@@ -218,20 +347,20 @@ function AdminGrafics({
                   >
                     Sales
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh" }}>
+                  <table className="table5" style={{ marginTop: "2vh", width: '60vw' }}>
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Client name</p>
+                          <p className="REPtype2">Client name</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Closing date</p>
+                          <p className="REPtype2">Closing date</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Address</p>
+                          <p className="REPtype2">Address</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Value</p>
+                          <p className="REPtype2">Value</p>
                         </th>
                       </tr>
                       {selected.Sells?.map((e) => {
@@ -257,7 +386,6 @@ function AdminGrafics({
                 </>
               ) : (
                 <>
-                
                   <p
                     className="subTitt"
                     style={{
@@ -271,7 +399,7 @@ function AdminGrafics({
                 </>
               )}
 
-              {Users.filter((e) => e.ReferredId == selected.id).length ? (
+              {Users?.filter((e) => e.ReferredId == selected.id)?.length ? (
                 <>
                   <p
                     className="subTitt"
@@ -283,26 +411,26 @@ function AdminGrafics({
                   >
                     Recruited
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh" }}>
+                  <table className="table5" style={{ marginTop: "2vh", width: '60vw' }}>
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Realtor name</p>
+                          <p className="REPtype2">Realtor name</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Email</p>
+                          <p className="REPtype2">Email</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Phone</p>
+                          <p className="REPtype2">Phone</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Sales</p>
+                          <p className="REPtype2">Sales</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Recruited</p>
+                          <p className="REPtype2">Recruited</p>
                         </th>
                       </tr>
-                      {Users.filter((e) => e.ReferredId == selected.id).map(
+                      {Users?.filter((e) => e.ReferredId == selected.id).map(
                         (e) => {
                           return (
                             <tr>
@@ -343,7 +471,7 @@ function AdminGrafics({
                 </>
               )}
 
-              {Referred.filter((e) => e.User?.id == selected.id).length ? (
+              {Referred?.filter((e) => e.User?.id == selected.id).length ? (
                 <>
                   <p
                     className="subTitt"
@@ -355,24 +483,24 @@ function AdminGrafics({
                   >
                     Referrals
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh" }}>
+                  <table className="table5" style={{ marginTop: "2vh", width: '60vw' }}>
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Referral name</p>
+                          <p className="REPtype2">Referral name</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Email</p>
+                          <p className="REPtype2">Email</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Phone</p>
+                          <p className="REPtype2">Phone</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Company</p>
+                          <p className="REPtype2">Company</p>
                         </th>
                       </tr>
 
-                      {Referred.filter((e) => e.User?.id == selected.id).map(
+                      {Referred?.filter((e) => e.User?.id == selected.id).map(
                         (e) => {
                           return (
                             <tr>
@@ -420,106 +548,143 @@ function AdminGrafics({
               )}
             </div>
             <BsChevronLeft
-      cursor='pointer'
-        color="grey"
-        style={{
-          minWidth: "30px",
-          minHeight: "30px",
-          position: "fixed",
-          zIndex: 9,
-          left: "80px",
-          top: "17px",
-          alignSelf: "flex-start",
-        }}
-        onClick={() => setSelected(false)}
-      />
+              cursor="pointer"
+              color="grey"
+              style={{
+                minWidth: "30px",
+                minHeight: "30px",
+                position: "fixed",
+                zIndex: 9,
+                left: "80px",
+                top: "17px",
+                alignSelf: "flex-start",
+              }}
+              onClick={() => setSelected(false)}
+            />
           </>
         )}
 
-        <div className="DashPList1Grow">
-          <div className="DashPListHeader">
-            <p className="DashPListTitle">Top Recruited</p>
-          </div>
-          <div className="DashPListDivider" />
-          <div className="DashPListRow1" style={{ marginBottom: "7px" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <div className="DashPListCircleWith"></div>
+        {Screen.width > 1000 && (
+          <>
 
-              <p
-                className="DashPListItemText"
-                style={{ color: "#000", fontWeight: "600" }}
-              >
-                Name
-              </p>
-            </div>
-            <div className="DashNumberDiv">
-              <p
-                className="DashNumber"
-                style={{ color: "#000", fontWeight: "600" }}
-              >
-                Rec
-              </p>
-              <p
-                className="DashNumber"
-                style={{ color: "#000", fontWeight: "600" }}
-              >
-                Ref
-              </p>
-            </div>
-          </div>
-          {/* {Users?.filter((e) => (e.ReferredId === UserId) | (e.id === UserId)) */}
-          {Users?.sort(function (a, b) {
-            return b.Referrals.length - a.Referrals.length;
-          })?.map((e) => {
-            return (
-              <div
-                className="DashPListRow1"
-                style={{
-                  marginBottom: "7px",
-                  cursor: "pointer",
-                  backgroundColor: selected.id == e.id ? "#8498a9" : "#fff",
-                }}
-                onClick={() => {
-                  selected.id == e.id ? setSelected(false) : setSelected(e); console.log(e)
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <div className="DashPListCircle">
-                    <img src={mask} />
-                  </div>
+          <div className={styleTable}>
 
-                  <p
-                    className="DashPListItemText"
-                    style={{
-                      color: selected.id == e.id ? "#000" : "#656a86",
-                    }}
-                  >
-                    {e.name}
-                  </p>
-                </div>
-                <div className="DashNumberDiv">
-                  <p className="DashNumber">&nbsp;{e.Referrals.length}</p>
-                  <p className="DashNumber">
-                    {Referred.filter((f) => f.UserId == e.id).length}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+         
+          <table className="table6">
+          <tbody>
+            <tr style={{position: 'fixed', top: '120px', width: '650px'}}>
+              <th scope="col" style={{ backgroundColor: 'rgba(87,204,152,255)'}}>
+                <p className="REPtype2" style={{ width: '256px', backgroundColor: 'rgba(87,204,152,255)'}}>Name</p>
+              </th>
+              <th scope="col" className="column1" style={{ width: '50px', backgroundColor: 'rgba(87,204,152,255)'}}>
+                <p className="REPtype2">Rec.</p>
+              </th>
+              <th scope="col" className="column1" style={{ width: '50px', backgroundColor: 'rgba(87,204,152,255)'}}>
+                <p className="REPtype2">Ref.</p>
+              </th>
+              <th scope="col" className="column1" style={{ width: '60px', backgroundColor: 'rgba(87,204,152,255)'}}>
+                <p className="REPtype2">Sales</p>
+              </th>
+              <th scope="col" className="column1" style={{ width: '50px', backgroundColor: 'rgba(87,204,152,255)'}}>
+                <p className="REPtype2">P.M.</p>
+              </th>
+              <th scope="col" className="column1" style={{maxWidth: '35px', width: '35px', backgroundColor: 'rgba(87,204,152,255)'}}>
+                <p className="REPtype2">T.C.</p>
+              </th>
+            </tr>
+
+            {Users?.filter((e) => e.User?.id == selected.id).sort(function (a, b) {
+              return b.Sells?.length - a.Sells?.length;
+            })?.map(
+              (e) => {
+                return (
+                  <tr>
+                    <td className="ClientName2" scope="row" >
+                      <NavLink
+                      className="ClientName2"
+                        style={{ textDecoration: "none", fontWeight: 'bold' }}
+                        to={{
+                          pathname: "/editUser",
+                          aboutProps: e,
+                        }}
+                      >
+                        {e.name}
+                      </NavLink>
+                    </td>
+
+                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
+                    {e.Referrals?.length}
+                    </td>
+                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
+                    {Referred?.filter((f) => f.UserId == e.id).length}
+                    </td>
+                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '40px'}}>
+                      {e.Sells?.length}
+                    </td>
+                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
+                      {e.PackageMarketings?.length}
+                    </td>
+                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
+                      {e.TransactionCoordinators?.length}
+                    </td>
+                  </tr>
+                );
+              }
+            )}
+          </tbody>
+        </table>
         </div>
+        </>
+        )}
       </div>
+      <img
+        src={Isologo_background}
+        style={{
+          position: "fixed",
+          pointerEvents: "none",
+          right: 0,
+          bottom: 0,
+          width: "428px",
+          opacity: "0.5",
+        }}
+      />
+     
+        {
+          styleTable === 'divTable2' &&
+          <div className={circle} onClick={() => {setStyleTable('divTable'); setChevron('bsChevron'); setCircle('circle2')}}>
+        <BsChevronLeft
+              cursor="pointer"
+              color="black"
+              className={chevron}
+              
+            />
+            </div>
+        }
+        {
+          styleTable === 'divTable3' &&
+          <div className={circle}  onClick={() => {setStyleTable('divTable'); setChevron('bsChevron'); setCircle('circle2')}}>
+        <BsChevronLeft
+              cursor="pointer"
+              color="black"
+              className={chevron}
+             
+            />
+               </div>
+        }
+
+{
+          styleTable === 'divTable' &&
+          <div className={circle}  onClick={() => {setStyleTable('divTable3');setChevron('bsChevron2'); setCircle('circle3')}}>
+          <BsChevronLeft
+          cursor="pointer"
+          color="black"
+          className={chevron}
+         
+        />
+           </div>
+        }
+
+        
     </div>
   );
 }

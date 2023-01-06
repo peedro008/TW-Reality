@@ -4,68 +4,104 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import PackageManagement from "../Components/PackageManagement";
 
-function PackageManagementControl() {
+function PackageManagementControl(props) {
+  const typeOfP = props.location.state?.aboutProps;
   const Commissions = useSelector((e) => e.Commissions);
+  const userId = useSelector((state) => state.UserId);
   const Users = useSelector((e) => e.Users);
+  const [packageMarketing, setPackageMarketing] = useState();
   const [modalPay, setModalPay] = useState("");
-  const [isMonthly, setIsMonthly] = useState()
+  const [isMonthly, setIsMonthly] = useState();
+  const [isSolded, setIsSolded] = useState()
   const [selectedId, setSelectedId] = useState(null);
   const [open, setOpen] = useState(false);
-  const [packages, setPackages] = useState([])
-  const [typeOfPackage, setTypeOfPackage] = useState()
+  const [packages, setPackages] = useState([]);
+  const [typeOfPackage, setTypeOfPackage] = useState();
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
+
+
+  const soldTC = () => {
+    axios
+    .get(`https://truewayrealtorsapi.com/getTransactionCoordinator`)
+    .then(function (response) {
+      response.status === 404 ? setPackages([]) : setPackages(response.data);
+    }).then(onCloseModal())
+    .catch((error) => {
+      setPackages([]);
+    });
+  }
+
+  const soldPM = () => {
+    axios
+    .get(`https://truewayrealtorsapi.com/getPackagesMarketing`)
+    .then(function (response) {
+      response.status === 404 ? setPackages([]) : setPackages(response.data);
+    }).then(onCloseModal())
+    .catch((error) => {
+      setPackages([]);
+    });
+  }
+
   useEffect(() => {
-    if (typeOfPackage === 'Marketing') {
-      axios
-      .get(`http://localhost:8080/getPackages`)
-      .then(function (response) {
-        response.status == 404
-          ? setPackages([])
-          : setPackages((response.data));
-      })
-      .catch((error) => {
-        setPackages([]);
-      });
-    } else if (typeOfPackage === 'Offer') {
-      axios
-      .get(`http://localhost:8080/getOffers`)
-      .then(function (response) {
-        response.status == 404
-          ? setPackages([])
-          : setPackages((response.data));
-      })
-      .catch((error) => {
-        setPackages([]);
-      });
-    } else if (typeOfPackage === 'Selling') {
-      axios
-      .get(`http://localhost:8080/getSellings`)
-      .then(function (response) {
-        response.status == 404
-          ? setPackages([])
-          : setPackages((response.data));
-      })
-      .catch((error) => {
-        setPackages([]);
-      });
-    } else if (typeOfPackage === 'Listing') {
-      axios
-      .get(`http://localhost:8080/getListings`)
-      .then(function (response) {
-        response.status == 404
-          ? setPackages([])
-          : setPackages((response.data));
-      })
-      .catch((error) => {
-        setPackages([]);
-      });
-    }
-  }, [typeOfPackage]);
+    setTypeOfPackage(typeOfP)
+  }, [typeOfP])
   
-  const onSubmit = (form) => {
-    fetch(`http://localhost:8080/editPackage`, {
+  useEffect(() => {
+    if (typeOfPackage === "Marketing") {
+      axios
+        .get(`https://truewayrealtorsapi.com/getPackagesMarketing`)
+        .then(function (response) {
+          response.status == 404 ? setPackages([]) : setPackages(response.data);
+        })
+        .catch((error) => {
+          setPackages([]);
+        });
+    } else {
+      axios
+        .get(`https://truewayrealtorsapi.com/getTransactionCoordinator`)
+        .then(function (response) {
+          response.status == 404 ? setPackages([]) : setPackages(response.data);
+        })
+        .catch((error) => {
+          setPackages([]);
+        });
+      }
+  }, [typeOfPackage]);
+
+  useEffect(() => {
+    fetch("https://truewayrealtorsapi.com/getPackagesMarketing")
+      .then((res) => res.json())
+      .then((json) => setPackageMarketing(json));
+  }, []);
+
+  const soldTransaction = (formTransaction) => {
+    fetch('https://truewayrealtorsapi.com/soldTransactionCoordinator', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formTransaction)
+    })
+    .then(async (res) => {
+      try {
+        const jsonRes = await res.json()
+        if (res.status !== 200) {
+          console.log("error");
+          
+        } else {
+          console.log(jsonRes);
+          setIsSolded('Transaction Sold')
+          soldTC();
+        }
+      } catch (err) {
+        console.log(err);
+      } 
+  })}
+
+  const onSubmitPackage = (form) => {
+    fetch(`https://truewayrealtorsapi.com/editPackageMarketing`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,12 +116,12 @@ function PackageManagementControl() {
             console.log("error");
           } else {
             console.log(jsonRes);
+            soldPM();
           }
         } catch (err) {
           console.log(err);
         }
       })
-      .then(() => window.location.reload())
       .catch((err) => {
         console.log(err);
       });
@@ -93,10 +129,10 @@ function PackageManagementControl() {
 
   return (
     <PackageManagement
+    typeOfP={typeOfP}
       Commissions={Commissions}
       setSelectedId={setSelectedId}
       selectedId={selectedId}
-      onSubmit={onSubmit}
       open={open}
       Users={Users}
       onOpenModal={onOpenModal}
@@ -107,6 +143,10 @@ function PackageManagementControl() {
       packages={packages}
       setIsMonthly={setIsMonthly}
       typeOfPackage={typeOfPackage}
+      packageMarketing={packageMarketing}
+      soldTransaction={soldTransaction}
+      onSubmitPackage={onSubmitPackage}
+      userId={userId}
     />
   );
 }

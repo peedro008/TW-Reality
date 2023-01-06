@@ -13,7 +13,7 @@ function ManagerDashboardController() {
 
   const google = useGoogleCharts();
 
-  
+  console.log(Users)
 const search = () => {
   dateSelected.substring(0,2)!=="00"?
     setDateReq({

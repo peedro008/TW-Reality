@@ -76,7 +76,7 @@ function ReferredEditAdmin({
         </div>
         <div className="managerInputsubContainer" style={{ width: "50vw" }}>
           <div className="inputDiv">
-            <p className="PAYtitle">Referral by</p>
+            <p className="PAYtitle">Referred by</p>
             <Select
               options={optionsRealtor}
               onChange={(e) => setForm({ ...form, UserId: e.value })}
@@ -104,7 +104,7 @@ function ReferredEditAdmin({
             console.log("Holaaaaa");
           }}
           style={{
-            backgroundColor: validation && "#586579",
+            opacity: validation && "0.2",
             cursor: validation && "default",
           }}
           disabled={validation ? true : false}
@@ -141,6 +141,7 @@ function ReferredEditAdmin({
         src={Isologo_background}
         style={{
           position: "absolute",
+          pointerEvents: "none",
           right: 0,
           bottom: 0,
           width: "428px",

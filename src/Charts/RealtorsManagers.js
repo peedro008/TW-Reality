@@ -6,14 +6,17 @@ function RealtorsManagers({ google, realtors, Referred, goUser }) {
   const [time, setTime] = useState(false);
   const [maxNumber, setmaxNumber] = useState(0)
 
+  let Screen = window.screen
   useEffect(() => {
     let all = [];
     realtors?.map((e, index) => {
       all.push([
         e.name,
-        e.Sells.length,
-        e.Referrals.length,
-        Referred.filter((f) => f.User?.id == e.id).length,
+        e.Sells?.length,
+        e.Referrals?.length,
+        Referred.filter((f) => f.User?.id == e.id)?.length,
+        e.PackageMarketings?.length,
+        e.TransactionCoordinators?.length
       ]);
     });
     setDato(all);
@@ -28,9 +31,11 @@ function RealtorsManagers({ google, realtors, Referred, goUser }) {
       if (google && !chart) {
         const data = new google.visualization.DataTable();
         data.addColumn("string", "Topping");
-        data.addColumn("number", "Sales", "color:#6F52ED");
+        data.addColumn("number", "Sales", "color:#3B71CA");
         data.addColumn("number", "Recruited", "color:#FF7A00");
         data.addColumn("number", "Referrals", "color:#33D69F");
+        data.addColumn("number", "Package Marketing", "color:#DC4C64");
+        data.addColumn("number", "Transaction Coord", "color:#332D2D");
         data.addRows(dato);
 
         // Set chart options
@@ -42,7 +47,7 @@ function RealtorsManagers({ google, realtors, Referred, goUser }) {
             fontSize: "20",
             marginLeft: "-10px",
           },
-          colors: ["#6F52ED", "#FF7A00", "#33D69F"],
+          colors: ["#6F52ED", "#FF7A00", "#33D69F", '#DC4C64', '#332D2D'],
           backgroundColor: "#EBEFF2",
           bar: { groupWidth: "40%", borderRadius: "10px" },
           vAxis: { format: "0", minValue: maxNumber + 2 },
@@ -82,7 +87,7 @@ function RealtorsManagers({ google, realtors, Referred, goUser }) {
        }}
      />
       ) : (
-        <div id="Realtors" className={!google ? "d-none" : "graficBig"}></div>
+        <div id="Realtors" className={!google ? "d-none" : Screen.width > 1000 ? "graficBig" : 'graficBigIpad' }></div>
       )}
     </>
   );

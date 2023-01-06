@@ -8,7 +8,7 @@ function ProducerPie({ aboutProps, google }) {
   let userId = aboutProps;
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/quotes`)
+      .get(`https://truewayrealtorsapi.com/quotes`)
       .then(function (response) {
         let paz = response.data;
 

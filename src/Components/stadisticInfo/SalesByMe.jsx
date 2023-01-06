@@ -8,25 +8,25 @@ function StadisticInfo(props) {
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{props.location.state.aboutProps.name}</p>
-        <p className="subTitt">Sell list</p>
+        <p className="subTitt" style={{ fontSize: '18px'}}>Sell list</p>
       </div>
       <div className="DashContainer">
-        <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
+        <div className="DashSubCont">
           <>
-            <table className="table5" style={{ marginTop: "2vh" }}>
+            <table className="table5" style={{ marginTop: "2vh", width: '90vw' }}>
               <tbody>
                 <tr>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Client name</p>
+                    <p className="REPtype2">Client name</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Address</p>
+                    <p className="REPtype2">Address</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Closing Date</p>
+                    <p className="REPtype2">Closing Date</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Value</p>
+                    <p className="REPtype2">Value</p>
                   </th>
                 </tr>
                 {sells.map((e,i) => {
@@ -42,7 +42,7 @@ function StadisticInfo(props) {
                         {e.ClosingDate}
                       </td>
                       <td className="ClientName" scope="row">
-                        {e.Value}
+                       $ {e.Value}
                       </td>
                     </tr>
                   );

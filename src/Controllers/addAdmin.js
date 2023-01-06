@@ -10,11 +10,12 @@ function AddAdminControl() {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
+  const [error, setError] = useState()
 
   console.log(form)
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/addAdmin`, {
+    fetch(`https://truewayrealtorsapi.com/addAdmin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,17 +26,23 @@ function AddAdminControl() {
         try {
           const jsonRes = await res.json();
 
-          if (res.status !== 200) {
-            console.log("error");
+          if (res.status === 200) {
+            onOpenModal();
+          } else if (res.status === 409){
+            setError('Email Already Exists')
+            onOpenModal();
           } else {
             console.log(jsonRes);
+            setError('Something was wrong')
+            onOpenModal();
           }
         } catch (err) {
+          setError('Email Already Exists')
           console.log(err);
         }
-        onOpenModal();
       })
       .catch((err) => {
+        setError('Email Already Exists')
         console.log(err);
       });
   };
@@ -57,6 +64,7 @@ function AddAdminControl() {
       onCloseModal={onCloseModal}
       onOpenModal={onOpenModal}
       validarEmail={validarEmail}
+      error={error}
     />
   );
 }

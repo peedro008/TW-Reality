@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import spinnerr from "../assets/spinnerr.gif"
+import spinnerr from "../assets/loadingIcon.gif";
 function MyRealtors ({google, realtors}) {
   const [chart, setChart] = useState(null);
   const [dato, setDato]= useState([])
   const [time, setTime]= useState(false)
 
-  // const [producers, setProducers]= useState([])
-  // const [modify, setModify]= useState([])
-  // const [quotes, setQuotes]= useState([])
-  // const date = new Date();
-  // const DATE = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
+  let Screen = window.screen
   
       useEffect(()=>{
         let pes = []
@@ -65,8 +61,13 @@ function MyRealtors ({google, realtors}) {
       {!google && <p>Google 404</p>}
       {
         !time?
-        <img src={spinnerr} style={{width:"100px", position:"absolute", right:"65vw", top:"40vh"}}/>:
-      <div style={{minHeight:"350px", minWidth:"66vw"}} id="MyRealtors" className={!google ? 'd-none' : ''} ></div>
+        <img src={spinnerr}   style={{
+          width: "150px",
+          position: "absolute",
+          right: "65vw",
+          top: "40vh",
+        }}/>:
+      <div style={{minHeight:"350px", minWidth:"66vw"}} id="MyRealtors" className={!google ? "d-none" : Screen.width < 1000 ? "graficBigIpad" : "graficBig"} ></div>
       }
     </>
   )

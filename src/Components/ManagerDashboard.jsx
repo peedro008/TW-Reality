@@ -19,11 +19,13 @@ function ManagerDashboardComponent({
   const thisUsers = Users?.filter(
     (e) => (e.managerId === UserId) | (e.id === UserId)
   );
+
+
   // const navigate = useNavigate()
   return (
     <div className="genericDiv1">
       <div className="StadCalendarDiv">
-        <p className="StadCalendarTitle" style={{marginLeft: '20px', marginBottom: '50px'}}>{yearLabel}</p>
+        <p className="StadCalendarTitle" style={{marginLeft: '20px', marginBottom: '20px', marginTop: '0px'}}>My Realtors</p>
       </div>
       <div
           style={{
@@ -44,7 +46,7 @@ function ManagerDashboardComponent({
             }}
           ></input>
         </div>
-      <div className="StadisticRowName">
+      <div className="StadisticRowName" style={{paddingTop: '0px'}}>
         
         {thisUsers.length ? (
           Search ? thisUsers.filter((e) =>
@@ -54,7 +56,7 @@ function ManagerDashboardComponent({
               <div key={i}>
                 <p
                   // style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
-                  style={{ color: "#2b4162" }}
+                 
                   className="StadisticProdName"
                 >
                   {e.name}
@@ -111,13 +113,46 @@ function ManagerDashboardComponent({
                   style={{ textDecoration: "none" }}
                 >
                   <div className="StadBox">
-                    <p className="StadBoxTitle">My Referrals</p>
+                    <p className="StadBoxTitle">Referrals</p>
                     <p className="StadBoxVal">
                       {
                         stateRed.Referred?.filter((i) => e.id === i.User?.id)
                           .length
                       }
                     </p>
+                  </div>
+                </NavLink>
+                
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/packageMarketingDash", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Package Marketing</p>
+                    <p className="StadBoxVal">{e.PackageMarketings?.length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordSold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Sold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators?.filter(e => e.isSold === true).length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordUnsold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Unsold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators?.filter(e => e.isSold === false).length}</p>
                   </div>
                 </NavLink>
 
@@ -174,7 +209,7 @@ function ManagerDashboardComponent({
               <div key={i}>
                 <p
                   // style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
-                  style={{ color: "#2b4162" }}
+                 
                   className="StadisticProdName"
                 >
                   {e.name}
@@ -182,42 +217,14 @@ function ManagerDashboardComponent({
 
                 <NavLink
                   className="icons"
-                  to={{ pathname: "/salesByMe", state: { aboutProps: e } }}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="StadBox">
-                    <p className="StadBoxTitle">Sales by me</p>
-                    <p className="StadBoxVal">{e.Sells.length}</p>
-                  </div>
-                </NavLink>
-
-                <NavLink
-                  className="icons"
-                  to={{
-                    pathname: "/salesByRealtors",
-                    state: { aboutProps: e },
-                  }}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="StadBox">
-                    <p className="StadBoxTitle">Sales by my realtors</p>
-                    <p className="StadBoxVal">
-                      {e.Referrals.length ? getRSells(e.Referrals) : 0}
-                    </p>
-                  </div>
-                </NavLink>
-
-                <NavLink
-                  className="icons"
                   to={{ pathname: "/newRealtors", state: { aboutProps: e } }}
                   style={{ textDecoration: "none" }}
                 >
                   <div className="StadBox">
-                    <p className="StadBoxTitle">New Realtors</p>
+                    <p className="StadBoxTitle">Realtors</p>
                     <p className="StadBoxVal">{e.Referrals.length}</p>
                   </div>
                 </NavLink>
-
                 <NavLink
                   className="icons"
                   to={{
@@ -231,7 +238,7 @@ function ManagerDashboardComponent({
                   style={{ textDecoration: "none" }}
                 >
                   <div className="StadBox">
-                    <p className="StadBoxTitle">My Referrals</p>
+                    <p className="StadBoxTitle">Referrals</p>
                     <p className="StadBoxVal">
                       {
                         stateRed.Referred?.filter((i) => e.id === i.User?.id)
@@ -240,7 +247,69 @@ function ManagerDashboardComponent({
                     </p>
                   </div>
                 </NavLink>
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/salesByMe", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Sales</p>
+                    <p className="StadBoxVal">{e.Sells.length}</p>
+                  </div>
+                </NavLink>
 
+                <NavLink
+                  className="icons"
+                  to={{
+                    pathname: "/salesByRealtors",
+                    state: { aboutProps: e },
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Sales by realtors</p>
+                    <p className="StadBoxVal">
+                      {e.Referrals.length ? getRSells(e.Referrals) : 0}
+                    </p>
+                  </div>
+                </NavLink>
+
+            
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/packageMarketingDash", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Package Marketing</p>
+                    <p className="StadBoxVal">{e.PackageMarketings.length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordSold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Sold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators.filter(e => e.isSold === true).length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordUnsold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Unsold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators.filter(e => e.isSold !== true).length}</p>
+                  </div>
+                </NavLink>
+
+                
                 <NavLink
                   className="icons"
                   to={{

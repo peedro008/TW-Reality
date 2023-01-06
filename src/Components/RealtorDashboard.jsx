@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import MyRealtors from "../Charts/MyRealtors";
 
 const RealtorDashboardComponent = ({ Referred,realtors, google, UserId, thisUser,comm }) => {
+  let Screen = window.screen
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -15,6 +16,8 @@ const RealtorDashboardComponent = ({ Referred,realtors, google, UserId, thisUser
       <div className="DashContainer">
         <div className="DashSubCont">
           {google && <MyRealtors google={google} realtors={realtors} />}
+          {
+            Screen.width > 1000 &&
           <div className="DashPList1Grow"  style={{minWidth:'350px'}}>
             <div className="DashPListHeader">
               <p className="DashPListTitle">My top agent by commission</p>
@@ -90,6 +93,7 @@ const RealtorDashboardComponent = ({ Referred,realtors, google, UserId, thisUser
                 );
               })}
           </div>
+          }
         </div>
 
         <div className="CardsGraficsContainer">
@@ -108,7 +112,8 @@ const RealtorDashboardComponent = ({ Referred,realtors, google, UserId, thisUser
               <p className="dashCardText">Monthly Commission</p>
                 </div>
               </div>
-            
+            {
+              Screen.width > 1000 &&
               <div
                 className="CardsGrafics"
                 style={{
@@ -127,6 +132,7 @@ const RealtorDashboardComponent = ({ Referred,realtors, google, UserId, thisUser
               <p className="dashCardText">Annual  Commission</p>
                 </div>
               </div>
+            }
              
               <div
                   className="CardsGrafics"

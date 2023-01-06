@@ -3,27 +3,23 @@ import "../Css/css.css";
 import Select from "react-select";
 import "react-responsive-modal/styles.css";
 import Isologo_background from "../assets/Isologo_background.png";
-import { Modal } from "react-responsive-modal";
-import Icon from "../assets/Icon.png";
-import { NavLink } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs";
 import PackageMarketing from "./packages/PackageMarketing";
-import Offer from "./packages/Offer";
-import Selling from "./packages/Selling";
-import Listing from "./packages/Listing";
+import TransactionCoordinator from "./packages/TransactionCoordinator";
+
+
 function AddPackage({
   form,
   setForm,
   open,
   onCloseModal,
   optionsUsers,
-  onSubmit,
-  onSubmitListing,
-  onSubmitOffer,
-  onSubmitSelling,
+  onSubmitPM,
+  onSubmitTC,
+  respTransactionCoord,
+  validarEmail,
 }) {
   const [typeOfPackage, setTypeOfPackage] = useState();
-  const [typeOfCoordinator, setTypeOfCoordinator] = useState();
 
   let optionsPackage = [
     {
@@ -35,122 +31,54 @@ function AddPackage({
       label: "Transaction Coordinator",
     },
   ];
-  let optionsCoordinator = [
-    {
-      value: 1,
-      label: "Offer",
-    },
-    {
-      value: 2,
-      label: "Selling",
-    },
-    {
-      value: 3,
-      label: "Listing",
-    },
-  ];
-
-  useEffect(() => {
-    if (form.typeOfPackage === 2) {
-      setForm({ ...form, monthly: false });
-    } else {
-      setForm({ ...form, monthly: true });
-    }
-  }, [form.typeOfPackage]);
 
   return (
     <div className="genericDiv">
-      <div className="genericHeader">
+      <div className="genericHeader" style={{ marginBottom: "30px" }}>
         <p className="genericTitle">Add Package</p>
-      </div>
-
-      <div className="managerInputsContainer2">
-        <div className="inputDiv">
-          <p className="PAYtitle">Type of Package</p>
-          <Select
-            onChange={(val) => {
-              setTypeOfPackage(val.label);
-              setTypeOfCoordinator();
-            }}
-            options={optionsPackage}
-            name={"Realtor Name"}
-            className="PAYselect"
-            placeholder="Select Package"
-          />
+        <div className="managerInputsContainer2">
+          <div className="inputDiv">
+            <p className="PAYtitle">Type of Package</p>
+            <Select
+              onChange={(val) => {
+                setTypeOfPackage(val.label);
+              }}
+              options={optionsPackage}
+              name={"Realtor Name"}
+              className="PAYselect"
+              placeholder="Select Package"
+            />
+          </div>
         </div>
       </div>
-
       {typeOfPackage === "Marketing" && (
         <PackageMarketing
           form={form}
           setForm={setForm}
           optionsUsers={optionsUsers}
-          onSubmit={onSubmit}
+          onSubmitPM={onSubmitPM}
+          open={open}
+          respTransactionCoord={respTransactionCoord}
+          onCloseModal={onCloseModal}
+          validarEmail={validarEmail}
         />
       )}
       {typeOfPackage === "Transaction Coordinator" && (
-        <div className="managerInputsContainer2">
-          <div className="inputDiv">
-            <p className="PAYtitle">Type of Transaction coordinator</p>
-            <Select
-              onChange={(val) => setTypeOfCoordinator(val.label)}
-              options={optionsCoordinator}
-              name={"Realtor Name"}
-              className="PAYselect"
-              placeholder="Select Transaction"
-            />
-          </div>
-        </div>
-      )}
-      {typeOfCoordinator === "Offer" && (
-        <Offer
+        <TransactionCoordinator
           form={form}
           setForm={setForm}
           optionsUsers={optionsUsers}
-          onSubmit={onSubmitOffer}
+          onSubmitTC={onSubmitTC}
+          open={open}
+          respTransactionCoord={respTransactionCoord}
+          onCloseModal={onCloseModal}
+          validarEmail={validarEmail}
         />
       )}
-      {typeOfCoordinator === "Selling" && (
-        <Selling
-          form={form}
-          setForm={setForm}
-          optionsUsers={optionsUsers}
-          onSubmit={onSubmitSelling}
-        />
-      )}
-      {typeOfCoordinator === "Listing" && (
-        <Listing
-          form={form}
-          setForm={setForm}
-          optionsUsers={optionsUsers}
-          onSubmit={onSubmitListing}
-        />
-      )}
-
-      <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
-        <div className="modal">
-          <img
-            src={Icon}
-            style={{
-              width: "35px",
-              alignSelf: "center",
-              marginTop: "25px",
-              marginBottom: "10px",
-            }}
-          />
-
-          <p className="modalText">Sell added successfully</p>
-
-          <button className="modalButton">
-            <NavLink style={{ textDecoration: "none", color: "#000" }} to={"/"}>
-              Continue
-            </NavLink>
-          </button>
-        </div>
-      </Modal>
+      {/* <PozzaChart2 /> */}
+      
       <img
         src={Isologo_background}
-        disabled
         style={{
           position: "fixed",
           pointerEvents: "none",

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import logo from "../assets/truewayrealty.svg";
+import logo from "../assets/truewayrealty.jpeg";
 import "../Css/css.css";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
@@ -32,10 +32,10 @@ setReset
   return (
     <div className="main">
       <div className="containerLogo">
-        <div style={{ display: "flex", alignSelf: "center", marginTop: "45%" }}>
+        <div style={{ display: "flex", height: '100vh',alignSelf: "center", alignItems: 'center',justifyContent: 'center', justifySelf: 'center'}}>
           <img
             style={{
-              width: "250px",
+              width: "550px",
               height: "auto",
               objectFit: "cover",
               display: "flex",
@@ -44,7 +44,7 @@ setReset
           />
         </div>
       </div>
-      <div className="loginContainer">
+      {/* <div className="loginContainer">
         <div className="box">
           <div>
             <p className="par">Sign In</p>
@@ -105,6 +105,106 @@ setReset
                 </button>
               </div>
         <p onClick={setOpen1} style={{fontSize:"13px",color:"#2b4162", textAlign:"right", alignSelf:"flex-end", marginBlock:"10px", marginRight:"5px", cursor:"pointer", fontFamily:"Montserrat" }}>Forgot password?</p>
+            </div>
+          </div>
+        </div>
+      </div> */}
+
+      <div className="loginContainer">
+        <div className="box">
+          <div>
+            <p className="par">Trueway Realtors</p>
+            <p className="par2" style={{ fontWeight: "bold" }}>
+              Sign in to your account
+            </p>
+            <div
+              style={{
+                paddingBottom: "35px",
+                alignItems: "center",
+                backgroundColor: "#FFFFFF",
+                width: "300px",
+                display: "flex",
+                height: "220px",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                borderRadius: "8px",
+                paddingInline: '10px'
+              }}
+            >
+              <div>
+                <p
+                  className="par3"
+                  style={{ fontWeight: "bold", fontSize: "15px" }}
+                >
+                  Email address
+                </p>
+                <input
+                  className="loginInput"
+                  style={{
+                    width: "270px",
+                    height: "28px",
+                    borderWidth: "0px",
+                    // borderRadius: "8px",
+                    borderBottom: "2px solid rgba(87,204,152,255)",
+                    
+                    paddingX: "5px",
+                    
+                  }}
+                  placeholder="Email or Username"
+                  onChange={(event) => setUserName(event.target.value)}
+                />
+              </div>
+              <div>
+                <p
+                  className="par3"
+                  style={{ fontWeight: "bold", fontSize: "15px" }}
+                >
+                  Password
+                </p>
+                <input
+                  className="loginInput"
+                  style={{
+                    width: "270px",
+                    height: "28px",
+                    borderWidth: "0px",
+                    // borderRadius: "8px",
+                    borderBottom: "2px solid rgba(87,204,152,255)",
+                    // backgroundColor: "#E5E5E5",
+                    paddingX: "5px",
+                  }}
+                  type="password"
+                  placeholder="Your Password"
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </div>
+              <div className="buttonC">
+                <button
+                  className="buttonSign"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => onSubmitHandler(UserName, Password)}
+                >
+                  <p className="buttonT" style={{ fontWeight: "bold" }}>
+                    Sign In
+                  </p>{" "}
+                </button>
+              </div>
+              <p
+                onClick={setOpen1}
+                style={{
+                  fontSize: "13px",
+                  color: "rgba(87,204,152,255)",
+                  fontWeight: "bold",
+                  textAlign: "right",
+                  alignSelf: "flex-end",
+                  marginBlock: "10px",
+                  marginRight: "13px",
+                  cursor: "pointer",
+                  fontFamily: "Montserrat",
+                  
+                }}
+              >
+                Forgot password?
+              </p>
             </div>
           </div>
         </div>

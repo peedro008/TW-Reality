@@ -1,73 +1,60 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import ReactExport from "react-export-excel";
+import Icon from "../../assets/Icon.png";
+import CrossMark from "../../assets/cross-mark.png";
+import { NavLink } from "react-router-dom";
+import Modal from "react-responsive-modal";
 
-const PackageMarketing = ({ form, setForm, optionsUsers, onSubmit }) => {
-  const [otherMLS, setOtherMLS] = useState();
-  let optionsPackage = [
-    { value: 1, label: "MIAMI" },
-    { value: 2, label: "Palm Beach" },
-    { value: 3, label: "Other" },
-  ];
-  console.log(form);
+const PackageMarketing = ({ form, setForm, optionsUsers, onSubmitPM, respTransactionCoord, onCloseModal, open,validarEmail }) => {
+
   useEffect(() => {
-    if (otherMLS !== "Other") {
-      setForm({ ...form, MLSassociation: otherMLS });
-    } else {
-      setForm({ ...form, MLSassociation: "" });
-    }
-  }, [otherMLS]);
-
-  const ExcelFile = ReactExport.ExcelFile;
-  const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-  const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+    setForm({})
+  }, [])
+  
+  console.log(validarEmail(form.email));
 
   let validation =
-    typeof form.fullName === "undefined" ||
+    !validarEmail(form.email) ||
+    typeof form.clientName === "undefined" ||
     typeof form.email === "undefined" ||
     typeof form.phone === "undefined" ||
-    typeof form.socialNetworks === "undefined" ||
-    typeof form.MLSassociation === "undefined" ||
     typeof form.openDate === "undefined" ||
-    form.fullName?.length < 3 ||
-    form.Email?.length < 8 ||
-    form.phone?.length < 6 ||
-    form.socialNetworks?.length < 3 ||
-    form.MLSassociation?.length < 3;
-
+    typeof form.UserId === 'undefined' ||
+    form.clientName?.length < 3 ||
+    form.email?.length < 8 ||
+    form.phone?.length < 6 
+   
   return (
-    <div className="managerInputsContainer" style={{ marginBottom: "100px" }}>
+    <div className="managerInputsContainer">
       <div className="managerInputsubContainer" style={{ width: "80vw" }}>
         <div className="inputDivPackage">
-          <p className="PAYtitlePackage" style={{ display: "flex" }}>
-            Full name<p style={{ color: "red" }}>*</p>
-          </p>
+          <div className="PAYtitlePackage" style={{ display: "flex" }}>
+            Client name
+          </div>
           <input
             onChange={(e) => {
-              setForm({ ...form, fullName: e.target.value });
+              setForm({ ...form, clientName: e.target.value});
             }}
-            placeholder="Email"
+            placeholder="Full name"
             className="AQinputPackage"
           ></input>
         </div>
         <div className="inputDivPackage">
-          <p className="PAYtitlePackage" style={{ display: "flex" }}>
-            Email <p style={{ color: "red" }}> *</p>
-          </p>
+          <div className="PAYtitlePackage" style={{ display: "flex" }}>
+            Email 
+          </div>
           <input
-            placeholder="Name"
+            placeholder="Client Email"
             onChange={(e) => {
               setForm({ ...form, email: e.target.value });
             }}
             className="AQinputPackage"
           ></input>
         </div>
-      </div>
-      <div className="managerInputsubContainer" style={{ width: "50vw" }}>
         <div className="inputDivPackage">
-          <p className="PAYtitlePackage" style={{ display: "flex" }}>
-            Phone <p style={{ color: "red" }}> *</p>
-          </p>
+          <div className="PAYtitlePackage" style={{ display: "flex" }}>
+            Phone 
+          </div>
           <input
             onChange={(e) => {
               setForm({ ...form, phone: e.target.value });
@@ -77,113 +64,26 @@ const PackageMarketing = ({ form, setForm, optionsUsers, onSubmit }) => {
           ></input>
         </div>
 
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage" style={{ display: "flex" }}>
-            Name on social networks? <p style={{ color: "red" }}> *</p>
-          </p>
-          <input
-            onChange={(e) => {
-              setForm({ ...form, socialNetworks: e.target.value });
-            }}
-            placeholder="social networks"
-            className="AQinputPackage"
-          ></input>
-        </div>
       </div>
+
       <div className="managerInputsubContainer" style={{ width: "50vw" }}>
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage">Target audiences?</p>
+      <div className="inputDivPackage">
+          <div className="PAYtitlePackage" style={{ display: "flex" }}>
+            Package Value 
+          </div>
           <input
             onChange={(e) => {
-              setForm({ ...form, targetAudiences: e.target.value });
+              setForm({ ...form, value: e.target.value });
             }}
-            placeholder="Target audiences"
+            type="Number"
+            placeholder="Value"
             className="AQinputPackage"
           ></input>
         </div>
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage">A phrase that identifies you</p>
-          <input
-            onChange={(e) => {
-              setForm({ ...form, identifyFrase: e.target.value });
-            }}
-            placeholder="Target audiences"
-            className="AQinputPackage"
-          ></input>
-        </div>
-      </div>
-      <div className="managerInputsubContainer" style={{ width: "50vw" }}>
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage">Write a short biografy</p>
-          <input
-            onChange={(e) => {
-              setForm({ ...form, biografy: e.target.value });
-            }}
-            placeholder="Web domain name"
-            className="AQinputPackage"
-          ></input>
-        </div>
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage">Web domain name?</p>
-          <input
-            onChange={(e) => {
-              setForm({ ...form, webDomain: e.target.value });
-            }}
-            placeholder="Web domain name"
-            className="AQinputPackage"
-          ></input>
-        </div>
-      </div>
-      <div className="managerInputsubContainer" style={{ width: "50vw" }}>
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage">Communities on your website?</p>
-          <input
-            onChange={(e) => {
-              setForm({ ...form, communities: e.target.value });
-            }}
-            placeholder="Communities"
-            className="AQinputPackage"
-          ></input>
-        </div>
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage">Customer tertimonials</p>
-          <input
-            onChange={(e) => {
-              setForm({ ...form, customerTestimonials: e.target.value });
-            }}
-            placeholder="Customer Tertimonials"
-            className="AQinputPackage"
-          ></input>
-        </div>
-      </div>
-      <div className="managerInputsubContainer" style={{ width: "50vw" }}>
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage">Do you offer any specific service?</p>
-          <input
-            onChange={(e) => {
-              setForm({ ...form, specificService: e.target.value });
-            }}
-            placeholder="Specific Service"
-            className="AQinputPackage"
-          ></input>
-        </div>
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage">Seller's Name </p>
-          <Select
-            onChange={(e) => {
-              setForm({ ...form, UserId: e.value });
-            }}
-            options={optionsUsers}
-            placeholder="Name"
-            className="PAYselectPackage"
-          />
-        </div>
-      </div>
-      <div className="managerInputsubContainer" style={{ width: "50vw" }}>
-        <div className="inputDivPackage">
-          <p className="PAYtitlePackage" style={{ display: "flex" }}>
-            Open Date <p style={{ color: "red" }}> *</p>
-          </p>
+      <div className="inputDivPackage">
+          <div className="PAYtitlePackage" style={{ display: "flex" }}>
+            Open Date 
+          </div>
           <input
             onChange={(e) => {
               setForm({ ...form, openDate: e.target.value });
@@ -194,44 +94,16 @@ const PackageMarketing = ({ form, setForm, optionsUsers, onSubmit }) => {
           ></input>
         </div>
         <div className="inputDivPackage">
-          <p className="PAYtitlePackage">Closing Date </p>
-          <input
-            onChange={(e) => {
-              setForm({ ...form, closingDate: e.target.value });
-            }}
-            type="Date"
-            placeholder="Closing"
-            className="AQinputPackage"
-          ></input>
-        </div>
-      </div>
-      <div className="managerInputsubContainer" style={{ width: "50vw" }}>
-        <div className="inputDivPackage">
-          <p className="PAYtitle" style={{ display: "flex" }}>
-            MLS association <p style={{ color: "red" }}> *</p>
-          </p>
+          <p className="PAYtitlePackage">Seller's Name </p>
           <Select
-            onChange={(val) => setOtherMLS(val.label)}
-            options={optionsPackage}
-            name={"MLS association"}
+            onChange={(e) => {
+              setForm({ ...form, UserId: e.value });
+            }}
+            options={optionsUsers}
+            placeholder="Seller"
             className="PAYselectPackage"
-            placeholder="Association"
           />
         </div>
-        {otherMLS === "Other" && (
-          <div className="inputDivPackage">
-            <p className="PAYtitlePackage" style={{ display: "flex" }}>
-              Which is your MLS association? <p style={{ color: "red" }}> *</p>
-            </p>
-            <input
-              onChange={(e) => {
-                setForm({ ...form, MLSassociation: e.target.value });
-              }}
-              placeholder="MLS Association"
-              className="AQinputPackage"
-            ></input>
-          </div>
-        )}
       </div>
       <div
         style={{
@@ -243,9 +115,9 @@ const PackageMarketing = ({ form, setForm, optionsUsers, onSubmit }) => {
       >
         <button
           className="PAYbutton"
-          onClick={onSubmit}
+          onClick={onSubmitPM}
           style={{
-            backgroundColor: validation && "#586579",
+            opacity: validation && "0.2",
             cursor: validation && "default",
           }}
           disabled={validation ? true : false}
@@ -253,22 +125,48 @@ const PackageMarketing = ({ form, setForm, optionsUsers, onSubmit }) => {
           <p className="PAYbuttonText">Add Package</p>
         </button>
       </div>
-      {validation && (
-        <p
-          className="PAYtitlePackage"
-          style={{
-            color: "red",
-            position: "fixed",
-            right: "0px",
-            top: "80px",
-            display: "flex",
-          }}
-        >
-          * is required
-        </p>
-      )}
 
-      <ExcelFile
+      <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+        <div className="modal">
+        {
+            respTransactionCoord[0] ? 
+            <>
+            <img
+            src={Icon}
+            style={{
+              width: "35px",
+              alignSelf: "center",
+              marginTop: "25px",
+              marginBottom: "10px",
+            }}
+          />
+
+          <p className="modalText">{respTransactionCoord[1]}</p>
+          </>
+          :
+          <>
+          <img
+          src={CrossMark}
+          style={{
+            width: "35px",
+            alignSelf: "center",
+            marginTop: "25px",
+            marginBottom: "10px",
+          }}
+        />
+
+        <p className="modalText">{respTransactionCoord[1]}</p>
+        </>
+          }
+
+            <NavLink style={{ textDecoration: "none", color: "#000", alignSelf: 'center' }} to={"/packageManagement"}>
+          <button className="modalButton">
+              Continue
+          </button>
+            </NavLink>
+        </div>
+      </Modal>
+      {/* <ExcelFile
         filename="Marketing Package"
         element={
           <div
@@ -308,7 +206,7 @@ const PackageMarketing = ({ form, setForm, optionsUsers, onSubmit }) => {
           <ExcelColumn label="Target Audiences" value="targetAudiences" />
           <ExcelColumn label="Web Domain" value="webDomain" />
         </ExcelSheet>
-      </ExcelFile>
+      </ExcelFile> */}
     </div>
   );
 };

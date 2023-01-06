@@ -6,8 +6,8 @@ import "react-responsive-modal/styles.css";
 import Isologo_background from "../assets/Isologo_background.png";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
+import CrossMark from "../assets/cross-mark.png";
 import { NavLink } from "react-router-dom";
-import { Controller } from "react-hook-form";
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 function AddReferredComponent({
@@ -17,9 +17,13 @@ function AddReferredComponent({
   onSubmit,
   onCloseModal,
   validarEmail,
-  onOpenModal}
-) {
-  let validation = (!validarEmail(form.email)||form.name?.length < 6  || typeof form.name?.length === 'undefined');
+  onOpenModal,
+  error
+}) {
+  let validation =
+    !validarEmail(form.email) ||
+    form.name?.length < 6 ||
+    typeof form.name?.length === "undefined";
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -37,9 +41,7 @@ function AddReferredComponent({
               }}
               className="AQinput"
             ></input>
-            <p className="FORMerror">
-           
-            </p>
+            <p className="FORMerror"></p>
           </div>
           <div className="inputDiv">
             <p className="PAYtitle">Phone</p>
@@ -50,9 +52,7 @@ function AddReferredComponent({
               }}
               className="AQinput"
             ></input>
-            <p className="FORMerror">
-          
-            </p>
+            <p className="FORMerror"></p>
           </div>
           <div className="inputDiv">
             <p className="PAYtitle">Email</p>
@@ -63,22 +63,21 @@ function AddReferredComponent({
               placeholder="Email"
               className="AQinput"
             ></input>
-            <p className="FORMerror">{validarEmail(form.email)?"":"Email must be a valid email"}</p>
-          </div>
-          <div className="inputDiv">
-            <p className="PAYtitle">Company</p>
-            <input
-             
-              onChange={(e) => {
-                setForm({ ...form, Company: e.target.value });
-              }}
-              placeholder="Company"
-              className="AQinput"
-            ></input>
-           
+            <p className="FORMerror">
+              {validarEmail(form.email) ? "" : "Email must be a valid email"}
+            </p>
           </div>
         </div>
-        
+        <div className="inputDiv">
+          <p className="PAYtitle">Company</p>
+          <input
+            onChange={(e) => {
+              setForm({ ...form, Company: e.target.value });
+            }}
+            placeholder="Company"
+            className="AQinput"
+          ></input>
+        </div>
       </div>
 
       <div
@@ -89,9 +88,14 @@ function AddReferredComponent({
           display: "flex",
         }}
       >
-        <button className="PAYbutton" onClick={() => onSubmit()} 
-        style={{backgroundColor: validation &&"#586579", cursor: validation && 'default'}}
-        disabled={validation?true:false}
+        <button
+          className="PAYbutton"
+          onClick={() => onSubmit()}
+          style={{
+            opacity: validation && "0.2",
+            cursor: validation && "default",
+          }}
+          disabled={validation ? true : false}
         >
           <p className="PAYbuttonText">Add referred</p>
         </button>
@@ -99,7 +103,23 @@ function AddReferredComponent({
 
       <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div className="modal">
-          <img
+        {
+          error ?
+          <>
+           <img
+            src={CrossMark}
+            style={{
+              width: "35px",
+              alignSelf: "center",
+              marginTop: "25px",
+              marginBottom: "10px",
+            }}
+          />
+          <p className="modalText">{error}</p> 
+          </>
+          : 
+          <>
+           <img
             src={Icon}
             style={{
               width: "35px",
@@ -108,15 +128,14 @@ function AddReferredComponent({
               marginBottom: "10px",
             }}
           />
-
-          <p className="modalText">Add Referral successfully!</p>
+          <p className="modalText">Admin added successfully</p>
+          </>
+          
+        }
 
           <button className="modalButton">
             {" "}
-            <NavLink
-              style={{ textDecoration: "none", color: "#000" }}
-              to={"/"}
-            >
+            <NavLink style={{ textDecoration: "none", color: "#000" }} to={"/"}>
               Continue
             </NavLink>
           </button>
@@ -126,6 +145,7 @@ function AddReferredComponent({
         src={Isologo_background}
         style={{
           position: "absolute",
+          pointerEvents: "none",
           right: 0,
           bottom: 0,
           width: "428px",
@@ -133,7 +153,7 @@ function AddReferredComponent({
         }}
       />
       <BsChevronLeft
-      cursor='pointer'
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",

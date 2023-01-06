@@ -14,30 +14,33 @@ function ManagerGrafics({
 }) {
   const [sumSales, setSumSales] = useState(0)
   const [sumRef, setSumRef] = useState(0)
-  const thisUsers = Users?.filter(
-    (e) => (e.managerId === UserId) | (e.id === UserId)
-  );
-  console.log(thisUsers)
+  const [sumMarketing, setSumMarketing] = useState(0)
+  const [sumTransactionCoord, setSumTransactionCoord] = useState(0)
+  let Screen = window.screen
+  
+  const thisReffered = Users?.map(e => Referred.filter((f) => f.UserId == e.id).length)
+
   useEffect(() => {
-    if(thisUsers.length !== 0) 
+    if(Users.length !== 0) 
     {
-      setSumSales(thisUsers?.map((e) => e.Sells?.length).reduce(
+      setSumSales(Users?.map((e) => e.Sells?.length).reduce(
         (previousValue, currentValue) => previousValue + currentValue
       ))
   
       setSumRef(thisReffered?.reduce(
         (previousValue, currentValue) => previousValue + currentValue
         ));
-        console.log(sumRef)
-    };
-  }, [thisUsers])
-  
+        
+        let marketing = 0;
+        Users.map(e => marketing = e.PackageMarketings?.length + marketing)
+        setSumMarketing(marketing)
 
-  
-  
-  const thisReffered = thisUsers?.map(e => Referred.filter((f) => f.UserId == e.id).length)
-
-  
+        let transaction = 0;
+        Users.map(e => transaction = e.TransactionCoordinators?.length + transaction)
+        setSumTransactionCoord(transaction)
+      }
+    }, [])
+    
 
     function goUser(f) {
       let newUs = Users?.filter((e) => e.name?.toLowerCase().includes(f?.toLowerCase()))
@@ -65,7 +68,7 @@ function ManagerGrafics({
               goUser={goUser}
               google={google}
               Referred={Referred}
-              realtors={thisUsers}
+              realtors={Users}
             />
           )
         ) : (
@@ -77,26 +80,26 @@ function ManagerGrafics({
                     className="subTitt"
                     style={{
                       marginTop: "2vh",
-                      marginLeft: "40px",
+                      marginLeft: "10px",
                       color: "#198754",
                     }}
                   >
                     Sales
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh" }}>
+                  <table className="table5" style={{ marginTop: "2vh", marginLeft: "10px", width: '800px' }}>
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Client name</p>
+                          <p className="REPtype2">Client name</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Closing date</p>
+                          <p className="REPtype2">Closing date</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Address</p>
+                          <p className="REPtype2">Address</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Value</p>
+                          <p className="REPtype2">Value</p>
                         </th>
                       </tr>
                       {selected.Sells?.map((e) => {
@@ -126,7 +129,7 @@ function ManagerGrafics({
                     className="subTitt"
                     style={{
                       marginTop: "2vh",
-                      marginLeft: "40px",
+                      marginLeft: "10px",
                       color: "#dc3545",
                     }}
                   >
@@ -135,38 +138,38 @@ function ManagerGrafics({
                 </>
               )}
 
-              {Users.filter((e) => e.ReferredId == selected.id).length ? (
+              {Users.filter((e) => (e.ReferredId == selected.id || e.managerId == selected.id)).length ? (
                 <>
                   <p
                     className="subTitt"
                     style={{
                       marginTop: "2vh",
-                      marginLeft: "40px",
+                      marginLeft: "10px",
                       color: "#198754",
                     }}
                   >
                     Recruited
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh" }}>
+                  <table className="table5" style={{ marginTop: "2vh",marginLeft: "10px", width: '800px' }}>
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Realtor name</p>
+                          <p className="REPtype2">Realtor name</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Email</p>
+                          <p className="REPtype2">Email</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Phone</p>
+                          <p className="REPtype2">Phone</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Sales</p>
+                          <p className="REPtype2">Sales</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Recruited</p>
+                          <p className="REPtype2">Recruited</p>
                         </th>
                       </tr>
-                      {Users.filter((e) => e.ReferredId == selected.id).map(
+                      {Users.filter((e) => (e.ReferredId == selected.id || e.managerId == selected.id)).map(
                         (e) => {
                           return (
                             <tr>
@@ -198,7 +201,7 @@ function ManagerGrafics({
                     className="subTitt"
                     style={{
                       marginTop: "2vh",
-                      marginLeft: "40px",
+                      marginLeft: "10px",
                       color: "#dc3545",
                     }}
                   >
@@ -213,26 +216,26 @@ function ManagerGrafics({
                     className="subTitt"
                     style={{
                       marginTop: "2vh",
-                      marginLeft: "40px",
+                      marginLeft: "10px",
                       color: "#198754",
                     }}
                   >
                     Referrals
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh" }}>
+                  <table className="table5" style={{ marginTop: "2vh",marginLeft: "10px", width: '800px' }}>
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Referral name</p>
+                          <p className="REPtype2">Referral name</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Email</p>
+                          <p className="REPtype2">Email</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Phone</p>
+                          <p className="REPtype2">Phone</p>
                         </th>
                         <th scope="col" className="column1">
-                          <p className="REPtype">Company</p>
+                          <p className="REPtype2">Company</p>
                         </th>
                       </tr>
 
@@ -274,7 +277,7 @@ function ManagerGrafics({
                     className="subTitt"
                     style={{
                       marginTop: "2vh",
-                      marginLeft: "40px",
+                      marginLeft: "10px",
                       color: "#dc3545",
                     }}
                   >
@@ -286,18 +289,15 @@ function ManagerGrafics({
           </>
         )}
 
+{
+  Screen.width > 1000 &&
         <div
           className="DashPList1Grow"
-          // style={{
-          //   position: "absolute",
-          //   right: "50px",
-          //   top: "80px",
-          //   height: "50px",
-          // }}
+  style={{width: '300px'}}
         >
           <div className="DashPListHeader">
             <p className="DashPListTitle">Top Agents</p>
-            {/* <p className="DashPListSTitle">Descending</p> */}
+
           </div>
 
           <div className="DashPListDivider" />
@@ -310,7 +310,7 @@ function ManagerGrafics({
               }}
             >
               <div className="DashPListCircleWith">
-                {/* <img src={mask} /> */}
+               
               </div>
 
               <p
@@ -339,9 +339,21 @@ function ManagerGrafics({
               >
                 Ref
               </p>
+              <p
+                className="DashNumber"
+                style={{ color: "#000", fontWeight: "600" }}
+              >
+                Mark
+              </p>
+              <p
+                className="DashNumber"
+                style={{ color: "#000", fontWeight: "600" }}
+              >
+                T.C.
+              </p>
             </div>
           </div>
-          {thisUsers?.sort(function (a, b) {
+          {Users?.sort(function (a, b) {
               return b.Referrals.length - a.Referrals.length;
             })
             ?.map((e ,i ) => {
@@ -379,21 +391,26 @@ function ManagerGrafics({
                     </p>
                   </div>
                   <div className="DashNumberDiv">
-                  <p className="DashNumber" style={{marginLeft: '10px'}}>&nbsp;{e.Sells.length}</p>
-                    <p className="DashNumber" style={{marginLeft: '10px'}}>&nbsp;{e.Referrals.length}</p>
+                  <p className="DashNumber" style={{marginLeft: '10px'}}>&nbsp;{e.Sells?.length}</p>
+                    <p className="DashNumber" style={{marginLeft: '10px'}}>&nbsp;{e.Referrals?.length}</p>
                     <p className="DashNumber" style={{marginLeft: '20px'}}>
-                      {Referred.filter((f) => f.UserId == e.id).length}
+                      {Referred?.filter((f) => f.UserId == e.id).length}
                     </p>
+                    <p className="DashNumber" style={{marginLeft: '10px'}}>&nbsp;{e.PackageMarketings?.length}</p>
+                    <p className="DashNumber" style={{marginLeft: '10px'}}>&nbsp;{e.TransactionCoordinators?.length}</p>
                   </div>
                 </div>
               );
             })}
         </div>
+}
       </div>
+      {
+        !selected &&
       <div className="CardsGraficsContainer">
               <div
                 className="CardsGrafics"
-                style={{ backgroundColor: " rgba(111, 82, 237, 0.15)" }}
+                style={{ backgroundColor: " rgba(111, 82, 237, 0.15)", minWidth: '200px' }}
               >
                 <div
                   className="dashCircle"
@@ -403,7 +420,7 @@ function ManagerGrafics({
                 </div>
                 <div className="dashText">
                   <p className="dashCardTitle">{sumSales}</p>
-                  <p className="dashCardText">Total Sales</p>
+                  <p className="dashCardText">Sales</p>
                 </div>
               </div>
               <NavLink
@@ -427,8 +444,8 @@ function ManagerGrafics({
                   <img src={mask} />
                 </div>
                 <div className="dashText">
-                  <p className="dashCardTitle">{thisUsers.length}</p>
-                  <p className="dashCardText">Total Realtors</p>
+                  <p className="dashCardTitle">{Users.length}</p>
+                  <p className="dashCardText">Realtors</p>
                 </div>
               </div>
               </NavLink>
@@ -454,11 +471,68 @@ function ManagerGrafics({
                   </div>
                   <div className="dashText">
                     <p className="dashCardTitle">{sumRef}</p>
-                    <p className="dashCardText">Total Referrals</p>
+                    <p className="dashCardText">Referrals</p>
                   </div>
                 </div>
               </NavLink>
+
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/packageManagement",
+                  state: { aboutProps: 'Marketing' },
+                }}
+                
+              >
+              <div
+                className="CardsGrafics"
+                style={{
+                  marginLeft: "20px",
+                  backgroundColor: "rgba(220, 76, 100, 0.15)",
+                }}
+              >
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={mask} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">{Users.length}</p>
+                  <p className="dashCardText">
+                    Package Marketing</p>
+                </div>
+              </div>
+              </NavLink>
+
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/packageManagement",
+                  state: { aboutProps: 'Transaction Coordinator' },
+                }}
+              >
+              <div
+                className="CardsGrafics"
+                style={{
+                  marginLeft: "20px",
+                  backgroundColor: "rgba(51, 45, 45, 0.15)",
+                }}
+              >
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={mask} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">{sumTransactionCoord}</p>
+                  <p className="dashCardText">Transaction Coord. Sold</p>
+                </div>
+              </div>
+              </NavLink>
             </div>
+      }
     </div>
   );
 }

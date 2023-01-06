@@ -1,83 +1,109 @@
 import React from "react";
-import AddSellComponent from "../Components/addSell";
-import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import AddPackage from "../Components/addPackage";
+
 function AddPackageControl() {
   const userId = useSelector((state) => state.UserId);
+  const UserRole = useSelector((state) => state.userRole)
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
- 
+  const [respTransactionCoord, setRespTransactionCoord] = useState([]);
 
   const Users = useSelector((e) => e.Users);
-  const optionsUsers = Users.map((e) => ({
-    value: e.id,
-    label: e.name,
-  }));
+  let options = []
   
-  const onSubmit = () => {
-    fetch(`http://localhost:8080/addPackage`, {
+{UserRole === 'Admin' ?
+options = 
+Users?.filter(
+  (f) => f.UserRole == "Realtor" || f.UserRole == "Manager"
+).map((e) => ({
+  value: e.id,
+  label: e.name,
+})) : options = 
+Users?.filter(
+  (f) => f.managerId === userId || f.id === userId
+).map((e) => ({
+  value: e.id,
+  label: e.name,
+}))}
+  // const optionsUsers = Users.map((e) => ({
+  //   value: e.id,
+  //   label: e.name,
+  // }));
+
+  const onSubmitPM = () => {
+    fetch(`https://truewayrealtorsapi.com/addPackageMarketing`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(form),
-    })
-      .then(async (res) => {
-        try {
-          const jsonRes = await res.json();
+    }).then(async (res) => {
+      try {
+        const jsonRes = await res.json();
 
-          if (res.status !== 200) {
-            console.log("error");
-          } else {
-            console.log(jsonRes);
-          }
-        } catch (err) {
-          console.log(err);
+        if (res.status !== 200) {
+          onOpenModal();
+          console.log("1");
+          setRespTransactionCoord([false, "Error adding Package Marketing"]);
+        } else {
+          onOpenModal();
+          console.log("2");
+          setRespTransactionCoord([
+            true,
+            "Package Marketing added successfully",
+          ]);
         }
-      })
-      .then(() => {
+      } catch (err) {
         onOpenModal();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        console.log("3");
+        setRespTransactionCoord([false, "Error adding Package Marketing"]);
+      }
+    });
   };
 
-  const onSubmitSelling = () => {
-    fetch(`http://localhost:8080/addSelling`, {
+  const onSubmitTC = () => {
+    fetch(`https://truewayrealtorsapi.com/addTransactionCoordinator`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(form),
-    })
-      .then(async (res) => {
-        try {
-          const jsonRes = await res.json();
+    }).then(async (res) => {
+      try {
+        const jsonRes = await res.json();
 
-          if (res.status !== 200) {
-            console.log("error");
-          } else {
-            console.log(jsonRes);
-          }
-        } catch (err) {
-          console.log(err);
+        if (res.status !== 200) {
+          onOpenModal();
+          console.log("1");
+          setRespTransactionCoord([
+            false,
+            "Error adding Transaction Coordinator",
+          ]);
+        } else {
+          onOpenModal();
+          console.log("2");
+          setRespTransactionCoord([
+            true,
+            "Transaction Coordinator added successfully",
+          ]);
         }
-      })
-      .then(() => {
+      } catch (err) {
         onOpenModal();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        console.log("3");
+        setRespTransactionCoord([
+          false,
+          "Error adding Transaction Coordinator",
+        ]);
+      }
+    });
   };
 
   const onSubmitOffer = () => {
-    fetch(`http://localhost:8080/addOffer`, {
+    fetch(`https://truewayrealtorsapi.com/addOffer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +132,7 @@ function AddPackageControl() {
   };
 
   const onSubmitListing = () => {
-    fetch(`http://localhost:8080/addListing`, {
+    fetch(`https://truewayrealtorsapi.com/addListing`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -143,19 +169,22 @@ function AddPackageControl() {
       return true;
     } else return false;
   }
-  
+
   return (
     <AddPackage
       form={form}
       setForm={setForm}
       open={open}
-      onSubmit={onSubmit}
+      onSubmitTC={onSubmitTC}
       onSubmitListing={onSubmitListing}
       onSubmitOffer={onSubmitOffer}
-      onSubmitSelling={onSubmitSelling}
       onCloseModal={onCloseModal}
       onOpenModal={onOpenModal}
-      optionsUsers={optionsUsers}
+      optionsUsers={options}
+      respTransactionCoord={respTransactionCoord}
+      onSubmitPM={onSubmitPM}
+      validarEmail={validarEmail}
+      userId={userId}
     />
   );
 }

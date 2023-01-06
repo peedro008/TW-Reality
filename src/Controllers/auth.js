@@ -43,7 +43,7 @@ const Auth = () => {
       UserName,
       Password,
     };
-    fetch(`http://localhost:8080/login`, {
+    fetch(`https://truewayrealtorsapi.com/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const Auth = () => {
     const payload = {
       email: reset,
     };
-    fetch(`http://localhost:8080/send`, {
+    fetch(`https://truewayrealtorsapi.com/send`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

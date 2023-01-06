@@ -4,157 +4,138 @@ import { useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Select from "react-select";
+import Pagination from "./Pagination";
+import PaginationToUsers from "./PaginationToUsers";
 
 function StadisticComponent({
-  yearLabel,
   onSubmit,
   getRSells,
-  Users,
   form,
   setForm,
   UsersByDate,
-  nothing
+  nothing,
+  onSubmitPagination,
+  paginationSize,
+  paginator,
+  setPaginator,
+  commissionsPaginate,
 }) {
+  const Screen = window.screen;
   const stateRed = useSelector((state) => state);
   const [Search, setSearch] = useState("");
-  const [dating, setDating] = useState(true);
-  const [año, setAño] = useState("2015-");
-  const [mes, setMes] = useState("01-01");
-  const [fechaInicial, setFechaInicial] = useState("2022-02-28");
-  const [añoFinal, setAñoFinal] = useState("2080-");
-  const [mesFinal, setMesFinal] = useState("01-01");
-  const [fechaFinal, setFechaFinal] = useState("2022-02-30");
-
-  useEffect(() => {
-    setFechaInicial(toMsDate(año + mes));
-  }, [año, mes]);
-  useEffect(() => {
-    setFechaFinal(toMsDate(añoFinal + mesFinal));
-  }, [añoFinal, mesFinal]);
-
-  function toMsDate(dateStr) {
-    // desarmamos el string por los '-' los descartamos y lo transformamos en un array
-    let parts = dateStr.split("-");
-    // parts[2] es año
-    // parts[1] el mes
-    // parts[0] el día
-    return new Date(parts[0], parts[1] - 1, parts[2]).getTime();
-  }
+  const [isPagination, setIsPagination] = useState(true);
+  let sumaRef = 0;
 
   return (
     <div className="genericDiv1">
       <div className="StadCalendarDiv">
-        <p className="StadCalendarTitle" style={{marginBottom: '20px'}}>Users Management</p>
-        { nothing && <p className="genericTitleNothing">{nothing}</p>}
-        <div style={{display: 'flex'}}>
-
-        
-        <div className="StadSelectCont">
-          <p
-            style={{
-              color: "#2b4162",
-              alignSelf: "center",
-              justifySelf: "center",
-              paddingRight: "10px",
+        <p className="StadCalendarTitle" style={{ marginBottom: "20px" }}>
+          Users Management
+        </p>
+        {nothing && <p className="genericTitleNothing">{nothing}</p>}
+        <div style={{ display: "flex" }}>
+          <div className="StadSelectCont">
+            <p
+              style={{
+                alignSelf: "center",
+                justifySelf: "center",
+                paddingRight: "10px",
+              }}
+              className="StadisticProdName"
+            >
+              From:
+            </p>
+            <input
+              type={"date"}
+              onChange={(e) => {
+                setForm({ ...form, dateFrom: e.target.value });
+              }}
+              placeholder="ClosingDate"
+              className="AQinputDate"
+            ></input>
+          </div>
+          <div className="StadSelectCont">
+            <p
+              style={{
+                alignSelf: "center",
+                justifySelf: "center",
+                paddingRight: "10px",
+                marginLeft: "10px",
+              }}
+              className="StadisticProdName"
+            >
+              To:
+            </p>
+            <input
+              type={"date"}
+              onChange={(e) => {
+                setForm({ ...form, dateTo: e.target.value });
+              }}
+              placeholder="ClosingDate"
+              className="AQinputDate"
+            ></input>
+          </div>
+          <button
+            onClick={() => {
+              onSubmit();
+              setIsPagination(false);
             }}
-            className="StadisticProdName"
+            className="StadBoxDate"
           >
-            From:
-          </p>
-          <input
-            type={"date"}
-            onChange={(e) => {
-              setForm({ ...form, dateFrom: e.target.value });
-            }}
-            placeholder="ClosingDate"
-            className="AQinputDate"
-          ></input>
-        </div>
-        <div className="StadSelectCont">
-          <p
-            style={{
-              color: "#2b4162",
-              alignSelf: "center",
-              justifySelf: "center",
-              paddingRight: "10px",
-              marginLeft: "10px",
-            }}
-            className="StadisticProdName"
-          >
-            To:
-          </p>
-          <input
-            type={"date"}
-            onChange={(e) => {
-              setForm({ ...form, dateTo: e.target.value });
-            }}
-            placeholder="ClosingDate"
-            className="AQinputDate"
-          ></input>
-        </div>
-        <button onClick={() => onSubmit()} className="StadBoxDate">
-          <p className="StadBoxTitle">Search</p>
-        </button>
+            <p
+              className={
+                Screen.width < 1000 ? "StadBoxTitleIpad" : "StadBoxTitle"
+              }
+            >
+              Search
+            </p>
+          </button>
         </div>
 
         <div
-          style={{
-            display: "flex",
-            position: "absolute",
-            right: "20px",
-            top: "80px",
-          }}
+          className={
+            Screen.width < 1000 ? "searchManagementIpad" : "searchManagement"
+          }
         >
           <BiSearchAlt2 size={"30px"} style={{ marginRight: "10px" }} />{" "}
           <input
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              onSubmit();
+              setIsPagination(false);
+            }}
+            placeholder="User name..."
             style={{
               height: "25px",
               borderColor: "transparent",
               borderRadius: "10px",
               paddingInline: "8px",
+              fontSize: "14px",
             }}
           ></input>
         </div>
       </div>
-      <div className="StadisticRowName">
+      <div
+        className={
+          Screen.width < 1000 ? "StadisticRowNameIpad" : "StadisticRowName"
+        }
+      >
         {UsersByDate?.length ? (
           Search ? (
             UsersByDate?.filter((e) =>
               e.name?.toLowerCase().includes(Search.toLowerCase())
             ).map((e, i) => {
+              sumaRef = 0;
+              {
+                e.Referrals?.length
+                  ? e.Referrals.map((f) => (sumaRef = sumaRef + f.Sells.length))
+                  : (sumaRef = 0);
+              }
               return (
                 <div key={i}>
-                  <p style={{ color: "#2b4162" }} className="StadisticProdName">
+                  <p style={{ color: "black" }} className="StadisticProdName">
                     {e.name}
                   </p>
-
-                  <NavLink
-                    className="icons"
-                    to={{ pathname: "/salesByMe", state: { aboutProps: e } }}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <div className="StadBox">
-                      <p className="StadBoxTitle">Sales by me</p>
-                      <p className="StadBoxVal">{e.Sells.length}</p>
-                    </div>
-                  </NavLink>
-
-                  <NavLink
-                    className="icons"
-                    to={{
-                      pathname: "/salesByRealtors",
-                      state: { aboutProps: e },
-                    }}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <div className="StadBox">
-                      <p className="StadBoxTitle">Sales by my realtors</p>
-                      <p className="StadBoxVal">
-                        {e.Referrals.length ? getRSells(e.Referrals) : 0}
-                      </p>
-                    </div>
-                  </NavLink>
 
                   <NavLink
                     className="icons"
@@ -162,8 +143,16 @@ function StadisticComponent({
                     style={{ textDecoration: "none" }}
                   >
                     <div className="StadBox">
-                      <p className="StadBoxTitle">New Realtors</p>
-                      <p className="StadBoxVal">{e.Referrals.length}</p>
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Realtors
+                      </p>
+                      <p className="StadBoxVal">{e.Referrals?.length}</p>
                     </div>
                   </NavLink>
 
@@ -181,7 +170,15 @@ function StadisticComponent({
                     style={{ textDecoration: "none" }}
                   >
                     <div className="StadBox">
-                      <p className="StadBoxTitle">My Referrals</p>
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Referrals
+                      </p>
                       <p className="StadBoxVal">
                         {
                           stateRed.Referred?.filter((i) => e.id === i.User?.id)
@@ -192,27 +189,77 @@ function StadisticComponent({
                   </NavLink>
                   <NavLink
                     className="icons"
+                    to={{ pathname: "/salesByMe", state: { aboutProps: e } }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="StadBox">
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Sales
+                      </p>
+                      <p className="StadBoxVal">{e.Sells.length}</p>
+                    </div>
+                  </NavLink>
+
+                  <NavLink
+                    className="icons"
                     to={{
-                      pathname: "/sells",
-                      state: {
-                        aboutProps: stateRed.Referred?.filter(
-                          (i) => e.id === i.UserId
-                        ),
-                        name: e.name,
-                      },
+                      pathname: "/salesByRealtors",
+                      state: { aboutProps: e },
                     }}
                     style={{ textDecoration: "none" }}
                   >
                     <div className="StadBox">
-                      <p className="StadBoxTitle">Total Sol</p>
-                      <p className="StadBoxVal">
-                        {
-                          stateRed.Referred?.filter((i) => e.id === i.UserId)
-                            .length
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
                         }
+                      >
+                        Sales by Realtors
                       </p>
+                      <p className="StadBoxVal">{sumaRef}</p>
                     </div>
                   </NavLink>
+
+                  <NavLink
+                  className="icons"
+                  to={{ pathname: "/packageMarketingDash", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Package Marketing</p>
+                    <p className="StadBoxVal">{e.PackageMarketings.length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordSold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Sold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators.filter(e => e.isSold === true).length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordUnsold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Unsold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators.filter(e => e.isSold === false).length}</p>
+                  </div>
+                </NavLink>
 
                   <NavLink
                     className="icons"
@@ -229,7 +276,15 @@ function StadisticComponent({
                     style={{ textDecoration: "none" }}
                   >
                     <div className="StadBox">
-                      <p className="StadBoxTitle">Total commission paid</p>
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Total commission paid
+                      </p>
                       <p className="StadBoxVal">
                         {stateRed.Commissions.filter(
                           (us) =>
@@ -254,7 +309,15 @@ function StadisticComponent({
                     style={{ textDecoration: "none" }}
                   >
                     <div className="StadBox">
-                      <p className="StadBoxTitle">Total commission unpaid</p>
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Total commission unpaid
+                      </p>
                       <p className="StadBoxVal">
                         {stateRed.Commissions.filter(
                           (us) =>
@@ -267,12 +330,18 @@ function StadisticComponent({
               );
             })
           ) : (
-            UsersByDate.map((e, i) => {
+            UsersByDate?.map((e, i) => {
+              sumaRef = 0;
+              {
+                e.Referrals?.length
+                  ? e.Referrals.map((f) => (sumaRef = sumaRef + f.Sells.length))
+                  : (sumaRef = 0);
+              }
               return (
                 <div key={i}>
                   <p
                     // style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
-                    style={{ color: "#2b4162" }}
+                    
                     className="StadisticProdName"
                   >
                     {e.name}
@@ -280,39 +349,20 @@ function StadisticComponent({
 
                   <NavLink
                     className="icons"
-                    to={{ pathname: "/salesByMe", state: { aboutProps: e } }}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <div className="StadBox">
-                      <p className="StadBoxTitle">Sales by me</p>
-                      <p className="StadBoxVal">{e.Sells.length}</p>
-                    </div>
-                  </NavLink>
-
-                  <NavLink
-                    className="icons"
-                    to={{
-                      pathname: "/salesByRealtors",
-                      state: { aboutProps: e },
-                    }}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <div className="StadBox">
-                      <p className="StadBoxTitle">Sales by my realtors</p>
-                      <p className="StadBoxVal">
-                        {e.Referrals.length ? getRSells(e.Referrals) : 0}
-                      </p>
-                    </div>
-                  </NavLink>
-
-                  <NavLink
-                    className="icons"
                     to={{ pathname: "/newRealtors", state: { aboutProps: e } }}
                     style={{ textDecoration: "none" }}
                   >
                     <div className="StadBox">
-                      <p className="StadBoxTitle">New Realtors</p>
-                      <p className="StadBoxVal">{e.Referrals.length}</p>
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Realtors
+                      </p>
+                      <p className="StadBoxVal">{e.Referrals?.length}</p>
                     </div>
                   </NavLink>
 
@@ -330,7 +380,15 @@ function StadisticComponent({
                     style={{ textDecoration: "none" }}
                   >
                     <div className="StadBox">
-                      <p className="StadBoxTitle">My Referrals</p>
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Referrals
+                      </p>
                       <p className="StadBoxVal">
                         {
                           stateRed.Referred?.filter((i) => e.id === i.User?.id)
@@ -341,27 +399,77 @@ function StadisticComponent({
                   </NavLink>
                   <NavLink
                     className="icons"
+                    to={{ pathname: "/salesByMe", state: { aboutProps: e } }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="StadBox">
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Sales
+                      </p>
+                      <p className="StadBoxVal">{e.Sells.length}</p>
+                    </div>
+                  </NavLink>
+
+                  <NavLink
+                    className="icons"
                     to={{
-                      pathname: "/sells",
-                      state: {
-                        aboutProps: stateRed.Sells?.filter(
-                          (i) => e.id === i.UserId
-                        ),
-                        name: e.name,
-                      },
+                      pathname: "/salesByRealtors",
+                      state: { aboutProps: e },
                     }}
                     style={{ textDecoration: "none" }}
                   >
                     <div className="StadBox">
-                      <p className="StadBoxTitle">Total Sold</p>
-                      <p className="StadBoxVal">
-                        {
-                          stateRed.Sells?.filter((i) => e.id === i.UserId)
-                            .length
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
                         }
+                      >
+                        Sales by Realtors
                       </p>
+                      <p className="StadBoxVal">{sumaRef}</p>
                     </div>
                   </NavLink>
+
+                  <NavLink
+                  className="icons"
+                  to={{ pathname: "/packageMarketingDash", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Package Marketing</p>
+                    <p className="StadBoxVal">{e.PackageMarketings.length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordSold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Sold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators.filter(e => e.isSold === true).length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordUnsold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Unsold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators.filter(e => e.isSold === false).length}</p>
+                  </div>
+                </NavLink>
 
                   <NavLink
                     className="icons"
@@ -377,8 +485,20 @@ function StadisticComponent({
                     }}
                     style={{ textDecoration: "none" }}
                   >
-                    <div className="StadBox">
-                      <p className="StadBoxTitle">Total commission paid</p>
+                    <div
+                      className={
+                        Screen.width < 1000 ? "StadBoxIpad" : "StadBox"
+                      }
+                    >
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Total commission paid
+                      </p>
                       <p className="StadBoxVal">
                         {stateRed.Commissions.filter(
                           (us) =>
@@ -402,8 +522,20 @@ function StadisticComponent({
                     }}
                     style={{ textDecoration: "none" }}
                   >
-                    <div className="StadBox">
-                      <p className="StadBoxTitle">Total commission unpaid</p>
+                    <div
+                      className={
+                        Screen.width < 1000 ? "StadBoxIpad" : "StadBox"
+                      }
+                    >
+                      <p
+                        className={
+                          Screen.width < 1000
+                            ? "StadBoxTitleIpad"
+                            : "StadBoxTitle"
+                        }
+                      >
+                        Total commission unpaid
+                      </p>
                       <p className="StadBoxVal">
                         {stateRed.Commissions.filter(
                           (us) =>
@@ -416,6 +548,218 @@ function StadisticComponent({
               );
             })
           )
+        ) : commissionsPaginate?.length ? (
+          commissionsPaginate?.map((e, i) => {
+            sumaRef = 0;
+            {
+              e.Referrals?.length
+                ? e.Referrals.map((f) => (sumaRef = sumaRef + f.Sells.length))
+                : (sumaRef = 0);
+            }
+            return (
+              <div key={i}>
+                <p
+                  // style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
+               
+                  className="StadisticProdName"
+                >
+                  {e.name}
+                </p>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/newRealtors", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p
+                      className={
+                        Screen.width < 1000
+                          ? "StadBoxTitleIpad"
+                          : "StadBoxTitle"
+                      }
+                    >
+                      Realtors
+                    </p>
+                    <p className="StadBoxVal">{e.Referrals?.length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{
+                    pathname: "/myReferrals",
+                    state: {
+                      aboutProps: stateRed.Referred?.filter(
+                        (i) => e.id === i.User?.id
+                      ),
+                      name: e.name,
+                    },
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p
+                      className={
+                        Screen.width < 1000
+                          ? "StadBoxTitleIpad"
+                          : "StadBoxTitle"
+                      }
+                    >
+                      Referrals
+                    </p>
+                    <p className="StadBoxVal">
+                      {
+                        stateRed.Referred?.filter((i) => e.id === i.User?.id)
+                          .length
+                      }
+                    </p>
+                  </div>
+                </NavLink>
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/salesByMe", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p
+                      className={
+                        Screen.width < 1000
+                          ? "StadBoxTitleIpad"
+                          : "StadBoxTitle"
+                      }
+                    >
+                      Sales
+                    </p>
+                    <p className="StadBoxVal">{e.Sells.length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{
+                    pathname: "/salesByRealtors",
+                    state: { aboutProps: e },
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p
+                      className={
+                        Screen.width < 1000
+                          ? "StadBoxTitleIpad"
+                          : "StadBoxTitle"
+                      }
+                    >
+                      Sales by Realtors
+                    </p>
+                    <p className="StadBoxVal">{sumaRef}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/packageMarketingDash", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Package Marketing</p>
+                    <p className="StadBoxVal">{e.PackageMarketings?.length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordSold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Sold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators?.filter(e => e.isSold === true).length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{ pathname: "/transactionCoordUnsold", state: { aboutProps: e } }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="StadBox">
+                    <p className="StadBoxTitle">Transaction Coord. Unsold</p>
+                    <p className="StadBoxVal">{e.TransactionCoordinators?.filter(e => e.isSold === false).length}</p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{
+                    pathname: "/totalCommissionPaid",
+                    state: {
+                      aboutProps: stateRed.Commissions.filter(
+                        (us) => (us.commisionTo === e.id) & (us.payded === true)
+                      ),
+                      name: e.name,
+                    },
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div
+                    className={Screen.width < 1000 ? "StadBoxIpad" : "StadBox"}
+                  >
+                    <p
+                      className={
+                        Screen.width < 1000
+                          ? "StadBoxTitleIpad"
+                          : "StadBoxTitle"
+                      }
+                    >
+                      Total commission paid
+                    </p>
+                    <p className="StadBoxVal">
+                      {stateRed.Commissions.filter(
+                        (us) => (us.commisionTo === e.id) & (us.payded === true)
+                      ).length * Number(e.ComissionValue)}
+                    </p>
+                  </div>
+                </NavLink>
+
+                <NavLink
+                  className="icons"
+                  to={{
+                    pathname: "/totalCommissionUnpaid",
+                    state: {
+                      aboutProps: stateRed.Commissions.filter(
+                        (us) =>
+                          (us.commisionTo === e.id) & (us.payded === false)
+                      ),
+                      name: e.name,
+                    },
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div
+                    className={Screen.width < 1000 ? "StadBoxIpad" : "StadBox"}
+                  >
+                    <p
+                      className={
+                        Screen.width < 1000
+                          ? "StadBoxTitleIpad"
+                          : "StadBoxTitle"
+                      }
+                    >
+                      Total commission unpaid
+                    </p>
+                    <p className="StadBoxVal">
+                      {stateRed.Commissions.filter(
+                        (us) =>
+                          (us.commisionTo === e.id) & (us.payded === false)
+                      ).length * Number(e.ComissionValue)}
+                    </p>
+                  </div>
+                </NavLink>
+              </div>
+            );
+          })
         ) : (
           <NavLink
             className="icons"
@@ -431,11 +775,14 @@ function StadisticComponent({
           </NavLink>
         )}
       </div>
-      {/* <div style={{flexDirection:"row", display:"flex", justifyContent:"space-between"}}>
-              {(google && quotes.length)? <StatsSold google={google} quotes={quotes} producers={Producers}/>:<></>}
-          
-              {(google && quotes.length)? <StatsQuoted google={google} quotes={quotes} producers={Producers}/>:<></>}
-            </div> */}
+      {isPagination && (
+        <PaginationToUsers
+          paginator={paginator}
+          setPaginator={setPaginator}
+          paginationSize={paginationSize}
+          commissionsPaginate={commissionsPaginate}
+        />
+      )}
     </div>
   );
 }

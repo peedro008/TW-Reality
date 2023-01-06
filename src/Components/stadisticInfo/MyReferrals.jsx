@@ -9,25 +9,25 @@ function MyReferrals(props) {
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{name}</p>
-        <p className="subTitt">My Referrals</p>
+        <p className="subTitt" style={{ fontSize: '18px'}}>My Referrals</p>
       </div>
       <div className="DashContainer">
-        <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
+        <div className="DashSubCont" >
           <>
-            <table className="table5" style={{ marginTop: "2vh" }}>
+            <table className="table5" style={{ marginTop: "2vh", width: '90vw' }}>
               <tbody>
                 <tr>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Name</p>
+                    <p className="REPtype2">Name</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Phone</p>
+                    <p className="REPtype2">Phone</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Email</p>
+                    <p className="REPtype2">Email</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Referrals Time</p>
+                    <p className="REPtype2">Referrals Time</p>
                   </th>
                 </tr>
                 {Reffered.map((e, i) => {

@@ -1,33 +1,31 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import spinnerr from "../assets/spinnerr.gif";
+import useGoogleCharts from "../Charts/useGoogleCharts";
 
-function PozzaChart({ google }) {
+function PozzaChart() {
+  const google = useGoogleCharts();
   const [chart, setChart] = useState(null);
-  const [quotes, setQuotes] = useState([]);
+  const transactionCoord = useSelector(state => state.TransactionCoordinator)
   const [dato, setDato] = useState([]);
-  const [asd, setAsd] = useState([]);
   const [time, setTime] = useState(false);
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/quotes`)
-      .then(function (response) {
-        setQuotes(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+
 
   useEffect(() => {
-    let Sold = 0;
+
     let Unsold = 0;
-    quotes.map((e) => {
-      if (e.QuoteStatuses.some((f) => f.Status === "Sold")) {
-        Sold++;
-      }
-    });
-    Unsold = quotes.length - Sold;
+    let Sold = 0;
+    transactionCoord?.map(f => { if(f.isSold === true) {Unsold = Unsold + 1}})
+    transactionCoord?.map(f => { if(f.isSold === false) {Sold = Sold + 1}})
+    // let Sold = 0;
+    // let Unsold = 0;
+    // quotes.map((e) => {
+    //   if (e.QuoteStatuses.some((f) => f.Status === "Sold")) {
+    //     Sold++;
+    //   }
+    // });
+    // Unsold = quotes.length - Sold;
     let pes = [
       ["Unsold", Unsold],
       ["Sold", Sold],
@@ -38,7 +36,7 @@ function PozzaChart({ google }) {
     });
 
     setDato(pas);
-  }, [quotes]);
+  }, [transactionCoord]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -75,7 +73,7 @@ function PozzaChart({ google }) {
 
         setChart(newChart);
       }
-    }, 700);
+    }, 2000);
   }, [dato, chart]);
   return (
     <>
@@ -87,8 +85,8 @@ function PozzaChart({ google }) {
             style={{
               width: "100px",
               position: "absolute",
-              right: "65vw",
-              top: "40vh",
+              right: "50vw",
+              top: "50vh",
             }}
           />
         </div>

@@ -4,12 +4,12 @@ import "../Css/css.css";
 import Select from "react-select";
 import "react-responsive-modal/styles.css";
 import Isologo_background from "../assets/Isologo_background.png";
+import { BsChevronLeft } from "react-icons/bs";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
+import CrossMark from "../assets/cross-mark.png";
 import { NavLink } from "react-router-dom";
-import { Controller } from "react-hook-form";
 
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 function AddAdmin({
   form,
   setForm,
@@ -17,8 +17,17 @@ function AddAdmin({
   onSubmit,
   onCloseModal,
   validarEmail,
-  onOpenModal}
+  onOpenModal,
+  error}
 ) {
+  console.log(error)
+  let validation =
+  form.name?.length < 3 ||
+  typeof form.name === "undefined" ||
+  typeof form.password === "undefined" ||
+  typeof form.phone === "undefined" ||
+  typeof form.ComissionValue === "undefined";
+
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -101,14 +110,36 @@ function AddAdmin({
           display: "flex",
         }}
       >
-        <button className="PAYbutton" onClick={() => {onSubmit()}} >
-          <p className="PAYbuttonText">Add Realtor</p>
+        <button className="PAYbutton" 
+        onClick={() => {onSubmit()}} 
+        style={{
+          opacity: validation && "0.2",
+          cursor: validation && "default",
+        }}>
+          <p className="PAYbuttonText">Add Admin</p>
         </button>
       </div>
 
       <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div className="modal">
-          <img
+         
+        {
+          error ?
+          <>
+           <img
+            src={CrossMark}
+            style={{
+              width: "35px",
+              alignSelf: "center",
+              marginTop: "25px",
+              marginBottom: "10px",
+            }}
+          />
+          <p className="modalText">{error}</p> 
+          </>
+          : 
+          <>
+           <img
             src={Icon}
             style={{
               width: "35px",
@@ -117,9 +148,11 @@ function AddAdmin({
               marginBottom: "10px",
             }}
           />
-
           <p className="modalText">Admin added successfully</p>
-
+          </>
+          
+        }
+        
           <button className="modalButton">
             {" "}
             <NavLink
@@ -135,6 +168,7 @@ function AddAdmin({
         src={Isologo_background}
         style={{
           position: "fixed",
+          pointerEvents: "none",
           right: 0,
           bottom: 0,
           width: "428px",

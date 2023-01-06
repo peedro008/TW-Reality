@@ -7,22 +7,25 @@ import { referredGet } from "../Logic/Fetch";
 
 function AddReferred() {
   const {UserId, userName} = useSelector((state) => state);
+  const stado = useSelector((state) => state)
   const us = useSelector((state) => state.Users)
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
+  const [error, setError] = useState()
   const dispatch = useDispatch();
+
   useEffect(() => {
     setForm({ ...form, UserRole: "Realtor", UserId: UserId, sendEmail: userMail, userNameEmail: userName });
   }, []);
 
-  const userRef = us.filter(e => e.id === UserId)[0].ReferredId
-  const userMail = us.filter(e => e.id === userRef)[0].email
+  const userRef = (us.filter(e => e.id === UserId)[0].ReferredId || 1)
+  const userMail = us.filter(e => e.id === userRef)[0]?.email
   console.log(form)
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/AddReferred`, {
+    fetch(`https://truewayrealtorsapi.com/AddReferred`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,6 +38,7 @@ function AddReferred() {
 
           if (res.status !== 200 && res.status !== 204) {
             console.log("error");
+            setError('Email Already Exists')
           } else {
             referredGet(dispatch);
             console.log(jsonRes);
@@ -68,6 +72,7 @@ function AddReferred() {
       onCloseModal={onCloseModal}
       onOpenModal={onOpenModal}
       validarEmail={validarEmail}
+      error={error}
     />
   );
 }

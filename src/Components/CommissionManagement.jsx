@@ -5,10 +5,14 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import Modal from "react-responsive-modal";
 import Select from "react-select";
 import wbill from "../assets/wbill.png";
+import Pagination from "./Pagination";
+import PaginationToCommissions from './PaginationToCommissions'
 
 function CommissionManagementComponent({
-  Commissions,
   CommissionsByDate,
+  commissionsPaginate,
+  setCommissionsByDate,
+  Commissions,
   Users,
   setSelectedId,
   onCloseModal,
@@ -20,43 +24,48 @@ function CommissionManagementComponent({
   form,
   setForm,
   getCommissionByDate,
-  nothing
+  nothing,
+  setPaginator,
+  paginator,
+  paginationSize,
+
 }) {
   const realtorsList = Users.map((e) => ({ value: e.name, label: e.name }));
   const [Search, setSearch] = useState("");
-  const [IsSelected, setIsSelected] = useState(false);
-  // const [sumPaid, setSumPaid] = useState(0)
+const [commiTo, setCommiTo] = useState(true)
+const [payed, setPayed] = useState()
+const [noPayed, setNoPayed] = useState()
+console.log(Commissions)
   let sumPaid = 0;
   let sumUnPaid = 0;
-  const [año, setAño] = useState("2015-");
-  const [mes, setMes] = useState("01-01");
-  const [fechaInicial, setFechaInicial] = useState("2022-02-28");
-  const [añoFinal, setAñoFinal] = useState("2080-");
-  const [mesFinal, setMesFinal] = useState("01-01");
-  const [fechaFinal, setFechaFinal] = useState("2022-02-30");
+
+  let commisionsPayed = Commissions.filter(e => e.payded === true)
 
   useEffect(() => {
-    setFechaInicial(toMsDate(año + mes));
-  }, [año, mes]);
-  useEffect(() => {
-    setFechaFinal(toMsDate(añoFinal + mesFinal));
-  }, [añoFinal, mesFinal]);
+    let pagado = 0
+    let noPagado = 0
 
-  console.log(fechaInicial);
-  function toMsDate(dateStr) {
-    // desarmamos el string por los '-' los descartamos y lo transformamos en un array
-    let parts = dateStr.split("-");
-    // parts[2] es año
-    // parts[1] el mes
-    // parts[0] el día
-    return new Date(parts[0], parts[1] - 1, parts[2]).getTime();
-  }
+    Commissions.map(e => 
+      {
+        e.payded === true ? (pagado =
+          pagado +
+          Users.filter((f) => f.id === e.commisionTo)[0]
+            ?.ComissionValue)
+            : (noPagado =
+              noPagado +
+              Users.filter((f) => f.id === e.commisionTo)[0]
+                ?.ComissionValue)
+      })
+      return setPayed(pagado), setNoPayed(noPagado)
+  }, [])
+  
+  let Screen = window.screen;
 
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{`Commission management`}</p>
-        { nothing && <p className="genericTitleNothing">{nothing}</p>}
+       
       </div>
 
       <div
@@ -115,7 +124,7 @@ function CommissionManagementComponent({
               className="AQinputDate"
             ></input>
           </div>
-          <button onClick={() => getCommissionByDate()} className="StadBoxDate">
+          <button onClick={() => {getCommissionByDate(); setSearch()}} className="StadBoxDate">
             <p className="StadBoxTitle">Search</p>
           </button>
         </div>
@@ -124,13 +133,14 @@ function CommissionManagementComponent({
           style={{
             display: "flex",
             position: "absolute",
-            right: "20px",
+            right: "50px",
             top: "80px",
           }}
         >
           <BiSearchAlt2 size={"30px"} style={{ marginRight: "10px" }} />{" "}
           <input
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {setSearch(e.target.value); setCommiTo(true)}}
+            placeholder='Commision or Client name...'
             style={{
               height: "25px",
               borderColor: "transparent",
@@ -154,103 +164,79 @@ function CommissionManagementComponent({
           options={realtorsList}
           onChange={(e) => {
             setSearch(e.value);
-            setIsSelected(true);
+            setCommiTo(false)
           }}
           className="StadSelectGrafic"
           // defaultInputValue={yearOptions[0]}
           placeholder="Type"
         />
         </div>
+        {
+          Search && <button onClick={() => {setSearch(''); setCommissionsByDate()}} className="StadBoxDate" style={{height: 30}}>
+          <p className="StadBoxTitle" style={{marginBottom: 0}}>Reset</p>
+        </button>
+        }
+        {/* {
+          CommissionsByDate && <button onClick={() => {setSearch(''); setCommissionsByDate()}} className="StadBoxDate" style={{height: 30}}>
+          <p className="StadBoxTitle" style={{marginBottom: 0}}>Reset</p>
+        </button>
+        } */}
         </div>
-        {/* <div style={{ width: "60vw",
-          minWidth: "500px",
-          height: "35px",
-          marginLeft: "5vw",
-          marginTop: "2vh",
-          marginBottom: "10px",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          textAlign: 'center',
-          }}>
 
-        <p
-          style={{
-            color: "#2b4162",
-            alignSelf: "center",
-            justifySelf: "center",
-          }}
-          className="StadisticProdName"
-        >
-          Commision To:
-        </p>
-        <Select
-          options={realtorsList}
-          onChange={(e) => {
-            setSearch(e.value);
-            setIsSelected(true);
-          }}
-          className="StadSelectGrafic"
-          // defaultInputValue={yearOptions[0]}
-          placeholder="Type"
-        />
-        </div> */}
-
-      <div className="DashContainer">
+        { nothing ? <p className="genericTitleNothing">{nothing}</p> :
+      <div className="DashContainer" style={{minHeight: '50vh'}}>
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
-            <table className="table5" style={{ marginTop: "2vh" }}>
+            <table className="table5" style={{ marginTop: "2vh",width: '70vw', marginLeft: '0px' }}>
               <tbody>
                 <tr>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Client name</p>
+                    <p className="REPtype2 ">Client name</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Sold by</p>
+                    <p className="REPtype2 ">Sold by</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Commission to</p>
+                    <p className="REPtype2 ">Commission to</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Closing date</p>
+                    <p className="REPtype2 ">Created date</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Address</p>
+                    <p className="REPtype2 ">Closing date</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Price</p>
+                    <p className="REPtype2 ">Address</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Payed?</p>
+                    <p className="REPtype2 ">Price</p>
+                  </th>
+                  <th scope="col" className="column1">
+                    <p className="REPtype2 ">Payed?</p>
                   </th>
                 </tr>
                 {Search
-                  ? CommissionsByDate?.filter(
+                  ? Commissions?.filter(
                       (e) =>
-                        e.Sell.ClientName?.toLowerCase().includes(
-                          Search.toLowerCase()
-                        ) ||
-                        e.User?.name
-                          ?.toLowerCase()
-                          .includes(Search.toLowerCase()) ||
+                      commiTo && e.Sell.ClientName?.toLowerCase().includes(Search.toLowerCase()
+                        )  ||
                         (Users?.filter((f) => f.id == e.commisionTo)[0]
                           ?.name?.toLowerCase()
-                          .includes(Search.toLowerCase()) &&
-                          fechaInicial < toMsDate(e.Sell.ClosingDate) &&
-                          fechaFinal > toMsDate(e.Sell.ClosingDate))
+                          .includes(Search.toLowerCase()))
                     )?.map((e) => {
                       {
                         e.payded
                           ? (sumPaid =
                               sumPaid +
-                              Users.filter((f) => f.id === e.User.ReferredId)[0]
+                              Users.filter((f) => f.id === e.commisionTo)[0]
                                 ?.ComissionValue)
                           : (sumUnPaid =
                               sumUnPaid +
-                              Users.filter((f) => f.id === e.User.ReferredId)[0]
+                              Users.filter((f) => f.id === e.commisionTo)[0]
                                 ?.ComissionValue);
                       }
                       return (
+                        <>
                         <tr>
                           <td className="ClientName" scope="row">
                             {e.Sell.ClientName}
@@ -265,6 +251,9 @@ function CommissionManagementComponent({
                             }
                           </td>
                           <td className="ClientName" scope="row">
+                            {e.createdAt.slice(0,10)}
+                          </td>
+                          <td className="ClientName" scope="row">
                             {e.Sell.ClosingDate}
                           </td>
                           <td className="ClientName" scope="row">
@@ -273,10 +262,165 @@ function CommissionManagementComponent({
                           <td className="ClientName" scope="row">
                             $
                             {
-                              Users.filter((f) => f.id === e.User.ReferredId)[0]
+                              Users.filter((f) => f.id === e.commisionTo)[0]
                                 ?.ComissionValue
                             }
                           </td>
+                          <td
+                            className="ClientName"
+                            scope="row"
+                            style={{
+                              alignItems: "center",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {e.payded ? (
+                              <MdPayments
+                                color={"#33D69F"}
+                                size={"24px"}
+                                style={{ alignSelf: "center" }}
+                              />
+                            ) : (
+                              <MdPayments
+                                onClick={() => {
+                                  setSelectedId(e.id);
+                                  onOpenModal();
+                                }}
+                                color={"#FF4C61"}
+                                size={"24px"}
+                                style={{
+                                  alignSelf: "center",
+                                  cursor: "pointer",
+                                }}
+                              />
+                            )}
+                            {/* <MdPayments onClick={()=>{setSelectedId(e.id); onOpenModal()}} color={e.payded?"#33D69F":"#FF4C61"} size={"24px"} style={{alignSelf:"center", cursor:"pointer"}}/> */}
+                          </td>
+                        </tr>
+                        </>
+                      );
+                    })
+                  : CommissionsByDate?.length ? 
+                  CommissionsByDate?.map((e) => {
+                      {
+                        e.payded
+                          ? (sumPaid =
+                              sumPaid +
+                              Users.filter((f) => f.id === e.commisionTo)[0]
+                                ?.ComissionValue)
+                          : (sumUnPaid =
+                              sumUnPaid +
+                              Users.filter((f) => f.id === e.commisionTo)[0]
+                                ?.ComissionValue);
+                      }
+                      return (
+                        <tr>
+                          <td className="ClientName" scope="row">
+                            {e.Sell.ClientName}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {e.User.name}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {
+                              Users?.filter((f) => f.id == e.commisionTo)[0]
+                                ?.name
+                            }
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {e.createdAt.slice(0,10)}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {e.Sell.ClosingDate}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {e.Sell.Address}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            $
+                            {
+                              Users?.filter((f) => f.id == e.commisionTo)[0]
+                                ?.ComissionValue
+                            }
+                          </td>
+
+                          <td
+                            className="ClientName"
+                            scope="row"
+                            style={{
+                              alignItems: "center",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {e.payded ? (
+                              <MdPayments
+                                color={"#33D69F"}
+                                size={"24px"}
+                                style={{ alignSelf: "center" }}
+                              />
+                            ) : (
+                              <MdPayments
+                                onClick={() => {
+                                  setSelectedId(e.id);
+                                  onOpenModal();
+                                }}
+                                color={"#FF4C61"}
+                                size={"24px"}
+                                style={{
+                                  alignSelf: "center",
+                                  cursor: "pointer",
+                                }}
+                              />
+                            )}
+                            {/* <MdPayments onClick={()=>{setSelectedId(e.id); onOpenModal()}} color={e.payded?"#33D69F":"#FF4C61"} size={"24px"} style={{alignSelf:"center", cursor:"pointer"}}/> */}
+                          </td>
+                        </tr>
+                      );
+                    }) : commissionsPaginate?.map((e) => {
+                      {
+                        e.payded
+                          ? (sumPaid =
+                              sumPaid +
+                              Users.filter((f) => f.id === e.commisionTo)[0]
+                                ?.ComissionValue)
+                          : (sumUnPaid =
+                              sumUnPaid +
+                              Users.filter((f) => f.id === e.commisionTo)[0]
+                                ?.ComissionValue);
+                      }
+                      return (
+                        <tr>
+                          <td className="ClientName" scope="row">
+                            {e.Sell.ClientName}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {e.User.name}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {
+                              Users?.filter((f) => f.id == e.commisionTo)[0]
+                                ?.name
+                            }
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {e.createdAt.slice(0,10)}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {e.Sell.ClosingDate}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            {e.Sell.Address}
+                          </td>
+                          <td className="ClientName" scope="row">
+                            $
+                            {
+                              Users?.filter((f) => f.id == e.commisionTo)[0]
+                                ?.ComissionValue
+                            }
+                          </td>
+
                           <td
                             className="ClientName"
                             scope="row"
@@ -311,90 +455,20 @@ function CommissionManagementComponent({
                         </tr>
                       );
                     })
-                  : CommissionsByDate?.map((e) => {
-                      {
-                        e.payded
-                          ? (sumPaid =
-                              sumPaid +
-                              Users.filter((f) => f.id === e.User.ReferredId)[0]
-                                ?.ComissionValue)
-                          : (sumUnPaid =
-                              sumUnPaid +
-                              Users.filter((f) => f.id === e.User.ReferredId)[0]
-                                ?.ComissionValue);
-                      }
-                      return (
-                        <tr>
-                          <td className="ClientName" scope="row">
-                            {e.Sell.ClientName}
-                          </td>
-                          <td className="ClientName" scope="row">
-                            {e.User.name}
-                          </td>
-                          <td className="ClientName" scope="row">
-                            {
-                              Users?.filter((f) => f.id == e.commisionTo)[0]
-                                ?.name
-                            }
-                          </td>
-                          <td className="ClientName" scope="row">
-                            {e.Sell.ClosingDate}
-                          </td>
-                          <td className="ClientName" scope="row">
-                            {e.Sell.Address}
-                          </td>
-                          <td className="ClientName" scope="row">
-                            $
-                            {
-                              Users?.filter((f) => f.id == e.commisionTo)[0]
-                                ?.ComissionValue
-                            }
-                          </td>
-
-                          <td
-                            className="ClientName"
-                            scope="row"
-                            style={{
-                              alignItems: "center",
-                              display: "flex",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {e.payded ? (
-                              <MdPayments
-                                color={"#33D69F"}
-                                size={"24px"}
-                                style={{ alignSelf: "center" }}
-                              />
-                            ) : (
-                              <MdPayments
-                                onClick={() => {
-                                  setSelectedId(e.id);
-                                  onOpenModal();
-                                }}
-                                color={"#FF4C61"}
-                                size={"24px"}
-                                style={{
-                                  alignSelf: "center",
-                                  cursor: "pointer",
-                                }}
-                              />
-                            )}
-                            {/* <MdPayments onClick={()=>{setSelectedId(e.id); onOpenModal()}} color={e.payded?"#33D69F":"#FF4C61"} size={"24px"} style={{alignSelf:"center", cursor:"pointer"}}/> */}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                  }
               </tbody>
             </table>
           </>
         </div>
-      </div>
+      </div>}
+      {
+        Screen.width > 1000 ?  
+      <div>
       <div
         className="CardsGraficsCommision"
         style={{
           marginLeft: "20px",
-          top: "200px",
+          top: "235px",
           backgroundColor: "rgba(51, 214, 159 ,0.15)",
         }}
       >
@@ -405,7 +479,9 @@ function CommissionManagementComponent({
           <img src={wbill} />
         </div>
         <div className="dashText">
-          <p className="dashCardTitle">${sumPaid}</p>
+        {
+            Search ? <p className="dashCardTitle">${sumPaid}</p> : <p className="dashCardTitle">${payed}</p>
+          }
           <p className="dashCardText">Total Commission Paid</p>
         </div>
       </div>
@@ -413,7 +489,7 @@ function CommissionManagementComponent({
         className="CardsGraficsCommision"
         style={{
           marginLeft: "20px",
-          top: "300px",
+          top: "325px",
           backgroundColor: "rgba(255, 76, 96 ,0.15)",
         }}
       >
@@ -424,10 +500,61 @@ function CommissionManagementComponent({
           <img src={wbill} />
         </div>
         <div className="dashText">
-          <p className="dashCardTitle">${sumUnPaid}</p>
+          {
+            Search ? <p className="dashCardTitle">${sumUnPaid}</p> : <p className="dashCardTitle">${noPayed}</p>
+          }
+          
           <p className="dashCardText">Total Com. Unpaid</p>
         </div>
       </div>
+      </div>
+      :
+      <div>
+      <div
+        className="CardsGraficsCommision"
+        style={{
+          left: "100px",
+          bottom: "250px",
+          backgroundColor: "rgba(51, 214, 159 ,0.15)",
+        }}
+      >
+        <div
+          className="dashCircle"
+          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+        >
+          <img src={wbill} />
+        </div>
+        <div className="dashText">
+        {
+            Search ? <p className="dashCardTitle">${sumPaid}</p> : <p className="dashCardTitle">${payed}</p>
+          }
+          <p className="dashCardText">Total Commission Paid</p>
+        </div>
+      </div>
+      <div
+        className="CardsGraficsCommision"
+        style={{
+          left: "400px",
+          bottom: "250px",
+          backgroundColor: "rgba(255, 76, 96 ,0.15)",
+        }}
+      >
+        <div
+          className="dashCircle"
+          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+        >
+          <img src={wbill} />
+        </div>
+        <div className="dashText">
+          {
+            Search ? <p className="dashCardTitle">${sumUnPaid}</p> : <p className="dashCardTitle">${noPayed}</p>
+          }
+          
+          <p className="dashCardText">Total Com. Unpaid</p>
+        </div>
+      </div>
+      </div>
+       }
       <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div
           className="modal"
@@ -458,6 +585,7 @@ function CommissionManagementComponent({
           </button>
         </div>
       </Modal>
+      <PaginationToCommissions paginationSize={paginationSize} paginator={paginator} setPaginator={setPaginator} commissionsPaginate={commissionsPaginate} CommissionsByDate={CommissionsByDate}/>
     </div>
   );
 }

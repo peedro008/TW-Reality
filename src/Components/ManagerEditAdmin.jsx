@@ -43,7 +43,7 @@ console.log(form)
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">Edit Realtor</p>
+        <p className="genericTitle">Edit User</p>
       </div>
 
       <div className="managerInputsContainer">
@@ -129,7 +129,7 @@ console.log(form)
           </div>
 
           <div className="inputDiv">
-            <p className="PAYtitle">Referral by</p>
+            <p className="PAYtitle">Referred by</p>
             <Select
               options={optionsRealtor}
               onChange={(e) => setForm({ ...form, ReferredId: e.value })}
@@ -156,12 +156,12 @@ console.log(form)
             console.log("Holaaaaa");
           }}
           style={{
-            backgroundColor: validation && "#586579",
+            opacity: validation && "0.2",
             cursor: validation && "default",
           }}
           disabled={validation ? true : false}
         >
-          <p className="PAYbuttonText">Edit Realtor</p>
+          <p className="PAYbuttonText">Edit User</p>
         </button>
       </div>
 
@@ -177,7 +177,7 @@ console.log(form)
             }}
           />
 
-          <p className="modalText">Realtor edited successfully</p>
+          <p className="modalText">User edited successfully</p>
 
           <button
             onClick={() => {
@@ -193,6 +193,7 @@ console.log(form)
         src={Isologo_background}
         style={{
           position: "absolute",
+          pointerEvents: "none",
           right: 0,
           bottom: 0,
           width: "428px",

@@ -31,8 +31,8 @@ html {
 .containerLogo {
   height: 100vh;
   min-width: 33vw;
-  width: 33vw;
-  background-color: #2b4162;
+  width: 45vw;
+  background-color: rgba(87,204,152,255);
   display: flex;
   flex-direction: column;
   align-items: "center";
@@ -54,12 +54,15 @@ html {
 .par {
   font-size: 30px;
   font-weight: 700;
+  align-self: center;
+  text-align: center;
   font-family: "Montserrat";
   padding-bottom: 25px;
 }
 .par2 {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
+  text-align: center;
   font-family: "Montserrat";
   padding-bottom: 15px;
 
@@ -68,7 +71,7 @@ html {
 .par3 {
   font-size: 12px;
   font-weight: 400;
-  font-family: "Montserrat";
+  font-family: Poppins;
   align-self: flex-start;
   margin-bottom: 10px;
   margin-top: 15px;
@@ -87,6 +90,21 @@ html {
   margin-top: 25px;
   border-width: 0px;
 }
+
+.buttonSign {
+  width: 270px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: rgba(87,204,152,255);
+  margin-top: 25px;
+  border-width: 0px;
+}
+
+.buttonSign:hover {
+  background-color: rgba(87,204,152,0.8);
+  box-shadow: 2px 2px 2px rgb(165, 162, 162);
+}
+
 .button:disabled{
   opacity: 0.5;
 }
@@ -102,7 +120,7 @@ html {
 .sidebar {
   height: 100vh;
   width: 70px;
-  background-color: #2b4162;
+  background-color: rgba(87,204,152,55);
   display: flex;
   box-shadow: 10;
   flex-direction: column;
@@ -115,7 +133,7 @@ html {
 .topbar {
   width: 100vw;
   background-color: #ffffff;
-  height: 6.5vh;
+  height: 60px;
   min-height: 60px;
   position: fixed;
   z-index: 1;
@@ -176,10 +194,74 @@ html {
   height: 43px;
   width: 43px;
   border-radius: 50%;
-
-  background-color: #2b4162;
+  background-color: rgba(87,204,152,255);
 }
 
+.circle2 {
+  position: fixed;
+  cursor: pointer;
+  top: 270px;
+  right: 650px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  height: 43px;
+  width: 43px;
+  border-radius: 50%;
+  animation: circleIn ease-in-out 1s forwards;
+  background-color: rgba(87,204,152,255);
+}
+.circle3 {
+  position: fixed;
+  cursor: pointer;
+  top: 270px;
+  right: 20px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  height: 43px;
+  width: 43px;
+  border-radius: 50%;
+  animation: circleOut ease-in-out 1s forwards;
+  background-color: rgba(87,204,152,255);
+}
+
+.circle4 {
+  position: fixed;
+  cursor: pointer;
+  top: 270px;
+  right: 20px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  height: 43px;
+  width: 43px;
+  border-radius: 50%;
+  background-color: rgba(87,204,152,255);
+}
+
+@keyframes circleIn {
+  0% {
+    right: 20px;
+  }
+  80% {
+    right: 700px;
+  }
+  100% {
+    right: 650px;
+  }
+}
+
+@keyframes circleOut {
+  from {
+    right: 650px;
+    
+  }
+  to {
+    right: 20px;
+
+  }
+}
 .circleLink {
   align-self: center;
   justify-content: center;
@@ -313,6 +395,7 @@ html {
   line-height: 42px;
   letter-spacing: 0.01em;
   text-align: left;
+  margin-left: 100px;
 }
 .genericSubTitle1 {
   font-family: "Gilroy-Regular";
@@ -343,23 +426,30 @@ html {
 /*------------------------payments---------------------------------------*/
 
 .PAYbutton {
-  background-color: #2b4162;
+  background-color:rgba(87,204,152,255);
   border-radius: 5px;
   border-width: 0px;
   display: flex;
   height: 40px;
   width: auto;
+  min-width: 150px;
   cursor: pointer;
   justify-content: center;
   padding-right: 20px;
   padding-left: 16px;
   box-shadow: 2px 2px 2px rgb(165, 162, 162);
 }
+
+.PAYbutton:hover {
+  background-color:rgba(87,204,152,0.8);
+  box-shadow: 4px 4px 4px rgb(165, 162, 162);
+}
+
 .PAYbuttonText {
   font-family: "Gilroy-Regular";
   font-weight: 800;
   font-size: 15px;
-  color: #ffffff;
+  color: #000000;
   margin-top: 11px;
 }
 .PAYbuttonIcon {
@@ -368,9 +458,8 @@ html {
 }
 .PAYbuttonCont {
   display: flex;
-  width: 800px;
+  width: 700px;
   justify-content: space-between;
-  margin-top: 25px;
   padding-left: 40px;
 }
 
@@ -417,6 +506,16 @@ html {
   border-radius: 7px;
   width: 190px;
 }
+.PAYselect2 {
+  font-family: "Gilroy-Regular";
+  font-weight: 700;
+  font-size: 13px;
+  color: black;
+  border-width: 0;
+  background-color: #fbfbfb;
+  border-radius: 7px;
+  width: 248px;
+}
 .PAYselectPackage {
   font-family: "Gilroy-Regular";
   font-weight: 700;
@@ -425,7 +524,7 @@ html {
   border-width: 0;
   background-color: #fbfbfb;
   border-radius: 7px;
-  width: 316px;
+  width: 250px;
 }
 .PAYselectQ {
   font-family: "Gilroy-Regular";
@@ -492,7 +591,6 @@ html {
 .managerInputsContainer2 {
   display: flex;
   flex-direction: column;
-  padding-left: 40px;
   margin-top: 10px;
 }
 .managerInputsubContainer {
@@ -755,6 +853,20 @@ html {
   text-align: left;
   color: "#323C47";
 }
+
+.ClientName2 {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+
 .REPmonth {
   height: 24px;
   width: 32px;
@@ -1045,12 +1157,19 @@ html {
 }
 .inputDiv {
   margin-right: 50px;
-  height: 60px;
-  
+  height: 60px;  
 }
+
+.inputDivDisabled {
+  pointer-events: none;
+  opacity: 0.5;
+  margin-right: 50px;
+  height: 60px;  
+}
+
 .inputDivPackage {
   margin-right: 200px;
-  width: 200px;
+  width: 100px;
   /* height: 60px; */
   
 }
@@ -1212,7 +1331,7 @@ html {
   border-width: 0;
   background-color: white;
   border-radius: 4px;
-  width: 300px;
+  width: 230px;
   min-height: 35px;
   border-color: rgb(212, 208, 208);
   border-width: 1px;
@@ -1317,7 +1436,7 @@ html {
   justify-content: space-between;
   padding: 0px 30px;
   padding-bottom: 0px;
-  min-height: 77vh;
+  min-height: 90vh;
   max-width: 85vw;
 }
 .DashSubCont {
@@ -1505,6 +1624,7 @@ html {
 .CardsGraficsContainer {
   display: flex;
   position: absolute;
+  margin-left: 40px;
   bottom: 2vh;
   flex-direction: row;
   width: 85vw;
@@ -1515,6 +1635,18 @@ html {
 .CardsGrafics {
   background-color: white;
   width: 300px;
+  max-width: 250px;
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.CardsGrafics2 {
+  background-color: white;
+  width: 200px;
   max-width: 250px;
   height: 80px;
   border-radius: 10px;
@@ -1917,6 +2049,11 @@ html {
   cursor: pointer;
 }
 
+.modalButton:hover {
+  background-color: rgba(87,204,152,255)
+}
+
+
 .modalButtonYes {
   height: 29.72413635253906px;
   width: 100px;
@@ -2027,6 +2164,181 @@ html {
   background-color: white;
   color: white;
 }
+
+
+.bsChevron {
+  min-width: 30px;
+  min-height: 30px;
+  margin-top: 6px;
+  margin-left: 4px;
+  z-index: 9;
+  justify-self: 'center';
+  animation: chevronRotate ease-in-out 1s forwards;
+  align-self: 'center';
+}
+
+.bsChevron2 {
+  min-width: 30px;
+  min-height: 30px;
+  margin-top: 6px;
+  z-index: 9;
+  justify-self: 'center';
+  animation: chevronBack ease-in-out 1s forwards;
+  align-self: 'center';
+}
+
+.bsChevron3 {
+  min-width: 30px;
+  min-height: 30px;
+  margin-top: 6px;
+  z-index: 9;
+  justify-self: 'center';
+  align-self: 'center';
+}
+
+@keyframes chevronRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(180deg);
+    }
+  }
+
+  @keyframes chevronBack {
+    from {
+      transform: rotate(180deg);
+      
+    }
+    to {
+      transform: rotate(0deg);
+
+    }
+  }
+
+.divTable{
+  max-height: 300px;
+  width: 650px;
+  top: 155px;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: fixed;
+  animation: divtableIn ease-in-out 1s forwards;
+  right: -700px;
+}
+
+.divTable2{
+  max-height: 300px;
+  width: 650px;
+  top: 155px;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: fixed;
+  right: -700px;
+}
+
+.divTable3{
+  max-height: 300px;
+  width: 650px;
+  top: 155px;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: fixed;
+  animation: divtableOut ease-in-out 1s forwards;
+  right: 20px;
+}
+
+@keyframes divtableIn {
+  0% {
+    right: -700px;
+  }
+  80% {
+    right: 40px;
+  }
+  100% {
+    right: 20px;
+  }
+}
+
+@keyframes divtableOut {
+  0% {
+    right: 20px;
+  }
+  100% {
+    right: -700px;
+  }
+}
+
+.divTable::-webkit-scrollbar {
+  background-color: #f3f4f6;
+  width: 8px;
+  border-radius: 0px 10px 10px 0px;
+}
+.divTable::-webkit-scrollbar-thumb {
+  background-color: rgba(87,204,152,255);
+  border-radius: 2px;
+}
+.divTable::-webkit-scrollbar {
+  background-color: #f3f4f6;
+  width: 8px;
+  border-radius: 0px 10px 10px 0px;
+}
+.divTable::-webkit-scrollbar-thumb {
+  background-color: rgba(87,204,152,255);
+  border-radius: 2px;
+}
+.divTable3::-webkit-scrollbar {
+  background-color: #f3f4f6;
+  width: 8px;
+  border-radius: 0px 10px 10px 0px;
+}
+.divTable3::-webkit-scrollbar-thumb {
+  background-color: rgba(87,204,152,255);
+  border-radius: 2px;
+}
+.divTable3::-webkit-scrollbar {
+  background-color: #f3f4f6;
+  width: 8px;
+  border-radius: 0px 10px 10px 0px;
+}
+.divTable3::-webkit-scrollbar-thumb {
+  background-color: rgba(87,204,152,255);
+  border-radius: 2px;
+}
+
+.table6 {
+  font-family: "Gilroy-Regular";
+  font-weight: 100;
+  border-collapse: collapse;
+  width: 600px;
+max-height: 200px;
+  margin-left: 40px;
+  background: rgb(255, 255, 255);
+  border-radius: 6px;
+  overflow: scroll;
+}
+
+.table6 td,
+.table6 th {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+}
+
+.table6 tr:nth-child(even) {
+  background-color: #ededed;
+}
+.table6 tr:hover {
+  background-color: #ddd;
+}
+.table6 th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: left;
+  background-color: white;
+  color: white;
+}
+
+
 
 .table3 {
   font-family: "Gilroy-Regular";
@@ -2707,48 +3019,58 @@ html {
 .PaginatorBox {
   display: flex;
   flex-direction: row;
-  position: relative;
-  margin-left: 82vw;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  position: fixed;
+  align-self: center;
+  bottom: 20px;
+}
+
+.PaginatorBoxIpad {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  align-self: center;
+  bottom: 400px;
 }
 .PaginatorLeft {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background: #ffffff;
+  background-color: rgba(87,204,152,255);
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border: 1px solid #eaeaea;
+  border: 2px solid black;
   border-radius: 10px;
 }
 .PaginatorRight {
+  background-color: rgba(87,204,152,255);
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background: #ffffff;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border: 1px solid #eaeaea;
+  border: 2px solid black;
   border-radius: 10px;
 }
 
 .PaginatorNum {
+  background-color: rgba(87,204,152,255);
+  border: 2px solid black;
   width: 30px;
   height: 30px;
-  background: #ffffff;
+  color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 5px;
   margin-left: 5px;
-  border: 1px solid #eaeaea;
   border-radius: 10px;
-  font-family: Lato;
+  font-size: large;
+  font-weight: 800;
+  font-family: "Gilroy-Regular";
 }
 
 .PRODRECTheader{
@@ -2768,14 +3090,27 @@ html {
   flex-direction: row;
   justify-content: space-evenly;
   padding-block: 20px;
+  margin-bottom: 100px;
 }
+
+.StadisticRowNameIpad{
+  max-width: 85vw;
+  padding-inline: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-block: 20px;
+}
+
 .StadisticProdName{
 font-family: "Gilroy-Regular";
 font-weight: 600;
 margin-bottom: 20px;
 text-align: center;
-text-shadow: 10px 10px 10px rgb(199, 199, 199);
 
+overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .StadCalendarDiv{
   height:max-content;
@@ -2795,9 +3130,10 @@ text-shadow: 10px 10px 10px rgb(199, 199, 199);
 .StadCalendarTitle{
   font-family: "Gilroy-Regular";
 font-weight: 600;
+width: 300px;
 font-size: 32px;
-color:#2b4162;
-margin-top: 20px;
+
+margin-top: 30px;
 
 }
 .StadSelect {
@@ -2856,7 +3192,7 @@ margin-top: 20px;
 }
 .StadBox{
   /* background-color: #d8e2f1; */
-  background-color: #2b4162;
+  background-color:  rgba(87,204,152,255);
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -2869,12 +3205,43 @@ margin-top: 20px;
   box-shadow: 5px 5px 5px rgb(199, 199, 199);
   cursor: pointer;
 }
+
+.StadBoxIpad{
+  /* background-color: #d8e2f1; */
+  background-color: #2b4162;
+  display: flex;
+  width: 120px;
+  flex-direction: column;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  margin-inline: 10px;
+  justify-content: center;
+  align-items: center;
+  padding-block: 5px;
+  padding-inline: 5px;
+  box-shadow: 5px 5px 5px rgb(199, 199, 199);
+  cursor: pointer;
+}
+
 .StadBox:hover{
-  background-color: #6183b6cb;
+  background-color: rgba(87,204,152,0.8);
+  box-shadow: 8px 8px 8px rgb(188, 188, 188);
   /* background-color: #2b4162; */
 }
+
+.REPtype2 {
+  font-family: Poppins;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color: black;
+}
+
 .StadBoxDate{
-  background-color: #2b4162;
+  background-color: rgba(87,204,152,255);
   height: 40px;
   display: flex;
   flex-direction: column;
@@ -2891,22 +3258,55 @@ margin-top: 20px;
   cursor: pointer;
 }
 .StadBoxDate:hover{
-  background-color: #6183b6cb;
-  /* background-color: #2b4162; */
+  background-color:  rgba(87,204,152,0.8);
+  box-shadow: 6px 6px 6px rgb(188, 188, 188)
 }
+
+.containerLoadingIn{
+  overflow: hidden;
+
+  /* background-color: red; */
+  width: 100vw;
+  max-width: 100vw;
+  max-height: 100vh;
+  height: 100vh;
+}
+
+.loadingIn{
+  overflow: hidden;
+  margin-top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(87,204,152,1);
+}
+
 .StadBoxTitle{
   font-family: "Gilroy-Regular";
   font-weight: 700;
-  font-size: 13px;
-  color:#ffffff;
-  margin-bottom: 5px;
+  font-size: 14px;
+  color:#000000;
+  margin-bottom: 1px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
+.StadBoxTitleIpad{
+  font-family: "Gilroy-Regular";
+  font-weight: 700;
+  font-size: 13px;
+  max-width: 120px;
+  color:#000000;
+  margin-bottom: 5px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .StadBoxVal{
     font-family: "Gilroy-Regular";
   font-weight: 700;
   font-size: 15px;
- color:#ffffff;
+ color:#000000;
 }
 
 /* .parent {
@@ -2938,6 +3338,28 @@ margin-top: 20px;
 
     .graficBig{
       height: 50vh;
-      width: 65vw;
+      width: 80vw;
       margin-top: 50px;
     }
+
+    .graficBigIpad{
+      height: 50vh;
+      width: 90vw;
+      margin-top: 50px;
+    }
+
+    .searchManagement{
+        display: flex;
+        position: fixed;
+        right: 20px;
+        top: 80px;
+    }
+
+    .searchManagementIpad{
+      display: flex;
+        position: fixed;
+        right: 40px;
+        top: 80px;
+  }
+
+  

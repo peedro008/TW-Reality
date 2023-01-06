@@ -10,28 +10,28 @@ function TotalCommisionPaid(
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{name}</p>
-        <p className="subTitt" style={{color: '#198754'}}>Commissions Paid</p>
+        <p className="subTitt" style={{color: '#198754', fontSize: '18px'}}>Commissions Paid</p>
       </div>
       <div className="DashContainer">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
-            <table className="table5" style={{ marginTop: "2vh" }}>
+            <table className="table5" style={{ marginTop: "2vh", width: '90vw' }}>
               <tbody>
                 <tr>
                 <th scope="col" className="column1">
-                    <p className="REPtype">Seller</p>
+                    <p className="REPtype2">Seller</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Client name</p>
+                    <p className="REPtype2">Client name</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Address</p>
+                    <p className="REPtype2">Address</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Closing Date</p>
+                    <p className="REPtype2">Closing Date</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Value</p>
+                    <p className="REPtype2">Value</p>
                   </th>
                 </tr>
                 {commisionsPaid.map((e,i) => {
@@ -50,7 +50,7 @@ function TotalCommisionPaid(
                         {e.Sell.ClosingDate}
                       </td>
                       <td className="ClientName" scope="row">
-                        {e.Sell.Value}
+                        $ {e.Sell.Value}
                       </td>
                     </tr>
                   );

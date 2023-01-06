@@ -25,25 +25,12 @@ function AdminManagementControl(props) {
   const dispatch = useDispatch();
 
   let data = props?.location.aboutProps;
-useEffect(() => {
-  setTypeList(data?.referrals)
-}, [])
-
-
   useEffect(() => {
-  
-    axios
-      .get(`http://localhost:8080/getRealtors`)
-      .then(function (response) {
-        dispatch(getUsers(response.data));
-      })
-      .catch((error) => {
-        dispatch(getUsers([]));
-      });
+    setTypeList(data?.referrals);
   }, []);
-  
+
   const deleteUser = () => {
-    fetch(`http://localhost:8080/deleteUser`, {
+    fetch(`https://truewayrealtorsapi.com/deleteUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +57,7 @@ useEffect(() => {
   };
 
   const deleteManager = () => {
-    fetch(`http://localhost:8080/deleteManager`, {
+    fetch(`https://truewayrealtorsapi.com/deleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +84,7 @@ useEffect(() => {
   };
 
   const deleteReferred = () => {
-    fetch(`http://localhost:8080/deleteReferred`, {
+    fetch(`https://truewayrealtorsapi.com/deleteReferred`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -125,24 +112,28 @@ useEffect(() => {
 
   return (
     <div>
-      <AdminManagement Users={Users} Name={Name} Referred={Referred} UserId={UserId}   
-      modalPay={modalPay}
-      setModalPay={setModalPay}
-      open={open}
-      deleteUser={deleteUser}
-      deleteReferred={deleteReferred}
-      deleteManager={deleteManager}
-      setSelectedId={setSelectedId}
-      onCloseModal={onCloseModal}
-      onOpenModal={onOpenModal}
-      onCloseModalRef={onCloseModalRef}
-      onOpenModalRef={onOpenModalRef}
-      openRef={openRef}
-      onCloseModalMan={onCloseModalMan}
-      onOpenModalMan={onOpenModalMan}
-      openMan={openMan}
-      typeList={typeList}
-      setTypeList={setTypeList}
+      <AdminManagement
+        Users={Users}
+        Name={Name}
+        Referred={Referred}
+        UserId={UserId}
+        modalPay={modalPay}
+        setModalPay={setModalPay}
+        open={open}
+        deleteUser={deleteUser}
+        deleteReferred={deleteReferred}
+        deleteManager={deleteManager}
+        setSelectedId={setSelectedId}
+        onCloseModal={onCloseModal}
+        onOpenModal={onOpenModal}
+        onCloseModalRef={onCloseModalRef}
+        onOpenModalRef={onOpenModalRef}
+        openRef={openRef}
+        onCloseModalMan={onCloseModalMan}
+        onOpenModalMan={onOpenModalMan}
+        openMan={openMan}
+        typeList={typeList}
+        setTypeList={setTypeList}
       />
     </div>
   );

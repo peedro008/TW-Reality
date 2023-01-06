@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ManagerRecruitComponent from "../Components/ManagerRecruit";
 import UserEditAdmin from "../Components/UserEditAdmin";
 import { FetchAll, RealtorsGet, referredGet } from "../Logic/Fetch";
 function UserEditController(props) {
@@ -37,7 +36,7 @@ function UserEditController(props) {
 
   const onSubmit = () => {
     if (form) {
-      fetch(`http://localhost:8080/editUser`, {
+      fetch(`https://truewayrealtorsapi.com/editUser`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

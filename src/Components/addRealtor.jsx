@@ -7,7 +7,6 @@ import Isologo_background from "../assets/Isologo_background.png";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
 import { NavLink } from "react-router-dom";
-import { Controller } from "react-hook-form";
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 function AddRealtorComponent({
@@ -111,6 +110,7 @@ function AddRealtorComponent({
         src={Isologo_background}
         style={{
           position: "absolute",
+          pointerEvents: "none",
           right: 0,
           bottom: 0,
           width: "428px",

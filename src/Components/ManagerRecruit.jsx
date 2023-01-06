@@ -4,6 +4,8 @@ import "react-responsive-modal/styles.css";
 import Isologo_background from "../assets/Isologo_background.png";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
+import CrossMark from "../assets/cross-mark.png";
+
 import { BsChevronLeft } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
@@ -21,7 +23,8 @@ function ManagerRecruitComponent({
   validarEmail,
   setForm,
   optionsRealtor,
-  optionsManager
+  optionsManager,
+  message
 }) {
   const Users = useSelector((e) => e.Users);
   let validation =
@@ -40,7 +43,7 @@ console.log(form)
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">Add Realtor</p>
+        <p className="genericTitle">Edit User</p>
       </div>
 
       <div className="managerInputsContainer">
@@ -125,7 +128,7 @@ console.log(form)
             <p className="FORMerror"></p>
           </div>
           <div className="inputDiv">
-            <p className="PAYtitle">Referral by</p>
+            <p className="PAYtitle">Referred by</p>
             <ReactSelect
               onChange={(val) => setForm({ ...form, ReferredId: val.value })}
               options={optionsRealtor}
@@ -159,17 +162,21 @@ console.log(form)
           className="PAYbutton"
           onClick={() => onSubmit()}
           style={{
-            backgroundColor: validation && "#586579",
+            opacity: validation && "0.2",
             cursor: validation && "default",
           }}
           disabled={validation ? true : false}
         >
-          <p className="PAYbuttonText">Add Realtor</p>
+          <p className="PAYbuttonText">Edit User</p>
         </button>
+        
       </div>
 
       <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div className="modal">
+          {
+            message === 'Realtor added succesfully' ?
+          
           <img
             src={Icon}
             style={{
@@ -178,9 +185,17 @@ console.log(form)
               marginTop: "25px",
               marginBottom: "10px",
             }}
-          />
-
-          <p className="modalText">Realtor added successfully</p>
+          /> : <img
+          src={CrossMark}
+          style={{
+            width: "45px",
+            alignSelf: "center",
+            marginTop: "25px",
+            marginBottom: "10px",
+          }}
+        />
+}
+          <p className="modalText">{message}</p>
 
           <button
             onClick={() => {
@@ -196,6 +211,7 @@ console.log(form)
         src={Isologo_background}
         style={{
           position: "absolute",
+          pointerEvents: "none",
           right: 0,
           bottom: 0,
           width: "428px",

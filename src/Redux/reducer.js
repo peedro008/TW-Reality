@@ -9,7 +9,9 @@ GET_REALTORS,
 GET_SELLS,
 GET_USERS,
 COMMISSION_VALUE,
-GET_REFERRED
+GET_REFERRED,
+GET_PACKAGE_MARKETING,
+GET_TRANSACTION_COORDINATOR
 
 } from "./actions";
 
@@ -25,6 +27,8 @@ const initialState = {
   CommissionValue:null,
   Users:[],
   Referred:[],
+  TransactionCoordinator:[],
+  PackageMarketing:[],
 };
 
 export default function reducer(state = initialState, action) {
@@ -88,6 +92,14 @@ export default function reducer(state = initialState, action) {
             ...state,
             Users: action.payload,
           };
+          case GET_TRANSACTION_COORDINATOR:
+            return {
+              ...state, TransactionCoordinator: action.payload,
+            };
+            case GET_PACKAGE_MARKETING:
+            return {
+              ...state, PackageMarketing: action.payload,
+            }
     default:
       return state;
   }

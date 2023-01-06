@@ -2,6 +2,9 @@ import React from "react";
 import { BsChevronLeft } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
 import Modal from "react-responsive-modal";
+import Icon from "../assets/Icon.png";
+import Isologo_background from "../assets/Isologo_background.png";
+import CrossMark from "../assets/cross-mark.png";
 import { NavLink } from "react-router-dom";
 import Select from "react-select";
 
@@ -16,6 +19,7 @@ function UserManagementComponent({
   onSubmitR,
   onCloseModal,
   Message,
+  error,
   Err,
   setErr,
   validarEmail,
@@ -40,7 +44,7 @@ function UserManagementComponent({
       {!type ? (
         <div className="PAYbuttonCont" style={{ justifyContent: "flex-start" }}>
           <button className="PAYbutton" onClick={() => setType("Realtor")}>
-            <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF" />
+            <MdAdd size="1.5em" className="PAYbuttonIcon" />
             <p className="PAYbuttonText">Add Realtor</p>
           </button>
 
@@ -52,7 +56,7 @@ function UserManagementComponent({
               style={{ marginLeft: "30px" }}
               onClick={() => setType("Manager")}
               >
-              <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF" />
+              <MdAdd size="1.5em" className="PAYbuttonIcon"  />
               <p className="PAYbuttonText">Add Manager</p>
             </button>
             <NavLink
@@ -61,9 +65,9 @@ function UserManagementComponent({
             >
               <button className="PAYbutton" style={{ marginLeft: "30px" }}>
                 <MdAdd
-                  size="1.25em"
+                  size="1.5em"
                   className="PAYbuttonIcon"
-                  color="#FFFFFF"
+                 
                 />
                 <p className="PAYbuttonText">Add Referral</p>
               </button>
@@ -74,9 +78,9 @@ function UserManagementComponent({
             >
               <button className="PAYbutton" style={{ marginLeft: "30px" }}>
                 <MdAdd
-                  size="1.25em"
+                  size="1.5em"
                   className="PAYbuttonIcon"
-                  color="#FFFFFF"
+                  
                 />
                 <p className="PAYbuttonText">Add Admin</p>
               </button>
@@ -89,9 +93,9 @@ function UserManagementComponent({
             >
               <button className="PAYbutton" style={{ marginLeft: "30px" }}>
                 <MdAdd
-                  size="1.25em"
+                  size="1.5em"
                   className="PAYbuttonIcon"
-                  color="#FFFFFF"
+                  color="black"
                 />
                 <p className="PAYbuttonText">Add Referral</p>
               </button>
@@ -207,7 +211,7 @@ function UserManagementComponent({
               className="PAYbutton"
               onClick={onSubmitR}
               style={{
-                backgroundColor: validation && "#586579",
+                opacity: validation && "0.2",
                 cursor: validation && "default",
               }}
               disabled={validation ? true : false}
@@ -308,7 +312,7 @@ function UserManagementComponent({
               className="PAYbutton"
               onClick={onSubmitM}
               style={{
-                backgroundColor: validation && "#586579",
+                opacity: validation && "0.2",
                 cursor: validation && "default",
               }}
               disabled={validation ? true : false}
@@ -328,8 +332,34 @@ function UserManagementComponent({
               marginBottom: "10px",
             }}
           />
-
-          <p className="modalText">{Message}</p>
+{
+          error ?
+          <>
+           <img
+            src={CrossMark}
+            style={{
+              width: "35px",
+              alignSelf: "center",
+              marginTop: "25px",
+              marginBottom: "10px",
+            }}
+          />
+          <p className="modalText">{error}</p> 
+          </>
+          : 
+          <>
+           <img
+            src={Icon}
+            style={{
+              width: "35px",
+              alignSelf: "center",
+              marginTop: "25px",
+              marginBottom: "10px",
+            }}
+          />
+          <p className="modalText">{type} added successfully</p>
+          </>
+        }
 
           <button
             className="modalButton"
@@ -347,6 +377,17 @@ function UserManagementComponent({
           </button>
         </div>
       </Modal>
+      <img
+        src={Isologo_background}
+        style={{
+          position: "fixed",
+          pointerEvents: "none",
+          right: 0,
+          bottom: 0,
+          width: "428px",
+          opacity: "0.5",
+        }}
+      />
     </div>
   );
 }

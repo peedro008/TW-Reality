@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../Css/css.css";
-import logo from "../assets/1logo.jpeg";
+import logo from "../assets/truewayrealtybig.jpeg";
 import { FiBarChart2, FiGrid } from "react-icons/fi";
-import { FaWallet } from "react-icons/fa";
+import { FaBoxes, FaBoxOpen, FaPaperPlane, FaWallet } from "react-icons/fa";
 import { MdManageAccounts } from "react-icons/md";
 import { BiStats } from "react-icons/bi";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
@@ -16,7 +16,8 @@ import brokerSumo from "../assets/brokersumo.png";
 import miamiRealtors from "../assets/miamiRealtors.jpg";
 import myRealtorsDash from "../assets/myRealtorsDash.png";
 import kvCore from "../assets/kvCore.png";
-
+import trueWayMarketing from "../assets/TRUEWAYMARKETING.png";
+import trueWayRealtors from "../assets/TruewayTransaction.jpeg";
 
 function ManagerNav({ onSearch }) {
   const dispatch = useDispatch();
@@ -33,51 +34,71 @@ function ManagerNav({ onSearch }) {
   return (
     <div style={{ display: "flex" }}>
       <div className="topbar">
-      <div style={{ paddingRight: "40px", display: "flex" }}>
-      
-      <div className="circleLink">
-      <a href="https://www.miamirealtors.com/" target='blank'>
-
+        <div style={{ paddingRight: "40px", display: "flex" }}>
+        <div className="circleLink" style={{marginBottom: '10px',marginRight:'100px', marginTop: '20px'}}>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZxHssfWU5-ZyJ_b3vYtYsSUiyFZu4k1CDJ1rRviBQbbV70w/viewform?vc=0&c=0&w=1&flr=0" target='_blank'>
         <img
           className="imageLink"
-          src={miamiRealtors}
+          src={trueWayMarketing}
           alt={"logo"}
-          style={{ backgroundColor: "#2b4162" }}
-          />
-          </a>
- 
-      </div>
-      <div className="circleLink">
-      <a href="https://myrealtordash.clareityiam.net/idp/login" target='blank'>
-        <img
-          className="imageLink"
-          src={myRealtorsDash}
-          alt={"logo"}
-          style={{ backgroundColor: "#2b4162" }}
+          style={{height: '30px', width: '120px'}}
         />
             </a>
       </div>
-      <div className="circleLink">
-      <a href="https://app.kvcore.com/" target='blank'>
+      <div className="circleLink" style={{marginBottom: '0px', marginRight:'95px'}}>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfohgaggb5AGraI-wzMDXdxch6LPgbcMH5lj5ZJLlGijFSGew/viewform?vc=0&c=0&w=1&flr=0" target='_blank'>
         <img
           className="imageLink"
-          src={kvCore}
+          src={trueWayRealtors}
           alt={"logo"}
-          style={{ backgroundColor: "#2b4162" }}
+          style={{height: '40px', width: '120px' }}
         />
             </a>
       </div>
-      <div className="circleLink">
-      <a href="https://www.brokersumo.com/#/dashboard" target='blank'>
-        <img
-          className="imageLink"
-          src={brokerSumo}
-          alt={"logo"}
-          style={{ backgroundColor: "#2b4162" }}
-        />
+          <div className="circleLink">
+            <a href="https://www.miamirealtors.com/" target="blank">
+              <img
+                className="imageLink"
+                src={miamiRealtors}
+                alt={"logo"}
+                style={{ backgroundColor: "#2b4162" }}
+              />
             </a>
-      </div>
-    </div>
+          </div>
+          <div className="circleLink">
+            <a
+              href="https://myrealtordash.clareityiam.net/idp/login"
+              target="blank"
+            >
+              <img
+                className="imageLink"
+                src={myRealtorsDash}
+                alt={"logo"}
+                style={{ backgroundColor: "#2b4162" }}
+              />
+            </a>
+          </div>
+          <div className="circleLink">
+            <a href="https://app.kvcore.com/" target="blank">
+              <img
+                className="imageLink"
+                src={kvCore}
+                alt={"logo"}
+                style={{ backgroundColor: "#2b4162" }}
+              />
+            </a>
+          </div>
+          <div className="circleLink">
+            <a href="https://www.brokersumo.com/#/dashboard" target="blank">
+              <img
+                className="imageLink"
+                src={brokerSumo}
+                alt={"logo"}
+                style={{ backgroundColor: "#2b4162" }}
+              />
+            </a>
+          </div>
+        </div>
         <div style={{ paddingRight: "40px", display: "flex" }}>
           <div className="circle">
             <p className="initial">{Name && Name.substring(0, 1)}</p>
@@ -107,36 +128,51 @@ function ManagerNav({ onSearch }) {
           alt={"logo"}
           style={{ backgroundColor: "#2b4162" }}
         />
-        
+
         <div className="NAcontainer">
           <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
             <FiBarChart2
               className="NAicon"
-              color="#868ba5"
+              color="black"
               activeClassName="NAactive"
             />
           </NavLink>
         </div>
-        
+
         <div className="NAcontainer">
-          <NavLink className="icons" to="/managerDashboard" activeClassName="NAavtive" exact>
+          <NavLink
+            className="icons"
+            to="/managerDashboard"
+            activeClassName="NAavtive"
+            exact
+          >
             <FiGrid
               className="NAicon"
-              color="#868ba5"
+              color="black"
               activeClassName="NAactive"
             />
           </NavLink>
         </div>
-        <span />
 
-
-        <span />
         <div className="NAcontainer">
           <NavLink className="icons" to="/addSell" activeClassName="NAavtive">
-            <FaRegMoneyBillAlt className="NAicon" size="20px" color="#868ba5" />
+            <FaRegMoneyBillAlt className="NAicon" size="20px"  color="black" />
           </NavLink>
         </div>
-        <span />
+        <div className="NAcontainer">
+          <NavLink
+            className="icons"
+            to="/sells"
+            activeClassName="NAavtive"
+            exact
+          >
+            <FaPaperPlane
+              className="NAicon"
+              color="black"
+              activeClassName="NAactive"
+            />
+          </NavLink>
+        </div>
 
         <div className="NAcontainer">
           <NavLink
@@ -147,7 +183,7 @@ function ManagerNav({ onSearch }) {
             <MdManageAccounts
               style={{ height: "25px", width: "25px" }}
               size="35px"
-              color="#868ba5"
+              color="black"
             />
           </NavLink>
         </div>
@@ -161,7 +197,7 @@ function ManagerNav({ onSearch }) {
             <MdAdd
               style={{ height: "25px", width: "25px" }}
               size="35px"
-              color="#868ba5"
+              color="black"
             />
           </NavLink>
         </div>

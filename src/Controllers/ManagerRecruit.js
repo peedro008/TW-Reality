@@ -9,6 +9,7 @@ function ManagerRecruit(props) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('')
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   let data = props.location.aboutProps;
@@ -37,7 +38,7 @@ function ManagerRecruit(props) {
 
   const onSubmit = () => {
     if (form.password) {
-      fetch(`http://localhost:8080/addRealtor`, {
+      fetch(`https://truewayrealtorsapi.com/addRealtor`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,12 +48,18 @@ function ManagerRecruit(props) {
         .then(async (res) => {
           try {
             const jsonRes = await res.json();
-
-            if (res.status !== 200 && res.status !== 200) {
+            if (res.status === 200 && res.status === 200) {
+              console.log(jsonRes);
+              setMessage('Realtor added succesfully')
+            } else if (res.status === 409 && res.status === 409) {
               dispatch(RealtorsGet);
               dispatch(referredGet);
-              console.log("error");
+              setMessage('Email already exist')
+              console.log('email already exist');
             } else {
+              dispatch(RealtorsGet);
+              dispatch(referredGet);
+              setMessage('Something was wrong')
               console.log(jsonRes);
             }
           } catch (err) {
@@ -92,6 +99,7 @@ function ManagerRecruit(props) {
       setShow={setShow}
       optionsRealtor={optionsRealtor}
       optionsManager={optionsManager}
+      message={message}
     />
   );
 }

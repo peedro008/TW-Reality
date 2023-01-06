@@ -8,28 +8,28 @@ function NewRealtors(props) {
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{props.location.state.aboutProps.name}</p>
-        <p className="subTitt">New Realtors</p>
+        <p className="subTitt"style={{ fontSize: '18px'}}>New Realtors</p>
       </div>
       <div className="DashContainer">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
-            <table className="table5" style={{ marginTop: "2vh" }}>
+            <table className="table5" style={{ marginTop: "2vh", width:' 90vw' }}>
               <tbody>
                 <tr>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Name</p>
+                    <p className="REPtype2">Name</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Phone</p>
+                    <p className="REPtype2">Phone</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Email</p>
+                    <p className="REPtype2">Email</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Start Date</p>
+                    <p className="REPtype2">Start Date</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype">Sells</p>
+                    <p className="REPtype2">Sells</p>
                   </th>
                 </tr>
                 {refferals?.map((e,i) => {

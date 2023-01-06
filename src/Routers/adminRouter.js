@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminNav from "../Navs/adminNav";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -27,11 +27,69 @@ import ReferredEditControl from "../Controllers/ReferredEdit";
 import ManagerEditController from "../Controllers/ManagerEdit";
 import SellsControl from "../Controllers/SellsControl";
 import AddAdminControl from "../Controllers/addAdmin";
+import AddClientControl from "../Controllers/addClientControl";
+import Clients from "../Components/Clients";
+import MyClientsControl from "../Controllers/myClientsControl";
+import EditClientControl from "../Controllers/editClientControl";
+import logo from "../assets/truewayrealty.jpeg";
+import Dual from '../assets/DualRing2.gif'
 
 
 const AdminRouter = () => {
   const dispatch = useDispatch()
+
   FetchAll(dispatch)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setLoading(true);
+    }, 2000);
+  },[])
+  
+  if( loading === false) {
+    return(
+      <div className="containerLoadingIn">
+      <div className="loadingIn">
+     
+            <img
+              style={{
+                position: 'absolute',
+                top: '20vh',
+                right: '40vw',
+                width: "350px",
+                height: "auto",
+                objectFit: "cover",
+                display: "flex",
+              }}
+              src={logo}
+            />
+            <div  style={{
+                position: 'absolute',
+                top: '60vh',
+                right: '40vw',
+                width: "350px",
+                height: "auto",
+                display: "flex",
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+               <img
+              style={{
+                width: "80px",
+                height: "auto",
+                objectFit: "cover",
+                display: "flex",
+              }}
+              src={Dual}
+            />
+            </div>
+            
+   
+      </div>
+      </div>
+    )
+   } else {
   return (
     <Router>
       <Route component={AdminNav} />
@@ -56,8 +114,13 @@ const AdminRouter = () => {
        <Route exact path='/newRealtors' component={NewRealtors}/>
        <Route exact path='/totalCommissionPaid' component={TotalCommisionPaid}/>
        <Route exact path='/totalCommissionUnpaid' component={TotalCommisionUnpaid}/>
+       <Route exact path='/clients' component={Clients}/>
+       <Route exact path='/addClient' component={AddClientControl}/>
+       <Route exact path='/clientsManagement' component={MyClientsControl}/>
+       <Route exact path='/editClient' component={EditClientControl}/>
     </Router>
   );
+   }
 };
 
 export default AdminRouter;

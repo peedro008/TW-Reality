@@ -5,6 +5,8 @@ export const USER_NAME = "USER_NAME";
 export const USER_ID = "USER_ID";
 export const LOGOUT = "LOGOUT";
 export const GET_USERS = "GET_USERS";
+export const GET_PACKAGE_MARKETING = "GET_PACKAGE_MARKETING";
+export const GET_TRANSACTION_COORDINATOR = "GET_TRANSACTION_COORDINATOR";
 export const GET_SELLS = "GET_SELLS";
 export const GET_REALTORS = "GET_REALTORS";
 export const GET_COMMISSION = "GET_COMMISSION";
@@ -79,6 +81,20 @@ export function userId(UserId) {
   export function getUsers(UserId) {
     return {
       type: GET_USERS,
+      payload: UserId,
+    }
+  }
+
+  export function getPackageMarketing(UserId) {
+    return {
+      type: GET_PACKAGE_MARKETING,
+      payload: UserId,
+    }
+  }
+
+  export function getTransactionCoordinator(UserId) {
+    return {
+      type: GET_TRANSACTION_COORDINATOR,
       payload: UserId,
     }
   }
