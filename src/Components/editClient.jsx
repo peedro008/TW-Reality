@@ -23,6 +23,18 @@ function EditClient({
   clientData
 }) {
 
+  const [checkedOne, setCheckedOne] = useState(clientData.clientType);
+
+
+  const handleChangeOne = () => {
+    setCheckedOne('Client');
+    
+  };
+
+  const handleChangeTwo = () => {
+    setCheckedOne('Lead'); 
+  };
+
   useEffect(() => {
     if(clientData.contactDate2) {setContact2(true)}
     if(clientData.contactDate3) {setContact3(true)}
@@ -98,9 +110,35 @@ function EditClient({
             ></input>
             <p className="FORMerror"></p>
           </div>
-        
+          <div className="inputDiv">
+            <p className="PAYtitle">Client</p>
+            <label className="containerCheck2">
+            <input type="checkbox" className="checkBoxCont" style={{color: 'red'}} checked={checkedOne === 'Client'} onChange={(val) => {handleChangeOne(); setForm({ ...form, clientType: 'Client' })}}  />
+            <span class="checkmark2"></span>
+            </label>
+          </div>
+          <div className="inputDiv">
+          <p className="PAYtitle">Lead</p>
+          <label className="containerCheck">
+
+            <input type="checkbox" className="checkBoxCont" checked={checkedOne === 'Lead'} onChange={(val) => {handleChangeTwo(); setForm({ ...form, clientType: 'Lead' })}} />
+            <span class="checkmark"></span>
+          </label>
+            </div>
           </div>
           <div className="managerInputsubContainer" style={{ width: "60vw" }}>
+          <div className="inputDiv">
+            <p className="PAYtitle">Added Date</p>
+            <input
+              type={"date"}
+              defaultValue={clientData.addedDate}
+              onChange={(e) => {
+                setForm({ ...form, addedDate: e.target.value });
+              }}
+              placeholder="Added Date"
+              className="AQinputPackage"
+            ></input>
+          </div>
           <div className="inputDiv">
             <p className="PAYtitle">Contact Date 1</p>
             <input
@@ -346,17 +384,17 @@ function EditClient({
          
           <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
-            <p className="PAYtitle">Reason</p>
+            <p className="PAYtitle">Transaction Type</p>
             <Select
              defaultValue={optionsReason[optionsReason.findIndex(x => x.value === clientData.reason)]}
               onChange={(val) => setForm({ ...form, reason: val.value })}
               options={optionsReason}
-              name={"Realtor Name"}
+              name={"Transaction Type"}
               className="PAYselect2"
-              placeholder="Select Reason"
+              placeholder="Select Type"
             />
           </div>
-          <div className="inputDiv">
+          {/* <div className="inputDiv">
             <p className="PAYtitle">Client Type</p>
             <Select
             defaultValue={optionsClient[optionsClient.findIndex(x => x.value === clientData.clientType)]}
@@ -366,10 +404,8 @@ function EditClient({
               className="PAYselect2"
               placeholder="Select Client Type"
             />
-          </div>
-          </div>
-          <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-          <div className="inputDiv">
+          </div> */}
+           <div className="inputDiv">
             <p className="PAYtitle">Status</p>
             <Select
             defaultValue={optionsStatus[optionsStatus.findIndex(x => x.value === clientData.status)]}
@@ -380,16 +416,19 @@ function EditClient({
               placeholder="Select Client Type"
             />
           </div>
+          </div>
+          <div className="managerInputsubContainer" style={{ width: "60vw" }}>
+          
           <div className="inputDiv">
             <p className="PAYtitle">Notes</p>
-            <input
+            <textarea
                     defaultValue={clientData.Notes}
               placeholder="Type notes"
               onChange={(e) => {
                 setForm({ ...form, Notes: e.target.value });
               }}
-              className="AQinputPackage"
-            ></input>
+              className="AQinputPackageText"
+            ></textarea>
           </div>
         </div>
       

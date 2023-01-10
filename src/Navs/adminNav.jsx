@@ -19,7 +19,7 @@ import { MdAdd } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Redux/actions";
 import { BiStats } from "react-icons/bi";
-import logo from "../assets/truewayrealtybig.jpeg";
+import logo from "../assets/realtorsbig.png";
 import brokerSumo from "../assets/brokersumo.png";
 import miamiRealtors from "../assets/miamiRealtors.jpg";
 import myRealtorsDash from "../assets/myRealtorsDash.png";
@@ -48,7 +48,7 @@ function AdminNav() {
           className="imageLink"
           src={trueWayMarketing}
           alt={"logo"}
-          style={{height: '30px', width: '120px'}}
+          style={{height: 'auto', width: '120px'}}
         />
             </a>
       </div>
@@ -129,6 +129,7 @@ function AdminNav() {
       <div className="sidebar">
         <img
           className="image"
+        
           src={logo}
           alt={"logo"}
           style={{ backgroundColor: "#2b4162" }}
@@ -137,7 +138,7 @@ function AdminNav() {
           <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
             <FiBarChart2
               className="NAicon"
-              color="black"
+              color="rgb(134, 139, 165)"
               activeClassName="NAactive"
             />
           </NavLink>
@@ -151,14 +152,14 @@ function AdminNav() {
           >
             <FiGrid
               className="NAicon"
-              color="black"
+              color="rgb(134, 139, 165)"
               activeClassName="NAactive"
             />
           </NavLink>
         </div>
         <div className="NAcontainer">
           <NavLink className="icons" to="/addSell" activeClassName="NAavtive">
-            <FaRegMoneyBillAlt className="NAicon" size="20px" color="black" />
+            <FaRegMoneyBillAlt className="NAicon" size="20px" color="rgb(134, 139, 165)" />
           </NavLink>
         </div>
 
@@ -168,7 +169,7 @@ function AdminNav() {
             to="/CommissionManagement"
             activeClassName="NAavtive"
           >
-            <FaWallet className="NAicon" size="25px" color="black" />
+            <FaWallet className="NAicon" size="25px" color="rgb(134, 139, 165)" />
           </NavLink>
         </div>
         <div className="NAcontainer">
@@ -180,7 +181,7 @@ function AdminNav() {
           >
             <FaPaperPlane
               className="NAicon"
-              color="black"
+              color="rgb(134, 139, 165)"
               activeClassName="NAactive"
             />
           </NavLink>
@@ -192,7 +193,7 @@ function AdminNav() {
             to="/addPackage"
             activeClassName="NAavtive"
           >
-            <FaBoxOpen className="NAicon" size="25px" color="black" />
+            <FaBoxOpen className="NAicon" size="25px" color="rgb(134, 139, 165)" />
           </NavLink>
         </div>
         <span />
@@ -203,7 +204,7 @@ function AdminNav() {
             to="/packageManagement"
             activeClassName="NAavtive"
           >
-            <FaBoxes className="NAicon" size="25px" color="black" />
+            <FaBoxes className="NAicon" size="25px" color="rgb(134, 139, 165)" />
           </NavLink>
         </div>
         <span />
@@ -217,7 +218,7 @@ function AdminNav() {
             <MdManageAccounts
               style={{ height: "25px", width: "25px" }}
               size="35px"
-              color="black"
+              color="rgb(134, 139, 165)"
             />
           </NavLink>
         </div>
@@ -231,7 +232,7 @@ function AdminNav() {
             <MdAdd
               style={{ height: "25px", width: "25px" }}
               size="35px"
-              color="black"
+              color="rgb(134, 139, 165)"
             />
           </NavLink>
         </div>
@@ -244,7 +245,7 @@ function AdminNav() {
             <FaChild
               style={{ height: "25px", width: "25px" }}
               size="35px"
-              color="black"
+              color="rgb(134, 139, 165)"
             />
           </NavLink>
         </div>

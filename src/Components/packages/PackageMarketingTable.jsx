@@ -95,7 +95,7 @@ const PackageMarketingTable = ({
                 <td className="ClientName" scope="row">
                   {e.closingDate?.slice(0, 10)}
                 </td>
-                <td className="ClientName" scope="row">
+                <td className="ClientName" style={{display: 'flex', justifyContent: 'center'}} scope="row">
                   {e.closingDate ? (
                     <FaPause
                       color="rgb(255, 76, 97)"
@@ -106,13 +106,12 @@ const PackageMarketingTable = ({
                         setForm({ closingDate: null, id: e.id });
                       }}
                       style={{
-                        alignSelf: "center",
                         cursor: 'pointer'
                       }}
                     />
                   ) : (
                     <FaCalendar
-                      color="#14B8A6"
+                      color='#002752'
                       size={"25px"}
                       onClick={(f) => {
                         setIsMonthly(true);

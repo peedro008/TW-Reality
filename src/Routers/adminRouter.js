@@ -31,8 +31,8 @@ import AddClientControl from "../Controllers/addClientControl";
 import Clients from "../Components/Clients";
 import MyClientsControl from "../Controllers/myClientsControl";
 import EditClientControl from "../Controllers/editClientControl";
-import logo from "../assets/truewayrealty.jpeg";
-import Dual from '../assets/DualRing2.gif'
+import logo from "../assets/realtorsBlanco.png";
+import Dual from '../assets/DualRing3.gif'
 
 
 const AdminRouter = () => {
@@ -54,17 +54,17 @@ const AdminRouter = () => {
      
             <img
               style={{
-                position: 'absolute',
-                top: '20vh',
-                right: '40vw',
-                width: "350px",
+                position: 'relative',
+                alignSelf: 'center',
+                justifySelf: 'center',
+                width: "200px",
                 height: "auto",
                 objectFit: "cover",
                 display: "flex",
               }}
               src={logo}
             />
-            <div  style={{
+            {/* <div  style={{
                 position: 'absolute',
                 top: '60vh',
                 right: '40vw',
@@ -83,7 +83,7 @@ const AdminRouter = () => {
               }}
               src={Dual}
             />
-            </div>
+            </div> */}
             
    
       </div>

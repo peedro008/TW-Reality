@@ -5,14 +5,14 @@ import {
   USER_ID,
   GET_COMMISSION,
   LOGOUT,
-GET_REALTORS,
-GET_SELLS,
-GET_USERS,
-COMMISSION_VALUE,
-GET_REFERRED,
-GET_PACKAGE_MARKETING,
-GET_TRANSACTION_COORDINATOR
-
+  GET_REALTORS,
+  GET_SELLS,
+  GET_USERS,
+  GET_MY_CLIENTS,
+  COMMISSION_VALUE,
+  GET_REFERRED,
+  GET_PACKAGE_MARKETING,
+  GET_TRANSACTION_COORDINATOR,
 } from "./actions";
 
 const initialState = {
@@ -23,12 +23,12 @@ const initialState = {
   userName: null,
   Realtors: [],
   Sells: [],
-  Commissions:[],
-  CommissionValue:null,
-  Users:[],
-  Referred:[],
-  TransactionCoordinator:[],
-  PackageMarketing:[],
+  Commissions: [],
+  CommissionValue: null,
+  Users: [],
+  Referred: [],
+  TransactionCoordinator: [],
+  PackageMarketing: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -38,16 +38,16 @@ export default function reducer(state = initialState, action) {
         ...state,
         User: action.payload,
       };
-      case GET_COMMISSION:
-        return {
-          ...state,
-          Commissions: action.payload,
-        };
-        case COMMISSION_VALUE:
-          return {
-            ...state,
-            CommissionValue: action.payload,
-          };
+    case GET_COMMISSION:
+      return {
+        ...state,
+        Commissions: action.payload,
+      };
+    case COMMISSION_VALUE:
+      return {
+        ...state,
+        CommissionValue: action.payload,
+      };
     case USER_ROLE:
       return {
         ...state,
@@ -65,11 +65,11 @@ export default function reducer(state = initialState, action) {
       };
     case LOGOUT:
       return {
-       ...state,
-       User: null,
-       userRole: null,
-       UserId: null,
-       userName: null
+        ...state,
+        User: null,
+        userRole: null,
+        UserId: null,
+        userName: null,
       };
 
     case GET_REALTORS:
@@ -77,29 +77,36 @@ export default function reducer(state = initialState, action) {
         ...state,
         Realtors: action.payload,
       };
-      case GET_REFERRED:
-        return {
-          ...state,
-          Referred: action.payload,
-        };
-      case GET_SELLS:
-        return {
-          ...state,
-          Sells: action.payload,
-        };
-        case GET_USERS:
-          return {
-            ...state,
-            Users: action.payload,
-          };
-          case GET_TRANSACTION_COORDINATOR:
-            return {
-              ...state, TransactionCoordinator: action.payload,
-            };
-            case GET_PACKAGE_MARKETING:
-            return {
-              ...state, PackageMarketing: action.payload,
-            }
+    case GET_REFERRED:
+      return {
+        ...state,
+        Referred: action.payload,
+      };
+    case GET_SELLS:
+      return {
+        ...state,
+        Sells: action.payload,
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        Users: action.payload,
+      };
+    case GET_MY_CLIENTS:
+      return {
+        ...state,
+        Clients: action.payload,
+      };
+    case GET_TRANSACTION_COORDINATOR:
+      return {
+        ...state,
+        TransactionCoordinator: action.payload,
+      };
+    case GET_PACKAGE_MARKETING:
+      return {
+        ...state,
+        PackageMarketing: action.payload,
+      };
     default:
       return state;
   }

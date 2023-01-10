@@ -169,6 +169,13 @@ function CommissionManagement() {
       });
   };
 
+  const formatNumber = (q) => {
+    return q?.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    })
+   } 
+
   return (
     <CommissionManagementComponent
       Commissions={Commissions}
@@ -191,6 +198,7 @@ function CommissionManagement() {
       paginator={paginator}
       setPaginator={setPaginator}
       paginationSize={paginationSize}
+      formatNumber={formatNumber}
     />
   );
 }

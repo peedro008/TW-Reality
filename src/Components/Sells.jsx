@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
+import { FaMoneyBillAlt } from "react-icons/fa";
 import Select from "react-select";
 import wbill from "../assets/wbill.png";
 import Pagination from "./Pagination";
@@ -172,18 +173,18 @@ function Sells({
         style={{
           marginLeft: "20px",
           top: "100px",
-          backgroundColor: "rgba(51, 214, 159 ,0.15)",
+          backgroundColor: "rgba(0, 39, 82,0.8)",
         }}
       >
         <div
           className="dashCircle"
-          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+          style={{ backgroundColor: "#ebeff2" }}
         >
-          <img src={wbill} />
+          <FaMoneyBillAlt size='28px' color='#002752'/>
         </div>
         <div className="dashText">
-          <p className="dashCardTitle">{formatNumber(sumTotalSold)}</p>
-          <p className="dashCardText">Total Sold</p>
+          <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(sumTotalSold)}</p>
+          <p className="dashCardText" style={{color: "#ebeff2"}}>Total Sold</p>
         </div>
       </div>
       :
@@ -192,14 +193,14 @@ function Sells({
       style={{
         left: "100px",
         bottom: "250px",
-        backgroundColor: "rgba(51, 214, 159 ,0.15)",
+        backgroundColor: "rgba(0, 39, 82,0.8)",
       }}
     >
       <div
         className="dashCircle"
-        style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+        style={{ backgroundColor: "#ebeff2" }}
       >
-        <img src={wbill} />
+        <FaMoneyBillAlt size='28px' color='#002752'/>
       </div>
       <div className="dashText">
         <p className="dashCardTitle">{formatNumber(sumTotalSold)}</p>
@@ -216,18 +217,18 @@ function Sells({
           style={{
             right: "300px",
             top: "100px",
-            backgroundColor: "rgba(111, 82, 237, 0.15)",
+            backgroundColor: "#84596B",
           }}
         >
           <div
             className="dashCircle"
-            style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+            style={{ backgroundColor: "#ebeff2" }}
           >
-            <img src={wbill} />
+            <FaMoneyBillAlt size='28px' color="#84596B"/>
           </div>
           <div className="dashText">
-            <p className="dashCardTitle">{formatNumber(sumTotalSoldSearch)}</p>
-            <p className="dashCardText">Sold On Search</p>
+            <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(sumTotalSoldSearch)}</p>
+            <p className="dashCardText" style={{color: "#ebeff2"}}>Sold On Search</p>
           </div>
         </div>
         : Search &&

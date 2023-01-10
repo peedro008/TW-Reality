@@ -71,7 +71,7 @@ function SellsControl() {
     return '$' + num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
  }
  const formatNumber = (q) => {
-  return q.toLocaleString('en-US', {
+  return q?.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD'
   })

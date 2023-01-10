@@ -36,7 +36,7 @@ function PackageManagement({
 
   return (
     <div className="genericDiv1">
-      <div className="genericHeader">
+      <div className="genericHeader" style={{paddingTop: '0px'}}>
         <p className="genericTitle">Package management</p>
         <div className="inputDiv" style={{marginTop: '10px', marginBottom: '10px'}}>
           <p className="PAYtitle" >Type of Package</p>

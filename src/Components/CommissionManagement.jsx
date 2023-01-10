@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { MdPayments } from "react-icons/md";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { MdMoneyOff, MdPayments } from "react-icons/md";
+import { FaMoneyBillAlt, FaRegMoneyBillAlt } from "react-icons/fa";
 import { BiSearchAlt2 } from "react-icons/bi";
 import Modal from "react-responsive-modal";
 import Select from "react-select";
@@ -28,7 +28,7 @@ function CommissionManagementComponent({
   setPaginator,
   paginator,
   paginationSize,
-
+  formatNumber
 }) {
   const realtorsList = Users.map((e) => ({ value: e.name, label: e.name }));
   const [Search, setSearch] = useState("");
@@ -62,9 +62,9 @@ console.log(Commissions)
   let Screen = window.screen;
 
   return (
-    <div className="genericDiv1">
-      <div className="genericHeader">
-        <p className="genericTitle">{`Commission management`}</p>
+    <div className="genericDiv1" >
+      <div className="genericHeader" style={{paddingTop: '0px'}}>
+        <p className="genericTitle" >{`Commission management`}</p>
        
       </div>
 
@@ -187,7 +187,7 @@ console.log(Commissions)
       <div className="DashContainer" style={{minHeight: '50vh'}}>
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
-            <table className="table5" style={{ marginTop: "2vh",width: '70vw', marginLeft: '0px' }}>
+            <table className="table5" style={{ marginTop: "2vh",width: '70vw', marginLeft: '0px', marginBottom: '100px' }}>
               <tbody>
                 <tr>
                   <th scope="col" className="column1">
@@ -277,7 +277,7 @@ console.log(Commissions)
                           >
                             {e.payded ? (
                               <MdPayments
-                                color={"#33D69F"}
+                                color={'#002752'}
                                 size={"24px"}
                                 style={{ alignSelf: "center" }}
                               />
@@ -287,7 +287,7 @@ console.log(Commissions)
                                   setSelectedId(e.id);
                                   onOpenModal();
                                 }}
-                                color={"#FF4C61"}
+                                color={"#84596B"}
                                 size={"24px"}
                                 style={{
                                   alignSelf: "center",
@@ -356,7 +356,7 @@ console.log(Commissions)
                           >
                             {e.payded ? (
                               <MdPayments
-                                color={"#33D69F"}
+                                color={'#002752'}
                                 size={"24px"}
                                 style={{ alignSelf: "center" }}
                               />
@@ -366,7 +366,7 @@ console.log(Commissions)
                                   setSelectedId(e.id);
                                   onOpenModal();
                                 }}
-                                color={"#FF4C61"}
+                                color={"#84596B"}
                                 size={"24px"}
                                 style={{
                                   alignSelf: "center",
@@ -432,7 +432,7 @@ console.log(Commissions)
                           >
                             {e.payded ? (
                               <MdPayments
-                                color={"#33D69F"}
+                                color={'#002752'}
                                 size={"24px"}
                                 style={{ alignSelf: "center" }}
                               />
@@ -469,20 +469,21 @@ console.log(Commissions)
         style={{
           marginLeft: "20px",
           top: "235px",
-          backgroundColor: "rgba(51, 214, 159 ,0.15)",
+          justifyContent:'space-between',
+          backgroundColor: "rgba(0, 39, 82,0.8)",
         }}
       >
         <div
           className="dashCircle"
-          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+          style={{ backgroundColor: "#ebeff2", marginLeft: '10px' }}
         >
-          <img src={wbill} />
+          <FaMoneyBillAlt size='28px' color='#002752'/>
         </div>
-        <div className="dashText">
+        <div className="dashText" style={{marginRight: '10px'}}>
         {
-            Search ? <p className="dashCardTitle">${sumPaid}</p> : <p className="dashCardTitle">${payed}</p>
+            Search ? <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(payed)}</p> : <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(payed)}</p>
           }
-          <p className="dashCardText">Total Commission Paid</p>
+          <p className="dashCardText" style={{color: "#ebeff2"}}>Total Commission Paid</p>
         </div>
       </div>
       <div
@@ -490,21 +491,22 @@ console.log(Commissions)
         style={{
           marginLeft: "20px",
           top: "325px",
-          backgroundColor: "rgba(255, 76, 96 ,0.15)",
+          justifyContent:'space-between',
+          backgroundColor: "#84596B",
         }}
       >
         <div
           className="dashCircle"
-          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+          style={{ backgroundColor: "#ebeff2", marginLeft: '10px' }}
         >
-          <img src={wbill} />
+          <MdMoneyOff size='28px' color="#84596B"/>
         </div>
-        <div className="dashText">
+        <div className="dashText" style={{marginRight: '20px'}}>
           {
-            Search ? <p className="dashCardTitle">${sumUnPaid}</p> : <p className="dashCardTitle">${noPayed}</p>
+            Search ? <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(noPayed)}</p> : <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(noPayed)}</p>
           }
           
-          <p className="dashCardText">Total Com. Unpaid</p>
+          <p className="dashCardText" style={{color: "#ebeff2"}}>Total Com. Unpaid</p>
         </div>
       </div>
       </div>
@@ -514,19 +516,21 @@ console.log(Commissions)
         className="CardsGraficsCommision"
         style={{
           left: "100px",
-          bottom: "250px",
-          backgroundColor: "rgba(51, 214, 159 ,0.15)",
+          bottom: "50px",
+          justifyContent:'space-between',
+          backgroundColor: "rgba(0, 39, 82,0.8)",
         }}
       >
         <div
           className="dashCircle"
-          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+          style={{ backgroundColor: "#ebeff2", marginLeft: '10px' }}
         >
-          <img src={wbill} />
+          <FaMoneyBillAlt size='28px' color='#002752'/>
+          
         </div>
-        <div className="dashText">
+        <div className="dashText" style={{marginRight: '20px'}}>
         {
-            Search ? <p className="dashCardTitle">${sumPaid}</p> : <p className="dashCardTitle">${payed}</p>
+            Search ? <p className="dashCardTitle">${sumPaid}</p> : <p className="dashCardTitle">{formatNumber(payed)}</p>
           }
           <p className="dashCardText">Total Commission Paid</p>
         </div>
@@ -535,19 +539,20 @@ console.log(Commissions)
         className="CardsGraficsCommision"
         style={{
           left: "400px",
-          bottom: "250px",
-          backgroundColor: "rgba(255, 76, 96 ,0.15)",
+          bottom: "50px",
+          justifyContent:'space-between',
+          backgroundColor: "#84596B",
         }}
       >
         <div
           className="dashCircle"
-          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+          style={{ backgroundColor: "#ebeff2", marginLeft: '10px' }}
         >
-          <img src={wbill} />
+          <MdMoneyOff size='28px' color="#84596B"/>
         </div>
-        <div className="dashText">
+        <div className="dashText" style={{marginRight: '20px'}}>
           {
-            Search ? <p className="dashCardTitle">${sumUnPaid}</p> : <p className="dashCardTitle">${noPayed}</p>
+            Search ? <p className="dashCardTitle">${sumUnPaid}</p> : <p className="dashCardTitle">{formatNumber(noPayed)}</p>
           }
           
           <p className="dashCardText">Total Com. Unpaid</p>

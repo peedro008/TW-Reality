@@ -95,7 +95,7 @@ function UserManagementComponent({
                 <MdAdd
                   size="1.5em"
                   className="PAYbuttonIcon"
-                  color="black"
+                  color='whitesmoke'
                 />
                 <p className="PAYbuttonText">Add Referral</p>
               </button>

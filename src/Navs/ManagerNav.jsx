@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../Css/css.css";
-import logo from "../assets/truewayrealtybig.jpeg";
+import logo from "../assets/realtorsbig.png";
 import { FiBarChart2, FiGrid } from "react-icons/fi";
 import { FaBoxes, FaBoxOpen, FaPaperPlane, FaWallet } from "react-icons/fa";
 import { MdManageAccounts } from "react-icons/md";
@@ -114,7 +114,7 @@ function ManagerNav({ onSearch }) {
             <FiLogOut
               cursor="pointer"
               size="20px"
-              color="grey"
+              color="rgb(134, 139, 165)"
               style={{ alignSelf: "center" }}
             />
           </button>
@@ -133,7 +133,7 @@ function ManagerNav({ onSearch }) {
           <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
             <FiBarChart2
               className="NAicon"
-              color="black"
+             color="rgb(134, 139, 165)"
               activeClassName="NAactive"
             />
           </NavLink>
@@ -148,7 +148,7 @@ function ManagerNav({ onSearch }) {
           >
             <FiGrid
               className="NAicon"
-              color="black"
+             color="rgb(134, 139, 165)"
               activeClassName="NAactive"
             />
           </NavLink>
@@ -156,7 +156,7 @@ function ManagerNav({ onSearch }) {
 
         <div className="NAcontainer">
           <NavLink className="icons" to="/addSell" activeClassName="NAavtive">
-            <FaRegMoneyBillAlt className="NAicon" size="20px"  color="black" />
+            <FaRegMoneyBillAlt className="NAicon" size="20px" color="rgb(134, 139, 165)" />
           </NavLink>
         </div>
         <div className="NAcontainer">
@@ -168,7 +168,7 @@ function ManagerNav({ onSearch }) {
           >
             <FaPaperPlane
               className="NAicon"
-              color="black"
+             color="rgb(134, 139, 165)"
               activeClassName="NAactive"
             />
           </NavLink>
@@ -183,7 +183,7 @@ function ManagerNav({ onSearch }) {
             <MdManageAccounts
               style={{ height: "25px", width: "25px" }}
               size="35px"
-              color="black"
+             color="rgb(134, 139, 165)"
             />
           </NavLink>
         </div>
@@ -197,7 +197,7 @@ function ManagerNav({ onSearch }) {
             <MdAdd
               style={{ height: "25px", width: "25px" }}
               size="35px"
-              color="black"
+             color="rgb(134, 139, 165)"
             />
           </NavLink>
         </div>

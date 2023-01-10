@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../Css/css.css";
 
 import Select from "react-select";
@@ -23,6 +23,17 @@ function AddClient({
   validarEmail
 }) {
 
+  const [checkedOne, setCheckedOne] = useState(false);
+
+
+  const handleChangeOne = () => {
+    setCheckedOne('Client');
+    
+  };
+
+  const handleChangeTwo = () => {
+    setCheckedOne('Lead'); 
+  };
   console.log(form)
   
   let validation =
@@ -73,10 +84,39 @@ function AddClient({
             ></input>
             <p className="FORMerror"></p>
           </div>
+       
+          <div className="inputDiv">
+            <p className="PAYtitle">Client</p>
+            <label className="containerCheck2">
+            <input type="checkbox" className="checkBoxCont" style={{color: 'red'}} checked={checkedOne === 'Client'} onChange={(val) => {handleChangeOne(); setForm({ ...form, clientType: 'Client' })}}  />
+            <span class="checkmark2"></span>
+            </label>
+          </div>
+          <div className="inputDiv">
+          <p className="PAYtitle">Lead</p>
+          <label className="containerCheck">
+
+            <input type="checkbox" className="checkBoxCont" checked={checkedOne === 'Lead'} onChange={(val) => {handleChangeTwo(); setForm({ ...form, clientType: 'Lead' })}} />
+            <span class="checkmark"></span>
+          </label>
+            </div>
+     
         
           </div>
           <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
+            <p className="PAYtitle">Added Date</p>
+            <input
+              type={"date"}
+
+              onChange={(e) => {
+                setForm({ ...form, addedDate: e.target.value });
+              }}
+              placeholder="Added Date"
+              className="AQinputPackage"
+            ></input>
+          </div>
+          {/* <div className="inputDiv">
             <p className="PAYtitle">Contact Date</p>
             <input
               type={"date"}
@@ -87,10 +127,10 @@ function AddClient({
               placeholder="ClosingDate"
               className="AQinputPackage"
             ></input>
-          </div>
+          </div> */}
      
           <div className="inputDiv">
-            <p className="PAYtitle">Reason</p>
+            <p className="PAYtitle">Transaction Type</p>
             <Select
               onChange={(val) => setForm({ ...form, reason: val.value })}
               options={optionsReason}
@@ -99,7 +139,7 @@ function AddClient({
               placeholder="Select Reason"
             />
           </div>
-          <div className="inputDiv">
+          {/* <div className="inputDiv">
             <p className="PAYtitle">Client Type</p>
             <Select
               onChange={(val) => setForm({ ...form, clientType: val.value })}
@@ -108,9 +148,7 @@ function AddClient({
               className="PAYselect2"
               placeholder="Select Client Type"
             />
-          </div>
-          </div>
-          <div className="managerInputsubContainer" style={{ width: "60vw" }}>
+          </div> */}
           <div className="inputDiv">
             <p className="PAYtitle">Status</p>
             <Select
@@ -121,15 +159,18 @@ function AddClient({
               placeholder="Select Client Type"
             />
           </div>
+          </div>
+          <div className="managerInputsubContainer" style={{ width: "60vw" }}>
+          
           <div className="inputDiv">
             <p className="PAYtitle">Notes</p>
-            <input
-              placeholder="Type notes"
+            <textarea 
+              placeholder="Type notes..."
               onChange={(e) => {
                 setForm({ ...form, Notes: e.target.value });
               }}
-              className="AQinputPackage"
-            ></input>
+              className="AQinputPackageText"
+            ></textarea >
           </div>
         </div>
       
@@ -222,6 +263,7 @@ function AddClient({
       />
     </div>
     </div>
+
   );
 }
 

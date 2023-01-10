@@ -17,7 +17,7 @@ export const options = {
   pieHole: 0.5,
   is3D: false,
   backgroundColor: 'transparent',
-  colors: ["#332D2D", "#57CC98"],
+  colors: ["#84596B", "#98473E"],
 
 };
 

@@ -1,53 +1,88 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getClients } from "../Redux/actions";
 import AddClient from "../Components/addClient";
 
 function AddClientControl() {
   const userId = useSelector((state) => state.UserId);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
   const [respTransactionCoord, setRespTransactionCoord] = useState([]);
 
-useEffect(() => {
-  setForm({...form, UserId: userId})
-}, [])
+  useEffect(() => {
+    setForm({ ...form, UserId: userId, clientType: "Client" });
+  }, []);
+  const GetMyClientsAll = () => {
+    axios
+      .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
+      .then(function (response) {
+        response.status == 200 || response.status == 204
+          ? dispatch(getClients(response.data))
+          : dispatch(getClients([]));
+      })
+      .catch((error) => {
+        dispatch(getClients([]));
+      });
+  };
 
+  let optionsReason = [
+    {
+      value: "Buyer",
+      label: "Buyer",
+    },
+    {
+      value: "Seller",
+      label: "Seller",
+    },
+    {
+      value: "Renter",
+      label: "Renter",
+    },
+  ];
 
-let optionsReason = [ {
-  value: "Buy",
-  label: "Buy",
-},
-{
-  value: "Sale",
-  label: "Sale",
-},
-{
-  value: "Rent",
-  label: "Rent",
-}]
+  let optionsClient = [
+    {
+      value: "Client",
+      label: "Client",
+    },
+    {
+      value: "Lead",
+      label: "Lead",
+    },
+  ];
 
-let optionsClient= [ {
-  value: "Client",
-  label: "Client",
-},
-{
-  value:"Lead",
-  label: "Lead",
-}
-]
+  let optionsStatus = [
+    {
+      value: "Showing",
+      label: "Showing",
+    },
+    {
+      value: "Pre-Qualifying",
+      label: "Pre-Qualifying",
+    },
+    {
+      value: "Under Contract",
+      label: "Under Contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
+    },
+    {
+      value: "Archive",
+      label: "Archive",
+    },
+    {
+      value: "Listed",
+      label: "Listed",
+    },
+  ];
 
-let optionsStatus=[ {
-  value: "Need to follow up",
-  label: "Need to follow up",
-},
-{
-  value: "Not interested for now",
-  label: "Not interested for now",
-}
-]
   const onSubmit = () => {
     fetch(`https://truewayrealtorsapi.com/addClient`, {
       method: "POST",
@@ -58,40 +93,28 @@ let optionsStatus=[ {
     }).then(async (res) => {
       try {
         if (res.status === 409) {
-        onOpenModal();
-        console.log(res);
-        setRespTransactionCoord([
-          false,
-          "Error adding Client, Email already Exists",
-        ]);
-      } 
-        else if (res.status !== 200) {
           onOpenModal();
           console.log(res);
           setRespTransactionCoord([
             false,
-            "Error adding Client",
+            "Error adding Client, Email already Exists",
           ]);
-        }
-        else {
+        } else if (res.status === 200) {
           onOpenModal();
-          console.log("2");
-          setRespTransactionCoord([
-            true,
-            "Client added successfully",
-          ]);
+          GetMyClientsAll();
+          setRespTransactionCoord([true, "Client added successfully"]);
+        } else {
+          onOpenModal();
+          console.log(res);
+          setRespTransactionCoord([false, "Error adding Client"]);
         }
       } catch (err) {
         onOpenModal();
         console.log(err);
-        setRespTransactionCoord([
-          false,
-          "Error adding Client",
-        ]);
+        setRespTransactionCoord([false, "Error adding Client 2"]);
       }
     });
   };
-
 
   function validarEmail(valor) {
     if (

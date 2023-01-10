@@ -289,7 +289,7 @@ function ManagerGrafics({
           </>
         )}
 
-{
+{/* {
   Screen.width > 1000 &&
         <div
           className="DashPList1Grow"
@@ -403,7 +403,7 @@ function ManagerGrafics({
               );
             })}
         </div>
-}
+} */}
       </div>
       {
         !selected &&

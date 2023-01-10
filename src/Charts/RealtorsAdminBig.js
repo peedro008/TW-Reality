@@ -28,7 +28,7 @@ function RealtorsAdminBig({ google, realtors, Referred, graficType, goUser, Scre
     });
 
     realtorsRecruited?.map((e, index) => {
-      dataRec.push([e.name, e.Referrals.length]);
+      dataRec.push([e.name, realtors.filter(f => e.id === f.ReferredId).length]);
     });
 
     realtorsReferred?.map((e, index) => {
@@ -60,38 +60,38 @@ function RealtorsAdminBig({ google, realtors, Referred, graficType, goUser, Scre
       let arrNum = dataSale.map(e => e.slice(1));
       let arrNumMax = (arrNum.map(e => Math.max(...e)))
       setmaxNumber(Math.max(...arrNumMax))
-      setColor('#6F52ED')
+      setColor('#002752')
     } else if (graficType === "Recruited") {
       setDato(dataRec);
       let arrNum = dataRec.map(e => e.slice(1));
       let arrNumMax = (arrNum.map(e => Math.max(...e)))
       setmaxNumber(Math.max(...arrNumMax))
-      setColor("#FF7A00")
+      setColor("rgb(216, 175, 77)")
     } else if (graficType === "Referral") {
       setDato(dataRef);
       let arrNum = dataRef.map(e => e.slice(1));
       let arrNumMax = (arrNum.map(e => Math.max(...e)))
       setmaxNumber(Math.max(...arrNumMax))
-      setColor("#33D69F")
+      setColor("#B0DAF1")
     } else if (graficType === "Package Marketing") {
       setDato(dataPack);
       let arrNum = dataPack.map(e => e.slice(1));
       let arrNumMax = (arrNum.map(e => Math.max(...e)))
       setmaxNumber(Math.max(...arrNumMax))
-      setColor("#DC4C64")
+      setColor("#2CA58D")
     } else if (graficType === "Transaction Coord."){
       setDato(dataTrans);
       let arrNum = dataTrans.map(e => e.slice(1));
       let arrNumMax = (arrNum.map(e => Math.max(...e)))
       setmaxNumber(Math.max(...arrNumMax))
-      setColor("#332D2D")
+      setColor( "#84596B")
     }
     else  {
       setDato(dataTransAct);
       let arrNum = dataTransAct.map(e => e.slice(1));
       let arrNumMax = (arrNum.map(e => Math.max(...e)))
       setmaxNumber(Math.max(...arrNumMax))
-      setColor("rgb(252, 252, 74)")
+      setColor("#98473E")
     }
     
     // if (graficType === 2) setDato('Hola');

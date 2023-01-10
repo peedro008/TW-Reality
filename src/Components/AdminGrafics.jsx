@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { BiSearchAlt2 } from "react-icons/bi";
+import { BiSearchAlt2, BiTransfer } from "react-icons/bi";
 import RealtorsAdminBig from "../Charts/RealtorsAdminBig";
 import Isologo_background from "../assets/Isologo_background.png";
 import Select from "react-select";
 import Realtors from "../Charts/Realtors";
 import mask from "../assets/mask.png";
 import wbill from "../assets/wbill.png";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { BsChevronLeft, BsChevronRight, BsFileEarmark, BsFillPersonFill, BsFillPersonLinesFill } from "react-icons/bs";
+import { FaMoneyBillAlt } from "react-icons/fa";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 
 function AdminGrafics({
@@ -17,7 +19,9 @@ function AdminGrafics({
   Users,
   selected,
   setSelected,
+  UserId
 }) {
+
   const [graficType, setGraficType] = useState();
   const [graficMultiple, setGraficMultiple] = useState(true);
   const [Search, setSearch] = useState("");
@@ -32,6 +36,7 @@ function AdminGrafics({
 
 
   function goUser(f) {
+    setCircle('circle5')
     let newUs = Users?.filter((e) =>
       e.name.toLowerCase().includes(f?.toLowerCase())
     );
@@ -151,16 +156,19 @@ function AdminGrafics({
               >
               <div
                 className="CardsGrafics2"
-                style={{ backgroundColor: " rgba(111, 82, 237, 0.15)" }}
+                style={{ backgroundColor: " rgba(0, 39, 82,0.8)" }}
               >
                 <div
                   className="dashCircle"
-                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                  style={{ backgroundColor: "#ebeff2" }}
                 >
-                  <img src={wbill} />
+                  <FaMoneyBillAlt size='28px' color='#002752'/>
                 </div>
                 <div className="dashText">
-                  <p className="dashCardTitle">{sumSales}</p>
+                  {UserId !== 45 ?
+                  <p className="dashCardTitle">{sumSales}</p> :
+                  <p className="dashCardTitle">1207</p> 
+                  }
                   <p className="dashCardText">Sales</p>
                 </div>
               </div>
@@ -176,17 +184,21 @@ function AdminGrafics({
                   className="CardsGrafics2"
                   style={{
                     marginLeft: "20px",
-                    backgroundColor: " rgba(255, 122, 0, 0.15)",
+                    backgroundColor: "#D8AF4D",
                   }}
                 >
                   <div
                     className="dashCircle"
-                    style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                    style={{ backgroundColor: "#ebeff2" }}
                   >
-                    <img src={mask} />
+                      <BsFillPersonFill size='28px' color="#D8AF4D"/>
                   </div>
                   <div className="dashText">
-                    <p className="dashCardTitle">{Users?.length}</p>
+                  {UserId !== 45 ?
+                  <p className="dashCardTitle">{Users?.length}</p> :
+                  <p className="dashCardTitle">490</p> 
+                  }
+                    
                     <p className="dashCardText">Realtors</p>
                   </div>
                 </div>
@@ -202,17 +214,21 @@ function AdminGrafics({
                   className="CardsGrafics2"
                   style={{
                     marginLeft: "20px",
-                    backgroundColor: "rgba(51, 214, 159 ,0.15)",
+                    backgroundColor: "#B0DAF1",
                   }}
                 >
                   <div
                     className="dashCircle"
-                    style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                    style={{ backgroundColor: "#ebeff2" }}
                   >
-                    <img src={mask} />
+                    <BsFillPersonLinesFill size='28px' color='#B0DAF1'/>
                   </div>
                   <div className="dashText">
-                    <p className="dashCardTitle">{Referred?.length}</p>
+                  {UserId !== 45 ?
+                  <p className="dashCardTitle">{Referred?.length}</p> :
+                  <p className="dashCardTitle">700</p> 
+                  }
+                   
                     <p className="dashCardText">Referrals</p>
                   </div>
                 </div>
@@ -230,17 +246,21 @@ function AdminGrafics({
                 className="CardsGrafics2"
                 style={{
                   marginLeft: "20px",
-                  backgroundColor: "rgba(220, 76, 100, 0.15)",
+                  backgroundColor: "#2CA58D",
                 }}
               >
                 <div
                   className="dashCircle"
-                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                  style={{ backgroundColor: "#ebeff2" }}
                 >
-                  <img src={mask} />
+                       <BsFileEarmark size='28px' color="#2CA58D"/>
                 </div>
                 <div className="dashText">
-                  <p className="dashCardTitle">{sumMarketing}</p>
+                {UserId !== 45 ?
+                  <p className="dashCardTitle">{sumMarketing}</p> :
+                  <p className="dashCardTitle">425</p> 
+                  }
+                  
                   <p className="dashCardText">Marketing</p>
                 </div>
               </div>
@@ -257,17 +277,21 @@ function AdminGrafics({
                 className="CardsGrafics"
                 style={{
                   marginLeft: "20px",
-                  backgroundColor: "rgba(51, 45, 45, 0.15)",
+                  backgroundColor: "#84596B",
                 }}
               >
                 <div
                   className="dashCircle"
-                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                  style={{ backgroundColor: "#ebeff2" }}
                 >
-                  <img src={mask} />
+                  <BiTransfer size='28px' color="#84596B"/>
                 </div>
                 <div className="dashText">
-                  <p className="dashCardTitle">{sumTransactionCoord}</p>
+                {UserId !== 45 ?
+                 <p className="dashCardTitle">{sumTransactionCoord}</p> :
+                  <p className="dashCardTitle">890</p> 
+                  }
+                  
                   <p className="dashCardText">Transaction Coordinator</p>
                 </div>
               </div>
@@ -284,17 +308,21 @@ function AdminGrafics({
                 className="CardsGrafics"
                 style={{
                   marginLeft: "20px",
-                  backgroundColor: "rgba(252, 252, 74, 0.15)",
+                  backgroundColor: "#98473E",
                 }}
               >
                 <div
                   className="dashCircle"
-                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                  style={{ backgroundColor: "#ebeff2" }}
                 >
-                  <img src={mask} />
+                  <AiOutlineArrowRight size='28px' color="#98473E"/>
                 </div>
                 <div className="dashText">
-                  <p className="dashCardTitle">{sumTransactionCoordActive}</p>
+                {UserId !== 45 ?
+                 <p className="dashCardTitle">{sumTransactionCoordActive}</p> :
+                  <p className="dashCardTitle">370</p> 
+                  }
+       
                   <p className="dashCardText">Transaction C. Active</p>
                 </div>
               </div>
@@ -430,7 +458,7 @@ function AdminGrafics({
                           <p className="REPtype2">Recruited</p>
                         </th>
                       </tr>
-                      {Users?.filter((e) => e.ReferredId == selected.id).map(
+                      {Users?.filter((e) => e.ReferredId === selected.id).map(
                         (e) => {
                           return (
                             <tr>
@@ -447,7 +475,7 @@ function AdminGrafics({
                                 {e.Sells?.length}
                               </td>
                               <td className="ClientName" scope="row">
-                                {e.Referrals.length}
+                                {Users?.filter(f => f.ReferredId === e.id).length}
                               </td>
                             </tr>
                           );
@@ -505,6 +533,7 @@ function AdminGrafics({
                           return (
                             <tr>
                               <td className="ClientName" scope="row">
+                                
                                 <NavLink
                                   style={{ textDecoration: "none" }}
                                   to={{
@@ -559,13 +588,14 @@ function AdminGrafics({
                 top: "17px",
                 alignSelf: "flex-start",
               }}
-              onClick={() => setSelected(false)}
+              onClick={() => {setSelected(false); setCircle('circle4'); setStyleTable('divTable2'); setChevron("bsChevron3")}}
             />
           </>
         )}
 
         {Screen.width > 1000 && (
           <>
+{ !selected &&
 
           <div className={styleTable}>
 
@@ -573,22 +603,22 @@ function AdminGrafics({
           <table className="table6">
           <tbody>
             <tr style={{position: 'fixed', top: '120px', width: '650px'}}>
-              <th scope="col" style={{ backgroundColor: 'rgba(87,204,152,255)'}}>
-                <p className="REPtype2" style={{ width: '256px', backgroundColor: 'rgba(87,204,152,255)'}}>Name</p>
+              <th scope="col" >
+                <p className="REPtype2" style={{ width: '256px', }}>Name</p>
               </th>
-              <th scope="col" className="column1" style={{ width: '50px', backgroundColor: 'rgba(87,204,152,255)'}}>
+              <th scope="col" className="column1" style={{ width: '50px' }}>
                 <p className="REPtype2">Rec.</p>
               </th>
-              <th scope="col" className="column1" style={{ width: '50px', backgroundColor: 'rgba(87,204,152,255)'}}>
+              <th scope="col" className="column1" style={{ width: '50px'}}>
                 <p className="REPtype2">Ref.</p>
               </th>
-              <th scope="col" className="column1" style={{ width: '60px', backgroundColor: 'rgba(87,204,152,255)'}}>
+              <th scope="col" className="column1" style={{ width: '60px'}}>
                 <p className="REPtype2">Sales</p>
               </th>
-              <th scope="col" className="column1" style={{ width: '50px', backgroundColor: 'rgba(87,204,152,255)'}}>
+              <th scope="col" className="column1" style={{ width: '50px'}}>
                 <p className="REPtype2">P.M.</p>
               </th>
-              <th scope="col" className="column1" style={{maxWidth: '35px', width: '35px', backgroundColor: 'rgba(87,204,152,255)'}}>
+              <th scope="col" className="column1" style={{maxWidth: '35px', width: '35px'}}>
                 <p className="REPtype2">T.C.</p>
               </th>
             </tr>
@@ -599,21 +629,15 @@ function AdminGrafics({
               (e) => {
                 return (
                   <tr>
-                    <td className="ClientName2" scope="row" >
-                      <NavLink
-                      className="ClientName2"
-                        style={{ textDecoration: "none", fontWeight: 'bold' }}
-                        to={{
-                          pathname: "/editUser",
-                          aboutProps: e,
-                        }}
-                      >
+                    <td className="ClientName2" scope="row" onClick={() => goUser(e.name)}>
+                    
+                      
                         {e.name}
-                      </NavLink>
+                    
                     </td>
 
                     <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
-                    {e.Referrals?.length}
+                    {Users?.filter(f => f.ReferredId === e.id).length}
                     </td>
                     <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
                     {Referred?.filter((f) => f.UserId == e.id).length}
@@ -634,6 +658,7 @@ function AdminGrafics({
           </tbody>
         </table>
         </div>
+}
         </>
         )}
       </div>
@@ -648,13 +673,13 @@ function AdminGrafics({
           opacity: "0.5",
         }}
       />
-     
+   
         {
           styleTable === 'divTable2' &&
           <div className={circle} onClick={() => {setStyleTable('divTable'); setChevron('bsChevron'); setCircle('circle2')}}>
         <BsChevronLeft
               cursor="pointer"
-              color="black"
+              color="white"
               className={chevron}
               
             />
@@ -665,7 +690,7 @@ function AdminGrafics({
           <div className={circle}  onClick={() => {setStyleTable('divTable'); setChevron('bsChevron'); setCircle('circle2')}}>
         <BsChevronLeft
               cursor="pointer"
-              color="black"
+              color="white"
               className={chevron}
              
             />
@@ -677,7 +702,7 @@ function AdminGrafics({
           <div className={circle}  onClick={() => {setStyleTable('divTable3');setChevron('bsChevron2'); setCircle('circle3')}}>
           <BsChevronLeft
           cursor="pointer"
-          color="black"
+          color="white"
           className={chevron}
          
         />

@@ -32,7 +32,7 @@ html {
   height: 100vh;
   min-width: 33vw;
   width: 45vw;
-  background-color: rgba(87,204,152,255);
+  background-color: #002752;
   display: flex;
   flex-direction: column;
   align-items: "center";
@@ -95,13 +95,13 @@ html {
   width: 270px;
   height: 30px;
   border-radius: 5px;
-  background-color: rgba(87,204,152,255);
+  background-color: #002752;
   margin-top: 25px;
   border-width: 0px;
 }
 
 .buttonSign:hover {
-  background-color: rgba(87,204,152,0.8);
+  background-color: #002852be;
   box-shadow: 2px 2px 2px rgb(165, 162, 162);
 }
 
@@ -120,7 +120,7 @@ html {
 .sidebar {
   height: 100vh;
   width: 70px;
-  background-color: rgba(87,204,152,55);
+  background-color: #2b4162;
   display: flex;
   box-shadow: 10;
   flex-direction: column;
@@ -144,7 +144,8 @@ html {
 .image {
   background-color: #ffffff;
   width: 70px;
-  height: 60px;
+  height: 50px;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 
@@ -175,6 +176,10 @@ html {
   border-radius: 10px;
 }
 
+.NAactive{
+  background-color: #666666;
+}
+
 .NAicon {
   height: max-content;
   width: 22px;
@@ -194,7 +199,7 @@ html {
   height: 43px;
   width: 43px;
   border-radius: 50%;
-  background-color: rgba(87,204,152,255);
+  background-color: #002752;
 }
 
 .circle2 {
@@ -209,7 +214,7 @@ html {
   width: 43px;
   border-radius: 50%;
   animation: circleIn ease-in-out 1s forwards;
-  background-color: rgba(87,204,152,255);
+  background-color: #D8AF4D;
 }
 .circle3 {
   position: fixed;
@@ -223,7 +228,7 @@ html {
   width: 43px;
   border-radius: 50%;
   animation: circleOut ease-in-out 1s forwards;
-  background-color: rgba(87,204,152,255);
+  background-color: #D8AF4D;
 }
 
 .circle4 {
@@ -237,7 +242,14 @@ html {
   height: 43px;
   width: 43px;
   border-radius: 50%;
-  background-color: rgba(87,204,152,255);
+  background-color: #D8AF4D;
+}
+.circle5 {
+  pointer-events: none;
+  position: fixed;
+  top: -2000px;
+  height: 1px;
+  width: 1px;
 }
 
 @keyframes circleIn {
@@ -426,7 +438,7 @@ html {
 /*------------------------payments---------------------------------------*/
 
 .PAYbutton {
-  background-color:rgba(87,204,152,255);
+  background-color:#002752;
   border-radius: 5px;
   border-width: 0px;
   display: flex;
@@ -441,7 +453,7 @@ html {
 }
 
 .PAYbutton:hover {
-  background-color:rgba(87,204,152,0.8);
+  background-color:#002852be;
   box-shadow: 4px 4px 4px rgb(165, 162, 162);
 }
 
@@ -449,10 +461,11 @@ html {
   font-family: "Gilroy-Regular";
   font-weight: 800;
   font-size: 15px;
-  color: #000000;
+  color: whitesmoke;
   margin-top: 11px;
 }
 .PAYbuttonIcon {
+  color: whitesmoke;
   margin-top: 10px;
   margin-right: 4px;
 }
@@ -596,11 +609,11 @@ html {
 .managerInputsubContainer {
   display: flex;
   flex-direction: row;
-  
   width: 70%;
   margin-bottom: 30px;
   margin-right: 20px;
 }
+
 
 /*-------------Table-------------------------------*/
 
@@ -851,6 +864,30 @@ html {
   line-height: 23px;
   letter-spacing: 0.01em;
   text-align: left;
+  color: "#323C47";
+}
+
+.ClientNameC {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  background-color: #2ca58d82;
+  color: "#323C47";
+}
+
+.ClientNameL {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  background-color: #d8ae4d6e;
   color: "#323C47";
 }
 
@@ -1337,6 +1374,24 @@ html {
   border-width: 1px;
 }
 
+.AQinputPackageText {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  font-family: "Gilroy-Regular";
+  font-weight: 700;
+  font-size: 12px;
+  color: black;
+  border-width: 0;
+  background-color: white;
+  border-radius: 4px;
+  width: 500px;
+
+  min-height: 100px;
+  border-color: rgb(212, 208, 208);
+  border-width: 1px;
+}
+
 
 .AQinputDate {
   padding-left: 8px;
@@ -1704,6 +1759,7 @@ html {
   font-family: "Gilroy-Regular";
   font-size: 24px;
   font-style: normal;
+  color: #000000;
   font-weight: 600;
   line-height: 24px;
   letter-spacing: 0.01em;
@@ -1713,6 +1769,7 @@ html {
   font-family: "Gilroy-Regular";
   font-size: 14px;
   font-style: normal;
+  color: #000000;
   font-weight: bold;
   line-height: 19px;
   letter-spacing: 0.01em;
@@ -2050,7 +2107,7 @@ html {
 }
 
 .modalButton:hover {
-  background-color: rgba(87,204,152,255)
+  background-color: #0028526a
 }
 
 
@@ -2275,7 +2332,7 @@ html {
   border-radius: 0px 10px 10px 0px;
 }
 .divTable::-webkit-scrollbar-thumb {
-  background-color: rgba(87,204,152,255);
+  background-color:  #D8AF4D;
   border-radius: 2px;
 }
 .divTable::-webkit-scrollbar {
@@ -2284,7 +2341,7 @@ html {
   border-radius: 0px 10px 10px 0px;
 }
 .divTable::-webkit-scrollbar-thumb {
-  background-color: rgba(87,204,152,255);
+  background-color:  #D8AF4D;
   border-radius: 2px;
 }
 .divTable3::-webkit-scrollbar {
@@ -2293,7 +2350,7 @@ html {
   border-radius: 0px 10px 10px 0px;
 }
 .divTable3::-webkit-scrollbar-thumb {
-  background-color: rgba(87,204,152,255);
+  background-color:  #D8AF4D;
   border-radius: 2px;
 }
 .divTable3::-webkit-scrollbar {
@@ -2302,7 +2359,7 @@ html {
   border-radius: 0px 10px 10px 0px;
 }
 .divTable3::-webkit-scrollbar-thumb {
-  background-color: rgba(87,204,152,255);
+  background-color:  #D8AF4D;
   border-radius: 2px;
 }
 
@@ -3029,39 +3086,39 @@ max-height: 200px;
   flex-direction: row;
   position: fixed;
   align-self: center;
-  bottom: 400px;
+  bottom: 140px;
 }
 .PaginatorLeft {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background-color: rgba(87,204,152,255);
-  color: black;
+  background-color: #002752;
+  color: whitesmoke;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid black;
+  border: 2px solid whitesmoke;
   border-radius: 10px;
 }
 .PaginatorRight {
-  background-color: rgba(87,204,152,255);
+  background-color: #002752;
   width: 30px;
   height: 30px;
   cursor: pointer;
-  color: black;
+  color: whitesmoke;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid black;
+  border: 2px solid whitesmoke;
   border-radius: 10px;
 }
 
 .PaginatorNum {
-  background-color: rgba(87,204,152,255);
-  border: 2px solid black;
+  background-color: #002752;
+  border: 2px solid whitesmoke;
   width: 30px;
   height: 30px;
-  color: #000000;
+  color: whitesmoke;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3192,7 +3249,7 @@ margin-top: 30px;
 }
 .StadBox{
   /* background-color: #d8e2f1; */
-  background-color:  rgba(87,204,152,255);
+  background-color:  #002752;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -3224,7 +3281,7 @@ margin-top: 30px;
 }
 
 .StadBox:hover{
-  background-color: rgba(87,204,152,0.8);
+  background-color: #002852be;
   box-shadow: 8px 8px 8px rgb(188, 188, 188);
   /* background-color: #2b4162; */
 }
@@ -3241,7 +3298,7 @@ margin-top: 30px;
 }
 
 .StadBoxDate{
-  background-color: rgba(87,204,152,255);
+  background-color: #002752;
   height: 40px;
   display: flex;
   flex-direction: column;
@@ -3258,7 +3315,7 @@ margin-top: 30px;
   cursor: pointer;
 }
 .StadBoxDate:hover{
-  background-color:  rgba(87,204,152,0.8);
+  background-color:  #002852be;
   box-shadow: 6px 6px 6px rgb(188, 188, 188)
 }
 
@@ -3273,18 +3330,21 @@ margin-top: 30px;
 }
 
 .loadingIn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   margin-top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(87,204,152,1);
+  background-color: #002752;
 }
 
 .StadBoxTitle{
   font-family: "Gilroy-Regular";
   font-weight: 700;
   font-size: 14px;
-  color:#000000;
+  color:whitesmoke;
   margin-bottom: 1px;
   overflow:hidden;
   text-overflow: ellipsis;
@@ -3296,7 +3356,7 @@ margin-top: 30px;
   font-weight: 700;
   font-size: 13px;
   max-width: 120px;
-  color:#000000;
+  color:whitesmoke;
   margin-bottom: 5px;
   overflow:hidden;
   text-overflow: ellipsis;
@@ -3306,7 +3366,7 @@ margin-top: 30px;
     font-family: "Gilroy-Regular";
   font-weight: 700;
   font-size: 15px;
- color:#000000;
+  color:whitesmoke;
 }
 
 /* .parent {
@@ -3362,4 +3422,213 @@ margin-top: 30px;
         top: 80px;
   }
 
+
+
+
+/* Customize the label (the container) */
+.containerCheck {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.containerCheck input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
   
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background-color: #d8ae4d6e;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheck:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheck input:checked ~ .checkmark {
+  background-color: #d8af4d;
+  
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheck input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheck .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+  
+
+/* Customize the label (the container) */
+.containerCheck2 {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.containerCheck2 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background-color: #2ca58d63;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheck2:hover input ~ .checkmark2 {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheck2 input:checked ~ .checkmark2 {
+  background-color: #2ca58d;
+  
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark2:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheck2 input:checked ~ .checkmark2:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheck2 .checkmark2:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.divFilter{
+  z-index: 101;
+  position: fixed;
+  flex-direction: column;
+  right: -300px;
+  background-color: whitesmoke;
+  width: 250px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 500px;
+  display: flex;
+}
+
+.filterClose1{
+  z-index: 101;
+  position: fixed;
+  flex-direction: column;
+  right: 0px;
+  background-color: whitesmoke;
+  width: 250px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 500px;
+  animation: closeFilter ease-in-out 0.5s forwards;
+  display: flex;
+}
+
+.filterClose2{
+  z-index: 101;
+  position: fixed;
+  flex-direction: column;
+  right: -300px;
+  background-color: whitesmoke;
+  width: 250px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 500px;
+  animation: openFilter ease-in-out 0.5s forwards;
+  display: flex;
+}
+
+
+
+@keyframes openFilter {
+  0% {
+    right: -300px;
+  }
+  80% {
+    right: 20px;
+  }
+  100% {
+    right: 0px;
+  }
+}
+
+@keyframes closeFilter {
+  0% {
+    right: 0px;
+  }
+  100% {
+    right: -300px;
+  }
+}

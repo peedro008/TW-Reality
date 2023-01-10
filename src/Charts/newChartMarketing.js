@@ -16,7 +16,7 @@ export const options = {
   pieHole: 0.5,
   is3D: false,
   backgroundColor: "transparent",
-  colors: ["black", "#DC4C64"],
+  colors: ['#B0DAF1', '#002752'],
 };
 
 const NewChartMarketing = () => {

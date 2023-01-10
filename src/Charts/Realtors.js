@@ -29,7 +29,7 @@ function Realtors({ google, realtors, Referred, goUser, Screen }) {
       all.push([
         e.name,
         e.Sells.length,
-        e.Referrals.length,
+        realtors.filter(f => e.id === f.ReferredId).length,
         Referred.filter((f) => f.User?.id == e.id).length,
         e.PackageMarketings?.length,
         transaction,
@@ -50,14 +50,14 @@ function Realtors({ google, realtors, Referred, goUser, Screen }) {
       if (google) {
         const data = new google.visualization.DataTable();
         data.addColumn("string", "Topping");
-        data.addColumn("number", "Sales", "color:#6F52ED");
-        data.addColumn("number", "Recruited", "color:#FF7A00");
-        data.addColumn("number", "Referrals", "color:#33D69F");
-        data.addColumn("number", "Package Marketing", "color:#DC4C64");
-        data.addColumn("number", "Transaction Coord", "color:#332D2D");
-        data.addColumn("number", "Transaction Active", "color:#fcfc4a");
+        data.addColumn("number", "Sales", "color:#002752");
+        data.addColumn("number", "Recruited", "color:rgb(216, 175, 77)");
+        data.addColumn("number", "Referrals", "color:#B0DAF1");
+        data.addColumn("number", "Package Marketing", "color:#2CA58D");
+        data.addColumn("number", "Transaction Coord", "color:#84596B");
+        data.addColumn("number", "Transaction Active", "color:#98473E");
         data.addRows(dato);
-
+       
         // Set chart options
         var options = {
           title: "Stats",
@@ -67,7 +67,7 @@ function Realtors({ google, realtors, Referred, goUser, Screen }) {
             fontSize: "20",
             marginLeft: "-10px",
           },
-          colors: ["#6F52ED", "#FF7A00", "#33D69F", '#DC4C64', '#332D2D',"#fcfc4a"],
+          colors: ["#002752", "rgb(216, 175, 77)", "#B0DAF1", '#2CA58D', '#84596B',"#98473E"],
           backgroundColor: "#EBEFF2",
           bar: { groupWidth: "80%", borderRadius: "10px" },
           vAxis: { format: "0", minValue: maxNumber + 2 },

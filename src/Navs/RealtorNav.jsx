@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../Css/css.css";
-import logo from "../assets/truewayrealtybig.jpeg";
+import logo from "../assets/realtorsbig.png";
 import { FiGrid } from "react-icons/fi";
 import { FiUser } from "react-icons/fi";
 import { VscGraph } from "react-icons/vsc";
@@ -131,7 +131,7 @@ function RealtorNav({ onSearch }) {
           <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
             <FiGrid
               className="NAicon"
-              color='black'
+              color="rgb(134, 139, 165)"
               activeClassName="NAactive"
             />
           </NavLink>
@@ -151,7 +151,7 @@ function RealtorNav({ onSearch }) {
             to="/addReferred"
             activeClassName="NAavtive"
           >
-            <MdAdd className="NAicon" size="25px"  color='black' />
+            <MdAdd className="NAicon" size="25px"      color="rgb(134, 139, 165)" />
           </NavLink>
         </div>
         <span />

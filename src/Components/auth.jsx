@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import logo from "../assets/truewayrealty.jpeg";
+import logo from "../assets/realtorsBlanco.png";
 import "../Css/css.css";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
@@ -35,7 +35,7 @@ setReset
         <div style={{ display: "flex", height: '100vh',alignSelf: "center", alignItems: 'center',justifyContent: 'center', justifySelf: 'center'}}>
           <img
             style={{
-              width: "550px",
+              width: "250px",
               height: "auto",
               objectFit: "cover",
               display: "flex",
@@ -145,7 +145,7 @@ setReset
                     height: "28px",
                     borderWidth: "0px",
                     // borderRadius: "8px",
-                    borderBottom: "2px solid rgba(87,204,152,255)",
+                    borderBottom: "2px solid #002752",
                     
                     paddingX: "5px",
                     
@@ -168,7 +168,7 @@ setReset
                     height: "28px",
                     borderWidth: "0px",
                     // borderRadius: "8px",
-                    borderBottom: "2px solid rgba(87,204,152,255)",
+                    borderBottom: "2px solid #002752",
                     // backgroundColor: "#E5E5E5",
                     paddingX: "5px",
                   }}
@@ -192,7 +192,7 @@ setReset
                 onClick={setOpen1}
                 style={{
                   fontSize: "13px",
-                  color: "rgba(87,204,152,255)",
+                  color: "#002752",
                   fontWeight: "bold",
                   textAlign: "right",
                   alignSelf: "flex-end",

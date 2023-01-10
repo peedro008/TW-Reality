@@ -127,7 +127,7 @@ function StadisticComponent({
             ).map((e, i) => {
               sumaRef = 0;
               {
-                e.Referrals?.length
+                UsersByDate?.filter(f => f.ReferredId === e.id).length
                   ? e.Referrals.map((f) => (sumaRef = sumaRef + f.Sells.length))
                   : (sumaRef = 0);
               }
@@ -152,7 +152,7 @@ function StadisticComponent({
                       >
                         Realtors
                       </p>
-                      <p className="StadBoxVal">{e.Referrals?.length}</p>
+                      <p className="StadBoxVal">{UsersByDate?.filter(f => f.ReferredId === e.id).length}</p>
                     </div>
                   </NavLink>
 
@@ -228,7 +228,7 @@ function StadisticComponent({
                     </div>
                   </NavLink>
 
-                  <NavLink
+                  {/* <NavLink
                   className="icons"
                   to={{ pathname: "/packageMarketingDash", state: { aboutProps: e } }}
                   style={{ textDecoration: "none" }}
@@ -259,7 +259,7 @@ function StadisticComponent({
                     <p className="StadBoxTitle">Transaction Coord. Unsold</p>
                     <p className="StadBoxVal">{e.TransactionCoordinators.filter(e => e.isSold === false).length}</p>
                   </div>
-                </NavLink>
+                </NavLink> */}
 
                   <NavLink
                     className="icons"
@@ -362,7 +362,7 @@ function StadisticComponent({
                       >
                         Realtors
                       </p>
-                      <p className="StadBoxVal">{e.Referrals?.length}</p>
+                      <p className="StadBoxVal">{UsersByDate?.filter(f => f.ReferredId === e.id).length}</p>
                     </div>
                   </NavLink>
 
@@ -438,7 +438,7 @@ function StadisticComponent({
                     </div>
                   </NavLink>
 
-                  <NavLink
+                  {/* <NavLink
                   className="icons"
                   to={{ pathname: "/packageMarketingDash", state: { aboutProps: e } }}
                   style={{ textDecoration: "none" }}
@@ -469,7 +469,7 @@ function StadisticComponent({
                     <p className="StadBoxTitle">Transaction Coord. Unsold</p>
                     <p className="StadBoxVal">{e.TransactionCoordinators.filter(e => e.isSold === false).length}</p>
                   </div>
-                </NavLink>
+                </NavLink> */}
 
                   <NavLink
                     className="icons"
@@ -581,7 +581,7 @@ function StadisticComponent({
                     >
                       Realtors
                     </p>
-                    <p className="StadBoxVal">{e.Referrals?.length}</p>
+                    <p className="StadBoxVal">{commissionsPaginate?.filter(f => f.ReferredId === e.id).length}</p>
                   </div>
                 </NavLink>
 
@@ -657,7 +657,7 @@ function StadisticComponent({
                   </div>
                 </NavLink>
 
-                <NavLink
+                {/* <NavLink
                   className="icons"
                   to={{ pathname: "/packageMarketingDash", state: { aboutProps: e } }}
                   style={{ textDecoration: "none" }}
@@ -688,7 +688,7 @@ function StadisticComponent({
                     <p className="StadBoxTitle">Transaction Coord. Unsold</p>
                     <p className="StadBoxVal">{e.TransactionCoordinators?.filter(e => e.isSold === false).length}</p>
                   </div>
-                </NavLink>
+                </NavLink> */}
 
                 <NavLink
                   className="icons"

@@ -9,6 +9,7 @@ import {
   getCommission,
   getTransactionCoordinator,
   getPackageMarketing,
+  getClients
 } from "../Redux/actions";
 const FetchAll = (dispatch) => {
   const UserId = useSelector((s) => s.UserId);
@@ -72,7 +73,16 @@ const FetchAll = (dispatch) => {
     .catch((error) => {
       console.log(error);
     });
- 
+    axios
+    .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${UserId}`)
+    .then(function (response) {
+      response.status == 200 || response.status == 204
+        ? dispatch(getClients(response.data))
+        : dispatch(getClients([]));
+    })
+    .catch((error) => {
+      dispatch(getUsers([]));
+    });
     axios
     .get(`https://truewayrealtorsapi.com/getTransactionCoordinator`)
     .then(function (response) {
@@ -129,6 +139,7 @@ const getSell = (dispatch) => {
     console.log(error);
   });
 }
+
 const referredGet = (dispatch) => {
   axios
     .get(`https://truewayrealtorsapi.com/getReferred`)

@@ -122,7 +122,7 @@ useEffect(() => {
                       />
                     ) : (
                       <FaCheck
-                        color="#14B8A6"
+                        color='#002752'
                         size={"25px"}
                         style={{
                           alignSelf: "center",
