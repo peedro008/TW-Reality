@@ -36,7 +36,7 @@ function AddTransactionCoordinator() {
     }, [form])
     
   const onSubmit = () => {
-    fetch(`http://localhost:8080/addTransactionCoordinator`, {
+    fetch(`https://truewayrealtorsapi.com/addTransactionCoordinator`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

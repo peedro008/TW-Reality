@@ -96,7 +96,7 @@ function MyClientsControl() {
     if (isFilter !== true) {
       const offset = 5;
       fetch(
-        `http://localhost:8080/getMyClients?UserId=${userId}&offset=${offset}&page=${
+        `https://truewayrealtorsapi.com/getMyClients?UserId=${userId}&offset=${offset}&page=${
           paginator * 5
         }`
       ).then(async (res) => {

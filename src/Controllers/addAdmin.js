@@ -15,7 +15,7 @@ function AddAdminControl() {
   console.log(form)
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/addAdmin`, {
+    fetch(`https://truewayrealtorsapi.com/addAdmin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

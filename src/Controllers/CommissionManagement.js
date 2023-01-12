@@ -43,7 +43,7 @@ function CommissionManagement() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getCommission`)
+      .get(`https://truewayrealtorsapi.com/getCommission`)
       .then(function (response) {
         response.status == 404
           ? dispatch(getCommission([]))
@@ -65,7 +65,7 @@ function CommissionManagement() {
   // }, [paginator])
 
   // const getCommissions = (page) => {
-  //   fetch(`http://localhost:8080/getCommissionPaginate?page=${page}&size=${size}`, {
+  //   fetch(`https://truewayrealtorsapi.com/getCommissionPaginate?page=${page}&size=${size}`, {
   //     method: "GET",
   //     headers: {
   //       "Content-Type": "application/json",
@@ -104,7 +104,7 @@ function CommissionManagement() {
 
   const getCommissionByDate = () => {
     fetch(
-      `http://localhost:8080/getCommission?dateFrom=${dateFrom}&dateTo=${dateTo}`,
+      `https://truewayrealtorsapi.com/getCommission?dateFrom=${dateFrom}&dateTo=${dateTo}`,
       {
         method: "GET",
         headers: {
@@ -134,7 +134,7 @@ function CommissionManagement() {
   };
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/paycommission`, {
+    fetch(`https://truewayrealtorsapi.com/paycommission`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -157,7 +157,7 @@ function CommissionManagement() {
       })
       .then(() =>
         axios
-          .get(`http://localhost:8080/getCommission`)
+          .get(`https://truewayrealtorsapi.com/getCommission`)
           .then(function (response) {
             response.status == 404
               ? dispatch(getCommission([]))

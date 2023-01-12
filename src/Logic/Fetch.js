@@ -21,7 +21,7 @@ const FetchAll = (dispatch) => {
   if(UserRole === 'Admin') {
 
     axios
-      .get(`http://localhost:8080/getRealtors`)
+      .get(`https://truewayrealtorsapi.com/getRealtors`)
       .then(function (response) {
         response.status == 200 || response.status == 204
           ? dispatch(getUsers(response.data))
@@ -32,7 +32,7 @@ const FetchAll = (dispatch) => {
       });
   } else {
     axios
-    .get(`http://localhost:8080/getMyUsers?UserId=${UserId}`)
+    .get(`https://truewayrealtorsapi.com/getMyUsers?UserId=${UserId}`)
     .then(function (response) {
       dispatch(getUsers(response.data));
     })
@@ -42,7 +42,7 @@ const FetchAll = (dispatch) => {
   }
 
   axios
-    .get(`http://localhost:8080/getMyRealtors?UserId=${UserId}`)
+    .get(`https://truewayrealtorsapi.com/getMyRealtors?UserId=${UserId}`)
     .then(function (response) {
       dispatch(getRealtor(response.data));
     })
@@ -51,7 +51,7 @@ const FetchAll = (dispatch) => {
     });
 
     axios
-    .get(`http://localhost:8080/getMyUsers?UserId=${UserId}`)
+    .get(`https://truewayrealtorsapi.com/getMyUsers?UserId=${UserId}`)
     .then(function (response) {
       dispatch(getUsersManager(response.data));
     })
@@ -60,7 +60,7 @@ const FetchAll = (dispatch) => {
     });
 
   axios
-    .get(`http://localhost:8080/getReferred`)
+    .get(`https://truewayrealtorsapi.com/getReferred`)
     .then(function (response) {
       dispatch(getReferred(response.data));
     })
@@ -68,7 +68,7 @@ const FetchAll = (dispatch) => {
       dispatch(getReferred([]));
     });
   axios
-    .get(`http://localhost:8080/getCommission`)
+    .get(`https://truewayrealtorsapi.com/getCommission`)
     .then(function (response) {
       response.status == 404
         ? dispatch(getCommission([]))
@@ -78,7 +78,7 @@ const FetchAll = (dispatch) => {
       dispatch(getCommission([]));
     });
   axios
-    .get(`http://localhost:8080/getSells`)
+    .get(`https://truewayrealtorsapi.com/getSells`)
     .then(function (response) {
       dispatch(getSells(response.data));
     })
@@ -86,7 +86,7 @@ const FetchAll = (dispatch) => {
       console.log(error);
     });
     axios
-    .get(`http://localhost:8080/getAllMyClients?UserId=${UserId}`)
+    .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${UserId}`)
     .then(function (response) {
       response.status == 200 || response.status == 204
         ? dispatch(getClients(response.data))
@@ -96,7 +96,7 @@ const FetchAll = (dispatch) => {
       dispatch(getUsers([]));
     });
     axios
-    .get(`http://localhost:8080/getTransactionCoordinator`)
+    .get(`https://truewayrealtorsapi.com/getTransactionCoordinator`)
     .then(function (response) {
       dispatch(getTransactionCoordinator(response.data));
     })
@@ -104,7 +104,7 @@ const FetchAll = (dispatch) => {
       console.log(error);
     });
     axios
-    .get(`http://localhost:8080/getPackagesMarketing`)
+    .get(`https://truewayrealtorsapi.com/getPackagesMarketing`)
     .then(function (response) {
       dispatch(getPackageMarketing(response.data));
     })
@@ -119,7 +119,7 @@ const RealtorsGet = (dispatch) => {
 
   if(UserRole === 'Admin') {
     axios
-      .get(`http://localhost:8080/getRealtors`)
+      .get(`https://truewayrealtorsapi.com/getRealtors`)
       .then(function (response) {
         response.status == 200 || response.status == 204
           ? dispatch(getUsers(response.data))
@@ -130,7 +130,7 @@ const RealtorsGet = (dispatch) => {
       });
   } else {
     axios
-    .get(`http://localhost:8080/getMyUsers?UserId=${UserId}`)
+    .get(`https://truewayrealtorsapi.com/getMyUsers?UserId=${UserId}`)
     .then(function (response) {
       dispatch(getUsers(response.data));
     })
@@ -144,7 +144,7 @@ const RealtorsGet = (dispatch) => {
 
 const getSell = (dispatch) => {
   axios
-  .get(`http://localhost:8080/getSells`)
+  .get(`https://truewayrealtorsapi.com/getSells`)
   .then(function (response) {
     dispatch(getSells(response.data));
   })
@@ -155,7 +155,7 @@ const getSell = (dispatch) => {
 
 const referredGet = (dispatch) => {
   axios
-    .get(`http://localhost:8080/getReferred`)
+    .get(`https://truewayrealtorsapi.com/getReferred`)
     .then(function (response) {
       dispatch(getReferred(response.data));
     })
@@ -163,7 +163,7 @@ const referredGet = (dispatch) => {
       dispatch(getReferred([]));
     });
   axios
-    .get(`http://localhost:8080/getCommission`)
+    .get(`https://truewayrealtorsapi.com/getCommission`)
     .then(function (response) {
       response.status == 404
         ? dispatch(getCommission([]))

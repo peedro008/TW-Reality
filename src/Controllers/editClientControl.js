@@ -77,7 +77,7 @@ function EditClientControl(props) {
 
   const dispatchClient = () => {
     axios
-    .get(`http://localhost:8080/getAllMyClients?UserId=${userId}`)
+    .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
     .then(function (response) {
       response.status == 200 || response.status == 204
         ? dispatch(getClients(response.data))
@@ -89,7 +89,7 @@ function EditClientControl(props) {
   }
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/editClient`, {
+    fetch(`https://truewayrealtorsapi.com/editClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

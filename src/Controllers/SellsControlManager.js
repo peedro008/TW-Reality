@@ -35,7 +35,7 @@ function SellsControlManager() {
 
 
   // const onSubmitPagination = (page) => {
-  //   fetch(`http://localhost:8080/getSellsPaginate?page=${page}&size=${size}`, {
+  //   fetch(`https://truewayrealtorsapi.com/getSellsPaginate?page=${page}&size=${size}`, {
   //     method: "GET",
   //     headers: {
   //       "Content-Type": "application/json",

@@ -38,7 +38,7 @@ function ManagerRecruit(props) {
 
   const onSubmit = () => {
     if (form.password) {
-      fetch(`http://localhost:8080/addRealtor`, {
+      fetch(`https://truewayrealtorsapi.com/addRealtor`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -27,7 +27,7 @@ function AdminManagementControl(props) {
   }, []);
 
   const deleteUser = () => {
-    fetch(`http://localhost:8080/deleteUser`, {
+    fetch(`https://truewayrealtorsapi.com/deleteUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ function AdminManagementControl(props) {
   };
 
   const deleteManager = () => {
-    fetch(`http://localhost:8080/deleteManager`, {
+    fetch(`https://truewayrealtorsapi.com/deleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ function AdminManagementControl(props) {
   };
 
   const deleteReferred = () => {
-    fetch(`http://localhost:8080/deleteReferred`, {
+    fetch(`https://truewayrealtorsapi.com/deleteReferred`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

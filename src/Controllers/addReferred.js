@@ -25,7 +25,7 @@ function AddReferred() {
   console.log(form)
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/AddReferred`, {
+    fetch(`https://truewayrealtorsapi.com/AddReferred`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
