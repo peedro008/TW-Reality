@@ -5,7 +5,7 @@ import RealtorsListManager from "../Components/RealtorsListManager";
 
 function RealtorsListManagerControl() {
   const Referred = useSelector((state) => state.Referred);
-  const Users = useSelector((state) => state.Users);
+  const Users = useSelector((state) => state.UsersManager);
   const UserId = useSelector((state) => state.UserId);
   const Name = useSelector((state) => state.userName);
 

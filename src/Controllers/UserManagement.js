@@ -18,12 +18,12 @@ function UserManagement() {
   const [error, setError] = useState()
   const dispatch = useDispatch();
   const [Err, setErr] = useState(false);
+  const Users = useSelector((e) => e.UsersManager);
 
   useEffect(() => {
     setForm({ ...form, UserId: UserId, managerId: UserId });
   }, []);
 
-  const Users = useSelector((e) => e.Users);
   const optionsRealtor = Users.map((e) => ({
     value: e.id,
     label: e.name,

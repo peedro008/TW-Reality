@@ -8,6 +8,7 @@ import {
   GET_REALTORS,
   GET_SELLS,
   GET_USERS,
+  GET_USERS_MANAGER,
   GET_MY_CLIENTS,
   COMMISSION_VALUE,
   GET_REFERRED,
@@ -26,6 +27,7 @@ const initialState = {
   Commissions: [],
   CommissionValue: null,
   Users: [],
+  UsersManager: [],
   Referred: [],
   TransactionCoordinator: [],
   PackageMarketing: [],
@@ -92,6 +94,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         Users: action.payload,
       };
+      case GET_USERS_MANAGER:
+        return {
+          ...state,
+          UsersManager: action.payload,
+        };
     case GET_MY_CLIENTS:
       return {
         ...state,

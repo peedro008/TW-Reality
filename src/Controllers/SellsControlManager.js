@@ -8,7 +8,7 @@ import { getSells } from "../Redux/actions";
 function SellsControlManager() {
   const allSells = useSelector((e) => e.Sells);
   const [sells, setSells] = useState([])
-  const Users = useSelector((e) => e.Users);
+  const Users = useSelector((e) => e.UsersManager);
   const [myUsersSell, setMyUsersSell] = useState([])
   const [myUsersSellPag, setMyUsersSellPag] = useState()
   const dispatch = useDispatch();

@@ -20,6 +20,7 @@ function AddSell() {
   const [sellResp, setSellResp] = useState('')
   const date = new Date();
   const Users = useSelector((e) => e.Users);
+  const UsersManager = useSelector(e => e.UsersManager)
   let options = [];
   console.log(options)
   console.log(UserRole)
@@ -31,7 +32,7 @@ function AddSell() {
     value: e.id,
     label: e.name,
   })) : options = 
-  Users?.filter(
+  UsersManager?.filter(
     (f) => f.managerId === userId || f.id === userId
   ).map((e) => ({
     value: e.id,

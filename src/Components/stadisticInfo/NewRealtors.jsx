@@ -2,12 +2,12 @@ import React from "react";
 import { BsChevronLeft } from "react-icons/bs";
 
 function NewRealtors(props) {
-  const refferals = props.location.state.aboutProps.Referrals;
+  const refferals = props.location.state.aboutProps?.Referrals;
   console.log(refferals);
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
-        <p className="genericTitle">{props.location.state.aboutProps.name}</p>
+        <p className="genericTitle">{props.location.state.aboutProps?.name}</p>
         <p className="subTitt"style={{ fontSize: '18px'}}>New Realtors</p>
       </div>
       <div className="DashContainer">
@@ -36,19 +36,19 @@ function NewRealtors(props) {
                   return (
                     <tr key={i}>
                       <td className="ClientName" scope="row">
-                        {e.name}
+                        {e?.name}
                       </td>
                       <td className="ClientName" scope="row">
-                        {e.phone}
+                        {e?.phone}
                       </td>
                       <td className="ClientName" scope="row">
-                        {e.email}
+                        {e?.email}
                       </td>
                       <td className="ClientName" scope="row">
-                        {e.createdAt.split("T", 1)}
+                        {e.createdAt?.split("T", 1)}
                       </td>
                       <td className="ClientName" scope="row">
-                        {e.Sells.length}
+                        {e.Sells?.length}
                       </td>
                     </tr>
                   );

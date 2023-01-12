@@ -5,7 +5,7 @@ import ManagerDashboardComponent from '../Components/ManagerDashboard'
 import useGoogleCharts from "../Charts/useGoogleCharts";
 
 function ManagerDashboardController() {
-  const Users = useSelector((state) => state.Users);
+  const Users = useSelector((state) => state.UsersManager);
   const [dateReq, setDateReq] = useState({});
   const [yearLabel, setYearLabel] = useState("");
   const [dateSelected, setDateSelected] = useState("");

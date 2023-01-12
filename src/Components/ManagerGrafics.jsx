@@ -476,7 +476,7 @@ function ManagerGrafics({
                 </div>
               </NavLink>
 
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none" }}
                 to={{
                   pathname: "/packageManagement",
@@ -530,7 +530,7 @@ function ManagerGrafics({
                   <p className="dashCardText">Transaction Coord. Sold</p>
                 </div>
               </div>
-              </NavLink>
+              </NavLink> */}
             </div>
       }
     </div>

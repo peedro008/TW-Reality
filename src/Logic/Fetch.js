@@ -9,7 +9,8 @@ import {
   getCommission,
   getTransactionCoordinator,
   getPackageMarketing,
-  getClients
+  getClients,
+  getUsersManager
 } from "../Redux/actions";
 const FetchAll = (dispatch) => {
   const UserId = useSelector((s) => s.UserId);
@@ -42,6 +43,15 @@ const FetchAll = (dispatch) => {
     .get(`https://truewayrealtorsapi.com/getMyRealtors?UserId=${UserId}`)
     .then(function (response) {
       dispatch(getRealtor(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+    axios
+    .get(`https://truewayrealtorsapi.com/getMyUsers?UserId=${UserId}`)
+    .then(function (response) {
+      dispatch(getUsersManager(response.data));
     })
     .catch((error) => {
       console.log(error);

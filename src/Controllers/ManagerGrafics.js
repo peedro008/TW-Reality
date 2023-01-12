@@ -8,7 +8,7 @@ import ManagerGrafics from "../Components/ManagerGrafics";
 function ManagerGraficsControl() {
   const google = useGoogleCharts();
   const Referred = useSelector((e) => e.Referred);
-  const Users = useSelector((e) => e.Users);
+  const Users = useSelector((e) => e.UsersManager);
   const Name = useSelector((state) => state.userName);
   const UserId = useSelector((state) => state.UserId);
   const [selected, setSelected] = useState(false);
