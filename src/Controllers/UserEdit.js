@@ -36,7 +36,7 @@ function UserEditController(props) {
 
   const onSubmit = () => {
     if (form) {
-      fetch(`https://truewayrealtorsapi.com/editUser`, {
+      fetch(`http://localhost:8080/editUser`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

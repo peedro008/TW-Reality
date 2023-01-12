@@ -26,7 +26,7 @@ const ResetPass = () => {
       UserName: pes,
       Password: Password,
     };
-    fetch(`https://truewayrealtorsapi.com/resetPass`, {
+    fetch(`http://localhost:8080/resetPass`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

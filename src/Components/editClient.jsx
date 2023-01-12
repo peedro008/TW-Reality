@@ -15,8 +15,8 @@ function EditClient({
   open,
   onSubmit,
   optionsReason,
-  optionsClient,
   optionsStatus,
+  optionsStatusLead,
   onCloseModal,
   respTransactionCoord,
   validarEmail,
@@ -410,7 +410,7 @@ function EditClient({
             <Select
             defaultValue={optionsStatus[optionsStatus.findIndex(x => x.value === clientData.status)]}
               onChange={(val) => setForm({ ...form, status: val.value })}
-              options={optionsStatus}
+              options={form.clientType === 'Client' ? optionsStatus : optionsStatusLead}
               name={"Realtor Name"}
               className="PAYselect2"
               placeholder="Select Client Type"
@@ -450,7 +450,7 @@ function EditClient({
           }}
           disabled={validation ? true : false}
         >
-          <p className="PAYbuttonText">Add Client +</p>
+          <p className="PAYbuttonText">Edit Client</p>
         </button>
       </div>
 

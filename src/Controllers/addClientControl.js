@@ -19,7 +19,7 @@ function AddClientControl() {
   }, []);
   const GetMyClientsAll = () => {
     axios
-      .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
+      .get(`http://localhost:8080/getAllMyClients?UserId=${userId}`)
       .then(function (response) {
         response.status == 200 || response.status == 204
           ? dispatch(getClients(response.data))
@@ -42,17 +42,6 @@ function AddClientControl() {
     {
       value: "Renter",
       label: "Renter",
-    },
-  ];
-
-  let optionsClient = [
-    {
-      value: "Client",
-      label: "Client",
-    },
-    {
-      value: "Lead",
-      label: "Lead",
     },
   ];
 
@@ -83,8 +72,19 @@ function AddClientControl() {
     },
   ];
 
+  let optionsStatusLead = [
+    {
+      value: "Entry Level",
+      label: "Entry Level",
+    },
+    {
+      value: "Hot Lead",
+      label: "Hot Lead",
+    },
+  ];
+  
   const onSubmit = () => {
-    fetch(`https://truewayrealtorsapi.com/addClient`, {
+    fetch(`http://localhost:8080/addClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -135,8 +135,8 @@ function AddClientControl() {
       onCloseModal={onCloseModal}
       onOpenModal={onOpenModal}
       optionsReason={optionsReason}
-      optionsClient={optionsClient}
       optionsStatus={optionsStatus}
+      optionsStatusLead={optionsStatusLead}
       respTransactionCoord={respTransactionCoord}
       validarEmail={validarEmail}
       userId={userId}

@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import AddClient from "../Components/addClient";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import EditClient from "../Components/editClient";
+import { getClients } from "../Redux/actions";
 
 function EditClientControl(props) {
   const userId = useSelector((state) => state.UserId);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -35,16 +37,7 @@ function EditClientControl(props) {
     label: "Renter",
   }]
   
-  let optionsClient= [ {
-    value: "Client",
-    label: "Client",
-  },
-  {
-    value:"Lead",
-    label: "Lead",
-  }
-  ]
-  
+
   let optionsStatus=[ {
     value: "Showing",
     label: "Showing",
@@ -70,8 +63,33 @@ function EditClientControl(props) {
     label: "Listed",
   }
   ]
+
+  let optionsStatusLead = [
+    {
+      value: "Entry Level",
+      label: "Entry Level",
+    },
+    {
+      value: "Hot Lead",
+      label: "Hot Lead",
+    },
+  ];
+
+  const dispatchClient = () => {
+    axios
+    .get(`http://localhost:8080/getAllMyClients?UserId=${userId}`)
+    .then(function (response) {
+      response.status == 200 || response.status == 204
+        ? dispatch(getClients(response.data))
+        : dispatch(getClients([]));
+    })
+    .catch((error) => {
+      dispatch(getClients([]));
+    });
+  }
+
   const onSubmit = () => {
-    fetch(`https://truewayrealtorsapi.com/editClient`, {
+    fetch(`http://localhost:8080/editClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,11 +99,10 @@ function EditClientControl(props) {
       try {
         if (res.status !== 200) {
           onOpenModal();
-          console.log("1");
           setRespTransactionCoord([false, "Error editing Client"]);
         } else {
           onOpenModal();
-          console.log("2");
+          dispatchClient();
           setRespTransactionCoord([true, "Client edited successfully"]);
         }
       } catch (err) {
@@ -115,8 +132,9 @@ function EditClientControl(props) {
       onCloseModal={onCloseModal}
       onOpenModal={onOpenModal}
       optionsReason={optionsReason}
-      optionsClient={optionsClient}
+
       optionsStatus={optionsStatus}
+      optionsStatusLead={optionsStatusLead}
       respTransactionCoord={respTransactionCoord}
       validarEmail={validarEmail}
       userId={userId}

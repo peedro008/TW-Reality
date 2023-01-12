@@ -16,8 +16,8 @@ function AddClient({
   open,
   onSubmit,
   optionsReason,
-  optionsClient,
   optionsStatus,
+  optionsStatusLead,
   onCloseModal,
   respTransactionCoord,
   validarEmail
@@ -34,11 +34,12 @@ function AddClient({
   const handleChangeTwo = () => {
     setCheckedOne('Lead'); 
   };
-  console.log(form)
-  
+
+ 
   let validation =
     form.clientName?.length < 3 ||
     typeof form.clientName === "undefined" ||
+    typeof form.addedDate === 'undefined' ||
     typeof form.phone === "undefined" ||
     typeof form.reason === "undefined" ||
     typeof form.clientType === "undefined" ||
@@ -54,7 +55,7 @@ function AddClient({
           <div className="inputDiv">
             <p className="PAYtitle">Client Name</p>
             <input
-              placeholder="Client Name"
+              placeholder="Type Name"
               onChange={(e) => {
                 setForm({ ...form, clientName: e.target.value });
               }}
@@ -65,7 +66,7 @@ function AddClient({
           <div className="inputDiv">
             <p className="PAYtitle">Email</p>
             <input
-              placeholder="Email"
+              placeholder="Type Email"
               onChange={(e) => {
                 setForm({ ...form, mail: e.target.value });
               }}
@@ -76,7 +77,7 @@ function AddClient({
           <div className="inputDiv">
             <p className="PAYtitle">Number Phone</p>
             <input
-              placeholder="Phone"
+              placeholder="Type Phone"
               onChange={(e) => {
                 setForm({ ...form, phone: e.target.value });
               }}
@@ -108,7 +109,6 @@ function AddClient({
             <p className="PAYtitle">Added Date</p>
             <input
               type={"date"}
-
               onChange={(e) => {
                 setForm({ ...form, addedDate: e.target.value });
               }}
@@ -116,19 +116,6 @@ function AddClient({
               className="AQinputPackage"
             ></input>
           </div>
-          {/* <div className="inputDiv">
-            <p className="PAYtitle">Contact Date</p>
-            <input
-              type={"date"}
-
-              onChange={(e) => {
-                setForm({ ...form, contactDate: e.target.value });
-              }}
-              placeholder="ClosingDate"
-              className="AQinputPackage"
-            ></input>
-          </div> */}
-     
           <div className="inputDiv">
             <p className="PAYtitle">Transaction Type</p>
             <Select
@@ -136,27 +123,18 @@ function AddClient({
               options={optionsReason}
               name={"Realtor Name"}
               className="PAYselect2"
-              placeholder="Select Reason"
+              placeholder="Select Transaction"
             />
           </div>
-          {/* <div className="inputDiv">
-            <p className="PAYtitle">Client Type</p>
-            <Select
-              onChange={(val) => setForm({ ...form, clientType: val.value })}
-              options={optionsClient}
-              name={"Realtor Name"}
-              className="PAYselect2"
-              placeholder="Select Client Type"
-            />
-          </div> */}
+
           <div className="inputDiv">
             <p className="PAYtitle">Status</p>
             <Select
               onChange={(val) => setForm({ ...form, status: val.value })}
-              options={optionsStatus}
+              options={form.clientType === 'Client' ? optionsStatus : optionsStatusLead}
               name={"Realtor Name"}
               className="PAYselect2"
-              placeholder="Select Client Type"
+              placeholder="Select Status"
             />
           </div>
           </div>

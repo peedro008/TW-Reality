@@ -8,11 +8,8 @@ import { useHistory } from "react-router-dom";
 import { AiOutlineFilter, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 const MyClients = ({
   allMyClientsFilter,
-  userId,
-  myClient,
   paginator,
   setPaginator,
-  optionsClient,
   optionsReason,
   optionsStatus,
   setTypeClient,
@@ -20,6 +17,7 @@ const MyClients = ({
   setStatusClient,
   filterOn,
 }) => {
+  console.log(allMyClientsFilter)
   const history = useHistory();
 const [isClosed, setIsClosed] = useState('divFilter')
   const [checkedOne, setCheckedOne] = useState(false);
@@ -108,7 +106,7 @@ const [isClosed, setIsClosed] = useState('divFilter')
 
   const navegator = (e) => {
     history.push({
-      pathname: "/editClient",
+      pathname: "/myClientHistory",
       state: {
         client: e,
       },
@@ -147,7 +145,7 @@ const [isClosed, setIsClosed] = useState('divFilter')
                   <p className="REPtype2">Email</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype2">Added Date</p>
+                  <p className="REPtype2">Modify Date</p>
                 </th>
                 <th scope="col" className="column1">
                   <p className="REPtype2">Contact Date</p>
@@ -217,8 +215,8 @@ const [isClosed, setIsClosed] = useState('divFilter')
                     onClick={() => navegator(e)}
                     style={{ cursor: "pointer" }}
                   >
-                    <td className="ClientName" scope="row">
-                      {e.createdAt?.slice(0, 10)}
+                    <td className="ClientName" style={{minWidth:'100px'}} scope="row">
+                      {e.addedDate}
                     </td>
                     <td className="ClientName" scope="row">
                       {e.clientName}
@@ -229,8 +227,8 @@ const [isClosed, setIsClosed] = useState('divFilter')
                     <td className="ClientName" scope="row">
                       {e.mail}
                     </td>
-                    <td className="ClientName" scope="row">
-                      {e.addedDate}
+                    <td className="ClientName" style={{minWidth:'100px'}} scope="row">
+                      {e.updatedAt?.slice(0,10)}
                     </td>
                     <td className="ClientName" scope="row">
                       {e.contactDate}

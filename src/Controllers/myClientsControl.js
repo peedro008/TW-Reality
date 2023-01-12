@@ -36,17 +36,6 @@ function MyClientsControl() {
     },
   ];
 
-  let optionsClient = [
-    {
-      value: "Client",
-      label: "Client",
-    },
-    {
-      value: "Lead",
-      label: "Lead",
-    },
-  ];
-
   let optionsStatus = [
     {
       value: "",
@@ -76,6 +65,14 @@ function MyClientsControl() {
       value: "Listed",
       label: "Listed",
     },
+    {
+      value: "Entry Level",
+      label: "Entry Level",
+    },
+    {
+      value: "Hot Lead",
+      label: "Hot Lead",
+    },
   ];
 
   const filterOn = () => {
@@ -99,7 +96,7 @@ function MyClientsControl() {
     if (isFilter !== true) {
       const offset = 5;
       fetch(
-        `https://truewayrealtorsapi.com/getMyClients?UserId=${userId}&offset=${offset}&page=${
+        `http://localhost:8080/getMyClients?UserId=${userId}&offset=${offset}&page=${
           paginator * 5
         }`
       ).then(async (res) => {
@@ -125,14 +122,12 @@ function MyClientsControl() {
 
   return (
     <MyClients
-      allMyClientsFilter={isFilter ? allMyClientsPag : myClient}
+      allMyClientsFilter={allMyClientsPag }
       setTypeClient={setTypeClient}
       setReasonClient={setReasonClient}
       setStatusClient={setStatusClient}
-      userId={userId}
       setPaginator={setPaginator}
       paginator={paginator}
-      optionsClient={optionsClient}
       optionsReason={optionsReason}
       optionsStatus={optionsStatus}
       filterOn={filterOn}

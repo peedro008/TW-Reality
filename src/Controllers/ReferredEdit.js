@@ -37,7 +37,7 @@ function ReferredEditControl(props) {
 
   const onSubmit = () => {
     if (form) {
-      fetch(`https://truewayrealtorsapi.com/editReferred`, {
+      fetch(`http://localhost:8080/editReferred`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

@@ -501,6 +501,22 @@ html {
   margin-bottom: 8px;
 }
 
+.PAYtitleClient {
+  font-family: "Gilroy-Regular";
+  font-size: 25px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #2CA58D;
+}
+
+.PAYtitleLead {
+  font-family: "Gilroy-Regular";
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color:#D8AF4D;
+}
+
 .PAYtitlePackage {
   font-family: "Gilroy-Regular";
   width: 300px;

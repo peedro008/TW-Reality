@@ -33,6 +33,7 @@ import MyClientsControl from "../Controllers/myClientsControl";
 import EditClientControl from "../Controllers/editClientControl";
 import logo from "../assets/realtorsBlanco.png";
 import Dual from '../assets/DualRing3.gif'
+import clientHistoryControl from "../Controllers/clientHistoryControl";
 
 
 const AdminRouter = () => {
@@ -118,6 +119,7 @@ const AdminRouter = () => {
        <Route exact path='/addClient' component={AddClientControl}/>
        <Route exact path='/clientsManagement' component={MyClientsControl}/>
        <Route exact path='/editClient' component={EditClientControl}/>
+       <Route exact path='/myClientHistory' component={clientHistoryControl}/>
     </Router>
   );
    }
