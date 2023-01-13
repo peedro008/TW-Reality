@@ -418,18 +418,7 @@ function EditClient({
           </div>
           </div>
           <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-          
-          <div className="inputDiv">
-            <p className="PAYtitle">Notes</p>
-            <textarea
-                    defaultValue={clientData.Notes}
-              placeholder="Type notes"
-              onChange={(e) => {
-                setForm({ ...form, Notes: e.target.value });
-              }}
-              className="AQinputPackageText"
-            ></textarea>
-          </div>
+        
         </div>
       
 
