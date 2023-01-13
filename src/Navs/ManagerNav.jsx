@@ -18,6 +18,7 @@ import myRealtorsDash from "../assets/myRealtorsDash.png";
 import kvCore from "../assets/kvCore.png";
 import trueWayMarketing from "../assets/TRUEWAYMARKETING.png";
 import trueWayRealtors from "../assets/TruewayTransaction.jpeg";
+import formSimplicity from "../assets/formSimplicity.png";
 
 function ManagerNav({ onSearch }) {
   const dispatch = useDispatch();
@@ -35,6 +36,16 @@ function ManagerNav({ onSearch }) {
     <div style={{ display: "flex" }}>
       <div className="topbar">
         <div style={{ paddingRight: "40px", display: "flex" }}>
+        <div className="circleLink" style={{marginBottom: '25px',marginRight:'100px', marginTop: '20px'}}>
+      <a href="https://forms.floridarealtors.org/index/signin" target='_blank'>
+        <img
+          className="imageLink"
+          src={formSimplicity}
+          alt={"logo"}
+          style={{height: 'auto', width: '120px'}}
+        />
+            </a>
+      </div>
         <div className="circleLink" style={{marginBottom: '10px',marginRight:'100px', marginTop: '20px'}}>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZxHssfWU5-ZyJ_b3vYtYsSUiyFZu4k1CDJ1rRviBQbbV70w/viewform?vc=0&c=0&w=1&flr=0" target='_blank'>
         <img

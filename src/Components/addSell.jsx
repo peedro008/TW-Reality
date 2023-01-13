@@ -20,6 +20,7 @@ function AddSellComponent({
   options,
   onCloseModal,
   Users,
+  UsersManager,
   setSoldForm,
   getTransactionsCoord,
   transactionCoordOptions,
@@ -34,10 +35,17 @@ function AddSellComponent({
     form.ClientName?.length < 3 ||
     typeof form.ClientName?.length === "undefined";
 
+    console.log(form)
   useEffect(() => {
-    let manId = Users.filter((e) => e.id === form.UserId)[0]?.managerId;
-    let refId = Users.filter((e) => e.id === form.UserId)[0]?.ReferredId;
-    setForm({ ...form, managerId: manId, ReferredId: refId });
+    if(UserRole === 'Admin') {
+      let manId = Users.filter((e) => e.id === form.UserId)[0]?.managerId;
+      let refId = Users.filter((e) => e.id === form.UserId)[0]?.ReferredId;
+      setForm({ ...form, managerId: manId, ReferredId: refId });
+    } else {
+      let manId = UsersManager.filter((e) => e.id === form.UserId)[0]?.managerId;
+      let refId = UsersManager.filter((e) => e.id === form.UserId)[0]?.ReferredId;
+      setForm({ ...form, managerId: manId, ReferredId: refId });
+    }
   }, [form.UserId]);
 
   let New_York_Date = new Date().toLocaleDateString("en-US", {

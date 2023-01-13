@@ -3,7 +3,8 @@ import AddSellComponent from "../Components/addSell";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSell } from "../Logic/Fetch";
+import { getSell, getCommissions } from "../Logic/Fetch";
+
 
 function AddSell() {
   const userId = useSelector((state) => state.UserId);
@@ -76,6 +77,7 @@ function AddSell() {
           } else {
             console.log(jsonRes);
             getSell(dispatch)
+            getCommissions(dispatch)
             setSellResp('Sell added successfully')
           }
         } catch (err) {
@@ -133,7 +135,8 @@ function AddSell() {
       onOpenModal={onOpenModal}
       DATE={DATE}
       options={options}
-      Users={Users}
+      Users={Users} 
+      UsersManager={UsersManager}
       setSoldForm={setSoldForm}
       getTransactionsCoord={getTransactionsCoord}
       transactionCoordOptions={transactionCoordOptions}

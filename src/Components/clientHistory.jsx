@@ -75,6 +75,7 @@ const ClientHistory = ({
               onChange={(e) => {
                 setForm({ ...form, modifyDate: e.target.value });
               }}
+
               placeholder="Added Date"
               className="AQinputPackage"
             ></input>
@@ -188,7 +189,7 @@ const ClientHistory = ({
                       scope="row"
                       style={{ width: "200px" }}
                     >
-                      {e.modifyDate}
+                      {e.modifyDate?.slice(0,10)}
                     </td>
                     <td
                       className={
@@ -260,6 +261,9 @@ const ClientHistory = ({
           </button>
         </div>
       </Modal>
+      {
+        !newHistory &&
+
       <div
             style={{
               position: "absolute",
@@ -272,6 +276,7 @@ const ClientHistory = ({
               <p className="PAYbuttonText">Edit Client</p>
             </button>
           </div>
+      }
       <img
         src={Isologo_background}
         style={{

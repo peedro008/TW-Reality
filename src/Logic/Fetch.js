@@ -153,6 +153,19 @@ const getSell = (dispatch) => {
   });
 }
 
+const getCommissions = (dispatch) => {
+  axios
+    .get(`https://truewayrealtorsapi.com/getCommission`)
+    .then(function (response) {
+      response.status == 404
+        ? dispatch(getCommission([]))
+        : dispatch(getCommission(response.data));
+    })
+    .catch((error) => {
+      dispatch(getCommission([]));
+    });
+}
+
 const referredGet = (dispatch) => {
   axios
     .get(`https://truewayrealtorsapi.com/getReferred`)
@@ -173,4 +186,4 @@ const referredGet = (dispatch) => {
       dispatch(getCommission([]));
     });
 };
-export { FetchAll, referredGet, RealtorsGet, getSell };
+export { FetchAll, referredGet, RealtorsGet, getSell, getCommissions };

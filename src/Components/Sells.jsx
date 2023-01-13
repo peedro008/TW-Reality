@@ -47,7 +47,7 @@ function Sells({
           width: "20vw",
           minWidth: "500px",
           height: "35px",
-          marginLeft: "5vw",
+          marginLeft: "40px",
           marginTop: "2vh",
           display: "flex",
           flexDirection: "row",
