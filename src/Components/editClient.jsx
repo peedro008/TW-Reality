@@ -476,11 +476,11 @@ function EditClient({
         </>
           }
 
+            <NavLink style={{ textDecoration: "none", color: "#000", alignSelf: 'center' }} to={"/clients"}>
           <button className="modalButton">
-            <NavLink style={{ textDecoration: "none", color: "#000" }} to={"/clients"}>
               Continue
-            </NavLink>
           </button>
+            </NavLink>
         </div>
       </Modal>
       <img
