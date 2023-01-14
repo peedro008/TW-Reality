@@ -4,7 +4,6 @@ import AdminNav from "../Navs/adminNav";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
-import Stadistic from "../Controllers/stadistic";
 import CommissionManagement from "../Controllers/CommissionManagement";
 import UserManagement from "../Controllers/UserManagement";
 import { FetchAll } from "../Logic/Fetch";
@@ -13,11 +12,10 @@ import StadisticInfo from "../Components/stadisticInfo/SalesByMe";
 import SalesByRealtors from "../Components/stadisticInfo/SalesByRealtors";
 import MyReferrals from "../Components/stadisticInfo/MyReferrals";
 import NewRealtors from "../Components/stadisticInfo/NewRealtors";
-import AddReferred from "../Controllers/addReferred";
 import TotalCommisionPaid from "../Components/stadisticInfo/TotalCommissionPaid";
 import TotalCommisionUnpaid from "../Components/stadisticInfo/TotalCommissionUnpaid";
 import ManagerRecruit from "../Controllers/ManagerRecruit";
-import AdminGraficsControl from "../Controllers/AdminGraficsControl";
+
 import UserEditController from "../Controllers/UserEdit";
 import AddSell from "../Controllers/addSell";
 import AddPackageControl from "../Controllers/addPackageControl";
@@ -26,14 +24,16 @@ import AdminManagementControl from "../Controllers/adminManagementControl";
 import ReferredEditControl from "../Controllers/ReferredEdit";
 import ManagerEditController from "../Controllers/ManagerEdit";
 import SellsControl from "../Controllers/SellsControl";
-import AddAdminControl from "../Controllers/addAdmin";
 import AddClientControl from "../Controllers/addClientControl";
 import Clients from "../Components/Clients";
 import MyClientsControl from "../Controllers/myClientsControl";
 import EditClientControl from "../Controllers/editClientControl";
 import logo from "../assets/realtorsBlanco.png";
-import Dual from '../assets/DualRing3.gif'
 import clientHistoryControl from "../Controllers/clientHistoryControl";
+import AdminGraficsControl from "../Controllers/AdminGraficsControl";
+import Stadistic from "../Controllers/stadistic";
+import AddAdminControl from "../Controllers/addAdmin";
+import AddReferred from "../Controllers/addReferred";
 
 
 const AdminRouter = () => {

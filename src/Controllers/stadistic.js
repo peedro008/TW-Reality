@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import StadisticComponent from "../Components/Stadistic";
+import StadisticComponent from "../Components/stadistic";
 
 function Stadistic() {
   const [nothing, setNothing] = useState()
@@ -14,7 +14,6 @@ function Stadistic() {
   const [size, setSize] = useState(5)
   const Users = useSelector(state => state.Users)
 
-  console.log(Users)
   useEffect(() => {
     setUsersByDate(dataDate )
   }, [dataDate])
