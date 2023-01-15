@@ -128,17 +128,16 @@ function AddReferredComponent({
               marginBottom: "10px",
             }}
           />
-          <p className="modalText">Admin added successfully</p>
+          <p className="modalText">Referral added successfully</p>
           </>
           
         }
 
+            <NavLink style={{ textDecoration: "none", color: "#000", alignSelf: 'center' }} to={"/realtorsListManager"}>
           <button className="modalButton">
-            {" "}
-            <NavLink style={{ textDecoration: "none", color: "#000" }} to={"/"}>
               Continue
-            </NavLink>
           </button>
+            </NavLink>
         </div>
       </Modal>
       <img

@@ -14,7 +14,7 @@ function RealtorsManagers({ google, realtors, Referred, goUser }) {
       all.push([
         e.name,
         e.Sells?.length,
-        e.Referrals?.length,
+        realtors.filter(f => e.id === f.ReferredId)?.length,
         Referred.filter((f) => f.User?.id == e.id)?.length,
         // e.PackageMarketings?.length,
         // e.TransactionCoordinators?.length

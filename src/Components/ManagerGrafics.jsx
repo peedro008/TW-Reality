@@ -529,6 +529,7 @@ function ManagerGrafics({
              
             </div>
       }
+      {selected &&
         <BsChevronLeft
               cursor="pointer"
               color="grey"
@@ -542,7 +543,7 @@ function ManagerGrafics({
                 alignSelf: "flex-start",
               }}
               onClick={() => {setSelected(false); setCircle('circle4'); setStyleTable('divTable2'); setChevron("bsChevron3")}}
-            />
+            />}
                <img
         src={Isologo_background}
         style={{

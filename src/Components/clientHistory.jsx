@@ -251,14 +251,14 @@ const ClientHistory = ({
             </>
           )}
 
-          <button className="modalButton">
             <NavLink
-              style={{ textDecoration: "none", color: "#000" }}
+              style={{ textDecoration: "none", color: "#000", alignSelf:'center' }}
               to={"/clients"}
             >
+          <button className="modalButton">
               Continue
-            </NavLink>
           </button>
+            </NavLink>
         </div>
       </Modal>
       {

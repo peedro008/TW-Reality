@@ -20,7 +20,7 @@ function AddReferred() {
     setForm({ ...form, UserRole: "Realtor", UserId: UserId, sendEmail: userMail, userNameEmail: userName });
   }, []);
 
-  const userRef = (us.filter(e => e.id === UserId)[0].ReferredId || 1)
+  const userRef = (us.filter(e => e.id === UserId)[0]?.ReferredId || 1)
   const userMail = us.filter(e => e.id === userRef)[0]?.email
   console.log(form)
 
