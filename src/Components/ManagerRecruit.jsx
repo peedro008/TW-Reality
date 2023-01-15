@@ -43,7 +43,7 @@ console.log(form)
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">Edit User</p>
+        <p className="genericTitle">Add Realtor</p>
       </div>
 
       <div className="managerInputsContainer">
@@ -167,7 +167,7 @@ console.log(form)
           }}
           disabled={validation ? true : false}
         >
-          <p className="PAYbuttonText">Edit User</p>
+          <p className="PAYbuttonText">Add Realtor +</p>
         </button>
         
       </div>

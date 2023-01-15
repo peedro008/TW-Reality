@@ -133,7 +133,7 @@ function AddReferredComponent({
           
         }
 
-            <NavLink style={{ textDecoration: "none", color: "#000", alignSelf: 'center' }} to={"/realtorsListManager"}>
+            <NavLink style={{ textDecoration: "none", color: "#000", alignSelf: 'center' }} to={"/"}>
           <button className="modalButton">
               Continue
           </button>

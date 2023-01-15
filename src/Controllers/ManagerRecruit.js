@@ -1,31 +1,51 @@
 import React from "react";
 import { useEffect } from "react";
+import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ManagerRecruitComponent from "../Components/ManagerRecruit";
 import { FetchAll, RealtorsGet, referredGet } from "../Logic/Fetch";
+import { getReferred, getUsers, getUsersManager } from "../Redux/actions";
 function ManagerRecruit(props) {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState("");
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   let data = props.location.aboutProps;
   const RUser = data?.User;
 
-  const Users = useSelector((e) => e.Users);
-  const optionsRealtor = Users.filter((f) => f.UserRole == "Realtor" || f.UserRole == "Manager").map((e) => ({
+  const UserId = useSelector((s) => s.UserId);
+
+  const [Users, setUsers] = useState([])
+  const userRole = useSelector((e) => e.userRole);
+  const usersMan = useSelector((e) => e.UsersManager)
+  const usersAdm = useSelector((e) => e.Users)
+
+  useEffect(() => {
+
+    if (userRole === 'Admin') {
+      setUsers(usersAdm)
+    } else {
+      setUsers(usersMan)
+    }
+  }, []);
+
+  const optionsRealtor = Users?.filter(
+    (f) => f.UserRole == "Realtor" || f.UserRole == "Manager"
+  ).map((e) => ({
     value: e.id,
     label: e.name,
   }));
 
-  const optionsManager = Users.filter((f) => f.UserRole == "Manager").map((e) => ({
-    value: e.id,
-    label: e.name,
-  }));
-
+  const optionsManager = Users?.filter((f) => f.UserRole == "Manager").map(
+    (e) => ({
+      value: e.id,
+      label: e.name,
+    })
+  );
 
   useEffect(() => {
     setForm({
@@ -35,6 +55,37 @@ function ManagerRecruit(props) {
       UserId: data?.UserId,
     });
   }, [data]);
+
+  const getRefRec = () => {
+    axios
+      .get(`https://truewayrealtorsapi.com/getReferred`)
+      .then(function (response) {
+        dispatch(getReferred(response.data));
+      })
+      .catch((error) => {
+        dispatch(getReferred([]));
+      });
+
+    axios
+      .get(`https://truewayrealtorsapi.com/getMyUsers?UserId=${UserId}`)
+      .then(function (response) {
+        dispatch(getUsersManager(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      axios
+      .get(`https://truewayrealtorsapi.com/getRealtors`)
+      .then(function (response) {
+        response.status == 200 || response.status == 204
+          ? dispatch(getUsers(response.data))
+          : dispatch(getUsers([]));
+      })
+      .catch((error) => {
+        dispatch(getUsers([]));
+      });
+  };
 
   const onSubmit = () => {
     if (form.password) {
@@ -49,17 +100,14 @@ function ManagerRecruit(props) {
           try {
             const jsonRes = await res.json();
             if (res.status === 200 && res.status === 200) {
+              getRefRec();
               console.log(jsonRes);
-              setMessage('Realtor added succesfully')
+              setMessage("Realtor added succesfully");
             } else if (res.status === 409 && res.status === 409) {
-              dispatch(RealtorsGet);
-              dispatch(referredGet);
-              setMessage('Email already exist')
-              console.log('email already exist');
+              setMessage("Email already exist");
+              console.log("email already exist");
             } else {
-              dispatch(RealtorsGet);
-              dispatch(referredGet);
-              setMessage('Something was wrong')
+              setMessage("Something was wrong");
               console.log(jsonRes);
             }
           } catch (err) {

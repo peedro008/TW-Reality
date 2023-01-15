@@ -18,10 +18,18 @@ function UserManagement() {
   const [error, setError] = useState()
   const dispatch = useDispatch();
   const [Err, setErr] = useState(false);
-  const Users = useSelector((e) => e.UsersManager);
+  const [Users, setUsers] = useState([])
+  const usersMan = useSelector((e) => e.UsersManager)
+  const usersAdm = useSelector((e) => e.Users)
 
   useEffect(() => {
     setForm({ ...form, UserId: UserId, managerId: UserId });
+
+    if (userRole === 'Admin') {
+      setUsers(usersAdm)
+    } else {
+      setUsers(usersMan)
+    }
   }, []);
 
   const optionsRealtor = Users.map((e) => ({
