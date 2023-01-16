@@ -17,29 +17,17 @@ import {
 const FetchAll = (dispatch) => {
   const UserId = useSelector((s) => s.UserId);
   const UserRole = useSelector((s) => s.userRole);
-  console.log(UserRole)
-  if(UserRole === 'Admin') {
 
     axios
       .get(`https://truewayrealtorsapi.com/getRealtors`)
       .then(function (response) {
         response.status == 200 || response.status == 204
-          ? dispatch(getUsers(response.data))
-          : dispatch(getUsers([]));
+          && dispatch(getUsers(response.data))
       })
       .catch((error) => {
-        dispatch(getUsers([]));
+        console.log(error)
       });
-  } else {
-    axios
-    .get(`https://truewayrealtorsapi.com/getMyUsers?UserId=${UserId}`)
-    .then(function (response) {
-      dispatch(getUsers(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+
 
   axios
     .get(`https://truewayrealtorsapi.com/getMyRealtors?UserId=${UserId}`)
@@ -90,10 +78,10 @@ const FetchAll = (dispatch) => {
     .then(function (response) {
       response.status == 200 || response.status == 204
         ? dispatch(getClients(response.data))
-        : dispatch(getClients([]));
+        : console.log(response)
     })
     .catch((error) => {
-      dispatch(getUsers([]));
+    console.log(error)
     });
     axios
     .get(`https://truewayrealtorsapi.com/getTransactionCoordinator`)
@@ -114,30 +102,16 @@ const FetchAll = (dispatch) => {
 };
 
 const RealtorsGet = (dispatch) => {
-  const UserId = useSelector((s) => s.UserId);
-  const UserRole = useSelector((s) => s.userRole);
 
-  if(UserRole === 'Admin') {
     axios
       .get(`https://truewayrealtorsapi.com/getRealtors`)
       .then(function (response) {
         response.status == 200 || response.status == 204
-          ? dispatch(getUsers(response.data))
-          : dispatch(getUsers([]));
+          && dispatch(getUsers(response.data))
       })
       .catch((error) => {
-        dispatch(getUsers([]));
+        console.log(error)
       });
-  } else {
-    axios
-    .get(`https://truewayrealtorsapi.com/getMyUsers?UserId=${UserId}`)
-    .then(function (response) {
-      dispatch(getUsers(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
 
 };
 

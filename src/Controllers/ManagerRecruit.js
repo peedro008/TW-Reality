@@ -80,10 +80,10 @@ function ManagerRecruit(props) {
       .then(function (response) {
         response.status == 200 || response.status == 204
           ? dispatch(getUsers(response.data))
-          : dispatch(getUsers([]));
+          : console.log(response.status)
       })
       .catch((error) => {
-        dispatch(getUsers([]));
+        console.log(error)
       });
   };
 
