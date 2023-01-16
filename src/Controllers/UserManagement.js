@@ -60,6 +60,9 @@ function UserManagement() {
           } else if (res.status === 409) {
             setError('Email already exists');
             onOpenModal();
+          } else if (res.status === 502) {
+            setError('Phone already exists');
+            onOpenModal();
           } else {
             setError('Something was wrong');
             onOpenModal();
@@ -83,11 +86,13 @@ function UserManagement() {
       .then(async (res) => {
         try {
           if (res.status === 200) {
-            RealtorsGet(dispatch);
             onOpenModal();
             console.log('200')
           } else if (res.status === 409) {
             setError('Email already exists');
+            onOpenModal();
+          }  else if (res.status === 502) {
+            setError('Phone already exists');
             onOpenModal();
           } else {
             setError('Something was wrong');

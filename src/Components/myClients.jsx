@@ -39,63 +39,63 @@ const [isClosed, setIsClosed] = useState('divFilter')
   const [isContact10, setIsContact10] = useState(false);
 
   useEffect(() => {
-    if (allMyClientsFilter.find((e) => typeof e.contactDate2 === "string")) {
+    if (allMyClientsFilter?.find((e) => typeof e.contactDate2 === "string")) {
       setIsContact2(true);
     } else {
       {
         setIsContact2(false);
       }
     }
-    if (allMyClientsFilter.find((e) => typeof e.contactDate3 === "string")) {
+    if (allMyClientsFilter?.find((e) => typeof e.contactDate3 === "string")) {
       setIsContact3(true);
     } else {
       {
         setIsContact3(false);
       }
     }
-    if (allMyClientsFilter.find((e) => typeof e.contactDate4 === "string")) {
+    if (allMyClientsFilter?.find((e) => typeof e.contactDate4 === "string")) {
       setIsContact4(true);
     } else {
       {
         setIsContact4(false);
       }
     }
-    if (allMyClientsFilter.find((e) => typeof e.contactDate5 === "string")) {
+    if (allMyClientsFilter?.find((e) => typeof e.contactDate5 === "string")) {
       setIsContact5(true);
     } else {
       {
         setIsContact5(false);
       }
     }
-    if (allMyClientsFilter.find((e) => typeof e.contactDate6 === "string")) {
+    if (allMyClientsFilter?.find((e) => typeof e.contactDate6 === "string")) {
       setIsContact6(true);
     } else {
       {
         setIsContact6(false);
       }
     }
-    if (allMyClientsFilter.find((e) => typeof e.contactDate7 === "string")) {
+    if (allMyClientsFilter?.find((e) => typeof e.contactDate7 === "string")) {
       setIsContact7(true);
     } else {
       {
         setIsContact7(false);
       }
     }
-    if (allMyClientsFilter.find((e) => typeof e.contactDate8 === "string")) {
+    if (allMyClientsFilter?.find((e) => typeof e.contactDate8 === "string")) {
       setIsContact8(true);
     } else {
       {
         setIsContact8(false);
       }
     }
-    if (allMyClientsFilter.find((e) => typeof e.contactDate9 === "string")) {
+    if (allMyClientsFilter?.find((e) => typeof e.contactDate9 === "string")) {
       setIsContact9(true);
     } else {
       {
         setIsContact9(false);
       }
     }
-    if (allMyClientsFilter.find((e) => typeof e.contactDate10 === "string")) {
+    if (allMyClientsFilter?.find((e) => typeof e.contactDate10 === "string")) {
       setIsContact10(true);
     } else {
       {
@@ -209,6 +209,10 @@ const [isClosed, setIsClosed] = useState('divFilter')
                 </th>
               </tr>
               {allMyClientsFilter?.map((e, i) => {
+                let ClientHistory = e.ClientHistories.sort(function (a, b) {
+                  return b.id - a.id
+                })
+
                 return (
                   <tr
                     key={i}
@@ -228,7 +232,7 @@ const [isClosed, setIsClosed] = useState('divFilter')
                       {e.mail}
                     </td>
                     <td className="ClientName" style={{minWidth:'100px'}} scope="row">
-                      {e.updatedAt?.slice(0,10)}
+                      {ClientHistory[0].modifyDate?.slice(0,10)}
                     </td>
                     <td className="ClientName" scope="row">
                       {e.contactDate}

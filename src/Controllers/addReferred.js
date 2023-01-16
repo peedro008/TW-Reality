@@ -36,12 +36,17 @@ function AddReferred() {
         try {
           const jsonRes = await res.json();
 
-          if (res.status !== 200 && res.status !== 204) {
-            console.log("error");
-            setError('Email Already Exists')
-          } else {
+          if (res.status === 200 || res.status === 204) {
             referredGet(dispatch);
             console.log(jsonRes);
+          } else if (res.status === 409) {
+            setError("Email already exist");
+          } else if (res.status === 502) {
+            setError('Name or Phone already exists');
+          }
+          else {
+            console.log("error");
+            setError('Something was wrong')
           }
         } catch (err) {
           console.log(err);

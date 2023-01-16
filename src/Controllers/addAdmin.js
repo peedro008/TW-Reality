@@ -31,7 +31,10 @@ function AddAdminControl() {
           } else if (res.status === 409){
             setError('Email Already Exists')
             onOpenModal();
-          } else {
+          }  else if (res.status === 502) {
+            setError('Phone already exists');
+            onOpenModal();
+          }  else {
             console.log(jsonRes);
             setError('Something was wrong')
             onOpenModal();

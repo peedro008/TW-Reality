@@ -101,14 +101,13 @@ function ManagerRecruit(props) {
             const jsonRes = await res.json();
             if (res.status === 200 && res.status === 200) {
               getRefRec();
-              console.log(jsonRes);
               setMessage("Realtor added succesfully");
             } else if (res.status === 409 && res.status === 409) {
               setMessage("Email already exist");
-              console.log("email already exist");
+            } else if (res.status === 502) {
+              setMessage('Phone already exists');
             } else {
               setMessage("Something was wrong");
-              console.log(jsonRes);
             }
           } catch (err) {
             console.log(err);
