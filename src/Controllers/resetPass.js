@@ -16,7 +16,7 @@ const ResetPass = () => {
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
-  
+
   const reload = () => {
     window.history.pushState("", "", "/");
     window.location.reload();

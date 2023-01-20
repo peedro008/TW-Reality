@@ -37,6 +37,7 @@ function AddClient({
 
  
   let validation =
+    !validarEmail(form.mail) ||
     form.clientName?.length < 3 ||
     typeof form.clientName === "undefined" ||
     typeof form.addedDate === 'undefined' ||

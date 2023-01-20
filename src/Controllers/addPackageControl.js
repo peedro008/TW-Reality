@@ -5,7 +5,7 @@ import AddPackage from "../Components/addPackage";
 
 function AddPackageControl() {
   const userId = useSelector((state) => state.UserId);
-  const UserRole = useSelector((state) => state.userRole)
+  const UserRole = useSelector((state) => state.userRole);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -13,22 +13,23 @@ function AddPackageControl() {
   const [respTransactionCoord, setRespTransactionCoord] = useState([]);
 
   const Users = useSelector((e) => e.Users);
-  let options = []
-  
-{UserRole === 'Admin' ?
-options = 
-Users?.filter(
-  (f) => f.UserRole == "Realtor" || f.UserRole == "Manager"
-).map((e) => ({
-  value: e.id,
-  label: e.name,
-})) : options = 
-Users?.filter(
-  (f) => f.managerId === userId || f.id === userId
-).map((e) => ({
-  value: e.id,
-  label: e.name,
-}))}
+  let options = [];
+
+  {
+    UserRole === "Admin"
+      ? (options = Users?.filter(
+          (f) => f.UserRole == "Realtor" || f.UserRole == "Manager"
+        ).map((e) => ({
+          value: e.id,
+          label: e.name,
+        })))
+      : (options = Users?.filter(
+          (f) => f.managerId === userId || f.id === userId
+        ).map((e) => ({
+          value: e.id,
+          label: e.name,
+        })));
+  }
   // const optionsUsers = Users.map((e) => ({
   //   value: e.id,
   //   label: e.name,

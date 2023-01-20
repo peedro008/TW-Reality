@@ -19,50 +19,51 @@ function EditClientControl(props) {
   useEffect(() => {
     setForm({
       ...form,
-      ...clientData
+      ...clientData,
     });
   }, []);
 
-  
-  let optionsReason = [ {
-    value: "Buyer",
-    label: "Buyer",
-  },
-  {
-    value: "Seller",
-    label: "Seller",
-  },
-  {
-    value: "Renter",
-    label: "Renter",
-  }]
-  
+  let optionsReason = [
+    {
+      value: "Buyer",
+      label: "Buyer",
+    },
+    {
+      value: "Seller",
+      label: "Seller",
+    },
+    {
+      value: "Renter",
+      label: "Renter",
+    },
+  ];
 
-  let optionsStatus=[ {
-    value: "Showing",
-    label: "Showing",
-  },
-  {
-    value: "Pre-Qualifying",
-    label: "Pre-Qualifying",
-  },
-  {
-    value: "Under Contract",
-    label: "Under Contract",
-  },
-  {
-    value: "Closed",
-    label: "Closed",
-  },
-  {
-    value: "Archive",
-    label: "Archive",
-  },
-  {
-    value: "Listed",
-    label: "Listed",
-  }
-  ]
+  let optionsStatus = [
+    {
+      value: "Showing",
+      label: "Showing",
+    },
+    {
+      value: "Pre-Qualifying",
+      label: "Pre-Qualifying",
+    },
+    {
+      value: "Under Contract",
+      label: "Under Contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
+    },
+    {
+      value: "Archive",
+      label: "Archive",
+    },
+    {
+      value: "Listed",
+      label: "Listed",
+    },
+  ];
 
   let optionsStatusLead = [
     {
@@ -77,16 +78,16 @@ function EditClientControl(props) {
 
   const dispatchClient = () => {
     axios
-    .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
-    .then(function (response) {
-      response.status == 200 || response.status == 204
-        ? dispatch(getClients(response.data))
-        : dispatch(getClients([]));
-    })
-    .catch((error) => {
-      dispatch(getClients([]));
-    });
-  }
+      .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
+      .then(function (response) {
+        response.status == 200 || response.status == 204
+          ? dispatch(getClients(response.data))
+          : dispatch(getClients([]));
+      })
+      .catch((error) => {
+        dispatch(getClients([]));
+      });
+  };
 
   const onSubmit = () => {
     fetch(`https://truewayrealtorsapi.com/editClient`, {
@@ -132,7 +133,6 @@ function EditClientControl(props) {
       onCloseModal={onCloseModal}
       onOpenModal={onOpenModal}
       optionsReason={optionsReason}
-
       optionsStatus={optionsStatus}
       optionsStatusLead={optionsStatusLead}
       respTransactionCoord={respTransactionCoord}

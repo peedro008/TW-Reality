@@ -19,17 +19,16 @@ function ManagerRecruit(props) {
 
   const UserId = useSelector((s) => s.UserId);
 
-  const [Users, setUsers] = useState([])
+  const [Users, setUsers] = useState([]);
   const userRole = useSelector((e) => e.userRole);
-  const usersMan = useSelector((e) => e.UsersManager)
-  const usersAdm = useSelector((e) => e.Users)
+  const usersMan = useSelector((e) => e.UsersManager);
+  const usersAdm = useSelector((e) => e.Users);
 
   useEffect(() => {
-
-    if (userRole === 'Admin') {
-      setUsers(usersAdm)
+    if (userRole === "Admin") {
+      setUsers(usersAdm);
     } else {
-      setUsers(usersMan)
+      setUsers(usersMan);
     }
   }, []);
 
@@ -75,15 +74,15 @@ function ManagerRecruit(props) {
         console.log(error);
       });
 
-      axios
+    axios
       .get(`https://truewayrealtorsapi.com/getRealtors`)
       .then(function (response) {
         response.status == 200 || response.status == 204
           ? dispatch(getUsers(response.data))
-          : console.log(response.status)
+          : console.log(response.status);
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
       });
   };
 
@@ -105,7 +104,7 @@ function ManagerRecruit(props) {
             } else if (res.status === 409 && res.status === 409) {
               setMessage("Email already exist");
             } else if (res.status === 502) {
-              setMessage('Phone already exists');
+              setMessage("Phone already exists");
             } else {
               setMessage("Something was wrong");
             }

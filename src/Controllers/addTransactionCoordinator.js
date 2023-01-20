@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import TransactionCoordinatorComp from "../Components/packages/TransactionCoordinator";
 
-
 function AddTransactionCoordinator() {
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -12,29 +11,29 @@ function AddTransactionCoordinator() {
   const [form, setForm] = useState({});
   const Users = useSelector((e) => e.Users);
 
-  const options = Users.filter((f) => f.UserRole == "Realtor" ||  f.UserRole == "Manager" ).map((e) => ({
+  const options = Users.filter(
+    (f) => f.UserRole == "Realtor" || f.UserRole == "Manager"
+  ).map((e) => ({
     value: e.id,
     label: e.name,
   }));
 
+  let New_York_Time = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    timestyle: "full",
+    hourCycle: "h24",
+  });
 
-    
-    let New_York_Time = new Date().toLocaleString("en-US", {
-      timeZone: "America/New_York",
-      timestyle: "full",
-      hourCycle: "h24",
-    });
-  
-    let New_York_Date = new Date().toLocaleDateString("en-US", {
-      timeZone: "America/New_York",
-      timestyle: "full",
-      hourCycle: "h24",
-    });
+  let New_York_Date = new Date().toLocaleDateString("en-US", {
+    timeZone: "America/New_York",
+    timestyle: "full",
+    hourCycle: "h24",
+  });
 
-    useEffect(() => {
-      console.log(form)
-    }, [form])
-    
+  useEffect(() => {
+    console.log(form);
+  }, [form]);
+
   const onSubmit = () => {
     fetch(`https://truewayrealtorsapi.com/addTransactionCoordinator`, {
       method: "POST",
@@ -51,7 +50,6 @@ function AddTransactionCoordinator() {
             console.log("error");
           } else {
             console.log(jsonRes);
-
           }
         } catch (err) {
           console.log(err);
@@ -75,7 +73,6 @@ function AddTransactionCoordinator() {
       DATE={New_York_Date}
       options={options}
       Users={Users}
-      
     />
   );
 }

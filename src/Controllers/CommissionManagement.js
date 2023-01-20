@@ -32,7 +32,7 @@ function CommissionManagement() {
       commisions?.slice(paginator * 10, paginator * 10 + 10)
     );
   }, [commisions, paginator]);
-  
+
   useEffect(() => {
     if (reload === "Reload") {
       setTimeout(() => {
@@ -170,11 +170,11 @@ function CommissionManagement() {
   };
 
   const formatNumber = (q) => {
-    return q?.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD'
-    })
-   } 
+    return q?.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+  };
 
   return (
     <CommissionManagementComponent

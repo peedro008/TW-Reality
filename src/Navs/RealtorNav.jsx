@@ -128,7 +128,7 @@ function RealtorNav({ onSearch }) {
           style={{ backgroundColor: "#2b4162" }}
         />
         <div className="NAcontainer">
-          <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
+          <NavLink className="NAiconCover" to="/" activeClassName="NAavtive" exact>
             <FiGrid
               className="NAicon"
               color="rgb(134, 139, 165)"
@@ -140,14 +140,14 @@ function RealtorNav({ onSearch }) {
         {/* <span />
 
         <div className="NAcontainer">
-          <NavLink className="icons" to="/addSell" activeClassName="NAavtive">
+          <NavLink className="NAiconCover" to="/addSell" activeClassName="NAavtive">
             <FaRegMoneyBillAlt className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div> */}
         
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/addReferred"
             activeClassName="NAavtive"
           >

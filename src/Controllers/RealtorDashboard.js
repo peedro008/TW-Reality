@@ -21,7 +21,7 @@ const RealtorDashboard = () => {
     (date.getMonth() + 1) +
     "-" +
     date.getDate();
-    let ownRealtors = realtors.filter(e => e.ReferredId === UserId)
+  let ownRealtors = realtors.filter((e) => e.ReferredId === UserId);
   useEffect(() => {
     let temp1 = 0;
     let temp2 = 0;
@@ -42,7 +42,7 @@ const RealtorDashboard = () => {
         console.log(error);
       });
 
-      ownRealtors?.map((e) => {
+    ownRealtors?.map((e) => {
       e.Sells?.map((f) => {
         if (f.ClosingDate.substring(5, 7) == DATE.substring(5, 7)) {
           temp1 = temp1 + 1;

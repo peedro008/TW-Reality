@@ -13,31 +13,38 @@ function UserEditController(props) {
   const onCloseModal = () => setOpen(false);
   let data = props.location.aboutProps;
   const manId = data?.managerId;
-  const refBy = useSelector((e) => e.Users.filter(e => e.id === data?.ReferredId));
+  const refBy = useSelector((e) =>
+    e.Users.filter((e) => e.id === data?.ReferredId)
+  );
 
   useEffect(() => {
-    if (data === undefined) {window.history.go(-1); console.log('hola')}
-  }, [])
-  
+    if (data === undefined) {
+      window.history.go(-1);
+      console.log("hola");
+    }
+  }, []);
+
   const Users = useSelector((e) => e.Users);
   const optionsRealtor = Users.map((e) => ({
     value: e.id,
     label: e.name,
   }));
 
-  const optionsManager = Users.filter((f) => f.UserRole == "Manager").map((e) => ({
-    value: e.id,
-    label: e.name,
-  }));
+  const optionsManager = Users.filter((f) => f.UserRole == "Manager").map(
+    (e) => ({
+      value: e.id,
+      label: e.name,
+    })
+  );
 
   useEffect(() => {
-    setForm({...data, password: null});
+    setForm({ ...data, password: null });
   }, [data]);
 
   const onSubmit = () => {
     if (form) {
       fetch(`https://truewayrealtorsapi.com/editUser`, {
-        method: 'POST',
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },

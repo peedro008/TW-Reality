@@ -7,32 +7,27 @@ import SellsManager from "../Components/SellsManager";
 import { getSells } from "../Redux/actions";
 function SellsControlManager() {
   const allSells = useSelector((e) => e.Sells);
-  const [sells, setSells] = useState([])
+  const [sells, setSells] = useState([]);
   const Users = useSelector((e) => e.UsersManager);
-  const [myUsersSell, setMyUsersSell] = useState([])
-  const [myUsersSellPag, setMyUsersSellPag] = useState()
+  const [myUsersSell, setMyUsersSell] = useState([]);
+  const [myUsersSellPag, setMyUsersSellPag] = useState();
   const dispatch = useDispatch();
-  const [paginationSize, setpaginationSize] = useState([])
+  const [paginationSize, setpaginationSize] = useState([]);
   const [paginator, setPaginator] = useState(0);
-  const [size, setSize] = useState(10)
-  
+  const [size, setSize] = useState(10);
+
   const myUsersID = Users.map((f) => {
     return f.id;
-  })
-  console.log(myUsersSellPag)
+  });
+  console.log(myUsersSellPag);
   useEffect(() => {
-    const mySells = allSells?.filter(
-      (e) => myUsersID?.includes(e.UserId)
-    );
-    setMyUsersSell(mySells)
-  }, [allSells])
-  
-
+    const mySells = allSells?.filter((e) => myUsersID?.includes(e.UserId));
+    setMyUsersSell(mySells);
+  }, [allSells]);
 
   useEffect(() => {
-    setMyUsersSellPag(myUsersSell?.slice(paginator  * 10, paginator * 10 + 10))
-  }, [paginator, myUsersSell])
-
+    setMyUsersSellPag(myUsersSell?.slice(paginator * 10, paginator * 10 + 10));
+  }, [paginator, myUsersSell]);
 
   // const onSubmitPagination = (page) => {
   //   fetch(`https://truewayrealtorsapi.com/getSellsPaginate?page=${page}&size=${size}`, {
@@ -60,24 +55,22 @@ function SellsControlManager() {
   // };
 
   const tamañoPagination = (totalCound) => {
-    let paginita = []
-    for (let i = 0; i < totalCound/size; i++) {
-       paginita.push(i + 1);
+    let paginita = [];
+    for (let i = 0; i < totalCound / size; i++) {
+      paginita.push(i + 1);
     }
-    return paginita
-  }
-
-
+    return paginita;
+  };
 
   function currencyFormat(num) {
-    return '$' + num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
- }
- const formatNumber = (q) => {
-  return q.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD'
-  })
- } 
+    return "$" + num.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  }
+  const formatNumber = (q) => {
+    return q.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+  };
 
   return (
     <SellsManager

@@ -11,12 +11,12 @@ function ClientHistoryControl(props) {
   const dispatch = useDispatch();
   let clientData = props?.location.state.client;
   let ClientId = clientData?.ClientId;
-  const [history, setHistory] = useState([])
+  const [history, setHistory] = useState([]);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [respEditClient, setRespEditClient] = useState([]);
-  const [form, setForm] = useState([])
+  const [form, setForm] = useState([]);
 
   let optionsStatus = [
     {
@@ -58,33 +58,43 @@ function ClientHistoryControl(props) {
 
   const dispatchClient = () => {
     axios
-    .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
-    .then(function (response) {
-      response.status == 200 || response.status == 204
-        ? dispatch(getClients(response.data))
-        : dispatch(getClients([]));
-    })
-    .catch((error) => {
-      dispatch(getClients([]));
-    });
-  }
+      .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
+      .then(function (response) {
+        response.status == 200 || response.status == 204
+          ? dispatch(getClients(response.data))
+          : dispatch(getClients([]));
+      })
+      .catch((error) => {
+        dispatch(getClients([]));
+      });
+  };
   useEffect(() => {
-      fetch(`https://truewayrealtorsapi.com/getClientHistory?ClientId=${ClientId}`).then(async (res) => 
-      {
+    fetch(
+      `https://truewayrealtorsapi.com/getClientHistory?ClientId=${ClientId}`
+    )
+      .then(async (res) => {
         const jsonRes = await res.json();
-        if (res.status === 200 ) {
-          setHistory(jsonRes)
+        if (res.status === 200) {
+          setHistory(jsonRes);
         } else {
-          console.log(`Error in getClientHistory: ${res.status}`)
-          setHistory([])
+          console.log(`Error in getClientHistory: ${res.status}`);
+          setHistory([]);
         }
-      }  
-      ).catch(err => {console.log(`Error in getClientHistory: ${err}`)
-      setHistory([])});
+      })
+      .catch((err) => {
+        console.log(`Error in getClientHistory: ${err}`);
+        setHistory([]);
+      });
 
-      setForm({...form, clientType: clientData.clientType, status: clientData.status, ClientId: ClientId, Notes: ''})
-  }, [clientData])
-  
+    setForm({
+      ...form,
+      clientType: clientData.clientType,
+      status: clientData.status,
+      ClientId: ClientId,
+      Notes: "",
+    });
+  }, [clientData]);
+
   const onSubmit = () => {
     fetch(`https://truewayrealtorsapi.com/editClient`, {
       method: "POST",
@@ -95,12 +105,12 @@ function ClientHistoryControl(props) {
     }).then(async (res) => {
       try {
         if (res.status !== 200 || res.status !== 204) {
-          console.log('Client edited succesfully')
+          console.log("Client edited succesfully");
         } else {
-          console.log('Client can not be edited')
+          console.log("Client can not be edited");
         }
       } catch (err) {
-        console.log('Client can not be edited')
+        console.log("Client can not be edited");
       }
     });
 
@@ -116,14 +126,14 @@ function ClientHistoryControl(props) {
           onOpenModal();
           // Reload();
           dispatchClient();
-          setRespEditClient([true, "Client record added successfully"])
+          setRespEditClient([true, "Client record added successfully"]);
         } else {
           onOpenModal();
           setRespEditClient([false, "Error adding Record"]);
         }
       } catch (err) {
         onOpenModal();
-   
+
         setRespEditClient([false, "Error adding record"]);
       }
     });
@@ -131,9 +141,9 @@ function ClientHistoryControl(props) {
 
   return (
     <ClientHistory
-    myClientHistories={history}
-    clientData={clientData}
-    optionsStatusLead={optionsStatusLead}
+      myClientHistories={history}
+      clientData={clientData}
+      optionsStatusLead={optionsStatusLead}
       optionsStatus={optionsStatus}
       respEditClient={respEditClient}
       form={form}

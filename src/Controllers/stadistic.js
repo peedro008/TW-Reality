@@ -3,48 +3,54 @@ import { useSelector } from "react-redux";
 import StadisticComponent from "../Components/stadistic";
 
 function Stadistic() {
-  const [nothing, setNothing] = useState()
-  const [UsersByDate, setUsersByDate] = useState()
+  const [nothing, setNothing] = useState();
+  const [UsersByDate, setUsersByDate] = useState();
   const [form, setForm] = useState({});
-  const [dataDate, setDataDate] = useState()
-  const {dateFrom, dateTo} = form
-  const [paginationSize, setpaginationSize] = useState([])
+  const [dataDate, setDataDate] = useState();
+  const { dateFrom, dateTo } = form;
+  const [paginationSize, setpaginationSize] = useState([]);
   const [paginator, setPaginator] = useState(1);
-  const [commissionsPaginate, setCommissionsPaginate] = useState()
-  const [size, setSize] = useState(5)
-  const Users = useSelector(state => state.Users)
+  const [commissionsPaginate, setCommissionsPaginate] = useState();
+  const [size, setSize] = useState(5);
+  const Users = useSelector((state) => state.Users);
 
   useEffect(() => {
-    setUsersByDate(dataDate )
-  }, [dataDate])
+    setUsersByDate(dataDate);
+  }, [dataDate]);
 
   useEffect(() => {
-    setCommissionsPaginate(Users.slice((paginator - 1) * 5, (paginator - 1) * 5 + 5))
-  }, [paginator])
-  
+    setCommissionsPaginate(
+      Users.slice((paginator - 1) * 5, (paginator - 1) * 5 + 5)
+    );
+  }, [paginator]);
+
   useEffect(() => {
-    onSubmitPagination((paginator - 1) * size)
-    onSubmitPaginationSize()
-  }, [paginator])
-  
+    onSubmitPagination((paginator - 1) * size);
+    onSubmitPaginationSize();
+  }, [paginator]);
 
   const onSubmit = () => {
-    fetch(`https://truewayrealtorsapi.com/getRealtors?dateFrom=${dateFrom || '2015-01-24'}&dateTo=${dateTo || '2115-01-24'}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    fetch(
+      `https://truewayrealtorsapi.com/getRealtors?dateFrom=${
+        dateFrom || "2015-01-24"
+      }&dateTo=${dateTo || "2115-01-24"}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    })
+    )
       .then(async (res) => {
         try {
           const jsonRes = await res.json();
           if (res.status !== 200) {
             console.log("error");
-            setNothing('Nothing On This Date')
+            setNothing("Nothing On This Date");
           } else {
             console.log(jsonRes);
-            setDataDate(jsonRes)
-            setNothing()
+            setDataDate(jsonRes);
+            setNothing();
           }
         } catch (err) {
           console.log(err);
@@ -56,22 +62,25 @@ function Stadistic() {
   };
 
   const onSubmitPagination = (page) => {
-    fetch(`https://truewayrealtorsapi.com/getUsersPagination?page=${page}&size=${size}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    fetch(
+      `https://truewayrealtorsapi.com/getUsersPagination?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    })
+    )
       .then(async (res) => {
         try {
           const jsonRes = await res.json();
           if (res.status !== 200) {
             console.log("error");
-            setNothing('Nothing Here')
+            setNothing("Nothing Here");
           } else {
             // setDataDate(jsonRes.rows)
             // setpaginationSize(tamañoPagination(jsonRes.count))
-            setNothing()
+            setNothing();
           }
         } catch (err) {
           console.log(err);
@@ -87,7 +96,7 @@ function Stadistic() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     })
       .then(async (res) => {
         try {
@@ -95,7 +104,7 @@ function Stadistic() {
           if (res.status !== 200) {
             console.log("error");
           } else {
-            setpaginationSize(tamañoPagination(jsonRes.count))
+            setpaginationSize(tamañoPagination(jsonRes.count));
           }
         } catch (err) {
           console.log(err);
@@ -107,24 +116,21 @@ function Stadistic() {
   };
 
   const tamañoPagination = (totalCound) => {
-    let paginita = []
-    for (let i = 0; i < totalCound/size; i++) {
-       paginita.push(i + 1);
+    let paginita = [];
+    for (let i = 0; i < totalCound / size; i++) {
+      paginita.push(i + 1);
     }
-    return paginita
-  }
+    return paginita;
+  };
 
-  
-  const getRSells = (e) =>{
-    let temp = 0
-    
-    let UsersSale = Users.filter(i=> e.map(f => f.id === i.id))
-    console.log(UsersSale)
-    UsersSale.map(e => temp = temp + e.Sells.length)
-    return temp
-  }
+  const getRSells = (e) => {
+    let temp = 0;
 
-
+    let UsersSale = Users.filter((i) => e.map((f) => f.id === i.id));
+    console.log(UsersSale);
+    UsersSale.map((e) => (temp = temp + e.Sells.length));
+    return temp;
+  };
 
   return (
     <StadisticComponent

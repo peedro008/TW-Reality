@@ -12,23 +12,25 @@ function UserManagement() {
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
   const UserId = useSelector((e) => e.UserId);
-  const Managers = useSelector((e) => e.Users.filter(e => e.UserRole === 'Manager'));
+  const Managers = useSelector((e) =>
+    e.Users.filter((e) => e.UserRole === "Manager")
+  );
   const userRole = useSelector((e) => e.userRole);
   const [Message, setMessage] = useState("");
-  const [error, setError] = useState()
+  const [error, setError] = useState();
   const dispatch = useDispatch();
   const [Err, setErr] = useState(false);
-  const [Users, setUsers] = useState([])
-  const usersMan = useSelector((e) => e.UsersManager)
-  const usersAdm = useSelector((e) => e.Users)
+  const [Users, setUsers] = useState([]);
+  const usersMan = useSelector((e) => e.UsersManager);
+  const usersAdm = useSelector((e) => e.Users);
 
   useEffect(() => {
     setForm({ ...form, UserId: UserId, managerId: UserId });
 
-    if (userRole === 'Admin') {
-      setUsers(usersAdm)
+    if (userRole === "Admin") {
+      setUsers(usersAdm);
     } else {
-      setUsers(usersMan)
+      setUsers(usersMan);
     }
   }, []);
 
@@ -37,12 +39,12 @@ function UserManagement() {
     label: e.name,
   }));
 
-  const optionsManager = Users.filter((f) => f.UserRole == "Manager").map((e) => ({
-    value: e.id,
-    label: e.name,
-  }));
-
-  
+  const optionsManager = Users.filter((f) => f.UserRole == "Manager").map(
+    (e) => ({
+      value: e.id,
+      label: e.name,
+    })
+  );
 
   const onSubmitR = () => {
     fetch(`https://truewayrealtorsapi.com/addRealtor`, {
@@ -58,13 +60,13 @@ function UserManagement() {
             onOpenModal();
             RealtorsGet(dispatch);
           } else if (res.status === 409) {
-            setError('Email already exists');
+            setError("Email already exists");
             onOpenModal();
           } else if (res.status === 502) {
-            setError('Phone already exists');
+            setError("Phone already exists");
             onOpenModal();
           } else {
-            setError('Something was wrong');
+            setError("Something was wrong");
             onOpenModal();
           }
         } catch (err) {
@@ -87,17 +89,17 @@ function UserManagement() {
         try {
           if (res.status === 200) {
             onOpenModal();
-            console.log('200')
+            console.log("200");
           } else if (res.status === 409) {
-            setError('Email already exists');
+            setError("Email already exists");
             onOpenModal();
-          }  else if (res.status === 502) {
-            setError('Phone already exists');
+          } else if (res.status === 502) {
+            setError("Phone already exists");
             onOpenModal();
           } else {
-            setError('Something was wrong');
+            setError("Something was wrong");
             onOpenModal();
-            console.log(res)
+            console.log(res);
           }
         } catch (err) {
           console.log(err);
@@ -134,7 +136,7 @@ function UserManagement() {
       error={error}
       setErr={setErr}
       userRole={userRole}
-      optionsRealtor= {optionsRealtor}
+      optionsRealtor={optionsRealtor}
       optionsManager={optionsManager}
     />
   );

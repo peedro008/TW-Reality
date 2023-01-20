@@ -147,7 +147,7 @@ function AdminNav() {
           style={{ backgroundColor: "#2b4162" }}
         />
         <div className="NAcontainer">
-          <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
+          <NavLink className="NAiconCover" to="/" activeClassName="NAavtive" exact>
             <FiBarChart2
               className="NAicon"
               color="rgb(134, 139, 165)"
@@ -157,7 +157,7 @@ function AdminNav() {
         </div>
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/stadistic"
             activeClassName="NAavtive"
             exact
@@ -170,14 +170,14 @@ function AdminNav() {
           </NavLink>
         </div>
         <div className="NAcontainer">
-          <NavLink className="icons" to="/addSell" activeClassName="NAavtive">
+          <NavLink className="NAiconCover" to="/addSell" activeClassName="NAavtive">
             <FaRegMoneyBillAlt className="NAicon" size="20px" color="rgb(134, 139, 165)" />
           </NavLink>
         </div>
 
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/CommissionManagement"
             activeClassName="NAavtive"
           >
@@ -186,7 +186,7 @@ function AdminNav() {
         </div>
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/sells"
             activeClassName="NAavtive"
             exact
@@ -201,7 +201,7 @@ function AdminNav() {
         <span />
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/addPackage"
             activeClassName="NAavtive"
           >
@@ -212,7 +212,7 @@ function AdminNav() {
 
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/packageManagement"
             activeClassName="NAavtive"
           >
@@ -223,7 +223,7 @@ function AdminNav() {
 
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/adminManagement"
             activeClassName="NAavtive"
           >
@@ -237,7 +237,7 @@ function AdminNav() {
 
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/UsersManagement"
             activeClassName="NAavtive"
           >
@@ -250,7 +250,7 @@ function AdminNav() {
         </div>
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/clients"
             activeClassName="NAavtive"
           >

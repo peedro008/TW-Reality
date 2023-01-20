@@ -3648,3 +3648,16 @@ margin-top: 30px;
     right: -300px;
   }
 }
+
+.NAiconCover{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.NAiconCover:hover{
+  background-color: rgba(255, 255, 255, 0.855);
+  border-radius: 10px;
+}

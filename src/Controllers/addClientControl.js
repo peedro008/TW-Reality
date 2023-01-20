@@ -82,7 +82,7 @@ function AddClientControl() {
       label: "Hot Lead",
     },
   ];
-  
+
   const onSubmit = () => {
     fetch(`https://truewayrealtorsapi.com/addClient`, {
       method: "POST",

@@ -6,13 +6,13 @@ import Sells from "../Components/Sells";
 import { getSells } from "../Redux/actions";
 function SellsControl() {
   const allSells = useSelector((e) => e.Sells);
-  const [sells, setSells] = useState([])
+  const [sells, setSells] = useState([]);
   const Users = useSelector((e) => e.Users);
   const dispatch = useDispatch();
-  const [paginationSize, setpaginationSize] = useState([])
+  const [paginationSize, setpaginationSize] = useState([]);
   const [paginator, setPaginator] = useState(1);
-  const [size, setSize] = useState(10)
-  
+  const [size, setSize] = useState(10);
+
   useEffect(() => {
     axios
       .get(`https://truewayrealtorsapi.com/getSells`)
@@ -26,27 +26,28 @@ function SellsControl() {
       });
   }, []);
 
-
   useEffect(() => {
-    onSubmitPagination((paginator -1) * size)
-  }, [paginator])
-
+    onSubmitPagination((paginator - 1) * size);
+  }, [paginator]);
 
   const onSubmitPagination = (page) => {
-    fetch(`https://truewayrealtorsapi.com/getSellsPaginate?page=${page}&size=${size}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    fetch(
+      `https://truewayrealtorsapi.com/getSellsPaginate?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    })
+    )
       .then(async (res) => {
         try {
           const jsonRes = await res.json();
           if (res.status !== 200) {
             console.log(res.status);
           } else {
-            setSells(jsonRes.rows)
-            setpaginationSize(tamañoPagination(jsonRes.count))
+            setSells(jsonRes.rows);
+            setpaginationSize(tamañoPagination(jsonRes.count));
           }
         } catch (err) {
           console.log(err);
@@ -58,24 +59,22 @@ function SellsControl() {
   };
 
   const tamañoPagination = (totalCound) => {
-    let paginita = []
-    for (let i = 0; i < totalCound/size; i++) {
-       paginita.push(i + 1);
+    let paginita = [];
+    for (let i = 0; i < totalCound / size; i++) {
+      paginita.push(i + 1);
     }
-    return paginita
-  }
-
-
+    return paginita;
+  };
 
   function currencyFormat(num) {
-    return '$' + num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
- }
- const formatNumber = (q) => {
-  return q?.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD'
-  })
- } 
+    return "$" + num.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  }
+  const formatNumber = (q) => {
+    return q?.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+  };
 
   return (
     <Sells

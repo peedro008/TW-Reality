@@ -122,7 +122,7 @@ function MyClientsControl() {
 
   return (
     <MyClients
-      allMyClientsFilter={allMyClientsPag }
+      allMyClientsFilter={allMyClientsPag}
       setTypeClient={setTypeClient}
       setReasonClient={setReasonClient}
       setStatusClient={setStatusClient}
