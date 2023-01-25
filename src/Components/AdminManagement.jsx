@@ -73,7 +73,7 @@ function AdminManagement({
         </button>
       </div>
       <div
-        className="DashContainer"
+        className="DashContainerSells"
         style={{ justifyContent: "start", flexDirection: "column" }}
       >
         {typeList === "Referral" && (

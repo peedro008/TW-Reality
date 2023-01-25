@@ -21,14 +21,14 @@ function RealtorsListManager({ Referred, Users, UserId }) {
     <div className="genericDiv1">
       <div className="genericHeader" style={{ marginBottom: "50px" }}>
         <p className="genericTitle">Management</p>
-        <div className="PAYbuttonCont" style={{ justifyContent: "flex-start", marginTop: '20px', paddingLeft: '0px' }}>
+      </div>
+      <div className="PAYbuttonCont" style={{ justifyContent: "flex-start", marginLeft: '0px', marginTop:'-10px', marginBottom: '10px' }}>
         <button className="PAYbutton" onClick={() => setTypeList("Realtors")} style={{marginRight: '20px'}} >
           <p className="PAYbuttonText">Realtors</p>
         </button>
         <button className="PAYbutton" onClick={() => setTypeList("Reffered")} >
           <p className="PAYbuttonText">Referrals</p>
         </button>
-      </div>
       </div>
       <div
         className="DashContainer"
@@ -37,7 +37,7 @@ function RealtorsListManager({ Referred, Users, UserId }) {
         {typeList === "Reffered" && (
           <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
             <div style={{ flexDirection: "row" }}>
-              <p className="subTitt" style={{ marginTop: "2vh", fontSize:'18px' }}>
+            <p className="subTitt" style={{ marginTop: "2vh", fontSize:'25px', color: 'black' }}>
                 Referral list
               </p>
               <table className="table5" style={{ marginTop: "2vh", marginLeft: '0px', width: '90vw' }}>
@@ -100,7 +100,7 @@ function RealtorsListManager({ Referred, Users, UserId }) {
         {typeList === "Realtors" && (
           <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
             <div style={{ flexDirection: "row"}}>
-              <p className="subTitt" style={{ marginTop: "2vh", fontSize:'18px' }}>
+              <p className="subTitt" style={{ marginTop: "2vh", fontSize:'25px', color: 'black' }}>
                 Realtors list
               </p>
               <table className="table5" style={{ marginTop: "2vh", marginLeft: '0px', width: '90vw' }}>

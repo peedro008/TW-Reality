@@ -9,8 +9,8 @@ function MyReferrals(props) {
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{name}</p>
-        <p className="subTitt" style={{ fontSize: '18px'}}>My Referrals</p>
       </div>
+        <p className="subTittMan" style={{ fontSize: '18px'}}>My Referrals</p>
       <div className="DashContainer">
         <div className="DashSubCont" >
           <>

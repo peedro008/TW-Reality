@@ -209,7 +209,7 @@ const [isClosed, setIsClosed] = useState('divFilter')
                 </th>
               </tr>
               {allMyClientsFilter?.map((e, i) => {
-                let ClientHistory = e.ClientHistories.sort(function (a, b) {
+                let ClientHistory = e.ClientHistories?.sort(function (a, b) {
                   return b.id - a.id
                 })
 
@@ -232,7 +232,7 @@ const [isClosed, setIsClosed] = useState('divFilter')
                       {e.mail}
                     </td>
                     <td className="ClientName" style={{minWidth:'100px'}} scope="row">
-                      {ClientHistory[0].modifyDate?.slice(0,10)}
+                      {ClientHistory[0]?.modifyDate?.slice(0,10)}
                     </td>
                     <td className="ClientName" scope="row">
                       {e.contactDate}

@@ -18,7 +18,7 @@ import { AiOutlineFile } from "react-icons/ai";
 import { MdAdd } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Redux/actions";
-import { BiStats } from "react-icons/bi";
+import { BiMessageDetail, BiStats } from "react-icons/bi";
 import logo from "../assets/realtorsbig.png";
 import brokerSumo from "../assets/brokersumo.png";
 import miamiRealtors from "../assets/miamiRealtors.jpg";
@@ -33,6 +33,7 @@ function AdminNav() {
 
   const Name = useSelector((state) => state.userName);
   const Role = useSelector((state) => state.userRole);
+  const UserId = useSelector((state) => state.UserId)
 
   const logOut = () => {
     localStorage.clear();
@@ -261,7 +262,22 @@ function AdminNav() {
             />
           </NavLink>
         </div>
-   
+{
+  UserId === 1 &&
+        <div className="NAcontainer">
+          <NavLink
+            className="NAiconCover"
+            to="/chat"
+            activeClassName="NAavtive"
+          >
+            <BiMessageDetail
+              style={{ height: "25px", width: "25px" }}
+              size="35px"
+              color="rgb(134, 139, 165)"
+            />
+          </NavLink>
+        </div>
+}
       </div>
     </div>
   );

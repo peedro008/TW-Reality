@@ -34,7 +34,7 @@ function Clients({
     
       </div>
       <div
-        className="DashContainer"
+        className="DashContainerSells"
         style={{ justifyContent: "start", flexDirection: "column" }}
       >
       </div>

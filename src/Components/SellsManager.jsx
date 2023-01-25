@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { BiSearchAlt2 } from "react-icons/bi";
+import { FaMoneyBillAlt } from "react-icons/fa";
 import Select from "react-select";
 import wbill from "../assets/wbill.png";
 import Pagination from "./Pagination";
@@ -92,7 +93,7 @@ function SellsManager({
         }
        
       </div>
-      <div className="DashContainer">
+      <div className="DashContainerSells">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
             <table className="table5" style={{ marginTop: "2vh", width: '90vw', marginLeft: '0px'  }}>
@@ -181,23 +182,23 @@ function SellsManager({
       </div>
       {
         Screen.width > 1000 ?
-      <div
+        <div
         className="CardsGraficsCommision"
         style={{
           marginLeft: "20px",
           top: "100px",
-          backgroundColor: "rgba(51, 214, 159 ,0.15)",
+          backgroundColor: "rgba(0, 39, 82,0.8)",
         }}
       >
         <div
           className="dashCircle"
-          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+          style={{ backgroundColor: "#ebeff2" }}
         >
-          <img src={wbill} />
+          <FaMoneyBillAlt size='28px' color='#002752'/>
         </div>
         <div className="dashText">
-          <p className="dashCardTitle">{formatNumber(sumTotalSold)}</p>
-          <p className="dashCardText">Total Sold</p>
+        <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(sumTotalSold)}</p>
+          <p className="dashCardText" style={{color: "#ebeff2"}}>Total Sold</p>
         </div>
       </div>
       :
@@ -230,18 +231,18 @@ function SellsManager({
           style={{
             right: "300px",
             top: "100px",
-            backgroundColor: "rgba(111, 82, 237, 0.15)",
+            backgroundColor: "#84596B",
           }}
         >
-          <div
+         <div
             className="dashCircle"
-            style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+            style={{ backgroundColor: "#ebeff2" }}
           >
-            <img src={wbill} />
+            <FaMoneyBillAlt size='28px' color="#84596B"/>
           </div>
           <div className="dashText">
-            <p className="dashCardTitle">{formatNumber(sumTotalSoldSearch)}</p>
-            <p className="dashCardText">Sold On Search</p>
+            <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(sumTotalSoldSearch)}</p>
+            <p className="dashCardText" style={{color: "#ebeff2"}}>Sold On Search</p>
           </div>
         </div>
         : Search &&
@@ -282,11 +283,11 @@ function SellsManager({
           ).length > 9 &&
       <div className="PaginatorBox">
             <div className="PaginatorLeft"  onClick={()=>{paginator!==0&&setPaginator(paginator-1)}}>
-                <AiOutlineLeft  color="black" size={"20px"}/>
+                <AiOutlineLeft  color="white" size={"20px"}/>
             </div>
             <div className="PaginatorNum">{paginator + 1}</div>
             <div className="PaginatorRight" onClick={()=>{myUsersSellPag.length>9 && setPaginator(paginator+1)}}>
-                <AiOutlineRight  color="black"  size={"20px"}/>
+                <AiOutlineRight  color="white"  size={"20px"}/>
             </div>
       </div>
         }

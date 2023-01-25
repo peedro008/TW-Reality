@@ -8,8 +8,8 @@ function NewRealtors(props) {
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{props.location.state.aboutProps?.name}</p>
-        <p className="subTitt"style={{ fontSize: '18px'}}>New Realtors</p>
       </div>
+        <p className="subTittMan"style={{ fontSize: '18px'}}>New Realtors</p>
       <div className="DashContainer">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>

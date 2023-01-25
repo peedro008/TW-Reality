@@ -55,14 +55,15 @@ function ManagerGrafics({
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{`Welcome ${Name} `}</p>
-        {!selected ? (
-          <p className="subTitt">My Realtors list</p>
+       
+      </div>
+      {!selected ? (
+          <p className="subTittMan">My Realtors</p>
         ) : (
-          <p className="subTitt" style={{ fontSize: "15px", color: "#000" }}>
+          <p className="subTittMan">
             Information about: {selected.name}
           </p>
         )}
-      </div>
       <div
         className="DashContainer"
         style={{ maxWidth: "90%", flexDirection: "row" }}

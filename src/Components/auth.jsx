@@ -175,6 +175,7 @@ setReset
                   type="password"
                   placeholder="Your Password"
                   onChange={(event) => setPassword(event.target.value)}
+                  
                 />
               </div>
               <div className="buttonC">

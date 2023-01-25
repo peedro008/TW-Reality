@@ -38,7 +38,9 @@ function PackageManagement({
     <div className="genericDiv1">
       <div className="genericHeader" style={{paddingTop: '0px'}}>
         <p className="genericTitle">Package management</p>
-        <div className="inputDiv" style={{marginTop: '10px', marginBottom: '10px'}}>
+       
+      </div>
+      <div className="inputDiv" style={{marginTop: '-20px', marginBottom: '10px' ,marginLeft: '40px'}}>
           <p className="PAYtitle" >Type of Package</p>
           <Select
             onChange={(val) => {
@@ -51,7 +53,6 @@ function PackageManagement({
             placeholder="Select Package"
           />
         </div>
-      </div>
       <div
         style={{
           position: 'fixed',
@@ -67,7 +68,7 @@ function PackageManagement({
         }}
       >
       </div>
-      <div className="DashContainer">
+      <div className="DashContainerSells">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
           {

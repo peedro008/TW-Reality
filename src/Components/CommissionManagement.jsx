@@ -140,12 +140,14 @@ console.log(Commissions)
           <BiSearchAlt2 size={"30px"} style={{ marginRight: "10px" }} />{" "}
           <input
             onChange={(e) => {setSearch(e.target.value); setCommiTo(true)}}
-            placeholder='Commision or Client name...'
+            placeholder='Commision or Client...'
             style={{
               height: "25px",
               borderColor: "transparent",
               borderRadius: "10px",
               paddingInline: "8px",
+              fontSize: 15,
+                  fontFamily: "Poppins"
             }}
           ></input>
         </div>

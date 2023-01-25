@@ -89,7 +89,7 @@ function AdminGrafics({
 
   return (
     <div className="genericDivAdminGrafic">
-      <div className="genericHeader">
+      <div className="genericHeaderAdmin">
         <p className="genericTitle">{`Welcome ${Name} `}</p>
         {!selected ? (
           <>
@@ -97,7 +97,7 @@ function AdminGrafics({
               style={{
                 width: "20vw",
                 minWidth: "500px",
-                marginTop: "20px",
+                marginTop: "50px",
                 height: "35px",
                 display: "flex",
                 flexDirection: "row",
@@ -109,7 +109,7 @@ function AdminGrafics({
                 style={{ marginRight: "10px", marginTop: "10px" }}
               />
               <input
-                placeholder="Name"
+                placeholder="Type user name..."
                 onChange={(e) => setSearch(e.target.value)}
                 style={{
                   height: "25px",
@@ -118,7 +118,9 @@ function AdminGrafics({
                   paddingInline: "8px",
                   marginTop: "10px",
                   width: "200px",
-                  zIndex: 999
+                  zIndex: 999,
+                  fontSize: 15,
+                  fontFamily: "Poppins"
                 }}
               ></input>
               <Select
@@ -143,7 +145,7 @@ function AdminGrafics({
                 }}
                 className="StadSelectGrafic"
                 // defaultInputValue={yearOptions[0]}
-                placeholder="Type"
+                placeholder="Grafic type"
               />
             </div>
             <div className="CardsGraficsContainer">
@@ -330,14 +332,14 @@ function AdminGrafics({
             </div>
           </>
         ) : (
-          <p className="subTitt" style={{ fontSize: "15px", color: "#000" }}>
+          <p className="subTitt" style={{ fontSize: "18px", color: "#000", paddingTop: '20px' }}>
             Information about: {selected.name}
           </p>
         )}
       </div>
 
       <div
-        className="DashContainer"
+        className="DashContainerAdmin"
         style={{ maxWidth: "90%", flexDirection: "row" }}
       >
         {!selected ? (
@@ -583,7 +585,7 @@ function AdminGrafics({
                 minWidth: "30px",
                 minHeight: "30px",
                 position: "fixed",
-                zIndex: 9,
+                zIndex:1009,
                 left: "80px",
                 top: "17px",
                 alignSelf: "flex-start",

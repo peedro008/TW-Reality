@@ -28,10 +28,11 @@ function StadisticComponent({
 
   return (
     <div className="genericDiv1">
+        <div className="genericHeader">
+        <p className="genericTitle">Users Management</p>
+      </div>
       <div className="StadCalendarDiv">
-        <p className="StadCalendarTitle" style={{ marginBottom: "20px" }}>
-          Users Management
-        </p>
+       
         {nothing && <p className="genericTitleNothing">{nothing}</p>}
         <div style={{ display: "flex" }}>
           <div className="StadSelectCont">

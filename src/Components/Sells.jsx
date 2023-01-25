@@ -79,7 +79,7 @@ function Sells({
         }
        
       </div>
-      <div className="DashContainer">
+      <div className="DashContainerSells">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
             <table className="table5" style={{ marginTop: "2vh", width: '90vw', marginLeft: '0px'  }}>

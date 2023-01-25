@@ -11,8 +11,8 @@ function PackageMarketingDash(props) {
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{props.location.state.aboutProps.name}</p>
-        <p className="subTitt" style={{ fontSize: '18px'}}>Package Marketing list</p>
       </div>
+        <p className="subTittMan" style={{ fontSize: '18px'}}>Package Marketing list</p>
       <div className="DashContainer">
         <div className="DashSubCont">
           <>

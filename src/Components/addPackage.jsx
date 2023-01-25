@@ -36,7 +36,9 @@ function AddPackage({
     <div className="genericDiv">
       <div className="genericHeader" style={{ marginBottom: "30px" }}>
         <p className="genericTitle">Add Package</p>
-        <div className="managerInputsContainer2">
+      
+      </div>
+      <div className="managerInputsContainer2">
           <div className="inputDiv">
             <p className="PAYtitle">Type of Package</p>
             <Select
@@ -50,7 +52,6 @@ function AddPackage({
             />
           </div>
         </div>
-      </div>
       {typeOfPackage === "Marketing" && (
         <PackageMarketing
           form={form}
@@ -89,7 +90,7 @@ function AddPackage({
           opacity: "0.5",
         }}
       />
-      <BsChevronLeft
+      {/* <BsChevronLeft
         cursor="pointer"
         color="grey"
         style={{
@@ -102,7 +103,7 @@ function AddPackage({
           alignSelf: "flex-start",
         }}
         onClick={() => window.history.go(-1)}
-      />
+      /> */}
     </div>
   );
 }

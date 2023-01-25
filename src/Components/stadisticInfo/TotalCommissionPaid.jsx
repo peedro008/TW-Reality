@@ -10,8 +10,8 @@ function TotalCommisionPaid(
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{name}</p>
-        <p className="subTitt" style={{color: '#198754', fontSize: '18px'}}>Commissions Paid</p>
       </div>
+        <p className="subTittMan" style={{color: '#198754', fontSize: '18px'}}>Commissions Paid</p>
       <div className="DashContainer">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>

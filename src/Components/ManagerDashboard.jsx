@@ -24,13 +24,13 @@ function ManagerDashboardComponent({
   // const navigate = useNavigate()
   return (
     <div className="genericDiv1">
-      <div className="StadCalendarDiv">
-        <p className="StadCalendarTitle" style={{marginLeft: '20px', marginBottom: '20px', marginTop: '0px'}}>My Realtors</p>
+    <div className="genericHeader">
+        <p className="StadCalendarTitle" style={{marginBottom: '20px', marginTop: '5px'}}>My Realtors</p>
       </div>
       <div
           style={{
             display: "flex",
-            position: "absolute",
+            position: "fixed",
             right: "20px",
             top: "80px",
           }}

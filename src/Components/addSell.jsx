@@ -242,7 +242,7 @@ function AddSellComponent({
           opacity: "0.5",
         }}
       />
-      <BsChevronLeft
+      {/* <BsChevronLeft
         cursor="pointer"
         color="grey"
         style={{
@@ -255,7 +255,7 @@ function AddSellComponent({
           alignSelf: "flex-start",
         }}
         onClick={() => window.history.go(-1)}
-      />
+      /> */}
     </div>
   );
 }
