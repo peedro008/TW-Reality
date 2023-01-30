@@ -18,17 +18,11 @@ function ChatControl() {
   const [phone, setPhone] = useState("");
   const [resetInput, setResetInput] = useState("");
   const [getMyLast, setGetMyLast] = useState("");
-  const [intervalTime, setIntervalTime] = useState(0);
   const [mynuevochatconimagenes, setMynuevochatconimagenes] = useState([]);
   const socket = io("https://truewayrealtorsapi.com");
 
-  // useEffect(() => {
-  //   socket.emit("messageReceived", "Hola pelu");
-  // }, []);
+  // Get Numbers
 
-  const reset = () => {
-    setResetInput("");
-  };
   useEffect(() => {
     fetch(`https://truewayrealtorsapi.com/getClientsNumber`).then(
       async (res) => {
@@ -44,6 +38,8 @@ function ChatControl() {
       }
     );
   }, [getMyLast]);
+
+  // Send Message
 
   const onSubmit = () => {
     fetch(`https://truewayrealtorsapi.com/sendMessage`, {
@@ -68,7 +64,11 @@ function ChatControl() {
     });
   };
 
-  console.log(mynuevochatconimagenes);
+  const reset = () => {
+    setResetInput("");
+  };
+
+  // Get my Messages
 
   useEffect(() => {
     if (phone !== "") {
@@ -89,30 +89,29 @@ function ChatControl() {
     }
   }, [phone]);
 
-  const intervalo = () => {
-    let contador = 0;
-    setInterval(() => {
-      // console.log("Corriendo");
-      setIntervalTime(contador);
-      contador = contador + 1;
-    }, 10000);
+  const getMyMessag = (numb) => {
+    if (numb === phone) {
+      fetch(`https://truewayrealtorsapi.com/getMyMessages?phone=${numb}`).then(
+        async (res) => {
+          try {
+            const jsonRes = await res.json();
+            if (res.status === 200) {
+              console.log(jsonRes);
+              setMyMessages(jsonRes);
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      );
+    }
   };
-  // useEffect(() => {
-  //   if (phone !== "") {
-  //     fetch(`https://truewayrealtorsapi.com/getMyMessages?phone=${phone}`).then(
-  //       async (res) => {
-  //         try {
-  //           const jsonRes = await res.json();
-  //           if (res.status === 200) {
-  //             setMyMessages(jsonRes);
-  //           }
-  //         } catch (error) {
-  //           console.log(error);
-  //         }
-  //       }
-  //     );
-  //   }
-  // }, [intervalTime]);
+
+  // Get my multimedia files
+
+  console.log(mynuevochatconimagenes);
+
+  // Socket IO
 
   useEffect(() => {
     socket.on("newMessageSend", (message) => {
@@ -138,24 +137,6 @@ function ChatControl() {
       });
     };
   }, []);
-
-  const getMyMessag = (numb) => {
-    if (numb === phone) {
-      fetch(`https://truewayrealtorsapi.com/getMyMessages?phone=${numb}`).then(
-        async (res) => {
-          try {
-            const jsonRes = await res.json();
-            if (res.status === 200) {
-              console.log(jsonRes);
-              setMyMessages(jsonRes);
-            }
-          } catch (error) {
-            console.log(error);
-          }
-        }
-      );
-    }
-  };
 
   return (
     <Chat
