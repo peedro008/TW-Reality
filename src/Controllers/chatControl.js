@@ -19,6 +19,7 @@ function ChatControl() {
   const [resetInput, setResetInput] = useState("");
   const [getMyLast, setGetMyLast] = useState("");
   const [intervalTime, setIntervalTime] = useState(0);
+  const [mynuevochatconimagenes, setMynuevochatconimagenes] = useState([]);
   const socket = io("https://truewayrealtorsapi.com");
 
   // useEffect(() => {
@@ -67,7 +68,7 @@ function ChatControl() {
     });
   };
 
-  console.log();
+  console.log(mynuevochatconimagenes);
 
   useEffect(() => {
     if (phone !== "") {
@@ -145,6 +146,7 @@ function ChatControl() {
           try {
             const jsonRes = await res.json();
             if (res.status === 200) {
+              console.log(jsonRes);
               setMyMessages(jsonRes);
             }
           } catch (error) {

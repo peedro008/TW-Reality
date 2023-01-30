@@ -20,7 +20,10 @@ function AddClient({
   optionsStatusLead,
   onCloseModal,
   respTransactionCoord,
-  validarEmail
+  validarEmail,
+  optionsStatusListing,
+  optionsStatusSelling,
+  optionsStatusRent,
 }) {
 
   const [checkedOne, setCheckedOne] = useState(false);
@@ -107,6 +110,17 @@ function AddClient({
           </div>
           <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
+            <p className="PAYtitle">Address</p>
+            <input
+              
+              onChange={(e) => {
+                setForm({ ...form, address: e.target.value });
+              }}
+              placeholder="Type Address"
+              className="AQinputPackage"
+            ></input>
+          </div>
+          <div className="inputDiv">
             <p className="PAYtitle">Added Date</p>
             <input
               type={"date"}
@@ -132,7 +146,13 @@ function AddClient({
             <p className="PAYtitle">Status</p>
             <Select
               onChange={(val) => setForm({ ...form, status: val.value })}
-              options={form.clientType === 'Client' ? optionsStatus : optionsStatusLead}
+              options={
+                form?.reason === "Buyer"
+                  ? optionsStatusListing
+                  : form?.reason === "Seller"
+                  ? optionsStatusSelling
+                  : optionsStatusRent
+              }
               name={"Realtor Name"}
               className="PAYselect2"
               placeholder="Select Status"
@@ -208,7 +228,7 @@ function AddClient({
         </>
           }
 
-            <NavLink style={{ textDecoration: "none", color: "#000", alignSelf: 'center' }} to={"/clients"}>
+            <NavLink style={{ textDecoration: "none", color: "#000", alignSelf: 'center' }} to={"/clientsManagement"}>
           <button className="modalButton">
               Continue
           </button>
@@ -224,6 +244,7 @@ function AddClient({
           bottom: 0,
           width: "428px",
           opacity: "0.5",
+        
         }}
       />
       <BsChevronLeft
@@ -233,10 +254,11 @@ function AddClient({
           minWidth: "30px",
           minHeight: "30px",
           position: "fixed",
-          zIndex: 9,
+          zIndex: 1009,
           left: "80px",
           top: "17px",
           alignSelf: "flex-start",
+          zIndex: '1000'
         }}
         onClick={() => window.history.go(-1)}
       />

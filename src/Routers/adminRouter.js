@@ -24,7 +24,6 @@ import ReferredEditControl from "../Controllers/ReferredEdit";
 import ManagerEditController from "../Controllers/ManagerEdit";
 import SellsControl from "../Controllers/SellsControl";
 import AddClientControl from "../Controllers/addClientControl";
-import Clients from "../Components/Clients";
 import MyClientsControl from "../Controllers/myClientsControl";
 import EditClientControl from "../Controllers/editClientControl";
 import logo from "../assets/realtorsBlanco.png";
@@ -139,7 +138,6 @@ const AdminRouter = () => {
           path="/totalCommissionUnpaid"
           component={TotalCommisionUnpaid}
         />
-        <Route exact path="/clients" component={Clients} />
         <Route exact path="/addClient" component={AddClientControl} />
         <Route exact path="/clientsManagement" component={MyClientsControl} />
         <Route exact path="/editClient" component={EditClientControl} />

@@ -6,6 +6,7 @@ import CrossMark from "../assets/cross-mark.png";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { AiOutlineFilter, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { BiSearchAlt2 } from "react-icons/bi";
 const MyClients = ({
   allMyClientsFilter,
   paginator,
@@ -16,6 +17,7 @@ const MyClients = ({
   setReasonClient,
   setStatusClient,
   filterOn,
+  setSearchName
 }) => {
   console.log(allMyClientsFilter)
   const history = useHistory();
@@ -117,7 +119,10 @@ const [isClosed, setIsClosed] = useState('divFilter')
       <div className="genericHeader">
         <p className="genericTitle">My Clients</p>
       </div>
-
+      <div class="input-wrapper-mc">
+            <input type="search" class="inputContact" onChange={(e) => setSearchName(e.target.value)} />
+            <BiSearchAlt2 size={"20px"} className="input-icon-mc" onClick={() => filterOn()} />
+          </div>
       <div>
         <>
           <table
@@ -391,7 +396,7 @@ const [isClosed, setIsClosed] = useState('divFilter')
         <div
           className="PaginatorRight"
           onClick={() => {
-            if (allMyClientsFilter?.length === 5) {
+            if (allMyClientsFilter?.length === 10) {
               setPaginator(paginator + 1);
             }
           }}
@@ -410,20 +415,12 @@ const [isClosed, setIsClosed] = useState('divFilter')
           opacity: "0.5",
         }}
       />
-      <BsChevronLeft
-        cursor="pointer"
-        color="grey"
-        style={{
-          minWidth: "30px",
-          minHeight: "30px",
-          position: "fixed",
-          zIndex: 9,
-          left: "80px",
-          top: "17px",
-          alignSelf: "flex-start",
-        }}
-        onClick={() => window.history.go(-1)}
-      />
+
+       <NavLink style={{ textDecoration: "none", color: "#000", position: 'absolute', right: '100px', top: '85px', }} to={"/addClient"}>
+        <button className="PAYbutton" style={{marginLeft: '50px'}}>
+        <p className="PAYbuttonText">Add Client</p>
+        </button>
+            </NavLink>
        <AiOutlineFilter
        style={{
         cursor:'pointer',

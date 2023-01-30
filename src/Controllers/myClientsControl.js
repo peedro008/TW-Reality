@@ -10,12 +10,13 @@ function MyClientsControl() {
   const [paginator, setPaginator] = useState(0);
   const [allMyClientsFilter, setAllMyClientsFilter] = useState(allMyClients);
   const [allMyClientsPag, setAllMyClientsPag] = useState(
-    allMyClientsFilter?.slice(0, 5)
+    allMyClientsFilter?.slice(0, 10)
   );
   const [isFilter, setIsFilter] = useState(false);
   const [typeClient, setTypeClient] = useState("");
   const [reasonClient, setReasonClient] = useState("");
   const [statusClient, setStatusClient] = useState("");
+  const [searchName, setSearchName] = useState("");
 
   let optionsReason = [
     {
@@ -89,15 +90,18 @@ function MyClientsControl() {
         .filter((e) =>
           e.clientType.toLowerCase().includes(typeClient?.toLowerCase())
         )
+        .filter((e) =>
+          e.clientName.toLowerCase().includes(searchName?.toLowerCase())
+        )
     );
   };
 
   useEffect(() => {
     if (isFilter !== true) {
-      const offset = 5;
+      const offset = 10;
       fetch(
         `https://truewayrealtorsapi.com/getMyClients?UserId=${userId}&offset=${offset}&page=${
-          paginator * 5
+          paginator * 10
         }`
       ).then(async (res) => {
         try {
@@ -116,7 +120,7 @@ function MyClientsControl() {
 
   useEffect(() => {
     setAllMyClientsPag(
-      allMyClientsFilter?.slice(paginator * 5, paginator * 5 + 5)
+      allMyClientsFilter?.slice(paginator * 10, paginator * 10 + 10)
     );
   }, [paginator, allMyClientsFilter]);
 
@@ -132,6 +136,7 @@ function MyClientsControl() {
       optionsStatus={optionsStatus}
       filterOn={filterOn}
       isFilter={isFilter}
+      setSearchName={setSearchName}
     />
   );
 }

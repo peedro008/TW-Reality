@@ -252,7 +252,7 @@ function AdminNav() {
         <div className="NAcontainer">
           <NavLink
             className="NAiconCover"
-            to="/clients"
+            to="/clientsManagement"
             activeClassName="NAavtive"
           >
             <FaChild

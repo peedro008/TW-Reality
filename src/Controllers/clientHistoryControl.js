@@ -11,12 +11,29 @@ function ClientHistoryControl(props) {
   const dispatch = useDispatch();
   let clientData = props?.location.state.client;
   let ClientId = clientData?.ClientId;
+  const [clientDataReload, setClientDataReload] = useState();
+  const [reloadInfo, setReloadInfo] = useState("");
   const [history, setHistory] = useState([]);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [respEditClient, setRespEditClient] = useState([]);
   const [form, setForm] = useState([]);
+
+  let optionsReason = [
+    {
+      value: "Buyer",
+      label: "Buyer",
+    },
+    {
+      value: "Seller",
+      label: "Seller",
+    },
+    {
+      value: "Renter",
+      label: "Renter",
+    },
+  ];
 
   let optionsStatus = [
     {
@@ -45,16 +62,67 @@ function ClientHistoryControl(props) {
     },
   ];
 
-  let optionsStatusLead = [
+  let optionsStatusListing = [
     {
-      value: "Entry Level",
-      label: "Entry Level",
+      value: "Active / Listed",
+      label: "Active / Listed",
     },
     {
-      value: "Hot Lead",
-      label: "Hot Lead",
+      value: "Under contract",
+      label: "Under contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
     },
   ];
+
+  let optionsStatusSelling = [
+    {
+      value: "Pre-qualifying",
+      label: "Pre-qualifying",
+    },
+    {
+      value: "Showing",
+      label: "Showing",
+    },
+    {
+      value: "Under contract",
+      label: "Under contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
+    },
+  ];
+  let optionsStatusRent = [
+    {
+      value: "Under contract",
+      label: "Under contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
+    },
+  ];
+  console.log(form);
+  useEffect(() => {
+    fetch(`https://truewayrealtorsapi.com/getClient?ClientId=${ClientId}`)
+      .then(async (res) => {
+        const jsonRes = await res.json();
+        if (res.status === 200) {
+          setClientDataReload(jsonRes[0]);
+          setHistory(jsonRes[0].ClientHistories.reverse());
+        } else {
+          console.log(`Error in getClientHistory: ${res.status}`);
+          setClientDataReload([]);
+        }
+      })
+      .catch((err) => {
+        console.log(`Error in getClientHistory: ${err}`);
+        setClientDataReload([]);
+      });
+  }, [reloadInfo]);
 
   const dispatchClient = () => {
     axios
@@ -69,31 +137,17 @@ function ClientHistoryControl(props) {
       });
   };
   useEffect(() => {
-    fetch(
-      `https://truewayrealtorsapi.com/getClientHistory?ClientId=${ClientId}`
-    )
-      .then(async (res) => {
-        const jsonRes = await res.json();
-        if (res.status === 200) {
-          setHistory(jsonRes);
-        } else {
-          console.log(`Error in getClientHistory: ${res.status}`);
-          setHistory([]);
-        }
-      })
-      .catch((err) => {
-        console.log(`Error in getClientHistory: ${err}`);
-        setHistory([]);
-      });
-
     setForm({
       ...form,
-      clientType: clientData.clientType,
-      status: clientData.status,
+      clientType: clientDataReload?.clientType,
+      status: clientDataReload?.status,
+      reason: clientDataReload?.reason,
       ClientId: ClientId,
       Notes: "",
     });
-  }, [clientData]);
+  }, [clientDataReload]);
+
+  console.log(form);
 
   const onSubmit = () => {
     fetch(`https://truewayrealtorsapi.com/editClient`, {
@@ -125,6 +179,7 @@ function ClientHistoryControl(props) {
         if (res.status === 200) {
           onOpenModal();
           // Reload();
+          setReloadInfo(history.length + 1);
           dispatchClient();
           setRespEditClient([true, "Client record added successfully"]);
         } else {
@@ -142,15 +197,19 @@ function ClientHistoryControl(props) {
   return (
     <ClientHistory
       myClientHistories={history}
-      clientData={clientData}
-      optionsStatusLead={optionsStatusLead}
+      clientData={clientDataReload}
       optionsStatus={optionsStatus}
+      optionsStatusListing={optionsStatusListing}
+      optionsStatusSelling={optionsStatusSelling}
+      optionsStatusRent={optionsStatusRent}
+      optionsReason={optionsReason}
       respEditClient={respEditClient}
       form={form}
       setForm={setForm}
       onCloseModal={onCloseModal}
       onSubmit={onSubmit}
       open={open}
+      setReloadInfo={setReloadInfo}
     />
   );
 }

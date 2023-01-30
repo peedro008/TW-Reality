@@ -83,6 +83,50 @@ function AddClientControl() {
     },
   ];
 
+  let optionsStatusListing = [
+    {
+      value: "Active / Listed",
+      label: "Active / Listed",
+    },
+    {
+      value: "Under contract",
+      label: "Under contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
+    },
+  ];
+
+  let optionsStatusSelling = [
+    {
+      value: "Pre-qualifying",
+      label: "Pre-qualifying",
+    },
+    {
+      value: "Showing",
+      label: "Showing",
+    },
+    {
+      value: "Under contract",
+      label: "Under contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
+    },
+  ];
+  let optionsStatusRent = [
+    {
+      value: "Under contract",
+      label: "Under contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
+    },
+  ];
+
   const onSubmit = () => {
     fetch(`https://truewayrealtorsapi.com/addClient`, {
       method: "POST",
@@ -136,6 +180,9 @@ function AddClientControl() {
       onOpenModal={onOpenModal}
       optionsReason={optionsReason}
       optionsStatus={optionsStatus}
+      optionsStatusListing={optionsStatusListing}
+      optionsStatusSelling={optionsStatusSelling}
+      optionsStatusRent={optionsStatusRent}
       optionsStatusLead={optionsStatusLead}
       respTransactionCoord={respTransactionCoord}
       validarEmail={validarEmail}

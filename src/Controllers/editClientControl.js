@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import EditClient from "../Components/editClient";
 import { getClients } from "../Redux/actions";
 
-function EditClientControl(props) {
+function EditClientControl({ clientData, setReloadInfo, setNewHistory }) {
   const userId = useSelector((state) => state.UserId);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -13,7 +13,7 @@ function EditClientControl(props) {
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({});
   const [respTransactionCoord, setRespTransactionCoord] = useState([]);
-  let clientData = props?.location.state.client;
+  // let clientData = props?.location.state.client;
   console.log(form);
 
   useEffect(() => {
@@ -63,16 +63,53 @@ function EditClientControl(props) {
       value: "Listed",
       label: "Listed",
     },
+    {
+      value: "Active / Listed",
+      label: "Active / Listed",
+    },
   ];
 
-  let optionsStatusLead = [
+  let optionsStatusListing = [
     {
-      value: "Entry Level",
-      label: "Entry Level",
+      value: "Active / Listed",
+      label: "Active / Listed",
     },
     {
-      value: "Hot Lead",
-      label: "Hot Lead",
+      value: "Under contract",
+      label: "Under contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
+    },
+  ];
+
+  let optionsStatusSelling = [
+    {
+      value: "Pre-qualifying",
+      label: "Pre-qualifying",
+    },
+    {
+      value: "Showing",
+      label: "Showing",
+    },
+    {
+      value: "Under contract",
+      label: "Under contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
+    },
+  ];
+  let optionsStatusRent = [
+    {
+      value: "Under contract",
+      label: "Under contract",
+    },
+    {
+      value: "Closed",
+      label: "Closed",
     },
   ];
 
@@ -134,11 +171,15 @@ function EditClientControl(props) {
       onOpenModal={onOpenModal}
       optionsReason={optionsReason}
       optionsStatus={optionsStatus}
-      optionsStatusLead={optionsStatusLead}
       respTransactionCoord={respTransactionCoord}
       validarEmail={validarEmail}
       userId={userId}
       clientData={clientData}
+      setReloadInfo={setReloadInfo}
+      setNewHistory={setNewHistory}
+      optionsStatusListing={optionsStatusListing}
+      optionsStatusSelling={optionsStatusSelling}
+      optionsStatusRent={optionsStatusRent}
     />
   );
 }

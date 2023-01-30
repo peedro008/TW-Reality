@@ -124,10 +124,10 @@ function AddRealtorComponent({
           minWidth: "30px",
           minHeight: "30px",
           position: "fixed",
-          zIndex: 9,
           left: "80px",
           top: "17px",
           alignSelf: "flex-start",
+          zIndex: 1009,
         }}
         onClick={() => window.history.go(-1)}
       />

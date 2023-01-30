@@ -181,6 +181,7 @@ function AddAdmin({
         style={{
           minWidth: "30px",
           minHeight: "30px",
+          zIndex: 1009,
           position: "fixed",
           zIndex: 9,
           left: "80px",

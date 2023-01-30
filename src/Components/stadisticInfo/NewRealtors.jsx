@@ -65,7 +65,7 @@ function NewRealtors(props) {
           minWidth: "30px",
           minHeight: "30px",
           position: "fixed",
-          zIndex: 9,
+          zIndex: 1009,
           left: "80px",
           top: "17px",
           alignSelf: "flex-start",

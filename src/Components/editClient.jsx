@@ -16,15 +16,24 @@ function EditClient({
   onSubmit,
   optionsReason,
   optionsStatus,
-  optionsStatusLead,
+  
   onCloseModal,
   respTransactionCoord,
   validarEmail,
-  clientData
+  clientData,
+  setNewHistory,
+  setReloadInfo,
+  optionsStatusListing,
+  optionsStatusSelling,
+  optionsStatusRent,
 }) {
 
   const [checkedOne, setCheckedOne] = useState(clientData.clientType);
-
+  let New_York_Time = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    timestyle: "full",
+    hourCycle: "h24",
+  });
 
   const handleChangeOne = () => {
     setCheckedOne('Client');
@@ -68,10 +77,8 @@ function EditClient({
     typeof form.status === "undefined";
 
   return (
-    <div className="genericDiv">
-       <div className="genericHeader" style={{ marginBottom: "30px" }}>
-        <p className="genericTitle">Edit Client</p>
-      </div>
+    <>
+
       <div className="managerInputsContainer">
         <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
@@ -105,6 +112,18 @@ function EditClient({
               placeholder="Phone"
               onChange={(e) => {
                 setForm({ ...form, phone: e.target.value });
+              }}
+              className="AQinputPackage"
+            ></input>
+            <p className="FORMerror"></p>
+          </div>
+          <div className="inputDiv">
+            <p className="PAYtitle">Address</p>
+            <input
+             defaultValue={clientData?.address}
+              placeholder="Address"
+              onChange={(e) => {
+                setForm({ ...form, address: e.target.value });
               }}
               className="AQinputPackage"
             ></input>
@@ -410,7 +429,13 @@ function EditClient({
             <Select
             defaultValue={optionsStatus[optionsStatus.findIndex(x => x.value === clientData.status)]}
               onChange={(val) => setForm({ ...form, status: val.value })}
-              options={form.clientType === 'Client' ? optionsStatus : optionsStatusLead}
+              options={
+                form?.reason === "Buyer"
+                  ? optionsStatusListing
+                  : form?.reason === "Seller"
+                  ? optionsStatusSelling
+                  : optionsStatusRent
+              }
               name={"Realtor Name"}
               className="PAYselect2"
               placeholder="Select Client Type"
@@ -476,11 +501,10 @@ function EditClient({
         </>
           }
 
-            <NavLink style={{ textDecoration: "none", color: "#000", alignSelf: 'center' }} to={"/clients"}>
-          <button className="modalButton">
+          <button className="modalButton"  onClick={() => {setNewHistory(''); setReloadInfo(New_York_Time)}}>
               Continue
           </button>
-            </NavLink>
+      
         </div>
       </Modal>
       <img
@@ -501,15 +525,16 @@ function EditClient({
           minWidth: "30px",
           minHeight: "30px",
           position: "fixed",
-          zIndex: 9,
+          zIndex: 1009,
           left: "80px",
           top: "17px",
           alignSelf: "flex-start",
+          
         }}
         onClick={() => window.history.go(-1)}
       />
     </div>
-    </div>
+    </>
   );
 }
 
