@@ -33,7 +33,7 @@ function AdminNav() {
 
   const Name = useSelector((state) => state.userName);
   const Role = useSelector((state) => state.userRole);
-  const UserId = useSelector((state) => state.UserId)
+  const UserId = useSelector((state) => state.UserId);
 
   const logOut = () => {
     localStorage.clear();
@@ -44,78 +44,105 @@ function AdminNav() {
     <div style={{ display: "flex" }}>
       <div className="topbar">
         <div style={{ paddingRight: "40px", display: "flex" }}>
-        <div className="circleLink" style={{marginBottom: '25px',marginRight:'100px', marginTop: '20px'}}>
-      <a href="https://forms.floridarealtors.org/index/signin" target='_blank'>
-        <img
-          className="imageLink"
-          src={formSimplicity}
-          alt={"logo"}
-          style={{height: 'auto', width: '120px'}}
-        />
-            </a>
-      </div>
-
-        <div className="circleLink" style={{marginBottom: '10px',marginRight:'100px', marginTop: '20px'}}>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZxHssfWU5-ZyJ_b3vYtYsSUiyFZu4k1CDJ1rRviBQbbV70w/viewform?vc=0&c=0&w=1&flr=0" target='_blank'>
-        <img
-          className="imageLink"
-          src={trueWayMarketing}
-          alt={"logo"}
-          style={{height: 'auto', width: '120px'}}
-        />
-            </a>
-      </div>
-      <div className="circleLink" style={{marginBottom: '0px', marginRight:'95px'}}>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfohgaggb5AGraI-wzMDXdxch6LPgbcMH5lj5ZJLlGijFSGew/viewform?vc=0&c=0&w=1&flr=0" target='_blank'>
-        <img
-          className="imageLink"
-          src={trueWayRealtors}
-          alt={"logo"}
-          style={{height: '40px', width: '120px' }}
-        />
-            </a>
-      </div>
-          <div className="circleLink">
-          <a href="https://www.miamirealtors.com/" target='blank'>
-
-            <img
-              className="imageLink"
-              src={miamiRealtors}
-              alt={"logo"}
-              style={{ backgroundColor: "#2b4162" }}
+          <div
+            className="circleLink"
+            style={{
+              marginBottom: "25px",
+              marginRight: "120px",
+              marginTop: "20px",
+            }}
+          >
+            <a
+              href="https://forms.floridarealtors.org/index/signin"
+              target="_blank"
+            >
+              <img
+                className="imageLink"
+                src={formSimplicity}
+                alt={"logo"}
+                style={{ height: "auto", width: "120px" }}
               />
-              </a>
-     
+            </a>
+          </div>
+
+          <div
+            className="circleLink"
+            style={{
+              marginBottom: "13px",
+              marginRight: "120px",
+              marginTop: "20px",
+            }}
+          >
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdZxHssfWU5-ZyJ_b3vYtYsSUiyFZu4k1CDJ1rRviBQbbV70w/viewform?vc=0&c=0&w=1&flr=0"
+              target="_blank"
+            >
+              <img
+                className="imageLink"
+                src={trueWayMarketing}
+                alt={"logo"}
+                style={{ height: "auto", width: "120px" }}
+              />
+            </a>
+          </div>
+          <div
+            className="circleLink"
+            style={{ marginBottom: "0px", marginRight: "115px" }}
+          >
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfohgaggb5AGraI-wzMDXdxch6LPgbcMH5lj5ZJLlGijFSGew/viewform?vc=0&c=0&w=1&flr=0"
+              target="_blank"
+            >
+              <img
+                className="imageLink"
+                src={trueWayRealtors}
+                alt={"logo"}
+                style={{ height: "40px", width: "120px" }}
+              />
+            </a>
           </div>
           <div className="circleLink">
-          <a href="https://myrealtordash.clareityiam.net/idp/login" target='blank'>
-            <img
-              className="imageLink"
-              src={myRealtorsDash}
-              alt={"logo"}
-              style={{ backgroundColor: "#2b4162" }}
-            />
-                </a>
+            <a href="https://www.miamirealtors.com/" target="blank">
+              <img
+                className="imageLink"
+                src={miamiRealtors}
+                alt={"logo"}
+                style={{ backgroundColor: "#2b4162" }}
+              />
+            </a>
           </div>
           <div className="circleLink">
-          <a href="https://app.kvcore.com/" target='blank'>
-            <img
-              className="imageLink"
-              src={kvCore}
-              alt={"logo"}
-              style={{ backgroundColor: "#2b4162" }}
-            />
-                </a>
+            <a
+              href="https://myrealtordash.clareityiam.net/idp/login"
+              target="blank"
+            >
+              <img
+                className="imageLink"
+                src={myRealtorsDash}
+                alt={"logo"}
+                style={{ backgroundColor: "#2b4162" }}
+              />
+            </a>
           </div>
           <div className="circleLink">
-          <a href="https://www.brokersumo.com/#/dashboard" target='blank'>
-            <img
-              className="imageLink"
-              src={brokerSumo}
-              alt={"logo"}
-              style={{ backgroundColor: "#2b4162" }}
-            />
-                </a>
+            <a href="https://app.kvcore.com/" target="blank">
+              <img
+                className="imageLink"
+                src={kvCore}
+                alt={"logo"}
+                style={{ backgroundColor: "#2b4162" }}
+              />
+            </a>
+          </div>
+          <div className="circleLink">
+            <a href="https://www.brokersumo.com/#/dashboard" target="blank">
+              <img
+                className="imageLink"
+                src={brokerSumo}
+                alt={"logo"}
+                style={{ backgroundColor: "#2b4162" }}
+              />
+            </a>
           </div>
         </div>
         <div style={{ paddingRight: "40px", display: "flex" }}>
@@ -142,13 +169,17 @@ function AdminNav() {
       <div className="sidebar">
         <img
           className="image"
-        
           src={logo}
           alt={"logo"}
           style={{ backgroundColor: "#2b4162" }}
         />
         <div className="NAcontainer">
-          <NavLink className="NAiconCover" to="/" activeClassName="NAavtive" exact>
+          <NavLink
+            className="NAiconCover"
+            to="/"
+            activeClassName="NAavtive"
+            exact
+          >
             <FiBarChart2
               className="NAicon"
               color="rgb(134, 139, 165)"
@@ -171,8 +202,16 @@ function AdminNav() {
           </NavLink>
         </div>
         <div className="NAcontainer">
-          <NavLink className="NAiconCover" to="/addSell" activeClassName="NAavtive">
-            <FaRegMoneyBillAlt className="NAicon" size="20px" color="rgb(134, 139, 165)" />
+          <NavLink
+            className="NAiconCover"
+            to="/addSell"
+            activeClassName="NAavtive"
+          >
+            <FaRegMoneyBillAlt
+              className="NAicon"
+              size="20px"
+              color="rgb(134, 139, 165)"
+            />
           </NavLink>
         </div>
 
@@ -182,7 +221,11 @@ function AdminNav() {
             to="/CommissionManagement"
             activeClassName="NAavtive"
           >
-            <FaWallet className="NAicon" size="25px" color="rgb(134, 139, 165)" />
+            <FaWallet
+              className="NAicon"
+              size="25px"
+              color="rgb(134, 139, 165)"
+            />
           </NavLink>
         </div>
         <div className="NAcontainer">
@@ -206,7 +249,11 @@ function AdminNav() {
             to="/addPackage"
             activeClassName="NAavtive"
           >
-            <FaBoxOpen className="NAicon" size="25px" color="rgb(134, 139, 165)" />
+            <FaBoxOpen
+              className="NAicon"
+              size="25px"
+              color="rgb(134, 139, 165)"
+            />
           </NavLink>
         </div>
         <span />
@@ -217,7 +264,11 @@ function AdminNav() {
             to="/packageManagement"
             activeClassName="NAavtive"
           >
-            <FaBoxes className="NAicon" size="25px" color="rgb(134, 139, 165)" />
+            <FaBoxes
+              className="NAicon"
+              size="25px"
+              color="rgb(134, 139, 165)"
+            />
           </NavLink>
         </div>
         <span />
@@ -262,22 +313,21 @@ function AdminNav() {
             />
           </NavLink>
         </div>
-{
-  UserId === 1 &&
-        <div className="NAcontainer">
-          <NavLink
-            className="NAiconCover"
-            to="/chat"
-            activeClassName="NAavtive"
-          >
-            <BiMessageDetail
-              style={{ height: "25px", width: "25px" }}
-              size="35px"
-              color="rgb(134, 139, 165)"
-            />
-          </NavLink>
-        </div>
-}
+        {UserId === 1 && (
+          <div className="NAcontainer">
+            <NavLink
+              className="NAiconCover"
+              to="/chat"
+              activeClassName="NAavtive"
+            >
+              <BiMessageDetail
+                style={{ height: "25px", width: "25px" }}
+                size="35px"
+                color="rgb(134, 139, 165)"
+              />
+            </NavLink>
+          </div>
+        )}
       </div>
     </div>
   );

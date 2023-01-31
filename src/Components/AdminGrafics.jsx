@@ -7,10 +7,15 @@ import Select from "react-select";
 import Realtors from "../Charts/Realtors";
 import mask from "../assets/mask.png";
 import wbill from "../assets/wbill.png";
-import { BsChevronLeft, BsChevronRight, BsFileEarmark, BsFillPersonFill, BsFillPersonLinesFill } from "react-icons/bs";
+import {
+  BsChevronLeft,
+  BsChevronRight,
+  BsFileEarmark,
+  BsFillPersonFill,
+  BsFillPersonLinesFill,
+} from "react-icons/bs";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { AiOutlineArrowRight } from "react-icons/ai";
-
 
 function AdminGrafics({
   Referred,
@@ -19,24 +24,23 @@ function AdminGrafics({
   Users,
   selected,
   setSelected,
-  UserId
+  UserId,
 }) {
-
   const [graficType, setGraficType] = useState();
   const [graficMultiple, setGraficMultiple] = useState(true);
   const [Search, setSearch] = useState("");
   const [thisUsers, setThisUsers] = useState(Users);
-  const [sumMarketing, setSumMarketing] = useState(0)
-  const [sumTransactionCoord, setSumTransactionCoord] = useState(0)
-  const [sumTransactionCoordActive, setSumTransactionCoordActive] = useState(0)
-  const [styleTable, setStyleTable] = useState("divTable2")
-  const [chevron, setChevron] = useState("bsChevron3")
-  const [circle, setCircle] = useState("circle4")
+  const [sumMarketing, setSumMarketing] = useState(0);
+  const [sumTransactionCoord, setSumTransactionCoord] = useState(0);
+  const [sumTransactionCoordActive, setSumTransactionCoordActive] = useState(0);
+  const [styleTable, setStyleTable] = useState("divTable2");
+  const [chevron, setChevron] = useState("bsChevron3");
+  const [circle, setCircle] = useState("circle4");
+  const [orderTable, setOrderTable] = useState("Sells");
   let Screen = window.screen;
 
-
   function goUser(f) {
-    setCircle('circle5')
+    setCircle("circle5");
     let newUs = Users?.filter((e) =>
       e.name.toLowerCase().includes(f?.toLowerCase())
     );
@@ -49,33 +53,45 @@ function AdminGrafics({
     );
   }, [Search]);
 
-  const [sumSales, setSumSales] = useState([])
+  const [sumSales, setSumSales] = useState([]);
   useEffect(() => {
     {
       Users.length > 0 &&
-       setSumSales(Users?.map((e) => e.Sells?.length).reduce(
-        (previousValue, currentValue) => previousValue + currentValue))
+        setSumSales(
+          Users?.map((e) => e.Sells?.length).reduce(
+            (previousValue, currentValue) => previousValue + currentValue
+          )
+        );
     }
-  }, [Users])
-  
+  }, [Users]);
 
-  
   useEffect(() => {
-    if(Users?.length !== 0) 
-    {  
-        let marketing = 0;
-        Users.map(e => marketing = e.PackageMarketings?.length + marketing)
-        setSumMarketing(marketing)
+    if (Users?.length !== 0) {
+      let marketing = 0;
+      Users.map((e) => (marketing = e.PackageMarketings?.length + marketing));
+      setSumMarketing(marketing);
 
-        let transaction = 0;
-        Users?.map(e => e.TransactionCoordinators?.map(f => { if(f.isSold === true) {transaction = transaction + 1}}))
-        setSumTransactionCoord(transaction)
-        
-        let transactionActive = 0;
-        Users?.map(e => e.TransactionCoordinators?.map(f => { if(f.isSold === false) {transactionActive = transactionActive + 1}}))
-        setSumTransactionCoordActive(transactionActive)
-      }
-    }, [])
+      let transaction = 0;
+      Users?.map((e) =>
+        e.TransactionCoordinators?.map((f) => {
+          if (f.isSold === true) {
+            transaction = transaction + 1;
+          }
+        })
+      );
+      setSumTransactionCoord(transaction);
+
+      let transactionActive = 0;
+      Users?.map((e) =>
+        e.TransactionCoordinators?.map((f) => {
+          if (f.isSold === false) {
+            transactionActive = transactionActive + 1;
+          }
+        })
+      );
+      setSumTransactionCoordActive(transactionActive);
+    }
+  }, []);
 
   const options = [
     { value: "All", label: "All" },
@@ -120,18 +136,18 @@ function AdminGrafics({
                   width: "200px",
                   zIndex: 999,
                   fontSize: 15,
-                  fontFamily: "Poppins"
+                  fontFamily: "Poppins",
                 }}
               ></input>
               <Select
                 styles={{
                   control: (baseStyles, state) => ({
                     ...baseStyles,
-                  colorAdjust: 'black',
-                  colorInterpolation:'black',
-                  colorScheme: 'black',
-                  colorRendering:'black',
-                  color:'black'
+                    colorAdjust: "black",
+                    colorInterpolation: "black",
+                    colorScheme: "black",
+                    colorRendering: "black",
+                    color: "black",
                   }),
                 }}
                 options={options}
@@ -149,31 +165,32 @@ function AdminGrafics({
               />
             </div>
             <div className="CardsGraficsContainer">
-            <NavLink
+              <NavLink
                 style={{ textDecoration: "none" }}
                 to={{
                   pathname: "/sells",
                   aboutProps: { referrals: "Realtors" },
                 }}
               >
-              <div
-                className="CardsGrafics2"
-                style={{ backgroundColor: " rgba(0, 39, 82,0.8)" }}
-              >
                 <div
-                  className="dashCircle"
-                  style={{ backgroundColor: "#ebeff2" }}
+                  className="CardsGrafics2"
+                  style={{ backgroundColor: " rgba(0, 39, 82,0.8)" }}
                 >
-                  <FaMoneyBillAlt size='28px' color='#002752'/>
+                  <div
+                    className="dashCircle"
+                    style={{ backgroundColor: "#ebeff2" }}
+                  >
+                    <FaMoneyBillAlt size="28px" color="#002752" />
+                  </div>
+                  <div className="dashText">
+                    {UserId !== 45 ? (
+                      <p className="dashCardTitle">{sumSales}</p>
+                    ) : (
+                      <p className="dashCardTitle">1207</p>
+                    )}
+                    <p className="dashCardText">Sales</p>
+                  </div>
                 </div>
-                <div className="dashText">
-                  {UserId !== 45 ?
-                  <p className="dashCardTitle">{sumSales}</p> :
-                  <p className="dashCardTitle">1207</p> 
-                  }
-                  <p className="dashCardText">Sales</p>
-                </div>
-              </div>
               </NavLink>
               <NavLink
                 style={{ textDecoration: "none" }}
@@ -193,14 +210,15 @@ function AdminGrafics({
                     className="dashCircle"
                     style={{ backgroundColor: "#ebeff2" }}
                   >
-                      <BsFillPersonFill size='28px' color="#D8AF4D"/>
+                    <BsFillPersonFill size="28px" color="#D8AF4D" />
                   </div>
                   <div className="dashText">
-                  {UserId !== 45 ?
-                  <p className="dashCardTitle">{Users?.length}</p> :
-                  <p className="dashCardTitle">490</p> 
-                  }
-                    
+                    {UserId !== 45 ? (
+                      <p className="dashCardTitle">{Users?.length}</p>
+                    ) : (
+                      <p className="dashCardTitle">490</p>
+                    )}
+
                     <p className="dashCardText">Realtors</p>
                   </div>
                 </div>
@@ -223,14 +241,15 @@ function AdminGrafics({
                     className="dashCircle"
                     style={{ backgroundColor: "#ebeff2" }}
                   >
-                    <BsFillPersonLinesFill size='28px' color='#B0DAF1'/>
+                    <BsFillPersonLinesFill size="28px" color="#B0DAF1" />
                   </div>
                   <div className="dashText">
-                  {UserId !== 45 ?
-                  <p className="dashCardTitle">{Referred?.length}</p> :
-                  <p className="dashCardTitle">700</p> 
-                  }
-                   
+                    {UserId !== 45 ? (
+                      <p className="dashCardTitle">{Referred?.length}</p>
+                    ) : (
+                      <p className="dashCardTitle">700</p>
+                    )}
+
                     <p className="dashCardText">Referrals</p>
                   </div>
                 </div>
@@ -240,99 +259,106 @@ function AdminGrafics({
                 style={{ textDecoration: "none" }}
                 to={{
                   pathname: "/packageManagement",
-                  state: { aboutProps: 'Marketing' },
-                }}
-                
-              >
-              <div
-                className="CardsGrafics2"
-                style={{
-                  marginLeft: "20px",
-                  backgroundColor: "#2CA58D",
+                  state: { aboutProps: "Marketing" },
                 }}
               >
                 <div
-                  className="dashCircle"
-                  style={{ backgroundColor: "#ebeff2" }}
+                  className="CardsGrafics2"
+                  style={{
+                    marginLeft: "20px",
+                    backgroundColor: "#2CA58D",
+                  }}
                 >
-                       <BsFileEarmark size='28px' color="#2CA58D"/>
+                  <div
+                    className="dashCircle"
+                    style={{ backgroundColor: "#ebeff2" }}
+                  >
+                    <BsFileEarmark size="28px" color="#2CA58D" />
+                  </div>
+                  <div className="dashText">
+                    {UserId !== 45 ? (
+                      <p className="dashCardTitle">{sumMarketing}</p>
+                    ) : (
+                      <p className="dashCardTitle">425</p>
+                    )}
+
+                    <p className="dashCardText">Marketing</p>
+                  </div>
                 </div>
-                <div className="dashText">
-                {UserId !== 45 ?
-                  <p className="dashCardTitle">{sumMarketing}</p> :
-                  <p className="dashCardTitle">425</p> 
-                  }
-                  
-                  <p className="dashCardText">Marketing</p>
-                </div>
-              </div>
               </NavLink>
 
               <NavLink
                 style={{ textDecoration: "none" }}
                 to={{
                   pathname: "/packageManagement",
-                  state: { aboutProps: 'Transaction Coordinator' },
-                }}
-              >
-              <div
-                className="CardsGrafics"
-                style={{
-                  marginLeft: "20px",
-                  backgroundColor: "#84596B",
+                  state: { aboutProps: "Transaction Coordinator" },
                 }}
               >
                 <div
-                  className="dashCircle"
-                  style={{ backgroundColor: "#ebeff2" }}
+                  className="CardsGrafics"
+                  style={{
+                    marginLeft: "20px",
+                    backgroundColor: "#84596B",
+                  }}
                 >
-                  <BiTransfer size='28px' color="#84596B"/>
+                  <div
+                    className="dashCircle"
+                    style={{ backgroundColor: "#ebeff2" }}
+                  >
+                    <BiTransfer size="28px" color="#84596B" />
+                  </div>
+                  <div className="dashText">
+                    {UserId !== 45 ? (
+                      <p className="dashCardTitle">{sumTransactionCoord}</p>
+                    ) : (
+                      <p className="dashCardTitle">890</p>
+                    )}
+
+                    <p className="dashCardText">Transaction Coordinator</p>
+                  </div>
                 </div>
-                <div className="dashText">
-                {UserId !== 45 ?
-                 <p className="dashCardTitle">{sumTransactionCoord}</p> :
-                  <p className="dashCardTitle">890</p> 
-                  }
-                  
-                  <p className="dashCardText">Transaction Coordinator</p>
-                </div>
-              </div>
               </NavLink>
 
               <NavLink
                 style={{ textDecoration: "none" }}
                 to={{
                   pathname: "/packageManagement",
-                  state: { aboutProps: 'Transaction Coordinator' },
-                }}
-              >
-              <div
-                className="CardsGrafics"
-                style={{
-                  marginLeft: "20px",
-                  backgroundColor: "#98473E",
+                  state: { aboutProps: "Transaction Coordinator" },
                 }}
               >
                 <div
-                  className="dashCircle"
-                  style={{ backgroundColor: "#ebeff2" }}
+                  className="CardsGrafics"
+                  style={{
+                    marginLeft: "20px",
+                    backgroundColor: "#98473E",
+                  }}
                 >
-                  <AiOutlineArrowRight size='28px' color="#98473E"/>
+                  <div
+                    className="dashCircle"
+                    style={{ backgroundColor: "#ebeff2" }}
+                  >
+                    <AiOutlineArrowRight size="28px" color="#98473E" />
+                  </div>
+                  <div className="dashText">
+                    {UserId !== 45 ? (
+                      <p className="dashCardTitle">
+                        {sumTransactionCoordActive}
+                      </p>
+                    ) : (
+                      <p className="dashCardTitle">370</p>
+                    )}
+
+                    <p className="dashCardText">Transaction C. Active</p>
+                  </div>
                 </div>
-                <div className="dashText">
-                {UserId !== 45 ?
-                 <p className="dashCardTitle">{sumTransactionCoordActive}</p> :
-                  <p className="dashCardTitle">370</p> 
-                  }
-       
-                  <p className="dashCardText">Transaction C. Active</p>
-                </div>
-              </div>
               </NavLink>
             </div>
           </>
         ) : (
-          <p className="subTitt" style={{ fontSize: "18px", color: "#000", paddingTop: '20px' }}>
+          <p
+            className="subTitt"
+            style={{ fontSize: "18px", color: "#000", paddingTop: "20px" }}
+          >
             Information about: {selected.name}
           </p>
         )}
@@ -377,7 +403,10 @@ function AdminGrafics({
                   >
                     Sales
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh", width: '60vw' }}>
+                  <table
+                    className="table5"
+                    style={{ marginTop: "2vh", width: "60vw" }}
+                  >
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
@@ -441,7 +470,10 @@ function AdminGrafics({
                   >
                     Recruited
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh", width: '60vw' }}>
+                  <table
+                    className="table5"
+                    style={{ marginTop: "2vh", width: "60vw" }}
+                  >
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
@@ -477,7 +509,10 @@ function AdminGrafics({
                                 {e.Sells?.length}
                               </td>
                               <td className="ClientName" scope="row">
-                                {Users?.filter(f => f.ReferredId === e.id).length}
+                                {
+                                  Users?.filter((f) => f.ReferredId === e.id)
+                                    .length
+                                }
                               </td>
                             </tr>
                           );
@@ -513,7 +548,10 @@ function AdminGrafics({
                   >
                     Referrals
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh", width: '60vw' }}>
+                  <table
+                    className="table5"
+                    style={{ marginTop: "2vh", width: "60vw" }}
+                  >
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
@@ -535,7 +573,6 @@ function AdminGrafics({
                           return (
                             <tr>
                               <td className="ClientName" scope="row">
-                                
                                 <NavLink
                                   style={{ textDecoration: "none" }}
                                   to={{
@@ -585,83 +622,264 @@ function AdminGrafics({
                 minWidth: "30px",
                 minHeight: "30px",
                 position: "fixed",
-                zIndex:1009,
+                zIndex: 1009,
                 left: "80px",
                 top: "17px",
                 alignSelf: "flex-start",
               }}
-              onClick={() => {setSelected(false); setCircle('circle4'); setStyleTable('divTable2'); setChevron("bsChevron3")}}
+              onClick={() => {
+                setSelected(false);
+                setCircle("circle4");
+                setStyleTable("divTable2");
+                setChevron("bsChevron3");
+              }}
             />
           </>
         )}
 
         {Screen.width > 1000 && (
           <>
-{ !selected &&
+            {!selected && (
+              <div className={styleTable}>
+                <table className="table6">
+                  <tbody>
+                    <tr
+                      style={{
+                        position: "fixed",
+                        top: "30.5%",
+                        backgroundColor: "rgba(0, 39, 82, 0.8)",
+                      }}
+                    >
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(0, 39, 82, 0.8)",
+                        }}
+                      >
+                        <p
+                          className="REPtype2"
+                          style={{
+                            width: "256px",
+                            color: "whitesmoke",
+                          }}
+                        >
+                          Name
+                        </p>
+                      </th>
+                      <th
+                        scope="col"
+                        className="column1"
+                        style={{
+                          width: "50px",
+                          cursor: "pointer",
+                          backgroundColor: "rgba(0, 39, 82, 0.8)",
+                        }}
+                        onClick={() => {
+                          orderTable === "Rec"
+                            ? setOrderTable("Rec2")
+                            : setOrderTable("Rec");
+                        }}
+                      >
+                        <p className="REPtype2" style={{ color: "whitesmoke" }}>
+                          Rec.
+                          {orderTable === "Rec"
+                            ? "🔽"
+                            : orderTable === "Rec2" && "🔼"}
+                        </p>
+                      </th>
+                      <th
+                        scope="col"
+                        className="column1"
+                        style={{
+                          width: "50px",
+                          cursor: "pointer",
+                          backgroundColor: "rgba(0, 39, 82, 0.8)",
+                        }}
+                        onClick={() => {
+                          orderTable === "Ref"
+                            ? setOrderTable("Ref2")
+                            : setOrderTable("Ref");
+                        }}
+                      >
+                        <p className="REPtype2" style={{ color: "whitesmoke" }}>
+                          Ref.
+                          {orderTable === "Ref"
+                            ? "🔽"
+                            : orderTable === "Ref2" && "🔼"}
+                        </p>
+                      </th>
+                      <th
+                        scope="col"
+                        className="column1"
+                        style={{
+                          width: "60px",
+                          cursor: "pointer",
+                          backgroundColor: "rgba(0, 39, 82, 0.8)",
+                        }}
+                        onClick={() => {
+                          orderTable === "Sells"
+                            ? setOrderTable("Sells2")
+                            : setOrderTable("Sells");
+                        }}
+                      >
+                        <p className="REPtype2" style={{ color: "whitesmoke" }}>
+                          Sales
+                          {orderTable === "Sells"
+                            ? "🔽"
+                            : orderTable === "Sells2" && "🔼"}
+                        </p>
+                      </th>
+                      <th
+                        scope="col"
+                        className="column1"
+                        style={{
+                          width: "50px",
+                          cursor: "pointer",
+                          backgroundColor: "rgba(0, 39, 82, 0.8)",
+                        }}
+                        onClick={() => {
+                          orderTable === "PackageMarketings"
+                            ? setOrderTable("PackageMarketings2")
+                            : setOrderTable("PackageMarketings");
+                        }}
+                      >
+                        <p className="REPtype2" style={{ color: "whitesmoke" }}>
+                          P.M.
+                          {orderTable === "PackageMarketings"
+                            ? "🔽"
+                            : orderTable === "PackageMarketings2" && "🔼"}
+                        </p>
+                      </th>
+                      <th
+                        scope="col"
+                        className="column1"
+                        style={{
+                          maxWidth: "35px",
+                          width: "35px",
+                          cursor: "pointer",
+                          backgroundColor: "rgba(0, 39, 82, 0.8)",
+                        }}
+                        onClick={() => {
+                          orderTable === "TransactionCoordinators"
+                            ? setOrderTable("TransactionCoordinators2")
+                            : setOrderTable("TransactionCoordinators");
+                        }}
+                      >
+                        <p className="REPtype2" style={{ color: "whitesmoke" }}>
+                          T.C.
+                          {orderTable === "TransactionCoordinators"
+                            ? "🔽"
+                            : orderTable === "TransactionCoordinators2" && "🔼"}
+                        </p>
+                      </th>
+                    </tr>
 
-          <div className={styleTable}>
+                    {Users?.filter((e) => e.User?.id == selected.id)
+                      .sort(function (a, b) {
+                        if (orderTable === "Sells") {
+                          return b.Sells?.length - a.Sells?.length;
+                        } else if (orderTable === "Sells2") {
+                          return a.Sells?.length - b.Sells?.length;
+                        } else if (orderTable === "PackageMarketings") {
+                          return (
+                            b.PackageMarketings?.length -
+                            a.PackageMarketings?.length
+                          );
+                        } else if (orderTable === "PackageMarketings2") {
+                          return (
+                            a.PackageMarketings?.length -
+                            b.PackageMarketings?.length
+                          );
+                        } else if (orderTable === "TransactionCoordinators") {
+                          return (
+                            b.TransactionCoordinators?.length -
+                            a.TransactionCoordinators?.length
+                          );
+                        } else if (orderTable === "TransactionCoordinators2") {
+                          return (
+                            a.TransactionCoordinators?.length -
+                            b.TransactionCoordinators?.length
+                          );
+                        } else if (orderTable === "Rec") {
+                          return (
+                            Users?.filter((f) => f.ReferredId === b.id).length -
+                            Users?.filter((f) => f.ReferredId === a.id).length
+                          );
+                        } else if (orderTable === "Rec2") {
+                          return (
+                            Users?.filter((f) => f.ReferredId === a.id).length -
+                            Users?.filter((f) => f.ReferredId === b.id).length
+                          );
+                        } else if (orderTable === "Ref") {
+                          return (
+                            Referred?.filter((f) => f.UserId == b.id).length -
+                            Referred?.filter((f) => f.UserId == a.id).length
+                          );
+                        } else if (orderTable === "Ref2") {
+                          return (
+                            Referred?.filter((f) => f.UserId == a.id).length -
+                            Referred?.filter((f) => f.UserId == b.id).length
+                          );
+                        }
+                      })
+                      ?.map((e) => {
+                        return (
+                          <tr>
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => goUser(e.name)}
+                            >
+                              {e.name}
+                            </td>
 
-         
-          <table className="table6">
-          <tbody>
-            <tr style={{position: 'fixed', top: '120px', width: '650px'}}>
-              <th scope="col" >
-                <p className="REPtype2" style={{ width: '256px', }}>Name</p>
-              </th>
-              <th scope="col" className="column1" style={{ width: '50px' }}>
-                <p className="REPtype2">Rec.</p>
-              </th>
-              <th scope="col" className="column1" style={{ width: '50px'}}>
-                <p className="REPtype2">Ref.</p>
-              </th>
-              <th scope="col" className="column1" style={{ width: '60px'}}>
-                <p className="REPtype2">Sales</p>
-              </th>
-              <th scope="col" className="column1" style={{ width: '50px'}}>
-                <p className="REPtype2">P.M.</p>
-              </th>
-              <th scope="col" className="column1" style={{maxWidth: '35px', width: '35px'}}>
-                <p className="REPtype2">T.C.</p>
-              </th>
-            </tr>
-
-            {Users?.filter((e) => e.User?.id == selected.id).sort(function (a, b) {
-              return b.Sells?.length - a.Sells?.length;
-            })?.map(
-              (e) => {
-                return (
-                  <tr>
-                    <td className="ClientName2" scope="row" onClick={() => goUser(e.name)}>
-                    
-                      
-                        {e.name}
-                    
-                    </td>
-
-                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
-                    {Users?.filter(f => f.ReferredId === e.id).length}
-                    </td>
-                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
-                    {Referred?.filter((f) => f.UserId == e.id).length}
-                    </td>
-                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '40px'}}>
-                      {e.Sells?.length}
-                    </td>
-                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
-                      {e.PackageMarketings?.length}
-                    </td>
-                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
-                      {e.TransactionCoordinators?.length}
-                    </td>
-                  </tr>
-                );
-              }
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              style={{ textAlign: "center", minWidth: "30px" }}
+                            >
+                              {
+                                Users?.filter((f) => f.ReferredId === e.id)
+                                  .length
+                              }
+                            </td>
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              style={{ textAlign: "center", minWidth: "30px" }}
+                            >
+                              {Referred?.filter((f) => f.UserId == e.id).length}
+                            </td>
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              style={{ textAlign: "center", minWidth: "40px" }}
+                            >
+                              {e.Sells?.length}
+                            </td>
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              style={{ textAlign: "center", minWidth: "30px" }}
+                            >
+                              {e.PackageMarketings?.length}
+                            </td>
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              style={{ textAlign: "center", minWidth: "30px" }}
+                            >
+                              {e.TransactionCoordinators?.length}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </div>
             )}
-          </tbody>
-        </table>
-        </div>
-}
-        </>
+          </>
         )}
       </div>
       <img
@@ -672,46 +890,47 @@ function AdminGrafics({
           right: 0,
           bottom: 0,
           width: "428px",
-          opacity: "0.5",
+          opacity: "0",
         }}
       />
-   
-        {
-          styleTable === 'divTable2' &&
-          <div className={circle} onClick={() => {setStyleTable('divTable'); setChevron('bsChevron'); setCircle('circle2')}}>
-        <BsChevronLeft
-              cursor="pointer"
-              color="white"
-              className={chevron}
-              
-            />
-            </div>
-        }
-        {
-          styleTable === 'divTable3' &&
-          <div className={circle}  onClick={() => {setStyleTable('divTable'); setChevron('bsChevron'); setCircle('circle2')}}>
-        <BsChevronLeft
-              cursor="pointer"
-              color="white"
-              className={chevron}
-             
-            />
-               </div>
-        }
 
-{
-          styleTable === 'divTable' &&
-          <div className={circle}  onClick={() => {setStyleTable('divTable3');setChevron('bsChevron2'); setCircle('circle3')}}>
-          <BsChevronLeft
-          cursor="pointer"
-          color="white"
-          className={chevron}
-         
-        />
-           </div>
-        }
+      {styleTable === "divTable2" && (
+        <div
+          className={circle}
+          onClick={() => {
+            setStyleTable("divTable");
+            setChevron("bsChevron");
+            setCircle("circle2");
+          }}
+        >
+          <BsChevronLeft cursor="pointer" color="white" className={chevron} />
+        </div>
+      )}
+      {styleTable === "divTable3" && (
+        <div
+          className={circle}
+          onClick={() => {
+            setStyleTable("divTable");
+            setChevron("bsChevron");
+            setCircle("circle2");
+          }}
+        >
+          <BsChevronLeft cursor="pointer" color="white" className={chevron} />
+        </div>
+      )}
 
-        
+      {styleTable === "divTable" && (
+        <div
+          className={circle}
+          onClick={() => {
+            setStyleTable("divTable3");
+            setChevron("bsChevron2");
+            setCircle("circle3");
+          }}
+        >
+          <BsChevronLeft cursor="pointer" color="white" className={chevron} />
+        </div>
+      )}
     </div>
   );
 }

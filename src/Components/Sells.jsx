@@ -13,28 +13,27 @@ function Sells({
   paginator,
   setPaginator,
   currencyFormat,
-  formatNumber
+  formatNumber,
 }) {
   const [Search, setSearch] = useState("");
-  const [sumTotalSold, setSumTotalSold] = useState(0)
-  const [sumTotalSoldSearch, setSumTotalSoldSearch] = useState(0)
+  const [sumTotalSold, setSumTotalSold] = useState(0);
+  const [sumTotalSoldSearch, setSumTotalSoldSearch] = useState(0);
   const realtorsList = Users.map((e) => ({ value: e.name, label: e.name }));
 
   let sumSold = 0;
 
-  let Screen = window.screen
+  let Screen = window.screen;
 
   useEffect(() => {
-    setSumTotalSoldSearch(sumSold)
-  }, [Search])
-  
+    setSumTotalSoldSearch(sumSold);
+  }, [Search]);
 
   useEffect(() => {
     let sumTotal = 0;
     allSells?.map((e) => {
       sumTotal = sumTotal + Math.floor(e.Value);
-    })
-    return setSumTotalSold(sumTotal)
+    });
+    return setSumTotalSold(sumTotal);
   }, []);
 
   return (
@@ -72,32 +71,40 @@ function Sells({
           className="StadSelectGrafic"
           placeholder="Type"
         />
-        {
-          Search && <button onClick={() => setSearch('')} className="StadBoxDate" style={{height: 30}}>
-          <p className="StadBoxTitle" style={{marginBottom: 0}}>Reset</p>
-        </button>
-        }
-       
+        {Search && (
+          <button
+            onClick={() => setSearch("")}
+            className="StadBoxDate"
+            style={{ height: 30 }}
+          >
+            <p className="StadBoxTitle" style={{ marginBottom: 0 }}>
+              Reset
+            </p>
+          </button>
+        )}
       </div>
       <div className="DashContainerSells">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
-            <table className="table5" style={{ marginTop: "2vh", width: '90vw', marginLeft: '0px'  }}>
+            <table
+              className="table5"
+              style={{ marginTop: "2vh", width: "90vw", marginLeft: "0px" }}
+            >
               <tbody>
                 <tr>
-                  <th scope="col" className="column1" >
+                  {/* <th scope="col" className="column1" >
                     <p className="REPtype2">Client name</p>
-                  </th>
-                  <th scope="col" className="column1" >
+                  </th> */}
+                  <th scope="col" className="column1">
                     <p className="REPtype2">Sold by</p>
                   </th>
-                  <th scope="col" className="column1" >
+                  <th scope="col" className="column1">
                     <p className="REPtype2">Closing date</p>
                   </th>
-                  <th scope="col" className="column1" >
+                  <th scope="col" className="column1">
                     <p className="REPtype2">Address</p>
                   </th>
-                  <th scope="col" className="column1" >
+                  <th scope="col" className="column1">
                     <p className="REPtype2">Price</p>
                   </th>
                 </tr>
@@ -115,36 +122,36 @@ function Sells({
                             ?.name?.toLowerCase()
                             .includes(Search.toLowerCase())
                       )
-                      .map((e,i) => {
+                      .map((e, i) => {
                         sumSold = sumSold + Math.floor(e.Value);
                         return (
                           <tr key={i}>
-                          <td className="ClientName" scope="row">
+                            {/* <td className="ClientName" scope="row">
                             {e.ClientName}
-                          </td>
-                          <td className="ClientName" scope="row">
-                            {e.User?.name}
-                          </td>
+                          </td> */}
+                            <td className="ClientName" scope="row">
+                              {e.User?.name}
+                            </td>
 
-                          <td className="ClientName" scope="row">
-                            {e.ClosingDate}
-                          </td>
-                          <td className="ClientName" scope="row">
-                            {e.Address}
-                          </td>
-                          <td className="ClientName" scope="row">
-                          {currencyFormat(e.Value)}
-                          </td>
-                        </tr>
+                            <td className="ClientName" scope="row">
+                              {e.ClosingDate}
+                            </td>
+                            <td className="ClientName" scope="row">
+                              {e.Address}
+                            </td>
+                            <td className="ClientName" scope="row">
+                              {currencyFormat(e.Value)}
+                            </td>
+                          </tr>
                         );
                       })
-                  : sells?.map((e,i) => {
+                  : sells?.map((e, i) => {
                       sumSold = sumSold + Math.floor(e.Value);
                       return (
                         <tr key={i}>
-                          <td className="ClientName" scope="row">
+                          {/* <td className="ClientName" scope="row">
                             {e.ClientName}
-                          </td>
+                          </td> */}
                           <td className="ClientName" scope="row">
                             {e.User?.name}
                           </td>
@@ -156,7 +163,7 @@ function Sells({
                             {e.Address}
                           </td>
                           <td className="ClientName" scope="row">
-                          {currencyFormat(e.Value)}
+                            {currencyFormat(e.Value)}
                           </td>
                         </tr>
                       );
@@ -166,53 +173,48 @@ function Sells({
           </>
         </div>
       </div>
-      {
-        Screen.width > 1000 ?
-      <div
-        className="CardsGraficsCommision"
-        style={{
-          marginLeft: "20px",
-          top: "100px",
-          backgroundColor: "rgba(0, 39, 82,0.8)",
-        }}
-      >
+      {Screen.width > 1000 ? (
         <div
-          className="dashCircle"
-          style={{ backgroundColor: "#ebeff2" }}
+          className="CardsGraficsCommision"
+          style={{
+            marginLeft: "20px",
+            top: "100px",
+            backgroundColor: "rgba(0, 39, 82,0.8)",
+          }}
         >
-          <FaMoneyBillAlt size='28px' color='#002752'/>
+          <div className="dashCircle" style={{ backgroundColor: "#ebeff2" }}>
+            <FaMoneyBillAlt size="28px" color="#002752" />
+          </div>
+          <div className="dashText">
+            <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+              {formatNumber(sumTotalSold)}
+            </p>
+            <p className="dashCardText" style={{ color: "#ebeff2" }}>
+              Total Sold
+            </p>
+          </div>
         </div>
-        <div className="dashText">
-          <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(sumTotalSold)}</p>
-          <p className="dashCardText" style={{color: "#ebeff2"}}>Total Sold</p>
+      ) : (
+        <div
+          className="CardsGraficsCommision"
+          style={{
+            left: "100px",
+            bottom: "250px",
+            backgroundColor: "rgba(0, 39, 82,0.8)",
+          }}
+        >
+          <div className="dashCircle" style={{ backgroundColor: "#ebeff2" }}>
+            <FaMoneyBillAlt size="28px" color="#002752" />
+          </div>
+          <div className="dashText">
+            <p className="dashCardTitle">{formatNumber(sumTotalSold)}</p>
+            <p className="dashCardText">Total Sold</p>
+          </div>
         </div>
-      </div>
-      :
-      <div
-      className="CardsGraficsCommision"
-      style={{
-        left: "100px",
-        bottom: "250px",
-        backgroundColor: "rgba(0, 39, 82,0.8)",
-      }}
-    >
-      <div
-        className="dashCircle"
-        style={{ backgroundColor: "#ebeff2" }}
-      >
-        <FaMoneyBillAlt size='28px' color='#002752'/>
-      </div>
-      <div className="dashText">
-        <p className="dashCardTitle">{formatNumber(sumTotalSold)}</p>
-        <p className="dashCardText">Total Sold</p>
-      </div>
-    </div>
-      }
+      )}
 
-        {
-          Search && Screen.width > 1000 ?
-         
-          <div
+      {Search && Screen.width > 1000 ? (
+        <div
           className="CardsGraficsCommision"
           style={{
             right: "300px",
@@ -220,40 +222,49 @@ function Sells({
             backgroundColor: "#84596B",
           }}
         >
-          <div
-            className="dashCircle"
-            style={{ backgroundColor: "#ebeff2" }}
-          >
-            <FaMoneyBillAlt size='28px' color="#84596B"/>
+          <div className="dashCircle" style={{ backgroundColor: "#ebeff2" }}>
+            <FaMoneyBillAlt size="28px" color="#84596B" />
           </div>
           <div className="dashText">
-            <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(sumTotalSoldSearch)}</p>
-            <p className="dashCardText" style={{color: "#ebeff2"}}>Sold On Search</p>
+            <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+              {formatNumber(sumTotalSoldSearch)}
+            </p>
+            <p className="dashCardText" style={{ color: "#ebeff2" }}>
+              Sold On Search
+            </p>
           </div>
         </div>
-        : Search &&
-        <div
-        className="CardsGraficsCommision"
-        style={{
-          left: "400px",
-          bottom: "250px",
-          backgroundColor: "rgba(111, 82, 237, 0.15)",
-        }}
-      >
-        <div
-          className="dashCircle"
-          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
-        >
-          <img src={wbill} />
-        </div>
-        <div className="dashText">
-          <p className="dashCardTitle">{formatNumber(sumTotalSoldSearch)}</p>
-          <p className="dashCardText">Sold On Search</p>
-        </div>
-      </div>
-        }
-     
-      <Pagination paginator={paginator} setPaginator={setPaginator} paginationSize={paginationSize}/>
+      ) : (
+        Search && (
+          <div
+            className="CardsGraficsCommision"
+            style={{
+              left: "400px",
+              bottom: "250px",
+              backgroundColor: "rgba(111, 82, 237, 0.15)",
+            }}
+          >
+            <div
+              className="dashCircle"
+              style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+            >
+              <img src={wbill} />
+            </div>
+            <div className="dashText">
+              <p className="dashCardTitle">
+                {formatNumber(sumTotalSoldSearch)}
+              </p>
+              <p className="dashCardText">Sold On Search</p>
+            </div>
+          </div>
+        )
+      )}
+
+      <Pagination
+        paginator={paginator}
+        setPaginator={setPaginator}
+        paginationSize={paginationSize}
+      />
     </div>
   );
 }

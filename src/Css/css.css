@@ -132,7 +132,7 @@ html {
 .topbar {
   width: 100vw;
   background-color: #ffffff;
-  height: 60px;
+  height: 70px;
   min-height: 60px;
   position: fixed;
   z-index: 1;
@@ -204,8 +204,8 @@ html {
 .circle2 {
   position: fixed;
   cursor: pointer;
-  top: 270px;
-  right: 650px;
+  top: 45%;
+  right: 700px;
   display: flex;
   align-self: center;
   justify-content: center;
@@ -213,13 +213,13 @@ html {
   width: 43px;
   border-radius: 50%;
   animation: circleIn ease-in-out 1s forwards;
-  background-color: #d8af4d;
+  background-color: #002752;
 }
 .circle3 {
   position: fixed;
   cursor: pointer;
-  top: 270px;
-  right: 20px;
+  top: 45%;
+  right: 700px;
   display: flex;
   align-self: center;
   justify-content: center;
@@ -227,13 +227,13 @@ html {
   width: 43px;
   border-radius: 50%;
   animation: circleOut ease-in-out 1s forwards;
-  background-color: #d8af4d;
+  background-color: #002752;
 }
 
 .circle4 {
   position: fixed;
   cursor: pointer;
-  top: 270px;
+  top: 45%;
   right: 20px;
   display: flex;
   align-self: center;
@@ -241,7 +241,7 @@ html {
   height: 43px;
   width: 43px;
   border-radius: 50%;
-  background-color: #d8af4d;
+  background-color: #002752;
 }
 .circle5 {
   pointer-events: none;
@@ -256,16 +256,16 @@ html {
     right: 20px;
   }
   80% {
-    right: 700px;
+    right: 750px;
   }
   100% {
-    right: 650px;
+    right: 700px;
   }
 }
 
 @keyframes circleOut {
   from {
-    right: 650px;
+    right: 700px;
   }
   to {
     right: 20px;
@@ -274,7 +274,7 @@ html {
 .circleLink {
   align-self: center;
   justify-content: center;
-  margin-right: 10px;
+  margin-right: 20px;
   height: 43px;
   width: 43px;
   border-radius: 50%;
@@ -423,7 +423,7 @@ html {
   color: "#A6ACBE";
 }
 .genericHeader {
-  margin-top: -50px;
+  margin-top: -45px;
   margin-bottom: 50px;
   padding-left: 40px;
   max-width: 400px;
@@ -432,7 +432,7 @@ html {
 }
 
 .genericHeaderAdmin {
-  margin-top: -50px;
+  margin-top: -45px;
   margin-bottom: 50px;
   padding-left: 50px;
   max-width: 400px;
@@ -457,7 +457,7 @@ html {
   box-shadow: 2px 2px 2px rgb(165, 162, 162);
 }
 
-.PAYbuttonSelected{
+.PAYbuttonSelected {
   background-color: #00285297;
   pointer-events: none;
   border-radius: 5px;
@@ -641,7 +641,6 @@ html {
   display: flex;
   padding-left: 40px;
   flex-direction: column;
-
 }
 .managerInputsubContainer {
   display: flex;
@@ -1419,7 +1418,7 @@ html {
   border-width: 0;
   background-color: white;
   border-radius: 4px;
-  width: 500px;
+  width: 530px;
 
   min-height: 100px;
   border-color: rgb(212, 208, 208);
@@ -1528,24 +1527,24 @@ html {
   max-width: 85vw;
 }
 
-.DashContainerSells{
+.DashContainerSells {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 0px 30px;
   padding-bottom: 0px;
-  min-height:70vh;
+  min-height: 70vh;
   max-width: 85vw;
 }
 
-.DashContainerAdmin{
+.DashContainerAdmin {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 0px 30px;
   padding-bottom: 0px;
-  min-height:80vh;
+  min-height: 80vh;
   max-width: 85vw;
 }
 .DashSubCont {
@@ -1831,15 +1830,6 @@ html {
   margin-left: 20px;
 }
 
-.asdasd {
-  background-image: url("../assets/producerDetailsG11.png");
-  background-size: contain;
-  width: 650px;
-  height: 205px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .dashListColumnT {
   font-family: Inter;
   font-size: 10px;
@@ -2248,6 +2238,19 @@ html {
   overflow: hidden;
 }
 
+
+.table5BN {
+  font-family: "Gilroy-Regular";
+  font-weight: 100;
+  border-collapse: collapse;
+  /* width: 60vw; */
+  height: max-content;
+  margin-left: 40px;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
 .table5 td,
 .table5 th {
   border: 1px solid #ddd;
@@ -2261,6 +2264,26 @@ html {
   background-color: #ddd;
 }
 .table5 th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: left;
+  background-color: white;
+  color: white;
+}
+
+.table5BN td,
+.table5BN th {
+
+  padding: 8px;
+}
+
+.table5BN tr:nth-child(even) {
+  background-color: #ededed;
+}
+.table5BN tr:hover {
+  background-color: #ddd;
+}
+.table5BN th {
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: left;
@@ -2318,8 +2341,9 @@ html {
 
 .divTable {
   max-height: 300px;
-  width: 650px;
-  top: 155px;
+  border: 20px solid rgb(216, 216, 216);
+  border-top: 50px solid rgb(216, 216, 216);
+  top: 28%;
   overflow: scroll;
   overflow-x: hidden;
   position: fixed;
@@ -2329,7 +2353,9 @@ html {
 
 .divTable2 {
   max-height: 300px;
-  width: 650px;
+  border: 20px rgb(216, 216, 216) solid;
+  border-top: 50px solid rgb(216, 216, 216);
+  top: 28%;
   top: 155px;
   overflow: scroll;
   overflow-x: hidden;
@@ -2339,8 +2365,9 @@ html {
 
 .divTable3 {
   max-height: 300px;
-  width: 650px;
-  top: 155px;
+  border: 20px rgb(216, 216, 216) solid;
+  border-top: 50px solid rgb(216, 216, 216);
+  top: 28%;
   overflow: scroll;
   overflow-x: hidden;
   position: fixed;
@@ -2370,40 +2397,23 @@ html {
 }
 
 .divTable::-webkit-scrollbar {
-  background-color: #f3f4f6;
+  background-color: rgb(216, 216, 216);
   width: 8px;
-  border-radius: 0px 10px 10px 0px;
+  /* border-radius: 0px 10px 10px 0px; */
 }
 .divTable::-webkit-scrollbar-thumb {
-  background-color: #d8af4d;
-  border-radius: 2px;
+  background-color: #002752;
+  /* border-radius: 2px; */
 }
-.divTable::-webkit-scrollbar {
-  background-color: #f3f4f6;
-  width: 8px;
-  border-radius: 0px 10px 10px 0px;
-}
-.divTable::-webkit-scrollbar-thumb {
-  background-color: #d8af4d;
-  border-radius: 2px;
-}
+
 .divTable3::-webkit-scrollbar {
-  background-color: #f3f4f6;
+  background-color: rgb(216, 216, 216);
   width: 8px;
-  border-radius: 0px 10px 10px 0px;
+  /* border-radius: 0px 10px 10px 0px; */
 }
 .divTable3::-webkit-scrollbar-thumb {
-  background-color: #d8af4d;
-  border-radius: 2px;
-}
-.divTable3::-webkit-scrollbar {
-  background-color: #f3f4f6;
-  width: 8px;
-  border-radius: 0px 10px 10px 0px;
-}
-.divTable3::-webkit-scrollbar-thumb {
-  background-color: #d8af4d;
-  border-radius: 2px;
+  background-color: #002752;
+  /* border-radius: 2px; */
 }
 
 .table6 {
@@ -2412,7 +2422,7 @@ html {
   border-collapse: collapse;
   width: 600px;
   max-height: 200px;
-  margin-left: 40px;
+  /* margin-left: 40px; */
   background: rgb(255, 255, 255);
   border-radius: 6px;
   overflow: scroll;
@@ -2848,7 +2858,7 @@ html {
   color: #757983;
 }
 
-.subTittMan{
+.subTittMan {
   font-family: "Gilroy-Regular";
   font-size: 18px;
   font-style: normal;
@@ -3728,14 +3738,14 @@ html {
   background-color: whitesmoke;
 }
 
-.clientCardGrow{
+.clientCardGrow {
   width: 100%;
   /* margin-top: 15px; */
   padding-top: 5px;
   padding-bottom: 10px;
 }
 
-.clientCardGrow2{
+.clientCardGrow2 {
   background-color: rgb(223, 224, 255);
   width: 100%;
   /* margin-top: 15px; */
@@ -3745,8 +3755,12 @@ html {
 }
 
 @keyframes growCard {
-  0% {width: 0%}
-  100% {width: 100%}
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
 }
 .clientCard2 {
   cursor: pointer;
@@ -3954,15 +3968,9 @@ html {
   /* width: 100%; */
 }
 
-.iconSend:hover{
+.iconSend:hover {
   background-color: #d8d8d8b0;
 }
-
-
-
-
-
-
 
 .file-input__input {
   width: 0.1px;
@@ -4014,7 +4022,7 @@ html {
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
 }
 
-.containerTags{
+.containerTags {
   width: 90vw;
   margin-top: 60px;
   border-radius: 10px;
@@ -4038,9 +4046,9 @@ html {
   border-radius: 2px;
 }
 
-.containerClientData{
+.containerClientData {
   width: 70vw;
-  padding:10px;
+  padding: 10px;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;

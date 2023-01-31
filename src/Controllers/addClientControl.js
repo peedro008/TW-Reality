@@ -14,8 +14,14 @@ function AddClientControl() {
   const [form, setForm] = useState({});
   const [respTransactionCoord, setRespTransactionCoord] = useState([]);
 
+  let New_York_Date = new Date().toLocaleDateString("en-US", {
+    timeZone: "America/New_York",
+    timestyle: "full",
+    hourCycle: "h24",
+  });
+
   useEffect(() => {
-    setForm({ ...form, UserId: userId, clientType: "Client" });
+    setForm({ ...form, UserId: userId, addedDate: New_York_Date });
   }, []);
   const GetMyClientsAll = () => {
     axios
@@ -45,41 +51,10 @@ function AddClientControl() {
     },
   ];
 
-  let optionsStatus = [
+  let optionsLeadType = [
     {
-      value: "Showing",
-      label: "Showing",
-    },
-    {
-      value: "Pre-Qualifying",
-      label: "Pre-Qualifying",
-    },
-    {
-      value: "Under Contract",
-      label: "Under Contract",
-    },
-    {
-      value: "Closed",
-      label: "Closed",
-    },
-    {
-      value: "Archive",
-      label: "Archive",
-    },
-    {
-      value: "Listed",
-      label: "Listed",
-    },
-  ];
-
-  let optionsStatusLead = [
-    {
-      value: "Entry Level",
-      label: "Entry Level",
-    },
-    {
-      value: "Hot Lead",
-      label: "Hot Lead",
+      value: "Jose",
+      label: "Jose",
     },
   ];
 
@@ -179,14 +154,13 @@ function AddClientControl() {
       onCloseModal={onCloseModal}
       onOpenModal={onOpenModal}
       optionsReason={optionsReason}
-      optionsStatus={optionsStatus}
       optionsStatusListing={optionsStatusListing}
       optionsStatusSelling={optionsStatusSelling}
       optionsStatusRent={optionsStatusRent}
-      optionsStatusLead={optionsStatusLead}
       respTransactionCoord={respTransactionCoord}
       validarEmail={validarEmail}
       userId={userId}
+      optionsLeadType={optionsLeadType}
     />
   );
 }

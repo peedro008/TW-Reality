@@ -16,7 +16,7 @@ function EditClient({
   onSubmit,
   optionsReason,
   optionsStatus,
-  
+  optionsLeadType,
   onCloseModal,
   respTransactionCoord,
   validarEmail,
@@ -27,7 +27,6 @@ function EditClient({
   optionsStatusSelling,
   optionsStatusRent,
 }) {
-
   const [checkedOne, setCheckedOne] = useState(clientData.clientType);
   let New_York_Time = new Date().toLocaleString("en-US", {
     timeZone: "America/New_York",
@@ -36,37 +35,53 @@ function EditClient({
   });
 
   const handleChangeOne = () => {
-    setCheckedOne('Client');
-    
+    setCheckedOne("Client");
   };
 
   const handleChangeTwo = () => {
-    setCheckedOne('Lead'); 
+    setCheckedOne("Lead");
   };
 
   useEffect(() => {
-    if(clientData.contactDate2) {setContact2(true)}
-    if(clientData.contactDate3) {setContact3(true)}
-    if(clientData.contactDate4) {setContact4(true)}
-    if(clientData.contactDate5) {setContact5(true)}
-    if(clientData.contactDate6) {setContact6(true)}
-    if(clientData.contactDate7) {setContact7(true)}
-    if(clientData.contactDate8) {setContact8(true)}
-    if(clientData.contactDate9) {setContact9(true)}
-    if(clientData.contactDate10) {setContact10(true)}
-  }, [clientData])
-  
-  const [contact2, setContact2] = useState(false)
-  const [contact3, setContact3] = useState(false)
-  const [contact4, setContact4] = useState(false)
-  const [contact5, setContact5] = useState(false)
-  const [contact6, setContact6] = useState(false)
-  const [contact7, setContact7] = useState(false)
-  const [contact8, setContact8] = useState(false)
-  const [contact9, setContact9] = useState(false)
-  const [contact10, setContact10] = useState(false)
+    if (clientData.contactDate2) {
+      setContact2(true);
+    }
+    if (clientData.contactDate3) {
+      setContact3(true);
+    }
+    if (clientData.contactDate4) {
+      setContact4(true);
+    }
+    if (clientData.contactDate5) {
+      setContact5(true);
+    }
+    if (clientData.contactDate6) {
+      setContact6(true);
+    }
+    if (clientData.contactDate7) {
+      setContact7(true);
+    }
+    if (clientData.contactDate8) {
+      setContact8(true);
+    }
+    if (clientData.contactDate9) {
+      setContact9(true);
+    }
+    if (clientData.contactDate10) {
+      setContact10(true);
+    }
+  }, [clientData]);
 
-  
+  const [contact2, setContact2] = useState(false);
+  const [contact3, setContact3] = useState(false);
+  const [contact4, setContact4] = useState(false);
+  const [contact5, setContact5] = useState(false);
+  const [contact6, setContact6] = useState(false);
+  const [contact7, setContact7] = useState(false);
+  const [contact8, setContact8] = useState(false);
+  const [contact9, setContact9] = useState(false);
+  const [contact10, setContact10] = useState(false);
+
   let validation =
     form.clientName?.length < 3 ||
     typeof form.clientName === "undefined" ||
@@ -78,7 +93,6 @@ function EditClient({
 
   return (
     <>
-
       <div className="managerInputsContainer">
         <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
@@ -96,7 +110,7 @@ function EditClient({
           <div className="inputDiv">
             <p className="PAYtitle">Email</p>
             <input
-             defaultValue={clientData.mail}
+              defaultValue={clientData.mail}
               placeholder="Email"
               onChange={(e) => {
                 setForm({ ...form, mail: e.target.value });
@@ -108,7 +122,7 @@ function EditClient({
           <div className="inputDiv">
             <p className="PAYtitle">Number Phone</p>
             <input
-             defaultValue={clientData.phone}
+              defaultValue={clientData.phone}
               placeholder="Phone"
               onChange={(e) => {
                 setForm({ ...form, phone: e.target.value });
@@ -120,7 +134,7 @@ function EditClient({
           <div className="inputDiv">
             <p className="PAYtitle">Address</p>
             <input
-             defaultValue={clientData?.address}
+              defaultValue={clientData?.address}
               placeholder="Address"
               onChange={(e) => {
                 setForm({ ...form, address: e.target.value });
@@ -132,20 +146,36 @@ function EditClient({
           <div className="inputDiv">
             <p className="PAYtitle">Client</p>
             <label className="containerCheck2">
-            <input type="checkbox" className="checkBoxCont" style={{color: 'red'}} checked={checkedOne === 'Client'} onChange={(val) => {handleChangeOne(); setForm({ ...form, clientType: 'Client' })}}  />
-            <span class="checkmark2"></span>
+              <input
+                type="checkbox"
+                className="checkBoxCont"
+                style={{ color: "red" }}
+                checked={checkedOne === "Client"}
+                onChange={(val) => {
+                  handleChangeOne();
+                  setForm({ ...form, clientType: "Client" });
+                }}
+              />
+              <span class="checkmark2"></span>
             </label>
           </div>
           <div className="inputDiv">
-          <p className="PAYtitle">Lead</p>
-          <label className="containerCheck">
-
-            <input type="checkbox" className="checkBoxCont" checked={checkedOne === 'Lead'} onChange={(val) => {handleChangeTwo(); setForm({ ...form, clientType: 'Lead' })}} />
-            <span class="checkmark"></span>
-          </label>
-            </div>
+            <p className="PAYtitle">Lead</p>
+            <label className="containerCheck">
+              <input
+                type="checkbox"
+                className="checkBoxCont"
+                checked={checkedOne === "Lead"}
+                onChange={(val) => {
+                  handleChangeTwo();
+                  setForm({ ...form, clientType: "Lead" });
+                }}
+              />
+              <span class="checkmark"></span>
+            </label>
           </div>
-          <div className="managerInputsubContainer" style={{ width: "60vw" }}>
+        </div>
+        <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
             <p className="PAYtitle">Added Date</p>
             <input
@@ -170,242 +200,244 @@ function EditClient({
               className="AQinputPackage"
             ></input>
           </div>
-          {
-            !contact2 &&
+          {!contact2 && (
             <div className="inputDiv">
-            <p className="PAYtitle"></p>
-            <button
-            onClick={() => setContact2(true)}
-              className="PAYbutton"
-              style={{width: '250px', marginTop: '25px'}}
-            ><p className="PAYbuttonText">Add Contact Date +</p></button>
-          </div>
-          }
-        
-          {
-            contact2 && 
-            <div className="inputDiv">
-            <p className="PAYtitle">Contact Date 2</p>
-            <input
-              type={"date"}
-              defaultValue={clientData.contactDate2}
-              onChange={(e) => {
-                setForm({ ...form, contactDate2: e.target.value });
-              }}
-              placeholder="ClosingDate"
-              className="AQinputPackage"
-            ></input>
-          </div>
-          }
+              <p className="PAYtitle"></p>
+              <button
+                onClick={() => setContact2(true)}
+                className="PAYbutton"
+                style={{ width: "250px", marginTop: "25px" }}
+              >
+                <p className="PAYbuttonText">Add Contact Date +</p>
+              </button>
+            </div>
+          )}
 
-{
-            !contact3 &&
+          {contact2 && (
             <div className="inputDiv">
-            <p className="PAYtitle"></p>
-            <button
-            onClick={() => setContact3(true)}
-              className="PAYbutton"
-              style={{width: '250px', marginTop: '25px'}}
-            ><p className="PAYbuttonText">Add Contact Date +</p></button>
-          </div>
-          }
-        
-          {
-            contact3 && 
+              <p className="PAYtitle">Contact Date 2</p>
+              <input
+                type={"date"}
+                defaultValue={clientData.contactDate2}
+                onChange={(e) => {
+                  setForm({ ...form, contactDate2: e.target.value });
+                }}
+                placeholder="ClosingDate"
+                className="AQinputPackage"
+              ></input>
+            </div>
+          )}
+
+          {!contact3 && (
             <div className="inputDiv">
-            <p className="PAYtitle">Contact Date 3</p>
-            <input
-              type={"date"}
-              defaultValue={clientData.contactDate3}
-              onChange={(e) => {
-                setForm({ ...form, contactDate3: e.target.value });
-              }}
-              placeholder="ClosingDate"
-              className="AQinputPackage"
-            ></input>
-          </div>
-          }
-          </div>
-          {
-            contact3 &&
-            <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-            {
-              !contact4 &&
-              <div className="inputDiv">
               <p className="PAYtitle"></p>
               <button
-              onClick={() => setContact4(true)}
+                onClick={() => setContact3(true)}
                 className="PAYbutton"
-                style={{width: '250px', marginTop: '25px'}}
-              ><p className="PAYbuttonText">Add Contact Date +</p></button>
+                style={{ width: "250px", marginTop: "25px" }}
+              >
+                <p className="PAYbuttonText">Add Contact Date +</p>
+              </button>
             </div>
-            }
-          
-            {
-              contact4 && 
-              <div className="inputDiv">
-              <p className="PAYtitle">Contact Date 4</p>
+          )}
+
+          {contact3 && (
+            <div className="inputDiv">
+              <p className="PAYtitle">Contact Date 3</p>
               <input
                 type={"date"}
-                defaultValue={clientData.contactDate4}
+                defaultValue={clientData.contactDate3}
                 onChange={(e) => {
-                  setForm({ ...form, contactDate4: e.target.value });
+                  setForm({ ...form, contactDate3: e.target.value });
                 }}
                 placeholder="ClosingDate"
                 className="AQinputPackage"
               ></input>
             </div>
-            }
-  
-  {
-              !contact5 &&
-              <div className="inputDiv">
-              <p className="PAYtitle"></p>
-              <button
-              onClick={() => setContact5(true)}
-                className="PAYbutton"
-                style={{width: '250px', marginTop: '25px'}}
-              ><p className="PAYbuttonText">Add Contact Date +</p></button>
-            </div>
-            }
-          
-            {
-              contact5 && 
-              <div className="inputDiv">
-              <p className="PAYtitle">Contact Date 5</p>
-              <input
-                type={"date"}
-                defaultValue={clientData.contactDate5}
-                onChange={(e) => {
-                  setForm({ ...form, contactDate5: e.target.value });
-                }}
-                placeholder="ClosingDate"
-                className="AQinputPackage"
-              ></input>
-            </div>
-            }
-            {
-              !contact6 &&
-              <div className="inputDiv">
-              <p className="PAYtitle"></p>
-              <button
-              onClick={() => setContact6(true)}
-                className="PAYbutton"
-                style={{width: '250px', marginTop: '25px'}}
-              ><p className="PAYbuttonText">Add Contact Date +</p></button>
-            </div>
-            }
-          
-            {
-              contact6 && 
-              <div className="inputDiv">
-              <p className="PAYtitle">Contact Date 6</p>
-              <input
-                type={"date"}
-                defaultValue={clientData.contactDate6}
-                onChange={(e) => {
-                  setForm({ ...form, contactDate6: e.target.value });
-                }}
-                placeholder="ClosingDate"
-                className="AQinputPackage"
-              ></input>
-            </div>
-            }
-            </div>
-          }
-            {
-            contact6 &&
-            <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-            {
-              !contact7 &&
-              <div className="inputDiv">
-              <p className="PAYtitle"></p>
-              <button
-              onClick={() => setContact7(true)}
-                className="PAYbutton"
-                style={{width: '250px', marginTop: '25px'}}
-              ><p className="PAYbuttonText">Add Contact Date +</p></button>
-            </div>
-            }
-          
-            {
-              contact7 && 
-              <div className="inputDiv">
-              <p className="PAYtitle">Contact Date 7</p>
-              <input
-                type={"date"}
-                defaultValue={clientData.contactDate7}
-                onChange={(e) => {
-                  setForm({ ...form, contactDate7: e.target.value });
-                }}
-                placeholder="ClosingDate"
-                className="AQinputPackage"
-              ></input>
-            </div>
-            }
-  
-  {
-              !contact8 &&
-              <div className="inputDiv">
-              <p className="PAYtitle"></p>
-              <button
-              onClick={() => setContact8(true)}
-                className="PAYbutton"
-                style={{width: '250px', marginTop: '25px'}}
-              ><p className="PAYbuttonText">Add Contact Date +</p></button>
-            </div>
-            }
-          
-            {
-              contact8 && 
-              <div className="inputDiv">
-              <p className="PAYtitle">Contact Date 8</p>
-              <input
-                type={"date"}
-                defaultValue={clientData.contactDate8}
-                onChange={(e) => {
-                  setForm({ ...form, contactDate8: e.target.value });
-                }}
-                placeholder="ClosingDate"
-                className="AQinputPackage"
-              ></input>
-            </div>
-            }
-            {
-              !contact9 &&
-              <div className="inputDiv">
-              <p className="PAYtitle"></p>
-              <button
-              onClick={() => setContact9(true)}
-                className="PAYbutton"
-                style={{width: '250px', marginTop: '25px'}}
-              ><p className="PAYbuttonText">Add Contact Date +</p></button>
-            </div>
-            }
-          
-            {
-              contact9 && 
-              <div className="inputDiv">
-              <p className="PAYtitle">Contact Date 9</p>
-              <input
-                type={"date"}
-                defaultValue={clientData.contactDate9}
-                onChange={(e) => {
-                  setForm({ ...form, contactDate9: e.target.value });
-                }}
-                placeholder="ClosingDate"
-                className="AQinputPackage"
-              ></input>
-            </div>
-            }
-            </div>
-          }
-         
+          )}
+        </div>
+        {contact3 && (
           <div className="managerInputsubContainer" style={{ width: "60vw" }}>
+            {!contact4 && (
+              <div className="inputDiv">
+                <p className="PAYtitle"></p>
+                <button
+                  onClick={() => setContact4(true)}
+                  className="PAYbutton"
+                  style={{ width: "250px", marginTop: "25px" }}
+                >
+                  <p className="PAYbuttonText">Add Contact Date +</p>
+                </button>
+              </div>
+            )}
+
+            {contact4 && (
+              <div className="inputDiv">
+                <p className="PAYtitle">Contact Date 4</p>
+                <input
+                  type={"date"}
+                  defaultValue={clientData.contactDate4}
+                  onChange={(e) => {
+                    setForm({ ...form, contactDate4: e.target.value });
+                  }}
+                  placeholder="ClosingDate"
+                  className="AQinputPackage"
+                ></input>
+              </div>
+            )}
+
+            {!contact5 && (
+              <div className="inputDiv">
+                <p className="PAYtitle"></p>
+                <button
+                  onClick={() => setContact5(true)}
+                  className="PAYbutton"
+                  style={{ width: "250px", marginTop: "25px" }}
+                >
+                  <p className="PAYbuttonText">Add Contact Date +</p>
+                </button>
+              </div>
+            )}
+
+            {contact5 && (
+              <div className="inputDiv">
+                <p className="PAYtitle">Contact Date 5</p>
+                <input
+                  type={"date"}
+                  defaultValue={clientData.contactDate5}
+                  onChange={(e) => {
+                    setForm({ ...form, contactDate5: e.target.value });
+                  }}
+                  placeholder="ClosingDate"
+                  className="AQinputPackage"
+                ></input>
+              </div>
+            )}
+            {!contact6 && (
+              <div className="inputDiv">
+                <p className="PAYtitle"></p>
+                <button
+                  onClick={() => setContact6(true)}
+                  className="PAYbutton"
+                  style={{ width: "250px", marginTop: "25px" }}
+                >
+                  <p className="PAYbuttonText">Add Contact Date +</p>
+                </button>
+              </div>
+            )}
+
+            {contact6 && (
+              <div className="inputDiv">
+                <p className="PAYtitle">Contact Date 6</p>
+                <input
+                  type={"date"}
+                  defaultValue={clientData.contactDate6}
+                  onChange={(e) => {
+                    setForm({ ...form, contactDate6: e.target.value });
+                  }}
+                  placeholder="ClosingDate"
+                  className="AQinputPackage"
+                ></input>
+              </div>
+            )}
+          </div>
+        )}
+        {contact6 && (
+          <div className="managerInputsubContainer" style={{ width: "60vw" }}>
+            {!contact7 && (
+              <div className="inputDiv">
+                <p className="PAYtitle"></p>
+                <button
+                  onClick={() => setContact7(true)}
+                  className="PAYbutton"
+                  style={{ width: "250px", marginTop: "25px" }}
+                >
+                  <p className="PAYbuttonText">Add Contact Date +</p>
+                </button>
+              </div>
+            )}
+
+            {contact7 && (
+              <div className="inputDiv">
+                <p className="PAYtitle">Contact Date 7</p>
+                <input
+                  type={"date"}
+                  defaultValue={clientData.contactDate7}
+                  onChange={(e) => {
+                    setForm({ ...form, contactDate7: e.target.value });
+                  }}
+                  placeholder="ClosingDate"
+                  className="AQinputPackage"
+                ></input>
+              </div>
+            )}
+
+            {!contact8 && (
+              <div className="inputDiv">
+                <p className="PAYtitle"></p>
+                <button
+                  onClick={() => setContact8(true)}
+                  className="PAYbutton"
+                  style={{ width: "250px", marginTop: "25px" }}
+                >
+                  <p className="PAYbuttonText">Add Contact Date +</p>
+                </button>
+              </div>
+            )}
+
+            {contact8 && (
+              <div className="inputDiv">
+                <p className="PAYtitle">Contact Date 8</p>
+                <input
+                  type={"date"}
+                  defaultValue={clientData.contactDate8}
+                  onChange={(e) => {
+                    setForm({ ...form, contactDate8: e.target.value });
+                  }}
+                  placeholder="ClosingDate"
+                  className="AQinputPackage"
+                ></input>
+              </div>
+            )}
+            {!contact9 && (
+              <div className="inputDiv">
+                <p className="PAYtitle"></p>
+                <button
+                  onClick={() => setContact9(true)}
+                  className="PAYbutton"
+                  style={{ width: "250px", marginTop: "25px" }}
+                >
+                  <p className="PAYbuttonText">Add Contact Date +</p>
+                </button>
+              </div>
+            )}
+
+            {contact9 && (
+              <div className="inputDiv">
+                <p className="PAYtitle">Contact Date 9</p>
+                <input
+                  type={"date"}
+                  defaultValue={clientData.contactDate9}
+                  onChange={(e) => {
+                    setForm({ ...form, contactDate9: e.target.value });
+                  }}
+                  placeholder="ClosingDate"
+                  className="AQinputPackage"
+                ></input>
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
             <p className="PAYtitle">Transaction Type</p>
             <Select
-             defaultValue={optionsReason[optionsReason.findIndex(x => x.value === clientData.reason)]}
+              defaultValue={
+                optionsReason[
+                  optionsReason.findIndex((x) => x.value === clientData.reason)
+                ]
+              }
               onChange={(val) => setForm({ ...form, reason: val.value })}
               options={optionsReason}
               name={"Transaction Type"}
@@ -424,116 +456,150 @@ function EditClient({
               placeholder="Select Client Type"
             />
           </div> */}
-           <div className="inputDiv">
-            <p className="PAYtitle">Status</p>
-            <Select
-            defaultValue={optionsStatus[optionsStatus.findIndex(x => x.value === clientData.status)]}
-              onChange={(val) => setForm({ ...form, status: val.value })}
-              options={
-                form?.reason === "Buyer"
-                  ? optionsStatusListing
-                  : form?.reason === "Seller"
-                  ? optionsStatusSelling
-                  : optionsStatusRent
-              }
-              name={"Realtor Name"}
-              className="PAYselect2"
-              placeholder="Select Client Type"
-            />
-          </div>
-          </div>
-          <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-        
+          {form.clientType === "Client" && (
+            <div className="inputDiv">
+              <p className="PAYtitle">Status</p>
+              <Select
+                defaultValue={
+                  optionsStatus[
+                    optionsStatus.findIndex(
+                      (x) => x.value === clientData.status
+                    )
+                  ]
+                }
+                onChange={(val) => setForm({ ...form, status: val.value })}
+                options={
+                  form?.reason === "Buyer"
+                    ? optionsStatusListing
+                    : form?.reason === "Seller"
+                    ? optionsStatusSelling
+                    : optionsStatusRent
+                }
+                name={"Realtor Name"}
+                className="PAYselect2"
+                placeholder="Select Status"
+              />
+            </div>
+          )}
+          {form.clientType === "Lead" && (
+            <div className="inputDiv">
+              <p className="PAYtitle">Lead Source</p>
+              <Select
+                onChange={(val) => setForm({ ...form, leadSource: val.value })}
+                defaultValue={
+                  optionsLeadType[
+                    optionsLeadType.findIndex(
+                      (x) => x.value === clientData.leadSource
+                    )
+                  ]
+                }
+                options={optionsLeadType}
+                name={"Realtor Name"}
+                className="PAYselect2"
+                placeholder="Select Lead Source"
+              />
+            </div>
+          )}
         </div>
-      
+        <div
+          className="managerInputsubContainer"
+          style={{ width: "60vw" }}
+        ></div>
 
-      <div
-        style={{
-          position: "absolute",
-          right: "50px",
-          top: "76px",
-          display: "flex",
-        }}
-      >
-        <button
-          className="PAYbutton"
-          onClick={onSubmit}
+        <div
           style={{
-            opacity: validation && "0.2",
-            cursor: validation && "default",
+            position: "absolute",
+            right: "50px",
+            top: "76px",
+            display: "flex",
           }}
-          disabled={validation ? true : false}
         >
-          <p className="PAYbuttonText">Edit Client</p>
-        </button>
-      </div>
-
-      <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
-        <div className="modal">
-        {
-            respTransactionCoord[0] ? 
-            <>
-            <img
-            src={Icon}
+          <button
+            className="PAYbutton"
+            onClick={onSubmit}
             style={{
-              width: "35px",
-              alignSelf: "center",
-              marginTop: "25px",
-              marginBottom: "10px",
+              opacity: validation && "0.2",
+              cursor: validation && "default",
             }}
-          />
+            disabled={validation ? true : false}
+          >
+            {clientData.clientType === "Client" ? (
+              <p className="PAYbuttonText">Edit Client</p>
+            ) : (
+              <p className="PAYbuttonText">Edit Lead</p>
+            )}
+          </button>
+        </div>
 
-          <p className="modalText">{respTransactionCoord[1]}</p>
-          </>
-          :
-          <>
-          <img
-          src={CrossMark}
+        <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+          <div className="modal">
+            {respTransactionCoord[0] ? (
+              <>
+                <img
+                  src={Icon}
+                  style={{
+                    width: "35px",
+                    alignSelf: "center",
+                    marginTop: "25px",
+                    marginBottom: "10px",
+                  }}
+                />
+
+                <p className="modalText">{respTransactionCoord[1]}</p>
+              </>
+            ) : (
+              <>
+                <img
+                  src={CrossMark}
+                  style={{
+                    width: "35px",
+                    alignSelf: "center",
+                    marginTop: "25px",
+                    marginBottom: "10px",
+                  }}
+                />
+
+                <p className="modalText">{respTransactionCoord[1]}</p>
+              </>
+            )}
+
+            <button
+              className="modalButton"
+              onClick={() => {
+                setNewHistory("");
+                setReloadInfo(New_York_Time);
+              }}
+            >
+              Continue
+            </button>
+          </div>
+        </Modal>
+        <img
+          src={Isologo_background}
           style={{
-            width: "35px",
-            alignSelf: "center",
-            marginTop: "25px",
-            marginBottom: "10px",
+            position: "fixed",
+            pointerEvents: "none",
+            right: 0,
+            bottom: 0,
+            width: "428px",
+            opacity: "0.5",
           }}
         />
-
-        <p className="modalText">{respTransactionCoord[1]}</p>
-        </>
-          }
-
-          <button className="modalButton"  onClick={() => {setNewHistory(''); setReloadInfo(New_York_Time)}}>
-              Continue
-          </button>
-      
-        </div>
-      </Modal>
-      <img
-        src={Isologo_background}
-        style={{
-          position: "fixed",
-          pointerEvents: "none",
-          right: 0,
-          bottom: 0,
-          width: "428px",
-          opacity: "0.5",
-        }}
-      />
-      <BsChevronLeft
-        cursor="pointer"
-        color="grey"
-        style={{
-          minWidth: "30px",
-          minHeight: "30px",
-          position: "fixed",
-          zIndex: 1009,
-          left: "80px",
-          top: "17px",
-          alignSelf: "flex-start",
-          
-        }}
-        onClick={() => window.history.go(-1)}
-      />
-    </div>
+        <BsChevronLeft
+          cursor="pointer"
+          color="grey"
+          style={{
+            minWidth: "30px",
+            minHeight: "30px",
+            position: "fixed",
+            zIndex: 1009,
+            left: "80px",
+            top: "17px",
+            alignSelf: "flex-start",
+          }}
+          onClick={() => window.history.go(-1)}
+        />
+      </div>
     </>
   );
 }

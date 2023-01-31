@@ -6,10 +6,14 @@ import CommissionManagementComponent from "../Components/CommissionManagement";
 import { getCommission } from "../Redux/actions";
 function CommissionManagement() {
   const Commissions = useSelector((e) => e.Commissions);
+  const userRole = useSelector((state) => state.userRole);
   const Users = useSelector((e) => e.Users);
   const [modalPay, setModalPay] = useState("");
   const [selectedId, setSelectedId] = useState(null);
   const [open, setOpen] = useState(false);
+  const [openRef, setOpenRef] = useState(false);
+  const onOpenModalRef = () => setOpenRef(true);
+  const onCloseModalRef = () => setOpenRef(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [form, setForm] = useState({
@@ -26,7 +30,12 @@ function CommissionManagement() {
   const [commissionsPaginate, setCommissionsPaginate] = useState();
   const [size, setSize] = useState(10);
   const [reload, setReload] = useState();
+  const [isAdminOne, setIsAdminOne] = useState(false);
+  useEffect(() => {
+    if (userRole === "Admin") setIsAdminOne(true);
+  }, []);
 
+  console.log(isAdminOne);
   useEffect(() => {
     setCommissionsByDate(
       commisions?.slice(paginator * 10, paginator * 10 + 10)
@@ -169,6 +178,33 @@ function CommissionManagement() {
       });
   };
 
+  const deleteCommission = () => {
+    fetch(`https://truewayrealtorsapi.com/deleteCommission`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: selectedId }),
+    })
+      .then(async (res) => {
+        try {
+          const jsonRes = await res.json();
+
+          if (res.status !== 200) {
+            console.log("error");
+          } else {
+            console.log(jsonRes);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      })
+      .then(() => window.location.reload())
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const formatNumber = (q) => {
     return q?.toLocaleString("en-US", {
       style: "currency",
@@ -199,6 +235,11 @@ function CommissionManagement() {
       setPaginator={setPaginator}
       paginationSize={paginationSize}
       formatNumber={formatNumber}
+      isAdminOne={isAdminOne}
+      openRef={openRef}
+      onCloseModalRef={onCloseModalRef}
+      onOpenModalRef={onOpenModalRef}
+      deleteCommission={deleteCommission}
     />
   );
 }

@@ -38,6 +38,13 @@ function EditClientControl({ clientData, setReloadInfo, setNewHistory }) {
     },
   ];
 
+  let optionsLeadType = [
+    {
+      value: "Jose",
+      label: "Jose",
+    },
+  ];
+
   let optionsStatus = [
     {
       value: "Showing",
@@ -180,6 +187,7 @@ function EditClientControl({ clientData, setReloadInfo, setNewHistory }) {
       optionsStatusListing={optionsStatusListing}
       optionsStatusSelling={optionsStatusSelling}
       optionsStatusRent={optionsStatusRent}
+      optionsLeadType={optionsLeadType}
     />
   );
 }

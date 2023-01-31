@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Isologo_background from "../assets/Isologo_background.png";
 import Select from "react-select";
-import { BsArrowRightShort, BsChevronLeft, BsReverseBackspaceReverse } from "react-icons/bs";
+import {
+  BsArrowRightShort,
+  BsChevronLeft,
+  BsReverseBackspaceReverse,
+} from "react-icons/bs";
 import CrossMark from "../assets/cross-mark.png";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -17,11 +21,11 @@ const MyClients = ({
   setReasonClient,
   setStatusClient,
   filterOn,
-  setSearchName
+  setSearchName,
 }) => {
-  console.log(allMyClientsFilter)
+  console.log(allMyClientsFilter);
   const history = useHistory();
-const [isClosed, setIsClosed] = useState('divFilter')
+  const [isClosed, setIsClosed] = useState("divFilter");
   const [checkedOne, setCheckedOne] = useState(false);
   const handleChangeOne = () => {
     setCheckedOne("Client");
@@ -120,9 +124,17 @@ const [isClosed, setIsClosed] = useState('divFilter')
         <p className="genericTitle">My Clients</p>
       </div>
       <div class="input-wrapper-mc">
-            <input type="search" class="inputContact" onChange={(e) => setSearchName(e.target.value)} />
-            <BiSearchAlt2 size={"20px"} className="input-icon-mc" onClick={() => filterOn()} />
-          </div>
+        <input
+          type="search"
+          class="inputContact"
+          onChange={(e) => setSearchName(e.target.value)}
+        />
+        <BiSearchAlt2
+          size={"20px"}
+          className="input-icon-mc"
+          onClick={() => filterOn()}
+        />
+      </div>
       <div>
         <>
           <table
@@ -215,8 +227,8 @@ const [isClosed, setIsClosed] = useState('divFilter')
               </tr>
               {allMyClientsFilter?.map((e, i) => {
                 let ClientHistory = e.ClientHistories?.sort(function (a, b) {
-                  return b.id - a.id
-                })
+                  return b.id - a.id;
+                });
 
                 return (
                   <tr
@@ -224,7 +236,11 @@ const [isClosed, setIsClosed] = useState('divFilter')
                     onClick={() => navegator(e)}
                     style={{ cursor: "pointer" }}
                   >
-                    <td className="ClientName" style={{minWidth:'100px'}} scope="row">
+                    <td
+                      className="ClientName"
+                      style={{ minWidth: "100px" }}
+                      scope="row"
+                    >
                       {e.addedDate}
                     </td>
                     <td className="ClientName" scope="row">
@@ -236,8 +252,12 @@ const [isClosed, setIsClosed] = useState('divFilter')
                     <td className="ClientName" scope="row">
                       {e.mail}
                     </td>
-                    <td className="ClientName" style={{minWidth:'100px'}} scope="row">
-                      {ClientHistory[0]?.modifyDate?.slice(0,10)}
+                    <td
+                      className="ClientName"
+                      style={{ minWidth: "100px" }}
+                      scope="row"
+                    >
+                      {ClientHistory[0]?.modifyDate?.slice(0, 10)}
                     </td>
                     <td className="ClientName" scope="row">
                       {e.contactDate}
@@ -314,73 +334,80 @@ const [isClosed, setIsClosed] = useState('divFilter')
         </>
       </div>
       <div className={isClosed}>
-        <div style={{marginLeft: '220px', marginTop: '10px', cursor: 'pointer'}}  onClick={() => setIsClosed('filterClose1')}>
-
-   <BsReverseBackspaceReverse size={'25px'} />
+        <div
+          style={{ marginLeft: "220px", marginTop: "10px", cursor: "pointer" }}
+          onClick={() => setIsClosed("filterClose1")}
+        >
+          <BsReverseBackspaceReverse size={"25px"} />
         </div>
-      <div style={{width: '300px' ,marginTop: '-10px'}}>
-      <div style={{alignSelf: 'center'}}>
-        <p className="PAYtitle">Status</p>
-        <Select
-          onChange={(val) => setStatusClient(val.value)}
-          options={optionsStatus}
-          name={"Realtor Name"}
-          className="PAYselect2"
-          placeholder="Select Status"
-        />
-      </div>
-      </div>
-      <div style={{width: '300px' ,marginTop: '20px'}}>
-        <p className="PAYtitle">Transaction Type</p>
-        <Select
-          onChange={(val) => setReasonClient(val.value)}
-          options={optionsReason}
-          name={"Realtor Name"}
-          className="PAYselect2"
-          placeholder="Select Transaction Type"
-        />
-      </div>
-      <div style={{display: 'flex' ,marginTop: '20px'}}>
-      <div className="inputDiv">
-        <p className="PAYtitle">Client</p>
-        <label className="containerCheck2">
-          <input
-            type="checkbox"
-            className="checkBoxCont"
-            style={{ color: "red" }}
-            checked={checkedOne === "Client"}
-            onChange={(val) => {
-              handleChangeOne();
-              setTypeClient("Client");
-            }}
+        <div style={{ width: "300px", marginTop: "-10px" }}>
+          <div style={{ alignSelf: "center" }}>
+            <p className="PAYtitle">Status</p>
+            <Select
+              onChange={(val) => setStatusClient(val.value)}
+              options={optionsStatus}
+              name={"Realtor Name"}
+              className="PAYselect2"
+              placeholder="Select Status"
+            />
+          </div>
+        </div>
+        <div style={{ width: "300px", marginTop: "20px" }}>
+          <p className="PAYtitle">Transaction Type</p>
+          <Select
+            onChange={(val) => setReasonClient(val.value)}
+            options={optionsReason}
+            name={"Realtor Name"}
+            className="PAYselect2"
+            placeholder="Select Transaction Type"
           />
-          <span class="checkmark2"></span>
-        </label>
+        </div>
+        <div style={{ display: "flex", marginTop: "20px" }}>
+          <div className="inputDiv">
+            <p className="PAYtitle">Client</p>
+            <label className="containerCheck2">
+              <input
+                type="checkbox"
+                className="checkBoxCont"
+                style={{ color: "red" }}
+                checked={checkedOne === "Client"}
+                onChange={(val) => {
+                  handleChangeOne();
+                  setTypeClient("Client");
+                }}
+              />
+              <span class="checkmark2"></span>
+            </label>
+          </div>
+          <div className="inputDiv">
+            <p className="PAYtitle">Lead</p>
+            <label className="containerCheck">
+              <input
+                type="checkbox"
+                className="checkBoxCont"
+                checked={checkedOne === "Lead"}
+                onChange={(val) => {
+                  handleChangeTwo();
+                  setTypeClient("Lead");
+                }}
+              />
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>
+
+        <button
+          onClick={() => {
+            filterOn();
+            setIsClosed("filterClose1");
+          }}
+          className="PAYbutton"
+          style={{ width: "250px", marginTop: "25px", alignSelf: "center" }}
+        >
+          <p className="PAYbuttonText">Filter</p>
+        </button>
       </div>
-      <div className="inputDiv">
-        <p className="PAYtitle">Lead</p>
-        <label className="containerCheck">
-          <input
-            type="checkbox"
-            className="checkBoxCont"
-            checked={checkedOne === "Lead"}
-            onChange={(val) => {
-              handleChangeTwo();
-              setTypeClient("Lead");
-            }}
-          />
-          <span class="checkmark"></span>
-        </label>
-      </div>
-      </div>
-      
-      <button
-            onClick={() => {filterOn(); setIsClosed('filterClose1')}}
-              className="PAYbutton"
-              style={{width: '250px', marginTop: '25px', alignSelf: 'center'}}
-            ><p className="PAYbuttonText">Filter</p></button>
-            </div>
-  
+
       <div
         className={Screen.width < 1000 ? "PaginatorBoxIpad" : "PaginatorBox"}
       >
@@ -416,24 +443,33 @@ const [isClosed, setIsClosed] = useState('divFilter')
         }}
       />
 
-       <NavLink style={{ textDecoration: "none", color: "#000", position: 'absolute', right: '100px', top: '85px', }} to={"/addClient"}>
-        <button className="PAYbutton" style={{marginLeft: '50px'}}>
-        <p className="PAYbuttonText">Add Client</p>
+      <NavLink
+        style={{
+          textDecoration: "none",
+          color: "#000",
+          position: "absolute",
+          right: "100px",
+          top: "85px",
+        }}
+        to={"/addClient"}
+      >
+        <button className="PAYbutton" style={{ marginLeft: "50px" }}>
+          <p className="PAYbuttonText">Add Lead or Client</p>
         </button>
-            </NavLink>
-       <AiOutlineFilter
-       style={{
-        cursor:'pointer',
-        position: "fixed",
-        right: "20px",
-        top: "85px",
-        zIndex:100,
-        display: "flex",
-      }}
-          color="#2b4162"
-          size={"40px"}
-          onClick={() => setIsClosed('filterClose2')}
-        />
+      </NavLink>
+      <AiOutlineFilter
+        style={{
+          cursor: "pointer",
+          position: "fixed",
+          right: "20px",
+          top: "85px",
+          zIndex: 100,
+          display: "flex",
+        }}
+        color="#2b4162"
+        size={"40px"}
+        onClick={() => setIsClosed("filterClose2")}
+      />
     </div>
   );
 };

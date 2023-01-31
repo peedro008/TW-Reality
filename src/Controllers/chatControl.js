@@ -19,6 +19,7 @@ function ChatControl() {
   const [resetInput, setResetInput] = useState("");
   const [getMyLast, setGetMyLast] = useState("");
   const [mynuevochatconimagenes, setMynuevochatconimagenes] = useState([]);
+  const [myImages, setMyImages] = useState([]);
   const socket = io("https://truewayrealtorsapi.com");
 
   // Get Numbers
@@ -79,6 +80,7 @@ function ChatControl() {
           try {
             const jsonRes = await res.json();
             if (res.status === 200) {
+              // setMynuevochatconimagenes(jsonRes);
               setMyMessages(jsonRes);
             }
           } catch (error) {
@@ -98,6 +100,7 @@ function ChatControl() {
             if (res.status === 200) {
               console.log(jsonRes);
               setMyMessages(jsonRes);
+              // setMynuevochatconimagenes(jsonRes);
             }
           } catch (error) {
             console.log(error);
@@ -109,8 +112,55 @@ function ChatControl() {
 
   // Get my multimedia files
 
-  console.log(mynuevochatconimagenes);
+  useEffect(() => {
+    let images = [];
+    setLoaderMessages(true);
+    myMessages.map(
+      (e) =>
+        e.numMedia !== "0" &&
+        fetch(`https://truewayrealtorsapi.com/getImages?message_Sid=${e.sid}`)
+          .then((res) => res.json())
+          .then((json) => {
+            json.media_list?.map((f) =>
+              images.push({
+                url: f.uri,
+                dateCreated: new Date(f.date_created).toISOString(),
+                content_type: f.content_type,
+              })
+            );
+          })
+          .then(() => {
+            setMynuevochatconimagenes(images);
+          })
+          .catch((err) => console.log(err))
+    );
+    // .then(console.log('Se cargaron todas las imagenes'));
+  }, [myMessages]);
 
+  // console.log(mynuevochatconimagenes);
+  // useEffect(() => {
+  //   mynuevochatconimagenes.map((e) =>
+  //     fetch(
+  //       `https://truewayrealtorsapi.com/yourImage?uriImage=${e.url?.slice(
+  //         0,
+  //         e.url.length - 5
+  //       )}`
+  //     ).then(async (res) => {
+  //       try {
+  //         const jsonRes = await res.json();
+  //         if (res.status !== 200) {
+  //           console.log("error");
+  //         } else {
+  //           setMyImages([...myImages, jsonRes]);
+  //         }
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     })
+  //   );
+  // }, [mynuevochatconimagenes]);
+
+  console.log(myImages);
   // Socket IO
 
   useEffect(() => {

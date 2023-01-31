@@ -27,23 +27,25 @@ function AddSellComponent({
   sellResp,
   coordinatorResp,
   soldForm,
-  UserRole
+  UserRole,
 }) {
   let validation =
     typeof form.Value?.length === "undefined" ||
     typeof form.UserId === "undefined" ||
-    form.ClientName?.length < 3 ||
-    typeof form.ClientName?.length === "undefined";
+    form.Address?.length < 3 ||
+    typeof form.Address?.length === "undefined";
 
-    console.log(form)
+  console.log(form);
   useEffect(() => {
-    if(UserRole === 'Admin') {
+    if (UserRole === "Admin") {
       let manId = Users.filter((e) => e.id === form.UserId)[0]?.managerId;
       let refId = Users.filter((e) => e.id === form.UserId)[0]?.ReferredId;
       setForm({ ...form, managerId: manId, ReferredId: refId });
     } else {
-      let manId = UsersManager.filter((e) => e.id === form.UserId)[0]?.managerId;
-      let refId = UsersManager.filter((e) => e.id === form.UserId)[0]?.ReferredId;
+      let manId = UsersManager.filter((e) => e.id === form.UserId)[0]
+        ?.managerId;
+      let refId = UsersManager.filter((e) => e.id === form.UserId)[0]
+        ?.ReferredId;
       setForm({ ...form, managerId: manId, ReferredId: refId });
     }
   }, [form.UserId]);
@@ -69,7 +71,7 @@ function AddSellComponent({
       <div className="managerInputsContainer">
         <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
-            <p className="PAYtitle">Seller</p>
+            <p className="PAYtitle">Realtor</p>
             <Select
               onChange={(val) => {
                 setForm({ ...form, UserId: val.value });
@@ -81,22 +83,21 @@ function AddSellComponent({
               placeholder="Select Realtor"
             />
           </div>
-{
-  UserRole === 'Admin' &&
-          <div className={form.UserId ? "inputDiv" : "inputDivDisabled"}>
-            <p className="PAYtitle">Transaction Coordinator</p>
-            <Select
-              onChange={(val) => {
-                setSoldForm({ id: val.value, closingDate: New_York_Date });
-              }}
-              options={transactionCoordOptions}
-              name={"Realtor Name"}
-              className="PAYselect"
-              placeholder="Select Package"
-            />
-          </div>
-}
-          <div className="inputDiv">
+          {UserRole === "Admin" && (
+            <div className={form.UserId ? "inputDiv" : "inputDivDisabled"}>
+              <p className="PAYtitle">Transaction Coordinator</p>
+              <Select
+                onChange={(val) => {
+                  setSoldForm({ id: val.value, closingDate: New_York_Date });
+                }}
+                options={transactionCoordOptions}
+                name={"Realtor Name"}
+                className="PAYselect"
+                placeholder="Select Package"
+              />
+            </div>
+          )}
+          {/* <div className="inputDiv">
             <p className="PAYtitle">Client Name</p>
             <input
               placeholder="Client Name"
@@ -106,7 +107,7 @@ function AddSellComponent({
               className="AQinput"
             ></input>
             <p className="FORMerror"></p>
-          </div>
+          </div> */}
         </div>
         <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
@@ -198,38 +199,36 @@ function AddSellComponent({
           />
 
           <p className="modalText">{sellResp}</p>
-        
-        {coordinatorResp !== "" && (
-          <div className="modal">
-            <img
-              src={
-                coordinatorResp === "Transaction Coordinator sold"
-                  ? Icon
-                  : CrossMark
-              }
-              style={{
-                width: "35px",
-                alignSelf: "center",
-                marginTop: "25px",
-                marginBottom: "10px",
-              }}
-            />
 
-            <p className="modalText">{coordinatorResp}</p>
+          {coordinatorResp !== "" && (
+            <div className="modal">
+              <img
+                src={
+                  coordinatorResp === "Transaction Coordinator sold"
+                    ? Icon
+                    : CrossMark
+                }
+                style={{
+                  width: "35px",
+                  alignSelf: "center",
+                  marginTop: "25px",
+                  marginBottom: "10px",
+                }}
+              />
 
-            
-          </div>
-        )}
-        <button className="modalButton">
-              {" "}
-              <NavLink
-                style={{ textDecoration: "none", color: "#000" }}
-                to={"/sells"}
-              >
-                Continue
-              </NavLink>
-            </button>
+              <p className="modalText">{coordinatorResp}</p>
             </div>
+          )}
+          <button className="modalButton">
+            {" "}
+            <NavLink
+              style={{ textDecoration: "none", color: "#000" }}
+              to={"/sells"}
+            >
+              Continue
+            </NavLink>
+          </button>
+        </div>
       </Modal>
       <img
         src={Isologo_background}

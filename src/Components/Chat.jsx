@@ -39,13 +39,12 @@ function Chat({
     element.scrollTop = element.scrollHeight;
   };
 
-  console.log(myMessages)
   useEffect(() => {
     setTimeout(() => {
       setLoaderMessages(false);
       setIconSend("iconSend");
       scrollToBottom("ScrollBottom");
-    }, 200);
+    }, 100);
   }, [myMessages]);
 
   const upload = (e) => {
@@ -55,7 +54,7 @@ function Chat({
       .then((data) => {
         console.log(data);
         setFileUploaded(data.key);
-        setIconSend('iconSend');
+        setIconSend("iconSend");
         setForm({ ...form, media: data.location });
         setLoadingFile("fileDone");
       })
@@ -112,9 +111,9 @@ function Chat({
                       <p className="chatPhone">
                         {" "}
                         Last message:{" "}
-                        {e.date &&
-                            <ReactTimeAgo date={e?.date} locale="en-US" />
-                           }
+                        {e.date && (
+                          <ReactTimeAgo date={e?.date} locale="en-US" />
+                        )}
                       </p>
                     </div>
                   </div>
@@ -143,57 +142,70 @@ function Chat({
             {loaderMessages === false ? (
               myMessages
                 ?.sort((x, y) => {
-                  return new Date(x.dateCreated) < new Date(y.dateCreated) ? 1 : -1;
+                  return new Date(x.dateCreated) < new Date(y.dateCreated)
+                    ? 1
+                    : -1;
                 })
                 .reverse()
                 .map((e) => {
-                  if (e.status === "failed") {
-                    return (
-                      <div className="chatStatusFailed">
-                        <p className="messageSent">{e.body}</p>
-                        <p className="timeMessage">{e.status}</p>
-                      </div>
-                    );
-                  } else {
-                    if (e.to?.slice(9, e.to.length) === clientSelected?.number) {
+                  // if (e.body) {
+                    if (e.status === "failed") {
                       return (
-                        <div className="chatStatusSelectFrom">
+                        <div className="chatStatusFailed">
                           <p className="messageSent">{e.body}</p>
-                      
-                          <p className="timeMessage">
-                          {e.dateCreated &&
-                            <ReactTimeAgo date={e?.dateCreated} locale="en-US" />
-                           }
-                           {e.status !== 'sending' && ` - ${e.status}`}
-                          </p>
-                          <p></p>
-                          {/* <img
-                src={`https://api.twilio.com${e.subresourceUris.media}`}
-                style={{
-                  display: "flex",
-                  width: "80px",
-                  marginLeft: "20px",
-                  alignSelf: "center",
-                  justifySelf: "center",
-                }}
-              /> */}
-                          {/* <p className="timeMessage">{e.status}</p> */}
+                          <p className="timeMessage">{e.status}</p>
                         </div>
                       );
                     } else {
-                      return (
-                        <div className="chatStatusSelect">
-                          <p className="messageSent">{e.body}</p>
-                     
-                          <p className="timeMessage">
-                            <ReactTimeAgo date={e?.dateCreated} locale="en-US" />
-                          </p>
-                          {/* <p className="timeMessage">{e.status}</p> */}
-                        </div>
-                      );
+                      if (
+                        e.to?.slice(9, e.to.length) === clientSelected?.number
+                      ) {
+                        return (
+                          <div className="chatStatusSelectFrom">
+                            <p className="messageSent">{e.body}</p>
+
+                            <p className="timeMessage">
+                              {e.dateCreated && (
+                                <ReactTimeAgo
+                                  date={e?.dateCreated}
+                                  locale="en-US"
+                                />
+                              )}
+                              {e.status !== "sending" && ` - ${e.status}`}
+                            </p>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div className="chatStatusSelect">
+                            <p className="messageSent">{e.body}</p>
+
+                            <p className="timeMessage">
+                              <ReactTimeAgo
+                                date={e?.dateCreated}
+                                locale="en-US"
+                              />
+                            </p>
+                            {/* <p className="timeMessage">{e.status}</p> */}
+                          </div>
+                        );
+                      }
                     }
-                  }
-                })
+                  } 
+                  // else {
+                  //   return (
+                  //     <div className="chatStatusSelectFrom">
+                  //       <img
+                  //         src={`https://api.twilio.com${e.url}`}
+                  //         style={{
+                  //           width: "150px",
+                  //         }}
+                  //       />
+                  //       <p className="timeMessage">{e.status}</p>
+                  //     </div>
+                  //   );
+                  // }
+                )
             ) : (
               <img
                 src={spinnerr}
@@ -209,19 +221,25 @@ function Chat({
           </div>
           {phone !== "" && (
             <>
-             {fileUploaded === "Loading" ? (
+              {fileUploaded === "Loading" ? (
                 <img
                   src={spinnerr}
                   style={{
                     width: "40px",
-                    marginBottom: '-15px',
-                    paddingLeft: '35px'
+                    marginBottom: "-15px",
+                    paddingLeft: "35px",
                   }}
                 />
               ) : (
                 fileUploaded !== "" && (
-                  <p className="chatPhone" style={{
-                  paddingLeft: '35px'}}>File add: {fileUploaded}</p>
+                  <p
+                    className="chatPhone"
+                    style={{
+                      paddingLeft: "35px",
+                    }}
+                  >
+                    File add: {fileUploaded}
+                  </p>
                 )
               )}
               <form onSubmit={() => onSubmit()} className="chatText">
@@ -236,13 +254,17 @@ function Chat({
                 ></textarea>
                 <div class="file-input">
                   <input
-                    onChange={(e) => {upload(e); setFileUploaded('Loading'); setIconSend('iconSend2')}}
+                    onChange={(e) => {
+                      upload(e);
+                      setFileUploaded("Loading");
+                      setIconSend("iconSend2");
+                    }}
                     type="file"
                     name="file-input"
                     id="file-input"
                     class="file-input__input"
                   />
-                  <label class="file-input__label" for="file-input">
+                  <label class="file-input__label" htmlFor="file-input">
                     <BiCloudUpload size={"300px"} />
                   </label>
                 </div>
@@ -253,15 +275,13 @@ function Chat({
                       onSubmit();
                       setResetInput("");
                       setIconSend("iconSend2");
-                      setFileUploaded('');
+                      setFileUploaded("");
                     }}
                   >
                     <AiOutlineSend size={"35px"} className={iconSend} />
                   </label>
                 )}
               </form>
-
-             
             </>
           )}
         </div>
