@@ -39,7 +39,7 @@ function Sells({
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
-        <p className="genericTitle">{`Sells management`}</p>
+        <p className="genericTitle">{`Sells`}</p>
       </div>
       <div
         style={{

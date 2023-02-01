@@ -48,8 +48,8 @@ function AdminNav() {
             className="circleLink"
             style={{
               marginBottom: "25px",
-              marginRight: "120px",
-              marginTop: "20px",
+              marginRight: "95px",
+              marginTop: "30px",
             }}
           >
             <a
@@ -60,7 +60,7 @@ function AdminNav() {
                 className="imageLink"
                 src={formSimplicity}
                 alt={"logo"}
-                style={{ height: "auto", width: "120px" }}
+                style={{ height: "auto", width: "100px" }}
               />
             </a>
           </div>
@@ -69,8 +69,8 @@ function AdminNav() {
             className="circleLink"
             style={{
               marginBottom: "13px",
-              marginRight: "120px",
-              marginTop: "20px",
+              marginRight: "95px",
+              marginTop: "30px",
             }}
           >
             <a
@@ -81,13 +81,13 @@ function AdminNav() {
                 className="imageLink"
                 src={trueWayMarketing}
                 alt={"logo"}
-                style={{ height: "auto", width: "120px" }}
+                style={{ height: "auto", width: "100px" }}
               />
             </a>
           </div>
           <div
             className="circleLink"
-            style={{ marginBottom: "0px", marginRight: "115px" }}
+            style={{ marginTop: "12px", marginRight: "95px" }}
           >
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSfohgaggb5AGraI-wzMDXdxch6LPgbcMH5lj5ZJLlGijFSGew/viewform?vc=0&c=0&w=1&flr=0"
@@ -97,11 +97,11 @@ function AdminNav() {
                 className="imageLink"
                 src={trueWayRealtors}
                 alt={"logo"}
-                style={{ height: "40px", width: "120px" }}
+                style={{ height: "auto", width: "100px" }}
               />
             </a>
           </div>
-          <div className="circleLink">
+          <div className="circleLink" style={{ marginTop: "5px" }}>
             <a href="https://www.miamirealtors.com/" target="blank">
               <img
                 className="imageLink"
@@ -111,7 +111,7 @@ function AdminNav() {
               />
             </a>
           </div>
-          <div className="circleLink">
+          <div className="circleLink" style={{ marginTop: "5px" }}>
             <a
               href="https://myrealtordash.clareityiam.net/idp/login"
               target="blank"
@@ -124,7 +124,7 @@ function AdminNav() {
               />
             </a>
           </div>
-          <div className="circleLink">
+          <div className="circleLink" style={{ marginTop: "5px" }}>
             <a href="https://app.kvcore.com/" target="blank">
               <img
                 className="imageLink"
@@ -134,7 +134,7 @@ function AdminNav() {
               />
             </a>
           </div>
-          <div className="circleLink">
+          <div className="circleLink" style={{ marginTop: "5px" }}>
             <a href="https://www.brokersumo.com/#/dashboard" target="blank">
               <img
                 className="imageLink"

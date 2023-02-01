@@ -68,7 +68,7 @@ function CommissionManagementComponent({
   return (
     <div className="genericDiv1">
       <div className="genericHeader" style={{ paddingTop: "0px" }}>
-        <p className="genericTitle">{`Commission management`}</p>
+        <p className="genericTitle">Commissions</p>
       </div>
 
       <div

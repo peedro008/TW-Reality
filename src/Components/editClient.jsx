@@ -103,7 +103,7 @@ function EditClient({
               onChange={(e) => {
                 setForm({ ...form, clientName: e.target.value });
               }}
-              className="AQinputPackage"
+              className="inputClient"
             ></input>
             <p className="FORMerror"></p>
           </div>
@@ -115,7 +115,7 @@ function EditClient({
               onChange={(e) => {
                 setForm({ ...form, mail: e.target.value });
               }}
-              className="AQinputPackage"
+              className="inputClient"
             ></input>
             {/* <p className="FORMerror">{validarEmail(form.email)? "" :"Email must be a valid email"}</p> */}
           </div>
@@ -127,7 +127,7 @@ function EditClient({
               onChange={(e) => {
                 setForm({ ...form, phone: e.target.value });
               }}
-              className="AQinputPackage"
+              className="inputClient"
             ></input>
             <p className="FORMerror"></p>
           </div>
@@ -139,11 +139,11 @@ function EditClient({
               onChange={(e) => {
                 setForm({ ...form, address: e.target.value });
               }}
-              className="AQinputPackage"
+              className="inputClient"
             ></input>
             <p className="FORMerror"></p>
           </div>
-          <div className="inputDiv">
+          {/* <div className="inputDiv">
             <p className="PAYtitle">Client</p>
             <label className="containerCheck2">
               <input
@@ -173,7 +173,7 @@ function EditClient({
               />
               <span class="checkmark"></span>
             </label>
-          </div>
+          </div> */}
         </div>
         <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
@@ -185,7 +185,7 @@ function EditClient({
                 setForm({ ...form, addedDate: e.target.value });
               }}
               placeholder="Added Date"
-              className="AQinputPackage"
+              className="inputClient"
             ></input>
           </div>
           <div className="inputDiv">
@@ -197,7 +197,7 @@ function EditClient({
                 setForm({ ...form, contactDate: e.target.value });
               }}
               placeholder="ClosingDate"
-              className="AQinputPackage"
+              className="inputClient"
             ></input>
           </div>
           {!contact2 && (
@@ -206,7 +206,7 @@ function EditClient({
               <button
                 onClick={() => setContact2(true)}
                 className="PAYbutton"
-                style={{ width: "250px", marginTop: "25px" }}
+                style={{ width: "218px", marginTop: "25px" }}
               >
                 <p className="PAYbuttonText">Add Contact Date +</p>
               </button>
@@ -223,7 +223,7 @@ function EditClient({
                   setForm({ ...form, contactDate2: e.target.value });
                 }}
                 placeholder="ClosingDate"
-                className="AQinputPackage"
+                className="inputClient"
               ></input>
             </div>
           )}
@@ -234,7 +234,7 @@ function EditClient({
               <button
                 onClick={() => setContact3(true)}
                 className="PAYbutton"
-                style={{ width: "250px", marginTop: "25px" }}
+                style={{ width: "218px", marginTop: "25px" }}
               >
                 <p className="PAYbuttonText">Add Contact Date +</p>
               </button>
@@ -251,7 +251,7 @@ function EditClient({
                   setForm({ ...form, contactDate3: e.target.value });
                 }}
                 placeholder="ClosingDate"
-                className="AQinputPackage"
+                className="inputClient"
               ></input>
             </div>
           )}
@@ -264,7 +264,7 @@ function EditClient({
                 <button
                   onClick={() => setContact4(true)}
                   className="PAYbutton"
-                  style={{ width: "250px", marginTop: "25px" }}
+                  style={{ width: "218px", marginTop: "25px" }}
                 >
                   <p className="PAYbuttonText">Add Contact Date +</p>
                 </button>
@@ -281,7 +281,7 @@ function EditClient({
                     setForm({ ...form, contactDate4: e.target.value });
                   }}
                   placeholder="ClosingDate"
-                  className="AQinputPackage"
+                  className="inputClient"
                 ></input>
               </div>
             )}
@@ -292,7 +292,7 @@ function EditClient({
                 <button
                   onClick={() => setContact5(true)}
                   className="PAYbutton"
-                  style={{ width: "250px", marginTop: "25px" }}
+                  style={{ width: "218px", marginTop: "25px" }}
                 >
                   <p className="PAYbuttonText">Add Contact Date +</p>
                 </button>
@@ -309,7 +309,7 @@ function EditClient({
                     setForm({ ...form, contactDate5: e.target.value });
                   }}
                   placeholder="ClosingDate"
-                  className="AQinputPackage"
+                  className="inputClient"
                 ></input>
               </div>
             )}
@@ -319,7 +319,7 @@ function EditClient({
                 <button
                   onClick={() => setContact6(true)}
                   className="PAYbutton"
-                  style={{ width: "250px", marginTop: "25px" }}
+                  style={{ width: "218px", marginTop: "25px" }}
                 >
                   <p className="PAYbuttonText">Add Contact Date +</p>
                 </button>
@@ -336,7 +336,7 @@ function EditClient({
                     setForm({ ...form, contactDate6: e.target.value });
                   }}
                   placeholder="ClosingDate"
-                  className="AQinputPackage"
+                  className="inputClient"
                 ></input>
               </div>
             )}
@@ -350,7 +350,7 @@ function EditClient({
                 <button
                   onClick={() => setContact7(true)}
                   className="PAYbutton"
-                  style={{ width: "250px", marginTop: "25px" }}
+                  style={{ width: "218px", marginTop: "25px" }}
                 >
                   <p className="PAYbuttonText">Add Contact Date +</p>
                 </button>
@@ -367,7 +367,7 @@ function EditClient({
                     setForm({ ...form, contactDate7: e.target.value });
                   }}
                   placeholder="ClosingDate"
-                  className="AQinputPackage"
+                  className="inputClient"
                 ></input>
               </div>
             )}
@@ -378,7 +378,7 @@ function EditClient({
                 <button
                   onClick={() => setContact8(true)}
                   className="PAYbutton"
-                  style={{ width: "250px", marginTop: "25px" }}
+                  style={{ width: "218px", marginTop: "25px" }}
                 >
                   <p className="PAYbuttonText">Add Contact Date +</p>
                 </button>
@@ -395,7 +395,7 @@ function EditClient({
                     setForm({ ...form, contactDate8: e.target.value });
                   }}
                   placeholder="ClosingDate"
-                  className="AQinputPackage"
+                  className="inputClient"
                 ></input>
               </div>
             )}
@@ -405,7 +405,7 @@ function EditClient({
                 <button
                   onClick={() => setContact9(true)}
                   className="PAYbutton"
-                  style={{ width: "250px", marginTop: "25px" }}
+                  style={{ width: "218px", marginTop: "25px" }}
                 >
                   <p className="PAYbuttonText">Add Contact Date +</p>
                 </button>
@@ -422,7 +422,7 @@ function EditClient({
                     setForm({ ...form, contactDate9: e.target.value });
                   }}
                   placeholder="ClosingDate"
-                  className="AQinputPackage"
+                  className="inputClient"
                 ></input>
               </div>
             )}
@@ -509,8 +509,9 @@ function EditClient({
         <div
           style={{
             position: "absolute",
-            right: "50px",
-            top: "76px",
+            right: "55px",
+            // top: "76px",
+            marginTop: "-30px",
             display: "flex",
           }}
         >
@@ -523,11 +524,7 @@ function EditClient({
             }}
             disabled={validation ? true : false}
           >
-            {clientData.clientType === "Client" ? (
-              <p className="PAYbuttonText">Edit Client</p>
-            ) : (
-              <p className="PAYbuttonText">Edit Lead</p>
-            )}
+            <p className="PAYbuttonText">Save</p>
           </button>
         </div>
 

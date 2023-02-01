@@ -123,10 +123,11 @@ const MyClients = ({
       <div className="genericHeader">
         <p className="genericTitle">My Clients</p>
       </div>
-      <div class="input-wrapper-mc">
+      <div className="input-wrapper-mc">
         <input
           type="search"
-          class="inputContact"
+          placeholder="Search by name..."
+          className="inputContact"
           onChange={(e) => setSearchName(e.target.value)}
         />
         <BiSearchAlt2

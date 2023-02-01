@@ -41,7 +41,7 @@ function AdminManagement({
     cursor: "pointer",
     fontFamily: "Gilroy-Regular",
     fontWeight: "bold",
-    fontSize: '16px',
+    fontSize: "16px",
     color: "white",
     boxShadow: "4px 4px 4px rgb(199, 199, 199)",
     backgroundColor: "#2b4162",
@@ -55,20 +55,31 @@ function AdminManagement({
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
-        <p className="genericTitle">Users Management</p>
+        <p className="genericTitle">Users</p>
       </div>
       <div className="PAYbuttonCont" style={{ justifyContent: "flex-start" }}>
-
         <button onClick={() => setTypeList("Admin")} className="PAYbutton">
           <p className="PAYbuttonText">Admins</p>
         </button>
-        <button onClick={() => setTypeList("Manager")} className="PAYbutton" style={{ marginLeft: "30px" }}>
+        <button
+          onClick={() => setTypeList("Manager")}
+          className="PAYbutton"
+          style={{ marginLeft: "30px" }}
+        >
           <p className="PAYbuttonText">Managers</p>
         </button>
-        <button onClick={() => setTypeList("Realtors")} className="PAYbutton" style={{ marginLeft: "30px" }}>
+        <button
+          onClick={() => setTypeList("Realtors")}
+          className="PAYbutton"
+          style={{ marginLeft: "30px" }}
+        >
           <p className="PAYbuttonText">Realtors</p>
         </button>
-        <button onClick={() => setTypeList("Referral")} className="PAYbutton" style={{ marginLeft: "30px" }}>
+        <button
+          onClick={() => setTypeList("Referral")}
+          className="PAYbutton"
+          style={{ marginLeft: "30px" }}
+        >
           <p className="PAYbuttonText">Referrals</p>
         </button>
       </div>
@@ -78,11 +89,17 @@ function AdminManagement({
       >
         {typeList === "Referral" && (
           <div className="DashSubCont" style={{ maxWidth: "90vw" }}>
-            <div style={{ flexDirection: "row"}}>
-              <p className="subTitt" style={{ marginTop: "2vh", fontSize: '18px', color: '#2b4162' }}>
+            <div style={{ flexDirection: "row" }}>
+              <p
+                className="subTitt"
+                style={{ marginTop: "2vh", fontSize: "18px", color: "#2b4162" }}
+              >
                 Referral list
               </p>
-              <table className="table5" style={{ marginTop: "2vh", width: '90vw', marginLeft: '0px'  }}>
+              <table
+                className="table5"
+                style={{ marginTop: "2vh", width: "90vw", marginLeft: "0px" }}
+              >
                 <tbody>
                   <tr>
                     <th scope="col" className="column1">
@@ -102,9 +119,9 @@ function AdminManagement({
                     <th scope="col" className="column1">
                       <p className="REPtype2">Company</p>
                     </th>
-                    <th scope="col" className="column1">
+                    {/* <th scope="col" className="column1">
                       <p className="REPtype2">Edit</p>
-                    </th>
+                    </th> */}
                     {isAdminOne && (
                       <th scope="col" className="column1">
                         <p className="REPtype2">Del</p>
@@ -139,7 +156,7 @@ function AdminManagement({
                         <td className="ClientName" scope="row">
                           {e.Company}
                         </td>
-                        <th className="ClientName" scope="row">
+                        {/* <th className="ClientName" scope="row">
                           <NavLink
                             className="icons"
                             to={{ pathname: "/editReferred", aboutProps: e }}
@@ -151,7 +168,7 @@ function AdminManagement({
                               color="#2b4162"
                             />
                           </NavLink>
-                        </th>
+                        </th> */}
                         {isAdminOne && (
                           <th className="ClientName" scope="row">
                             <FaTrash
@@ -212,11 +229,17 @@ function AdminManagement({
         )}
         {typeList === "Realtors" && (
           <div className="DashSubCont" style={{ maxWidth: "90vw" }}>
-            <div style={{ flexDirection: "row"}}>
-              <p className="subTitt" style={{ marginTop: "2vh",fontSize: '18px', color: '#2b4162' }}>
+            <div style={{ flexDirection: "row" }}>
+              <p
+                className="subTitt"
+                style={{ marginTop: "2vh", fontSize: "18px", color: "#2b4162" }}
+              >
                 Realtors list
               </p>
-              <table className="table5" style={{ marginTop: "2vh", marginLeft: '0px', width: '90vw' }}>
+              <table
+                className="table5"
+                style={{ marginTop: "2vh", marginLeft: "0px", width: "90vw" }}
+              >
                 <tbody>
                   <tr>
                     <th scope="col" className="column1">
@@ -374,10 +397,16 @@ function AdminManagement({
         {typeList === "Manager" && (
           <div className="DashSubCont" style={{ maxWidth: "90vw" }}>
             <div style={{ flexDirection: "row" }}>
-              <p className="subTitt" style={{ marginTop: "2vh", fontSize: '18px', color: '#2b4162' }}>
+              <p
+                className="subTitt"
+                style={{ marginTop: "2vh", fontSize: "18px", color: "#2b4162" }}
+              >
                 Managers list
               </p>
-              <table className="table5" style={{ marginTop: "2vh", marginLeft: '0px', width: '90vw' }}>
+              <table
+                className="table5"
+                style={{ marginTop: "2vh", marginLeft: "0px", width: "90vw" }}
+              >
                 <tbody>
                   <tr>
                     <th scope="col" className="column1">
@@ -514,13 +543,19 @@ function AdminManagement({
             </Modal>
           </div>
         )}
-          {typeList === "Admin" && (
+        {typeList === "Admin" && (
           <div className="DashSubCont" style={{ maxWidth: "90vw" }}>
             <div style={{ flexDirection: "row" }}>
-              <p className="subTitt" style={{ marginTop: "2vh", fontSize: '18px', color: '#2b4162' }}>
+              <p
+                className="subTitt"
+                style={{ marginTop: "2vh", fontSize: "18px", color: "#2b4162" }}
+              >
                 Admin list
               </p>
-              <table className="table5" style={{ marginTop: "2vh", marginLeft: '0px', width: '90vw' }}>
+              <table
+                className="table5"
+                style={{ marginTop: "2vh", marginLeft: "0px", width: "90vw" }}
+              >
                 <tbody>
                   <tr>
                     <th scope="col" className="column1">

@@ -18,9 +18,9 @@ function PackageManagement({
   typeOfPackage,
   onOpenModal,
   soldTransaction,
-  userId,typeOfP
+  userId,
+  typeOfP,
 }) {
-
   // const [Search, setSearch] = useState("");
 
   let optionsPackage = [
@@ -36,28 +36,30 @@ function PackageManagement({
 
   return (
     <div className="genericDiv1">
-      <div className="genericHeader" style={{paddingTop: '0px'}}>
-        <p className="genericTitle">Package management</p>
-       
+      <div className="genericHeader" style={{ paddingTop: "0px" }}>
+        <p className="genericTitle">Packages</p>
       </div>
-      <div className="inputDiv" style={{marginTop: '-20px', marginBottom: '10px' ,marginLeft: '40px'}}>
-          <p className="PAYtitle" >Type of Package</p>
-          <Select
-            onChange={(val) => {
-              setTypeOfPackage(val.label);
-            }}
-            defaultValue={typeOfP}
-            options={optionsPackage}
-            name={"Realtor Name"}
-            className="PAYselect"
-            placeholder="Select Package"
-          />
-        </div>
+      <div
+        className="inputDiv"
+        style={{ marginTop: "-20px", marginBottom: "10px", marginLeft: "40px" }}
+      >
+        <p className="PAYtitle">Type of Package</p>
+        <Select
+          onChange={(val) => {
+            setTypeOfPackage(val.label);
+          }}
+          defaultValue={typeOfP}
+          options={optionsPackage}
+          name={"Realtor Name"}
+          className="PAYselect"
+          placeholder="Select Package"
+        />
+      </div>
       <div
         style={{
-          position: 'fixed',
+          position: "fixed",
           right: 0,
-          top: '80px',
+          top: "80px",
           width: "20vw",
           minWidth: "500px",
           height: "35px",
@@ -66,28 +68,42 @@ function PackageManagement({
           flexDirection: "row",
           alignItems: "center",
         }}
-      >
-      </div>
+      ></div>
       <div className="DashContainerSells">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
-          {
-            typeOfPackage === 'Marketing' && <PackageMarketingTable packages={packages} userId={userId} Users={Users} open={open} onOpenModal={onOpenModal} onCloseModal={onCloseModal} onSubmitPackage={onSubmitPackage}/>
-          }
-          {
-            typeOfPackage === 'Transaction Coordinator' && <TransactionCoordinatorTable packages={packages} userId={userId} open={open} Users={Users} onOpenModal={onOpenModal} onCloseModal={onCloseModal} soldTransaction={soldTransaction}/>
-          } 
+            {typeOfPackage === "Marketing" && (
+              <PackageMarketingTable
+                packages={packages}
+                userId={userId}
+                Users={Users}
+                open={open}
+                onOpenModal={onOpenModal}
+                onCloseModal={onCloseModal}
+                onSubmitPackage={onSubmitPackage}
+              />
+            )}
+            {typeOfPackage === "Transaction Coordinator" && (
+              <TransactionCoordinatorTable
+                packages={packages}
+                userId={userId}
+                open={open}
+                Users={Users}
+                onOpenModal={onOpenModal}
+                onCloseModal={onCloseModal}
+                soldTransaction={soldTransaction}
+              />
+            )}
           </>
         </div>
       </div>
-      {
-        !typeOfPackage &&
+      {!typeOfPackage && (
         <>
-        <NewChart/>
-        <NewChartMarketing/>
+          <NewChart />
+          <NewChartMarketing />
         </>
-      }
-     
+      )}
+
       <img
         src={Isologo_background}
         disabled

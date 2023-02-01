@@ -5,6 +5,14 @@ import ClientHistory from "../Components/clientHistory";
 import { useDispatch, useSelector } from "react-redux";
 import { GetMyClients } from "../Logic/Fetch";
 import { getClients } from "../Redux/actions";
+import ReactS3 from "react-s3";
+
+const config = {
+  bucketName: process.env.REACT_APP_BUCKET_NAME,
+  region: process.env.REACT_APP_REGION,
+  accessKeyId: process.env.REACT_APP_ACCESS,
+  secretAccessKey: process.env.REACT_APP_SECRET,
+};
 
 function ClientHistoryControl(props) {
   const userId = useSelector((state) => state.UserId);
@@ -18,6 +26,8 @@ function ClientHistoryControl(props) {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [respEditClient, setRespEditClient] = useState([]);
+  const [loaderPhoto, setLoaderPhoto] = useState(false);
+  const [goStatus, setGoStatus] = useState("statusHistory");
   const [form, setForm] = useState([]);
 
   let optionsReason = [
@@ -105,7 +115,7 @@ function ClientHistoryControl(props) {
       label: "Closed",
     },
   ];
-  console.log(form);
+
   useEffect(() => {
     fetch(`https://truewayrealtorsapi.com/getClient?ClientId=${ClientId}`)
       .then(async (res) => {
@@ -147,7 +157,7 @@ function ClientHistoryControl(props) {
     });
   }, [clientDataReload]);
 
-  console.log(form);
+  console.log(clientDataReload);
 
   const onSubmit = () => {
     fetch(`https://truewayrealtorsapi.com/editClient`, {
@@ -178,20 +188,66 @@ function ClientHistoryControl(props) {
       try {
         if (res.status === 200) {
           onOpenModal();
-          // Reload();
+          setGoStatus("statusHistory");
           setReloadInfo(history.length + 1);
           dispatchClient();
           setRespEditClient([true, "Client record added successfully"]);
         } else {
           onOpenModal();
+          setGoStatus("statusHistory");
           setRespEditClient([false, "Error adding Record"]);
         }
       } catch (err) {
         onOpenModal();
-
+        setGoStatus("statusHistory");
         setRespEditClient([false, "Error adding record"]);
       }
     });
+  };
+
+  const upload = (e) => {
+    setLoaderPhoto(true);
+    console.log(e.target.files[0]);
+    ReactS3.uploadFile(e.target.files[0], config)
+      .then((data) => {
+        console.log(data);
+
+        fetch(`https://truewayrealtorsapi.com/editClient`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ClientId: ClientId, photo: data.location }),
+        }).then(async (res) => {
+          try {
+            if (res.status !== 200 || res.status !== 204) {
+              onOpenModal();
+              dispatchClient();
+              setGoStatus("");
+              setReloadInfo(history.length + 1);
+              setRespEditClient([true, "Photo edited succesfully"]);
+              setLoaderPhoto(false);
+            } else {
+              onOpenModal();
+              setGoStatus("");
+              setRespEditClient([false, "Photo can not be edited"]);
+              setLoaderPhoto(false);
+            }
+          } catch (err) {
+            onOpenModal();
+            setLoaderPhoto(false);
+            setGoStatus("");
+            setRespEditClient([false, "Error adding record"]);
+          }
+        });
+        // setFileUploaded(data.key);
+        // setIconSend("iconSend");
+        // setForm({ media: data.location });
+      })
+      .catch((err) => {
+        console.log(err);
+        // setLoadingFile("fileDont");
+      });
   };
 
   return (
@@ -210,6 +266,9 @@ function ClientHistoryControl(props) {
       onSubmit={onSubmit}
       open={open}
       setReloadInfo={setReloadInfo}
+      upload={upload}
+      loaderPhoto={loaderPhoto}
+      goStatus={goStatus}
     />
   );
 }

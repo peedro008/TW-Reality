@@ -15,46 +15,43 @@ function SellsManager({
   setPaginator,
   currencyFormat,
   formatNumber,
-  myUsersSellPag
+  myUsersSellPag,
 }) {
   const [Search, setSearch] = useState("");
-  const [sumTotalSold, setSumTotalSold] = useState(0)
-  const [sumTotalSoldSearch, setSumTotalSoldSearch] = useState(0)
+  const [sumTotalSold, setSumTotalSold] = useState(0);
+  const [sumTotalSoldSearch, setSumTotalSoldSearch] = useState(0);
   const realtorsList = Users.map((e) => ({ value: e.name, label: e.name }));
 
   let sumSold = 0;
 
-  let Screen = window.screen
+  let Screen = window.screen;
 
   useEffect(() => {
-    setSumTotalSoldSearch(sumSold)
-  }, [Search])
-  
-  console.log(allSells
-    .filter(
+    setSumTotalSoldSearch(sumSold);
+  }, [Search]);
+
+  console.log(
+    allSells.filter(
       (e) =>
-        e.ClientName?.toLowerCase().includes(
-          Search.toLowerCase()
-        ) ||
-        e.User?.name
-          ?.toLowerCase()
-          .includes(Search.toLowerCase()) ||
+        e.ClientName?.toLowerCase().includes(Search.toLowerCase()) ||
+        e.User?.name?.toLowerCase().includes(Search.toLowerCase()) ||
         Users?.filter((f) => f.id == e.UserId)[0]
           ?.name?.toLowerCase()
           .includes(Search.toLowerCase())
-    ).length)
+    ).length
+  );
   useEffect(() => {
     let sumTotal = 0;
     allSells?.map((e) => {
       sumTotal = sumTotal + Math.floor(e.Value);
-    })
-    return setSumTotalSold(sumTotal)
+    });
+    return setSumTotalSold(sumTotal);
   }, [allSells]);
 
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
-        <p className="genericTitle">{`Sells management`}</p>
+        <p className="genericTitle">{`Sells`}</p>
       </div>
       <div
         style={{
@@ -86,32 +83,40 @@ function SellsManager({
           className="StadSelectGrafic"
           placeholder="Type"
         />
-        {
-          Search && <button onClick={() => setSearch('')} className="StadBoxDate" style={{height: 30}}>
-          <p className="StadBoxTitle" style={{marginBottom: 0}}>Reset</p>
-        </button>
-        }
-       
+        {Search && (
+          <button
+            onClick={() => setSearch("")}
+            className="StadBoxDate"
+            style={{ height: 30 }}
+          >
+            <p className="StadBoxTitle" style={{ marginBottom: 0 }}>
+              Reset
+            </p>
+          </button>
+        )}
       </div>
       <div className="DashContainerSells">
         <div className="DashSubCont" style={{ maxWidth: "88vw" }}>
           <>
-            <table className="table5" style={{ marginTop: "2vh", width: '90vw', marginLeft: '0px'  }}>
+            <table
+              className="table5"
+              style={{ marginTop: "2vh", width: "90vw", marginLeft: "0px" }}
+            >
               <tbody>
                 <tr>
-                  <th scope="col" className="column1" >
+                  <th scope="col" className="column1">
                     <p className="REPtype2">Client name</p>
                   </th>
-                  <th scope="col" className="column1" >
+                  <th scope="col" className="column1">
                     <p className="REPtype2">Sold by</p>
                   </th>
-                  <th scope="col" className="column1" >
+                  <th scope="col" className="column1">
                     <p className="REPtype2">Closing date</p>
                   </th>
-                  <th scope="col" className="column1" >
+                  <th scope="col" className="column1">
                     <p className="REPtype2">Address</p>
                   </th>
-                  <th scope="col" className="column1" >
+                  <th scope="col" className="column1">
                     <p className="REPtype2">Price</p>
                   </th>
                 </tr>
@@ -129,30 +134,30 @@ function SellsManager({
                             ?.name?.toLowerCase()
                             .includes(Search.toLowerCase())
                       )
-                      .map((e,i) => {
+                      .map((e, i) => {
                         sumSold = sumSold + Math.floor(e.Value);
                         return (
                           <tr key={i}>
-                          <td className="ClientName" scope="row">
-                            {e.ClientName}
-                          </td>
-                          <td className="ClientName" scope="row">
-                            {e.User?.name}
-                          </td>
+                            <td className="ClientName" scope="row">
+                              {e.ClientName}
+                            </td>
+                            <td className="ClientName" scope="row">
+                              {e.User?.name}
+                            </td>
 
-                          <td className="ClientName" scope="row">
-                            {e.ClosingDate}
-                          </td>
-                          <td className="ClientName" scope="row">
-                            {e.Address}
-                          </td>
-                          <td className="ClientName" scope="row">
-                          {currencyFormat(e.Value)}
-                          </td>
-                        </tr>
+                            <td className="ClientName" scope="row">
+                              {e.ClosingDate}
+                            </td>
+                            <td className="ClientName" scope="row">
+                              {e.Address}
+                            </td>
+                            <td className="ClientName" scope="row">
+                              {currencyFormat(e.Value)}
+                            </td>
+                          </tr>
                         );
                       })
-                  : myUsersSellPag?.map((e,i) => {
+                  : myUsersSellPag?.map((e, i) => {
                       sumSold = sumSold + Math.floor(e.Value);
                       return (
                         <tr key={i}>
@@ -170,7 +175,7 @@ function SellsManager({
                             {e.Address}
                           </td>
                           <td className="ClientName" scope="row">
-                          {currencyFormat(e.Value)}
+                            {currencyFormat(e.Value)}
                           </td>
                         </tr>
                       );
@@ -180,53 +185,51 @@ function SellsManager({
           </>
         </div>
       </div>
-      {
-        Screen.width > 1000 ?
+      {Screen.width > 1000 ? (
         <div
-        className="CardsGraficsCommision"
-        style={{
-          marginLeft: "20px",
-          top: "100px",
-          backgroundColor: "rgba(0, 39, 82,0.8)",
-        }}
-      >
-        <div
-          className="dashCircle"
-          style={{ backgroundColor: "#ebeff2" }}
+          className="CardsGraficsCommision"
+          style={{
+            marginLeft: "20px",
+            top: "100px",
+            backgroundColor: "rgba(0, 39, 82,0.8)",
+          }}
         >
-          <FaMoneyBillAlt size='28px' color='#002752'/>
+          <div className="dashCircle" style={{ backgroundColor: "#ebeff2" }}>
+            <FaMoneyBillAlt size="28px" color="#002752" />
+          </div>
+          <div className="dashText">
+            <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+              {formatNumber(sumTotalSold)}
+            </p>
+            <p className="dashCardText" style={{ color: "#ebeff2" }}>
+              Total Sold
+            </p>
+          </div>
         </div>
-        <div className="dashText">
-        <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(sumTotalSold)}</p>
-          <p className="dashCardText" style={{color: "#ebeff2"}}>Total Sold</p>
-        </div>
-      </div>
-      :
-      <div
-      className="CardsGraficsCommision"
-      style={{
-        left: "100px",
-        bottom: "250px",
-        backgroundColor: "rgba(51, 214, 159 ,0.15)",
-      }}
-    >
-      <div
-        className="dashCircle"
-        style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
-      >
-        <img src={wbill} />
-      </div>
-      <div className="dashText">
-        <p className="dashCardTitle">{formatNumber(sumTotalSold)}</p>
-        <p className="dashCardText">Total Sold</p>
-      </div>
-    </div>
-      }
-
-        {
-          Search && Screen.width > 1000 ?
-         
+      ) : (
+        <div
+          className="CardsGraficsCommision"
+          style={{
+            left: "100px",
+            bottom: "250px",
+            backgroundColor: "rgba(51, 214, 159 ,0.15)",
+          }}
+        >
           <div
+            className="dashCircle"
+            style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+          >
+            <img src={wbill} />
+          </div>
+          <div className="dashText">
+            <p className="dashCardTitle">{formatNumber(sumTotalSold)}</p>
+            <p className="dashCardText">Total Sold</p>
+          </div>
+        </div>
+      )}
+
+      {Search && Screen.width > 1000 ? (
+        <div
           className="CardsGraficsCommision"
           style={{
             right: "300px",
@@ -234,64 +237,72 @@ function SellsManager({
             backgroundColor: "#84596B",
           }}
         >
-         <div
-            className="dashCircle"
-            style={{ backgroundColor: "#ebeff2" }}
-          >
-            <FaMoneyBillAlt size='28px' color="#84596B"/>
+          <div className="dashCircle" style={{ backgroundColor: "#ebeff2" }}>
+            <FaMoneyBillAlt size="28px" color="#84596B" />
           </div>
           <div className="dashText">
-            <p className="dashCardTitle" style={{color: "#ebeff2"}}>{formatNumber(sumTotalSoldSearch)}</p>
-            <p className="dashCardText" style={{color: "#ebeff2"}}>Sold On Search</p>
+            <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+              {formatNumber(sumTotalSoldSearch)}
+            </p>
+            <p className="dashCardText" style={{ color: "#ebeff2" }}>
+              Sold On Search
+            </p>
           </div>
         </div>
-        : Search &&
-        <div
-        className="CardsGraficsCommision"
-        style={{
-          left: "400px",
-          bottom: "250px",
-          backgroundColor: "rgba(111, 82, 237, 0.15)",
-        }}
-      >
-        <div
-          className="dashCircle"
-          style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
-        >
-          <img src={wbill} />
-        </div>
-        <div className="dashText">
-          <p className="dashCardTitle">{formatNumber(sumTotalSoldSearch)}</p>
-          <p className="dashCardText">Sold On Search</p>
-        </div>
-      </div>
-        }
-
-        {
-          allSells
-          .filter(
-            (e) =>
-              e.ClientName?.toLowerCase().includes(
-                Search.toLowerCase()
-              ) ||
-              e.User?.name
-                ?.toLowerCase()
-                .includes(Search.toLowerCase()) ||
-              Users?.filter((f) => f.id == e.UserId)[0]
-                ?.name?.toLowerCase()
-                .includes(Search.toLowerCase())
-          ).length > 9 &&
-      <div className="PaginatorBox">
-            <div className="PaginatorLeft"  onClick={()=>{paginator!==0&&setPaginator(paginator-1)}}>
-                <AiOutlineLeft  color="white" size={"20px"}/>
+      ) : (
+        Search && (
+          <div
+            className="CardsGraficsCommision"
+            style={{
+              left: "400px",
+              bottom: "250px",
+              backgroundColor: "rgba(111, 82, 237, 0.15)",
+            }}
+          >
+            <div
+              className="dashCircle"
+              style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+            >
+              <img src={wbill} />
             </div>
-            <div className="PaginatorNum">{paginator + 1}</div>
-            <div className="PaginatorRight" onClick={()=>{myUsersSellPag.length>9 && setPaginator(paginator+1)}}>
-                <AiOutlineRight  color="white"  size={"20px"}/>
+            <div className="dashText">
+              <p className="dashCardTitle">
+                {formatNumber(sumTotalSoldSearch)}
+              </p>
+              <p className="dashCardText">Sold On Search</p>
             </div>
-      </div>
-        }
+          </div>
+        )
+      )}
 
+      {allSells.filter(
+        (e) =>
+          e.ClientName?.toLowerCase().includes(Search.toLowerCase()) ||
+          e.User?.name?.toLowerCase().includes(Search.toLowerCase()) ||
+          Users?.filter((f) => f.id == e.UserId)[0]
+            ?.name?.toLowerCase()
+            .includes(Search.toLowerCase())
+      ).length > 9 && (
+        <div className="PaginatorBox">
+          <div
+            className="PaginatorLeft"
+            onClick={() => {
+              paginator !== 0 && setPaginator(paginator - 1);
+            }}
+          >
+            <AiOutlineLeft color="white" size={"20px"} />
+          </div>
+          <div className="PaginatorNum">{paginator + 1}</div>
+          <div
+            className="PaginatorRight"
+            onClick={() => {
+              myUsersSellPag.length > 9 && setPaginator(paginator + 1);
+            }}
+          >
+            <AiOutlineRight color="white" size={"20px"} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

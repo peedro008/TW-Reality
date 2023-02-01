@@ -28,11 +28,10 @@ function StadisticComponent({
 
   return (
     <div className="genericDiv1">
-        <div className="genericHeader">
-        <p className="genericTitle">Users Management</p>
+      <div className="genericHeader">
+        <p className="genericTitle">Users</p>
       </div>
       <div className="StadCalendarDiv">
-       
         {nothing && <p className="genericTitleNothing">{nothing}</p>}
         <div style={{ display: "flex" }}>
           <div className="StadSelectCont">
@@ -128,7 +127,7 @@ function StadisticComponent({
             ).map((e, i) => {
               sumaRef = 0;
               {
-                UsersByDate?.filter(f => f.ReferredId === e.id).length
+                UsersByDate?.filter((f) => f.ReferredId === e.id).length
                   ? e.Referrals.map((f) => (sumaRef = sumaRef + f.Sells.length))
                   : (sumaRef = 0);
               }
@@ -153,7 +152,12 @@ function StadisticComponent({
                       >
                         Realtors
                       </p>
-                      <p className="StadBoxVal">{UsersByDate?.filter(f => f.ReferredId === e.id).length}</p>
+                      <p className="StadBoxVal">
+                        {
+                          UsersByDate?.filter((f) => f.ReferredId === e.id)
+                            .length
+                        }
+                      </p>
                     </div>
                   </NavLink>
 
@@ -342,7 +346,7 @@ function StadisticComponent({
                 <div key={i}>
                   <p
                     // style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
-                    
+
                     className="StadisticProdName"
                   >
                     {e.name}
@@ -363,7 +367,12 @@ function StadisticComponent({
                       >
                         Realtors
                       </p>
-                      <p className="StadBoxVal">{UsersByDate?.filter(f => f.ReferredId === e.id).length}</p>
+                      <p className="StadBoxVal">
+                        {
+                          UsersByDate?.filter((f) => f.ReferredId === e.id)
+                            .length
+                        }
+                      </p>
                     </div>
                   </NavLink>
 
@@ -561,7 +570,7 @@ function StadisticComponent({
               <div key={i}>
                 <p
                   // style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
-               
+
                   className="StadisticProdName"
                 >
                   {e.name}
@@ -582,7 +591,13 @@ function StadisticComponent({
                     >
                       Realtors
                     </p>
-                    <p className="StadBoxVal">{commissionsPaginate?.filter(f => f.ReferredId === e.id).length}</p>
+                    <p className="StadBoxVal">
+                      {
+                        commissionsPaginate?.filter(
+                          (f) => f.ReferredId === e.id
+                        ).length
+                      }
+                    </p>
                   </div>
                 </NavLink>
 
