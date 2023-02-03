@@ -192,6 +192,10 @@ function ClientHistoryControl(props) {
           setReloadInfo(history.length + 1);
           dispatchClient();
           setRespEditClient([true, "Client record added successfully"]);
+
+          setTimeout(() => {
+            onCloseModal();
+          }, 1000);
         } else {
           onOpenModal();
           setGoStatus("statusHistory");
@@ -227,6 +231,9 @@ function ClientHistoryControl(props) {
               setReloadInfo(history.length + 1);
               setRespEditClient([true, "Photo edited succesfully"]);
               setLoaderPhoto(false);
+              setTimeout(() => {
+                onCloseModal();
+              }, 1000);
             } else {
               onOpenModal();
               setGoStatus("");

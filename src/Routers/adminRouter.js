@@ -33,6 +33,8 @@ import Stadistic from "../Controllers/stadistic";
 import AddAdminControl from "../Controllers/addAdmin";
 import AddReferred from "../Controllers/addReferred";
 import ChatControl from "../Controllers/chatControl";
+import ContactsControl from "../Controllers/contactsControll";
+import MessageCampaignControl from "../Controllers/MessageCampaignControl";
 
 const AdminRouter = () => {
   const dispatch = useDispatch();
@@ -143,6 +145,12 @@ const AdminRouter = () => {
         <Route exact path="/editClient" component={EditClientControl} />
         <Route exact path="/myClientHistory" component={clientHistoryControl} />
         <Route exact path="/chat" component={ChatControl} />
+        <Route exact path="/contacts" component={ContactsControl} />
+        <Route
+          exact
+          path="/messageCampaign"
+          component={MessageCampaignControl}
+        />
       </Router>
     );
   }

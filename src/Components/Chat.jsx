@@ -5,6 +5,7 @@ import spinnerr from "../assets/loaderEllipsis.gif";
 import { AiOutlineSend } from "react-icons/ai";
 import ReactTimeAgo from "react-time-ago";
 import ReactS3 from "react-s3";
+import { NavLink } from "react-router-dom";
 
 const config = {
   bucketName: process.env.REACT_APP_BUCKET_NAME,
@@ -27,6 +28,7 @@ function Chat({
   loaderMessages,
   phone,
   setLoaderMessages,
+  setMessaggePlusFile,
 }) {
   const [clientSelected, setClientSelected] = useState([]);
   const [clientCardGrow, setClientCardGrow] = useState("clientCardGrow");
@@ -55,7 +57,7 @@ function Chat({
         console.log(data);
         setFileUploaded(data.key);
         setIconSend("iconSend");
-        setForm({ ...form, media: data.location });
+        setForm({ ...form, media: data.location.replace(" ", "+") });
         setLoadingFile("fileDone");
       })
       .catch((err) => {
@@ -63,7 +65,7 @@ function Chat({
         setLoadingFile("fileDont");
       });
   };
-
+  console.log(form);
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -71,8 +73,8 @@ function Chat({
       </div>
       <div className="containerChat">
         <div className="containerContacts">
-          <div class="input-wrapper">
-            <input type="search" class="inputContact" />
+          <div className="input-wrapper">
+            <input type="search" className="inputContact" />
             <BiSearchAlt2 size={"20px"} className="input-icon" />
           </div>
           <div
@@ -96,6 +98,7 @@ function Chat({
                         number: e.phone.slice(9, e.phone.length),
                       });
                       setLoaderMessages(true);
+                      setMessaggePlusFile([]);
                     }}
                   >
                     <div
@@ -147,8 +150,9 @@ function Chat({
                     : -1;
                 })
                 .reverse()
-                .map((e) => {
-                  // if (e.body) {
+                .map(
+                  (e) => {
+                    // if (e.body) {
                     if (e.status === "failed") {
                       return (
                         <div className="chatStatusFailed">
@@ -176,22 +180,38 @@ function Chat({
                           </div>
                         );
                       } else {
-                        return (
-                          <div className="chatStatusSelect">
-                            <p className="messageSent">{e.body}</p>
+                        if (e.img) {
+                          return (
+                            <div className="chatStatusSelect">
+                              <img src={e.img} className="photoProfile" />
 
-                            <p className="timeMessage">
-                              <ReactTimeAgo
-                                date={e?.dateCreated}
-                                locale="en-US"
-                              />
-                            </p>
-                            {/* <p className="timeMessage">{e.status}</p> */}
-                          </div>
-                        );
+                              <p className="timeMessage">
+                                <ReactTimeAgo
+                                  date={e?.dateCreated}
+                                  locale="en-US"
+                                />
+                              </p>
+                              {/* <p className="timeMessage">{e.status}</p> */}
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <div className="chatStatusSelect">
+                              <p className="messageSent">{e.body}</p>
+
+                              <p className="timeMessage">
+                                <ReactTimeAgo
+                                  date={e?.dateCreated}
+                                  locale="en-US"
+                                />
+                              </p>
+                              {/* <p className="timeMessage">{e.status}</p> */}
+                            </div>
+                          );
+                        }
                       }
                     }
-                  } 
+                  }
                   // else {
                   //   return (
                   //     <div className="chatStatusSelectFrom">
@@ -286,6 +306,34 @@ function Chat({
           )}
         </div>
       </div>
+      <NavLink
+        style={{
+          textDecoration: "none",
+          color: "#000",
+          position: "absolute",
+          right: "220px",
+          top: "85px",
+        }}
+        to={"/messageCampaign"}
+      >
+        <button className="PAYbutton" style={{ marginLeft: "50px" }}>
+          <p className="PAYbuttonText">Message Campaign</p>
+        </button>
+      </NavLink>
+      <NavLink
+        style={{
+          textDecoration: "none",
+          color: "#000",
+          position: "absolute",
+          right: "65px",
+          top: "85px",
+        }}
+        to={"/contacts"}
+      >
+        <button className="PAYbutton" style={{ marginLeft: "50px" }}>
+          <p className="PAYbuttonText">Contacts</p>
+        </button>
+      </NavLink>
       <img
         src={Isologo_background}
         style={{

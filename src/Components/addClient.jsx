@@ -46,12 +46,12 @@ function AddClient({
   return (
     <div className="genericDiv">
       <div className="genericHeader" style={{ marginBottom: "30px" }}>
-        <p className="genericTitle">Add Client</p>
+        <p className="genericTitle">Add</p>
       </div>
       <div className="managerInputsContainer">
         <div className="managerInputsubContainer" style={{ width: "60vw" }}>
           <div className="inputDiv">
-            <p className="PAYtitle">Client Name</p>
+            <p className="PAYtitle">Name</p>
             <input
               placeholder="Type Name"
               onChange={(e) => {
@@ -73,7 +73,7 @@ function AddClient({
             {/* <p className="FORMerror">{validarEmail(form.email)? "" :"Email must be a valid email"}</p> */}
           </div>
           <div className="inputDiv">
-            <p className="PAYtitle">Number Phone</p>
+            <p className="PAYtitle">Phone number</p>
             <input
               placeholder="Type Phone"
               onChange={(e) => {
@@ -221,7 +221,7 @@ function AddClient({
             }}
             disabled={validation ? true : false}
           >
-            <p className="PAYbuttonText">Add Client +</p>
+            <p className="PAYbuttonText">Save</p>
           </button>
         </div>
 
@@ -239,7 +239,7 @@ function AddClient({
                   }}
                 />
 
-                <p className="modalText">{respTransactionCoord[1]}</p>
+                <p className="modalText">Saved</p>
               </>
             ) : (
               <>

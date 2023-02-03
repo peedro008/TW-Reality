@@ -76,7 +76,7 @@ function MyClientsControl() {
     },
   ];
 
-  const filterOn = () => {
+  const filterOn = (btnFilter) => {
     setPaginator(0);
     setIsFilter(true);
     setAllMyClientsFilter(
@@ -88,7 +88,11 @@ function MyClientsControl() {
           e.reason.toLowerCase().includes(reasonClient?.toLowerCase())
         )
         .filter((e) =>
-          e.clientType.toLowerCase().includes(typeClient?.toLowerCase())
+          e.clientType
+            .toLowerCase()
+            .includes(
+              btnFilter ? btnFilter.toLowerCase() : typeClient?.toLowerCase()
+            )
         )
         .filter((e) =>
           e.clientName.toLowerCase().includes(searchName?.toLowerCase())

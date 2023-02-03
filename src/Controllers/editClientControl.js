@@ -16,6 +16,12 @@ function EditClientControl({ clientData, setReloadInfo, setNewHistory }) {
   // let clientData = props?.location.state.client;
   console.log(form);
 
+  let New_York_Time = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    timestyle: "full",
+    hourCycle: "h24",
+  });
+
   useEffect(() => {
     setForm({
       ...form,
@@ -40,8 +46,36 @@ function EditClientControl({ clientData, setReloadInfo, setNewHistory }) {
 
   let optionsLeadType = [
     {
-      value: "Jose",
-      label: "Jose",
+      value: "Email marketing",
+      label: "Email marketing",
+    },
+    {
+      value: "Paid ads",
+      label: "Paid ads",
+    },
+    {
+      value: "Social media",
+      label: "Social media",
+    },
+    {
+      value: "Referrals",
+      label: "Referrals",
+    },
+    {
+      value: "Events",
+      label: "Events",
+    },
+    {
+      value: "Kvcore",
+      label: "Kvcore",
+    },
+    {
+      value: "Trueway Marketing",
+      label: "Trueway Marketing",
+    },
+    {
+      value: "Others",
+      label: "Others",
     },
   ];
 
@@ -148,7 +182,11 @@ function EditClientControl({ clientData, setReloadInfo, setNewHistory }) {
         } else {
           onOpenModal();
           dispatchClient();
+          setReloadInfo(New_York_Time);
           setRespTransactionCoord([true, "Client edited successfully"]);
+          setTimeout(() => {
+            onCloseModal();
+          }, 1000);
         }
       } catch (err) {
         onOpenModal();

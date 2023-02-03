@@ -20,6 +20,7 @@ function ChatControl() {
   const [getMyLast, setGetMyLast] = useState("");
   const [mynuevochatconimagenes, setMynuevochatconimagenes] = useState([]);
   const [myImages, setMyImages] = useState([]);
+  const [messaggePlusFile, setMessaggePlusFile] = useState([]);
   const socket = io("https://truewayrealtorsapi.com");
 
   // Get Numbers
@@ -99,8 +100,8 @@ function ChatControl() {
             const jsonRes = await res.json();
             if (res.status === 200) {
               console.log(jsonRes);
+              setMessaggePlusFile([]);
               setMyMessages(jsonRes);
-              // setMynuevochatconimagenes(jsonRes);
             }
           } catch (error) {
             console.log(error);
@@ -113,54 +114,116 @@ function ChatControl() {
   // Get my multimedia files
 
   useEffect(() => {
-    let images = [];
     setLoaderMessages(true);
-    myMessages.map(
-      (e) =>
-        e.numMedia !== "0" &&
-        fetch(`https://truewayrealtorsapi.com/getImages?message_Sid=${e.sid}`)
-          .then((res) => res.json())
-          .then((json) => {
-            json.media_list?.map((f) =>
-              images.push({
-                url: f.uri,
-                dateCreated: new Date(f.date_created).toISOString(),
-                content_type: f.content_type,
-              })
-            );
-          })
-          .then(() => {
+    let obj = [{ hola: "hola" }, { hola: "hola" }, { hola: "hola" }];
+    let cantidadConFiles = myMessages.filter((e) => e.numMedia !== "0");
+    let cantidadConFiles2 = [...cantidadConFiles, ...obj];
+    console.log(cantidadConFiles2);
+    let images = [];
+    let contador = 0;
+    cantidadConFiles2?.map((e) => {
+      let thisJson = "";
+      fetch(`https://truewayrealtorsapi.com/getImages?message_Sid=${e.sid}`)
+        .then((res) => res.json())
+        .then(async (json) => {
+          thisJson = json;
+          await json.media_list?.map((f) =>
+            images.push({
+              url: f.uri,
+              dateCreated: new Date(f.date_created).toISOString(),
+              content_type: f.content_type,
+            })
+          );
+        })
+        .then(() => (contador = contador + 1))
+        .then(() => {
+          // console.log(contador);
+          if (contador === cantidadConFiles2.length - 1) {
             setMynuevochatconimagenes(images);
-          })
-          .catch((err) => console.log(err))
-    );
-    // .then(console.log('Se cargaron todas las imagenes'));
+          }
+        })
+        .catch((err) => console.log(err));
+    });
   }, [myMessages]);
 
-  // console.log(mynuevochatconimagenes);
-  // useEffect(() => {
-  //   mynuevochatconimagenes.map((e) =>
-  //     fetch(
-  //       `https://truewayrealtorsapi.com/yourImage?uriImage=${e.url?.slice(
-  //         0,
-  //         e.url.length - 5
-  //       )}`
-  //     ).then(async (res) => {
-  //       try {
-  //         const jsonRes = await res.json();
-  //         if (res.status !== 200) {
-  //           console.log("error");
-  //         } else {
-  //           setMyImages([...myImages, jsonRes]);
-  //         }
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     })
-  //   );
-  // }, [mynuevochatconimagenes]);
+  useEffect(() => {
+    let images = [];
+    let contador = 0;
+    if (mynuevochatconimagenes.length > 0) {
+      fetch(
+        `https://truewayrealtorsapi.com/yourImage?uriImage=${mynuevochatconimagenes[
+          mynuevochatconimagenes.length - 1
+        ].url?.slice(
+          0,
+          mynuevochatconimagenes[mynuevochatconimagenes.length - 1].url.length -
+            5
+        )}`
+      )
+        .then(async (res) => {
+          const jsonRes = await res.json();
+          if (mynuevochatconimagenes.length < 2) {
+            setMyImages([
+              {
+                img: jsonRes,
+                dateCreated:
+                  mynuevochatconimagenes[mynuevochatconimagenes.length - 1]
+                    .dateCreated,
+                contentType:
+                  mynuevochatconimagenes[mynuevochatconimagenes.length - 1]
+                    .content_type,
+              },
+            ]);
+            console.log("Set el 208 o mas con el array de 1");
+          }
+          images.push({
+            img: jsonRes,
+            dateCreated:
+              mynuevochatconimagenes[mynuevochatconimagenes.length - 1]
+                .dateCreated,
+            contentType:
+              mynuevochatconimagenes[mynuevochatconimagenes.length - 1]
+                .content_type,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+    if (mynuevochatconimagenes.length > 1) {
+      mynuevochatconimagenes.map((e) =>
+        fetch(
+          `https://truewayrealtorsapi.com/yourImage?uriImage=${e.url?.slice(
+            0,
+            e.url.length - 5
+          )}`
+        )
+          .then(async (res) => {
+            const jsonRes = await res.json();
+            images.push({
+              img: jsonRes,
+              dateCreated: e.dateCreated,
+              contentType: e.content_type,
+            });
+          })
+          .then(() => (contador = contador + 1))
+          .then(() => {
+            console.log(contador);
+            // console.log(images);
+            if (contador === mynuevochatconimagenes.length - 1) {
+              setMyImages(images);
+            }
+          })
+          .catch((err) => console.log(err))
+      );
+    }
+  }, [mynuevochatconimagenes]);
 
-  console.log(myImages);
+  useEffect(() => {
+    if (myImages.length > 0) {
+      console.log(myImages);
+      setMessaggePlusFile([...myMessages, ...myImages]);
+    }
+  }, [myImages]);
+
+  console.log(messaggePlusFile);
   // Socket IO
 
   useEffect(() => {
@@ -195,7 +258,7 @@ function ChatControl() {
       setForm={setForm}
       phone={phone}
       setPhone={setPhone}
-      myMessages={myMessages}
+      myMessages={messaggePlusFile.length > 0 ? messaggePlusFile : myMessages}
       myLastClients={myLastClients}
       resetInput={resetInput}
       reset={reset}
@@ -203,6 +266,7 @@ function ChatControl() {
       loader={loader}
       loaderMessages={loaderMessages}
       setLoaderMessages={setLoaderMessages}
+      setMessaggePlusFile={setMessaggePlusFile}
     />
   );
 }

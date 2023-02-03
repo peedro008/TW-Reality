@@ -53,8 +53,36 @@ function AddClientControl() {
 
   let optionsLeadType = [
     {
-      value: "Jose",
-      label: "Jose",
+      value: "Email marketing",
+      label: "Email marketing",
+    },
+    {
+      value: "Paid ads",
+      label: "Paid ads",
+    },
+    {
+      value: "Social media",
+      label: "Social media",
+    },
+    {
+      value: "Referrals",
+      label: "Referrals",
+    },
+    {
+      value: "Events",
+      label: "Events",
+    },
+    {
+      value: "Kvcore",
+      label: "Kvcore",
+    },
+    {
+      value: "Trueway Marketing",
+      label: "Trueway Marketing",
+    },
+    {
+      value: "Others",
+      label: "Others",
     },
   ];
 

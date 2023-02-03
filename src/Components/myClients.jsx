@@ -34,82 +34,6 @@ const MyClients = ({
     setCheckedOne("Lead");
   };
 
-  const [isContact2, setIsContact2] = useState(false);
-  const [isContact3, setIsContact3] = useState(false);
-  const [isContact4, setIsContact4] = useState(false);
-  const [isContact5, setIsContact5] = useState(false);
-  const [isContact6, setIsContact6] = useState(false);
-  const [isContact7, setIsContact7] = useState(false);
-  const [isContact8, setIsContact8] = useState(false);
-  const [isContact9, setIsContact9] = useState(false);
-  const [isContact10, setIsContact10] = useState(false);
-
-  useEffect(() => {
-    if (allMyClientsFilter?.find((e) => typeof e.contactDate2 === "string")) {
-      setIsContact2(true);
-    } else {
-      {
-        setIsContact2(false);
-      }
-    }
-    if (allMyClientsFilter?.find((e) => typeof e.contactDate3 === "string")) {
-      setIsContact3(true);
-    } else {
-      {
-        setIsContact3(false);
-      }
-    }
-    if (allMyClientsFilter?.find((e) => typeof e.contactDate4 === "string")) {
-      setIsContact4(true);
-    } else {
-      {
-        setIsContact4(false);
-      }
-    }
-    if (allMyClientsFilter?.find((e) => typeof e.contactDate5 === "string")) {
-      setIsContact5(true);
-    } else {
-      {
-        setIsContact5(false);
-      }
-    }
-    if (allMyClientsFilter?.find((e) => typeof e.contactDate6 === "string")) {
-      setIsContact6(true);
-    } else {
-      {
-        setIsContact6(false);
-      }
-    }
-    if (allMyClientsFilter?.find((e) => typeof e.contactDate7 === "string")) {
-      setIsContact7(true);
-    } else {
-      {
-        setIsContact7(false);
-      }
-    }
-    if (allMyClientsFilter?.find((e) => typeof e.contactDate8 === "string")) {
-      setIsContact8(true);
-    } else {
-      {
-        setIsContact8(false);
-      }
-    }
-    if (allMyClientsFilter?.find((e) => typeof e.contactDate9 === "string")) {
-      setIsContact9(true);
-    } else {
-      {
-        setIsContact9(false);
-      }
-    }
-    if (allMyClientsFilter?.find((e) => typeof e.contactDate10 === "string")) {
-      setIsContact10(true);
-    } else {
-      {
-        setIsContact10(false);
-      }
-    }
-  }, [allMyClientsFilter]);
-
   const navegator = (e) => {
     history.push({
       pathname: "/myClientHistory",
@@ -118,6 +42,17 @@ const MyClients = ({
       },
     });
   };
+
+  function formatUSTelephoneNumber(num) {
+    num = num.toString().replace(/\D/g, ""); // Remove non-numeric characters
+    if (num.length === 10) {
+      return num.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+    } else if (num.length === 11) {
+      return num.replace(/(\d{1})(\d{3})(\d{3})(\d{4})/, "$1 ($2) $3-$4");
+    }
+    return num;
+  }
+
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -136,6 +71,55 @@ const MyClients = ({
           onClick={() => filterOn()}
         />
       </div>
+      <div
+        style={{
+          display: "flex",
+          marginTop: "-20px",
+          marginBottom: "20px",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            top: "40px",
+            display: "flex",
+            paddingLeft: "0px",
+          }}
+        >
+          <button
+            className={"PAYbutton"}
+            style={{ backgroundColor: "#d8ae4d6e" }}
+            onClick={() => {
+              filterOn("Lead");
+            }}
+          >
+            <p className="PAYbuttonText" style={{ color: "black" }}>
+              Lead
+            </p>
+          </button>
+        </div>
+
+        <div
+          style={{
+            position: "relative",
+            top: "40px",
+            display: "flex",
+            paddingLeft: "20px",
+          }}
+        >
+          <button
+            className={"PAYbutton"}
+            style={{ backgroundColor: " #2ca58d82" }}
+            onClick={() => {
+              filterOn("Client");
+            }}
+          >
+            <p className="PAYbuttonText" style={{ color: "black" }}>
+              Client
+            </p>
+          </button>
+        </div>
+      </div>
       <div>
         <>
           <table
@@ -150,80 +134,21 @@ const MyClients = ({
             <tbody>
               <tr>
                 <th scope="col" className="column1">
-                  <p className="REPtype2">Fecha</p>
+                  <p className="REPtype2">Lead or Client</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype2">Client name</p>
+                  <p className="REPtype2">Name</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype2">Phone</p>
+                  <p className="REPtype2">Phone number</p>
                 </th>
 
                 <th scope="col" className="column1">
                   <p className="REPtype2">Email</p>
                 </th>
-                <th scope="col" className="column1">
-                  <p className="REPtype2">Modify Date</p>
-                </th>
-                <th scope="col" className="column1">
-                  <p className="REPtype2">Contact Date</p>
-                </th>
-                {isContact2 && (
-                  <th scope="col" className="column1">
-                    <p className="REPtype2">Contact Date 2</p>
-                  </th>
-                )}
-                {isContact3 && (
-                  <th scope="col" className="column1">
-                    <p className="REPtype2">Contact Date 3</p>
-                  </th>
-                )}
-                {isContact4 && (
-                  <th scope="col" className="column1">
-                    <p className="REPtype2">Contact Date 4</p>
-                  </th>
-                )}
-                {isContact5 && (
-                  <th scope="col" className="column1">
-                    <p className="REPtype2">Contact Date 5</p>
-                  </th>
-                )}
-                {isContact6 && (
-                  <th scope="col" className="column1">
-                    <p className="REPtype2">Contact Date 6</p>
-                  </th>
-                )}
-                {isContact7 && (
-                  <th scope="col" className="column1">
-                    <p className="REPtype2">Contact Date 7</p>
-                  </th>
-                )}
-                {isContact8 && (
-                  <th scope="col" className="column1">
-                    <p className="REPtype2">Contact Date 8</p>
-                  </th>
-                )}
-                {isContact9 && (
-                  <th scope="col" className="column1">
-                    <p className="REPtype2">Contact Date 9</p>
-                  </th>
-                )}
-                {isContact10 && (
-                  <th scope="col" className="column1">
-                    <p className="REPtype2">Contact Date 10</p>
-                  </th>
-                )}
+
                 <th scope="col" className="column1">
                   <p className="REPtype2">Transaction Type</p>
-                </th>
-                <th scope="col" className="column1">
-                  <p className="REPtype2">Client Type</p>
-                </th>
-                <th scope="col" className="column1">
-                  <p className="REPtype2">Status</p>
-                </th>
-                <th scope="col" className="column1">
-                  <p className="REPtype2">Notes</p>
                 </th>
               </tr>
               {allMyClientsFilter?.map((e, i) => {
@@ -238,80 +163,6 @@ const MyClients = ({
                     style={{ cursor: "pointer" }}
                   >
                     <td
-                      className="ClientName"
-                      style={{ minWidth: "100px" }}
-                      scope="row"
-                    >
-                      {e.addedDate}
-                    </td>
-                    <td className="ClientName" scope="row">
-                      {e.clientName}
-                    </td>
-                    <td className="ClientName" scope="row">
-                      {e.phone}
-                    </td>
-                    <td className="ClientName" scope="row">
-                      {e.mail}
-                    </td>
-                    <td
-                      className="ClientName"
-                      style={{ minWidth: "100px" }}
-                      scope="row"
-                    >
-                      {ClientHistory[0]?.modifyDate?.slice(0, 10)}
-                    </td>
-                    <td className="ClientName" scope="row">
-                      {e.contactDate}
-                    </td>
-                    {isContact2 && (
-                      <td className="ClientName" scope="row">
-                        {e.contactDate2}
-                      </td>
-                    )}
-                    {isContact3 && (
-                      <td className="ClientName" scope="row">
-                        {e.contactDate3}
-                      </td>
-                    )}
-                    {isContact4 && (
-                      <td className="ClientName" scope="row">
-                        {e.contactDate4}
-                      </td>
-                    )}
-                    {isContact5 && (
-                      <td className="ClientName" scope="row">
-                        {e.contactDate5}
-                      </td>
-                    )}
-                    {isContact6 && (
-                      <td className="ClientName" scope="row">
-                        {e.contactDate6}
-                      </td>
-                    )}
-                    {isContact7 && (
-                      <td className="ClientName" scope="row">
-                        {e.contactDate7}
-                      </td>
-                    )}
-                    {isContact8 && (
-                      <td className="ClientName" scope="row">
-                        {e.contactDate8}
-                      </td>
-                    )}
-                    {isContact9 && (
-                      <td className="ClientName" scope="row">
-                        {e.contactDate9}
-                      </td>
-                    )}
-                    {isContact10 && (
-                      <td className="ClientName" scope="row">
-                        {e.contactDate10}
-                      </td>
-                    )}
-                    <td className="ClientName" scope="row">
-                      {e.reason}
-                    </td>
-                    <td
                       className={
                         e.clientType === "Client"
                           ? "ClientNameC"
@@ -322,10 +173,16 @@ const MyClients = ({
                       {e.clientType}
                     </td>
                     <td className="ClientName" scope="row">
-                      {e.status}
+                      {e.clientName}
                     </td>
                     <td className="ClientName" scope="row">
-                      {e.Notes}
+                      {formatUSTelephoneNumber(e.phone)}
+                    </td>
+                    <td className="ClientName" scope="row">
+                      {e.mail}
+                    </td>
+                    <td className="ClientName" scope="row">
+                      {e.reason}
                     </td>
                   </tr>
                 );

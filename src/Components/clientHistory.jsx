@@ -31,7 +31,7 @@ const ClientHistory = ({
   loaderPhoto,
   goStatus,
 }) => {
-  const [newHistory, setNewHistory] = useState(false);
+  const [newHistory, setNewHistory] = useState("noteTable");
   const [showPencil, setShowPencil] = useState(false);
 
   return (
@@ -180,11 +180,9 @@ const ClientHistory = ({
             >
               <button
                 className={
-                  newHistory === "statusHistory"
-                    ? "PAYbuttonSelected"
-                    : "PAYbutton"
+                  newHistory === "noteTable" ? "PAYbuttonSelected" : "PAYbutton"
                 }
-                onClick={() => setNewHistory("statusHistory")}
+                onClick={() => setNewHistory("noteTable")}
               >
                 <p className="PAYbuttonText">Status History</p>
               </button>
@@ -220,9 +218,7 @@ const ClientHistory = ({
             >
               <button
                 className={
-                  newHistory === "statusHistory"
-                    ? "PAYbuttonSelected"
-                    : "PAYbutton"
+                  newHistory === "noteTable" ? "PAYbuttonSelected" : "PAYbutton"
                 }
                 onClick={() => setNewHistory("noteTable")}
               >
@@ -419,10 +415,10 @@ const ClientHistory = ({
               <tbody>
                 <tr>
                   <th scope="col" className="column1">
-                    <p className="REPtype2">Fecha</p>
+                    <p className="REPtype2">Date</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype2">Hora</p>
+                    <p className="REPtype2">Time</p>
                   </th>
                   <th scope="col" className="column1">
                     <p className="REPtype2">Client Type</p>
@@ -610,10 +606,10 @@ const ClientHistory = ({
               <tbody>
                 <tr>
                   <th scope="col" className="column1">
-                    <p className="REPtype2">Fecha</p>
+                    <p className="REPtype2">Date</p>
                   </th>
                   <th scope="col" className="column1">
-                    <p className="REPtype2">Hora</p>
+                    <p className="REPtype2">Time</p>
                   </th>
 
                   <th
@@ -661,7 +657,7 @@ const ClientHistory = ({
           </>
         )}
         {/* Convert to client */}
-        {/* Modify Status */}
+
         {newHistory === "convert" && (
           <div
             className="managerInputsubContainer"
@@ -736,8 +732,11 @@ const ClientHistory = ({
                   marginBottom: "10px",
                 }}
               />
-
-              <p className="modalText">{respEditClient[1]}</p>
+              {newHistory === "convert" ? (
+                <p className="modalText">Lead turned client</p>
+              ) : (
+                <p className="modalText">{respEditClient[1]}</p>
+              )}
             </>
           ) : (
             <>
