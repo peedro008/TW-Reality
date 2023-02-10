@@ -20,7 +20,7 @@ const MessageCampaignControl = () => {
   }, [contacts]);
 
   useEffect(() => {
-    fetch("https://truewayrealtorsapi.com/getContacts").then(async (res) => {
+    fetch("http://localhost:8080/getContacts").then(async (res) => {
       const jsonRes = await res.json();
       if (res.status === 200) {
         setContacts(jsonRes);
@@ -31,7 +31,7 @@ const MessageCampaignControl = () => {
   }, []);
 
   const onSubmit = () => {
-    fetch(`https://truewayrealtorsapi.com/sendMultiMessage`, {
+    fetch(`http://localhost:8080/sendMultiMessage`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

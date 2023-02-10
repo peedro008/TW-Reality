@@ -1,7 +1,5 @@
 import React from "react";
 import "../Css/css.css";
-
-import Select from "react-select";
 import "react-responsive-modal/styles.css";
 import Isologo_background from "../assets/Isologo_background.png";
 import { Modal } from "react-responsive-modal";
@@ -16,8 +14,8 @@ function AddRealtorComponent({
   onSubmit,
   onCloseModal,
   validarEmail,
-  onOpenModal}
-) {
+  onOpenModal,
+}) {
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -50,7 +48,9 @@ function AddRealtorComponent({
               placeholder="Email"
               className="AQinput"
             ></input>
-            <p className="FORMerror">{validarEmail(form.email)?"":"Email must be a valid email"}</p>
+            <p className="FORMerror">
+              {validarEmail(form.email) ? "" : "Email must be a valid email"}
+            </p>
           </div>
           <div className="inputDiv">
             <p className="PAYtitle">Password</p>
@@ -62,10 +62,13 @@ function AddRealtorComponent({
               placeholder="Password"
               className="AQinput"
             ></input>
-            <p className="FORMerror">{form.password?.length<8?"Password must have at least 6 characters":""}</p>
+            <p className="FORMerror">
+              {form.password?.length < 8
+                ? "Password must have at least 6 characters"
+                : ""}
+            </p>
           </div>
         </div>
-        
       </div>
 
       <div
@@ -76,7 +79,26 @@ function AddRealtorComponent({
           display: "flex",
         }}
       >
-        <button className="PAYbutton" onClick={() => {onSubmit()}} style={{backgroundColor:(form.password?.length<8||!validarEmail(form.email)||form.name?.length < 6)&&"#586579"}} disabled={(form.password?.length<8||!validarEmail(form.email)||form.name?.length < 6)?true:false}>
+        <button
+          className="PAYbutton"
+          onClick={() => {
+            onSubmit();
+          }}
+          style={{
+            backgroundColor:
+              (form.password?.length < 8 ||
+                !validarEmail(form.email) ||
+                form.name?.length < 6) &&
+              "#586579",
+          }}
+          disabled={
+            form.password?.length < 8 ||
+            !validarEmail(form.email) ||
+            form.name?.length < 6
+              ? true
+              : false
+          }
+        >
           <p className="PAYbuttonText">Add Realtor</p>
         </button>
       </div>
@@ -118,7 +140,7 @@ function AddRealtorComponent({
         }}
       />
       <BsChevronLeft
-      cursor='pointer'
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",

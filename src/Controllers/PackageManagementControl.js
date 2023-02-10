@@ -22,7 +22,7 @@ function PackageManagementControl(props) {
 
   const soldTC = () => {
     axios
-      .get(`https://truewayrealtorsapi.com/getTransactionCoordinator`)
+      .get(`http://localhost:8080/getTransactionCoordinator`)
       .then(function (response) {
         response.status === 404 ? setPackages([]) : setPackages(response.data);
       })
@@ -34,7 +34,7 @@ function PackageManagementControl(props) {
 
   const soldPM = () => {
     axios
-      .get(`https://truewayrealtorsapi.com/getPackagesMarketing`)
+      .get(`http://localhost:8080/getPackagesMarketing`)
       .then(function (response) {
         response.status === 404 ? setPackages([]) : setPackages(response.data);
       })
@@ -51,7 +51,7 @@ function PackageManagementControl(props) {
   useEffect(() => {
     if (typeOfPackage === "Marketing") {
       axios
-        .get(`https://truewayrealtorsapi.com/getPackagesMarketing`)
+        .get(`http://localhost:8080/getPackagesMarketing`)
         .then(function (response) {
           response.status == 404 ? setPackages([]) : setPackages(response.data);
         })
@@ -60,7 +60,7 @@ function PackageManagementControl(props) {
         });
     } else {
       axios
-        .get(`https://truewayrealtorsapi.com/getTransactionCoordinator`)
+        .get(`http://localhost:8080/getTransactionCoordinator`)
         .then(function (response) {
           response.status == 404 ? setPackages([]) : setPackages(response.data);
         })
@@ -71,13 +71,13 @@ function PackageManagementControl(props) {
   }, [typeOfPackage]);
 
   useEffect(() => {
-    fetch("https://truewayrealtorsapi.com/getPackagesMarketing")
+    fetch("http://localhost:8080/getPackagesMarketing")
       .then((res) => res.json())
       .then((json) => setPackageMarketing(json));
   }, []);
 
   const soldTransaction = (formTransaction) => {
-    fetch("https://truewayrealtorsapi.com/soldTransactionCoordinator", {
+    fetch("http://localhost:8080/soldTransactionCoordinator", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ function PackageManagementControl(props) {
   };
 
   const onSubmitPackage = (form) => {
-    fetch(`https://truewayrealtorsapi.com/editPackageMarketing`, {
+    fetch(`http://localhost:8080/editPackageMarketing`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

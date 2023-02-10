@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import MyClients from "../Components/myClients";
+import MyClients from "../../Components/clientComponents/myClients";
 
 function MyClientsControl() {
   const userId = useSelector((state) => state.UserId);
@@ -104,7 +104,7 @@ function MyClientsControl() {
     if (isFilter !== true) {
       const offset = 10;
       fetch(
-        `https://truewayrealtorsapi.com/getMyClients?UserId=${userId}&offset=${offset}&page=${
+        `http://localhost:8080/getMyClients?UserId=${userId}&offset=${offset}&page=${
           paginator * 10
         }`
       ).then(async (res) => {

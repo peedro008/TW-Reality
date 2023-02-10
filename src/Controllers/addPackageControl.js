@@ -36,7 +36,7 @@ function AddPackageControl() {
   // }));
 
   const onSubmitPM = () => {
-    fetch(`https://truewayrealtorsapi.com/addPackageMarketing`, {
+    fetch(`http://localhost:8080/addPackageMarketing`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ function AddPackageControl() {
   };
 
   const onSubmitTC = () => {
-    fetch(`https://truewayrealtorsapi.com/addTransactionCoordinator`, {
+    fetch(`http://localhost:8080/addTransactionCoordinator`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +104,7 @@ function AddPackageControl() {
   };
 
   const onSubmitOffer = () => {
-    fetch(`https://truewayrealtorsapi.com/addOffer`, {
+    fetch(`http://localhost:8080/addOffer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -133,7 +133,7 @@ function AddPackageControl() {
   };
 
   const onSubmitListing = () => {
-    fetch(`https://truewayrealtorsapi.com/addListing`, {
+    fetch(`http://localhost:8080/addListing`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

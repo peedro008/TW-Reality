@@ -480,17 +480,59 @@ html {
   /* box-shadow: 2px 2px 2px rgb(165, 162, 162); */
 }
 
+.PAYbuttonList {
+  background-color: #002752;
+  border-radius: 5px 5px 0px 0px;
+  border-width: 0px;
+  display: flex;
+  height: 35px;
+  width: auto;
+  min-width: 160px;
+  cursor: pointer;
+  justify-content: center;
+  padding-right: 20px;
+  padding-left: 16px;
+  box-shadow: 3px 0px 3px 0px rgb(165, 162, 162);
+}
+
+.PAYbuttonSelectedList {
+  background-color: #00285258;
+  pointer-events: none;
+  border-radius: 5px 5px 0px 0px;
+  border-width: 0px;
+  display: flex;
+  height: 35px;
+  width: auto;
+  min-width: 160px;
+  justify-content: center;
+  padding-right: 20px;
+  padding-left: 16px;
+  /* box-shadow: 2px 2px 2px rgb(165, 162, 162); */
+}
+
 .PAYbutton:hover {
   background-color: #002852be;
   box-shadow: 4px 4px 4px rgb(165, 162, 162);
 }
 
+.PAYbuttonList:hover {
+  background-color: #002852be;
+  box-shadow: 4px 0px 4px 0px rgb(165, 162, 162);
+}
 
 .PAYbuttonText {
   font-family: "Gilroy-Regular";
   font-weight: 800;
   font-size: 14px;
   color: whitesmoke;
+  margin-top: 8px;
+}
+
+.PAYbuttonTextBlack {
+  font-family: "Gilroy-Regular";
+  font-weight: 800;
+  font-size: 16px;
+  color: black;
   margin-top: 8px;
 }
 .PAYbuttonIcon {
@@ -948,7 +990,7 @@ html {
   line-height: 23px;
   letter-spacing: 0.01em;
   text-align: left;
-  background-color: #d8ae4d6e;
+  background-color: #D8AF4D;
   color: "#323C47";
 }
 
@@ -2149,6 +2191,8 @@ html {
 }
 .modal {
   height: 242px;
+  min-height: 100px;
+  min-width: 100px;
   width: 438px;
   left: 741px;
   top: 419px;
@@ -3551,7 +3595,6 @@ html {
   opacity: 0;
   cursor: pointer;
   height: 0;
-
   width: 0;
 }
 
@@ -3563,12 +3606,12 @@ html {
   height: 20px;
   width: 20px;
   border-radius: 10px;
-  background-color: #d8ae4d6e;
+  background-color: #d8ae4d99;
 }
 
 /* On mouse-over, add a grey background color */
 .containerCheck:hover input ~ .checkmark {
-  background-color: #ccc;
+  background-color: #d8ae4dbc;
 }
 
 /* When the checkbox is checked, add a blue background */
@@ -3601,6 +3644,7 @@ html {
   transform: rotate(45deg);
 }
 
+
 /* Customize the label (the container) */
 .containerCheck2 {
   display: block;
@@ -3621,7 +3665,6 @@ html {
   opacity: 0;
   cursor: pointer;
   height: 0;
-
   width: 0;
 }
 
@@ -3638,7 +3681,7 @@ html {
 
 /* On mouse-over, add a grey background color */
 .containerCheck2:hover input ~ .checkmark2 {
-  background-color: #ccc;
+  background-color: #2ca58d9f;
 }
 
 /* When the checkbox is checked, add a blue background */
@@ -3660,6 +3703,129 @@ html {
 
 /* Style the checkmark/indicator */
 .containerCheck2 .checkmark2:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+/* Create a custom checkbox */
+.checkmark3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background-color: #0028527c;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheck2:hover input ~ .checkmark3 {
+  background-color: #002852a9;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheck2 input:checked ~ .checkmark3 {
+  background-color: #002852de;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark3:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheck2 input:checked ~ .checkmark3:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheck2 .checkmark3:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+
+
+
+
+
+/* Customize the label (the container) */
+.containerCheck5 {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.containerCheck5 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark5 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background-color: #d84d4d82;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheck5:hover input ~ .checkmark5 {
+  background-color: #d84d4dae;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheck5 input:checked ~ .checkmark5 {
+  background-color: #d84d4d;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark5:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheck5 input:checked ~ .checkmark5:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheck5 .checkmark5:after {
   left: 6px;
   top: 2px;
   width: 5px;
@@ -4120,7 +4286,26 @@ html {
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
 }
 
+.file-input__label_pre {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+  width: 35px;
+  padding: 5px 5px;
+  background-color: #002752;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+}
+
 .file-input__label svg {
+  height: 35px;
+}
+
+.file-input__label_pre svg {
   height: 35px;
 }
 
@@ -4146,8 +4331,8 @@ html {
 
 .containerTags {
   width: 90vw;
-  margin-top: 60px;
-  border-radius: 10px;
+  margin-top: 30px;
+  /* border-radius: 0px 10px 10px 10px; */
   height: 50vh;
   margin-left: 40px;
   margin-bottom: 20px;
@@ -4155,6 +4340,8 @@ html {
   overflow-x: scroll;
   background-color: #00285218;
 }
+
+
 
 .containerTags::-webkit-scrollbar {
   background-color: #00285218;
@@ -4171,7 +4358,7 @@ html {
 
 .containerClientData {
   width: 90vw;
-  margin-top: 40px;
+  margin-top: 30px;
   margin-left: 40px;
   /* padding-left: 40px; */
   /* padding-right: 40px; */
@@ -4182,3 +4369,65 @@ html {
   height: 150px;
   background-color: #00285218;
 }
+
+.containerTimeLine{
+  margin-left: 40px;
+  padding-top: 30px;
+  margin-bottom: -30px;
+  display: flex;
+  justify-content: space-between;
+  min-width: 1000px;
+  width: 1000px;
+  max-width: 1000px;
+  height: 50px;
+  /* background-color: #198754;  */
+}
+
+.LineTimeLine{
+  position: absolute;
+  min-width: 900px;
+  width: 900px;
+  max-width: 900px;
+  height: 5px;
+  margin-top: 28.5px;
+  margin-left: 50px;
+  border-bottom: gray dashed 2px;
+  z-index: 0;
+}
+.containerBall{
+  width: 120px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Ball {
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  z-index: 1;
+  background-color: #ebeff2;
+  border: gray solid 3px;
+}
+
+.BallWaiting {
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  z-index: 1;
+  background-color: #ebeff2;
+  border: gray solid 3px;
+}
+
+.BallCurrent{
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  z-index: 1;
+  background-color: #ebeff2;
+  border: #198754 solid 3px;
+}
+
+

@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { BsChevronLeft, BsFillPersonFill, BsFillPersonLinesFill } from "react-icons/bs";
+import {
+  BsChevronLeft,
+  BsFillPersonFill,
+  BsFillPersonLinesFill,
+} from "react-icons/bs";
 import Isologo_background from "../assets/Isologo_background.png";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -13,57 +17,62 @@ function ManagerGrafics({
   selected,
   setSelected,
 }) {
-  const [sumSales, setSumSales] = useState(0)
-  const [sumRef, setSumRef] = useState(0)
-  const [sumMarketing, setSumMarketing] = useState(0)
-  const [sumTransactionCoord, setSumTransactionCoord] = useState(0)
-  const [styleTable, setStyleTable] = useState("divTable2")
-  const [chevron, setChevron] = useState("bsChevron3")
-  const [circle, setCircle] = useState("circle4")
-  let Screen = window.screen
-  
-  const thisReffered = Users?.map(e => Referred.filter((f) => f.UserId == e.id).length)
+  const [sumSales, setSumSales] = useState(0);
+  const [sumRef, setSumRef] = useState(0);
+  const [sumMarketing, setSumMarketing] = useState(0);
+  const [sumTransactionCoord, setSumTransactionCoord] = useState(0);
+  const [styleTable, setStyleTable] = useState("divTable2");
+  const [chevron, setChevron] = useState("bsChevron3");
+  const [circle, setCircle] = useState("circle4");
+  let Screen = window.screen;
+
+  const thisReffered = Users?.map(
+    (e) => Referred.filter((f) => f.UserId == e.id).length
+  );
 
   useEffect(() => {
-    if(Users.length !== 0) 
-    {
-      setSumSales(Users?.map((e) => e.Sells?.length).reduce(
-        (previousValue, currentValue) => previousValue + currentValue
-      ))
-  
-      setSumRef(thisReffered?.reduce(
-        (previousValue, currentValue) => previousValue + currentValue
-        ));
-        
-        let marketing = 0;
-        Users.map(e => marketing = e.PackageMarketings?.length + marketing)
-        setSumMarketing(marketing)
+    if (Users.length !== 0) {
+      setSumSales(
+        Users?.map((e) => e.Sells?.length).reduce(
+          (previousValue, currentValue) => previousValue + currentValue
+        )
+      );
 
-        let transaction = 0;
-        Users.map(e => transaction = e.TransactionCoordinators?.length + transaction)
-        setSumTransactionCoord(transaction)
-      }
-    }, [])
-    
+      setSumRef(
+        thisReffered?.reduce(
+          (previousValue, currentValue) => previousValue + currentValue
+        )
+      );
 
-    function goUser(f) {
-      setCircle('circle5');
-      let newUs = Users?.filter((e) => e.name?.toLowerCase().includes(f?.toLowerCase()))
-      setSelected(newUs[0])
+      let marketing = 0;
+      Users.map((e) => (marketing = e.PackageMarketings?.length + marketing));
+      setSumMarketing(marketing);
+
+      let transaction = 0;
+      Users.map(
+        (e) => (transaction = e.TransactionCoordinators?.length + transaction)
+      );
+      setSumTransactionCoord(transaction);
     }
+  }, []);
+
+  function goUser(f) {
+    setCircle("circle5");
+    let newUs = Users?.filter((e) =>
+      e.name?.toLowerCase().includes(f?.toLowerCase())
+    );
+    setSelected(newUs[0]);
+  }
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{`Welcome ${Name} `}</p>
-       
       </div>
       {!selected ? (
-          <p className="subTittMan">My Realtors</p>
-        ) : (
-          <p className="subTittMan">
-            Information about: {selected.name}
-          </p>
-        )}
+        <p className="subTittMan">My Realtors</p>
+      ) : (
+        <p className="subTittMan">Information about: {selected.name}</p>
+      )}
       <div
         className="DashContainer"
         style={{ maxWidth: "90%", flexDirection: "row" }}
@@ -92,7 +101,14 @@ function ManagerGrafics({
                   >
                     Sales
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh", marginLeft: "10px", width: '800px' }}>
+                  <table
+                    className="table5"
+                    style={{
+                      marginTop: "2vh",
+                      marginLeft: "10px",
+                      width: "800px",
+                    }}
+                  >
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
@@ -144,7 +160,7 @@ function ManagerGrafics({
                 </>
               )}
 
-              {Users.filter((e) => (e.ReferredId == selected.id)).length ? (
+              {Users.filter((e) => e.ReferredId == selected.id).length ? (
                 <>
                   <p
                     className="subTitt"
@@ -156,7 +172,14 @@ function ManagerGrafics({
                   >
                     Recruited
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh",marginLeft: "10px", width: '800px' }}>
+                  <table
+                    className="table5"
+                    style={{
+                      marginTop: "2vh",
+                      marginLeft: "10px",
+                      width: "800px",
+                    }}
+                  >
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
@@ -175,7 +198,7 @@ function ManagerGrafics({
                           <p className="REPtype2">Recruited</p>
                         </th>
                       </tr>
-                      {Users.filter((e) => (e.ReferredId == selected.id)).map(
+                      {Users.filter((e) => e.ReferredId == selected.id).map(
                         (e) => {
                           return (
                             <tr>
@@ -228,7 +251,14 @@ function ManagerGrafics({
                   >
                     Referrals
                   </p>
-                  <table className="table5" style={{ marginTop: "2vh",marginLeft: "10px", width: '800px' }}>
+                  <table
+                    className="table5"
+                    style={{
+                      marginTop: "2vh",
+                      marginLeft: "10px",
+                      width: "800px",
+                    }}
+                  >
                     <tbody>
                       <tr>
                         <th scope="col" className="column1">
@@ -295,184 +325,213 @@ function ManagerGrafics({
           </>
         )}
 
-{Screen.width > 1000 && (
+        {Screen.width > 1000 && (
           <>
-{ !selected &&
-
-          <div className={styleTable}>
-
-         
-          <table className="table6">
-          <tbody>
-            <tr style={{position: 'fixed', top: '120px', width: '650px'}}>
-              <th scope="col" >
-                <p className="REPtype2" style={{ width: '330px', }}>Name</p>
-              </th>
-              <th scope="col" className="column1" style={{ width: '70px' }}>
-                <p className="REPtype2">Rec.</p>
-              </th>
-              <th scope="col" className="column1" style={{ width: '72px'}}>
-                <p className="REPtype2">Ref.</p>
-              </th>
-              <th scope="col" className="column1" style={{ width: '60px'}}>
-                <p className="REPtype2">Sales</p>
-              </th>
-              {/* <th scope="col" className="column1" style={{ width: '50px'}}>
+            {!selected && (
+              <div className={styleTable}>
+                <table className="table6">
+                  <tbody>
+                    <tr
+                      style={{
+                        position: "fixed",
+                        top: "120px",
+                        width: "650px",
+                      }}
+                    >
+                      <th scope="col">
+                        <p className="REPtype2" style={{ width: "330px" }}>
+                          Name
+                        </p>
+                      </th>
+                      <th
+                        scope="col"
+                        className="column1"
+                        style={{ width: "70px" }}
+                      >
+                        <p className="REPtype2">Rec.</p>
+                      </th>
+                      <th
+                        scope="col"
+                        className="column1"
+                        style={{ width: "72px" }}
+                      >
+                        <p className="REPtype2">Ref.</p>
+                      </th>
+                      <th
+                        scope="col"
+                        className="column1"
+                        style={{ width: "60px" }}
+                      >
+                        <p className="REPtype2">Sales</p>
+                      </th>
+                      {/* <th scope="col" className="column1" style={{ width: '50px'}}>
                 <p className="REPtype2">P.M.</p>
               </th>
               <th scope="col" className="column1" style={{maxWidth: '35px', width: '35px'}}>
                 <p className="REPtype2">T.C.</p>
               </th> */}
-            </tr>
+                    </tr>
 
-            {Users?.filter((e) => e.User?.id == selected.id).sort(function (a, b) {
-              return b.Sells?.length - a.Sells?.length;
-            })?.map(
-              (e) => {
-                return (
-                  <tr>
-                    <td className="ClientName2" scope="row" onClick={() => goUser(e.name)}>
-                    
-                      
-                        {e.name}
-                    
-                    </td>
+                    {Users?.filter((e) => e.User?.id == selected.id)
+                      .sort(function (a, b) {
+                        return b.Sells?.length - a.Sells?.length;
+                      })
+                      ?.map((e) => {
+                        return (
+                          <tr>
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              onClick={() => goUser(e.name)}
+                            >
+                              {e.name}
+                            </td>
 
-                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
-                    {Users?.filter(f => f.ReferredId === e.id).length}
-                    
-                    </td>
-                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
-                    {Referred?.filter((f) => f.UserId == e.id).length}
-                    </td>
-                    <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '40px'}}>
-                      {e.Sells?.length}
-                    </td>
-                    {/* <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              style={{ textAlign: "center", minWidth: "30px" }}
+                            >
+                              {
+                                Users?.filter((f) => f.ReferredId === e.id)
+                                  .length
+                              }
+                            </td>
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              style={{ textAlign: "center", minWidth: "30px" }}
+                            >
+                              {Referred?.filter((f) => f.UserId == e.id).length}
+                            </td>
+                            <td
+                              className="ClientName2"
+                              scope="row"
+                              style={{ textAlign: "center", minWidth: "40px" }}
+                            >
+                              {e.Sells?.length}
+                            </td>
+                            {/* <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
                       {e.PackageMarketings?.length}
                     </td>
                     <td className="ClientName2" scope="row" style={{textAlign: 'center', minWidth: '30px'}}>
                       {e.TransactionCoordinators?.length}
                     </td> */}
-                  </tr>
-                );
-              }
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </div>
             )}
-          </tbody>
-        </table>
-        </div>
-}
-        </>
+          </>
         )}
-           {
-          styleTable === 'divTable2' &&
-          <div className={circle} onClick={() => {setStyleTable('divTable'); setChevron('bsChevron'); setCircle('circle2')}}>
-        <BsChevronLeft
-              cursor="pointer"
-              color="white"
-              className={chevron}
-              
-            />
-            </div>
-        }
-        {
-          styleTable === 'divTable3' &&
-          <div className={circle}  onClick={() => {setStyleTable('divTable'); setChevron('bsChevron'); setCircle('circle2')}}>
-        <BsChevronLeft
-              cursor="pointer"
-              color="white"
-              className={chevron}
-             
-            />
-               </div>
-        }
+        {styleTable === "divTable2" && (
+          <div
+            className={circle}
+            onClick={() => {
+              setStyleTable("divTable");
+              setChevron("bsChevron");
+              setCircle("circle2");
+            }}
+          >
+            <BsChevronLeft cursor="pointer" color="white" className={chevron} />
+          </div>
+        )}
+        {styleTable === "divTable3" && (
+          <div
+            className={circle}
+            onClick={() => {
+              setStyleTable("divTable");
+              setChevron("bsChevron");
+              setCircle("circle2");
+            }}
+          >
+            <BsChevronLeft cursor="pointer" color="white" className={chevron} />
+          </div>
+        )}
 
-{
-          styleTable === 'divTable' &&
-          <div className={circle}  onClick={() => {setStyleTable('divTable3');setChevron('bsChevron2'); setCircle('circle3')}}>
-          <BsChevronLeft
-          cursor="pointer"
-          color="white"
-          className={chevron}
-         
-        />
-           </div>
-        }
-
+        {styleTable === "divTable" && (
+          <div
+            className={circle}
+            onClick={() => {
+              setStyleTable("divTable3");
+              setChevron("bsChevron2");
+              setCircle("circle3");
+            }}
+          >
+            <BsChevronLeft cursor="pointer" color="white" className={chevron} />
+          </div>
+        )}
       </div>
-      {
-        !selected &&
-      <div className="CardsGraficsContainer">
+      {!selected && (
+        <div className="CardsGraficsContainer">
+          <div
+            className="CardsGrafics2"
+            style={{ backgroundColor: " rgba(0, 39, 82,0.8)" }}
+          >
+            <div className="dashCircle" style={{ backgroundColor: "#ebeff2" }}>
+              <FaMoneyBillAlt size="28px" color="#002752" />
+            </div>
+            <div className="dashText">
+              <p className="dashCardTitle">{sumSales}</p>
+              <p className="dashCardText">Sales</p>
+            </div>
+          </div>
+          <NavLink
+            style={{ textDecoration: "none" }}
+            to={{
+              pathname: "/realtorsListManager",
+              aboutProps: { referrals: "Realtors" },
+            }}
+          >
+            <div
+              className="CardsGrafics"
+              style={{
+                marginLeft: "20px",
+                backgroundColor: "#D8AF4D",
+              }}
+            >
               <div
-               className="CardsGrafics2"
-               style={{ backgroundColor: " rgba(0, 39, 82,0.8)" }}
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
               >
-                <div
-                  className="dashCircle"
-                  style={{ backgroundColor: "#ebeff2" }}
-                >
-                  <FaMoneyBillAlt size='28px' color='#002752'/>
-                </div>
-                <div className="dashText">
-                  <p className="dashCardTitle">{sumSales}</p>
-                  <p className="dashCardText">Sales</p>
-                </div>
+                <BsFillPersonFill size="28px" color="#D8AF4D" />
               </div>
-              <NavLink
-                style={{ textDecoration: "none" }}
-                to={{
-                  pathname: "/realtorsListManager",
-                  aboutProps: { referrals: 'Realtors' },
-                }}
-              >
+              <div className="dashText">
+                <p className="dashCardTitle">{Users.length - 1}</p>
+                <p className="dashCardText">Realtors</p>
+              </div>
+            </div>
+          </NavLink>
+          <NavLink
+            style={{ textDecoration: "none" }}
+            to={{
+              pathname: "/realtorsListManager",
+              aboutProps: { referrals: "Referral" },
+            }}
+          >
+            <div
+              className="CardsGrafics"
+              style={{
+                marginLeft: "20px",
+                backgroundColor: "#B0DAF1",
+              }}
+            >
               <div
-                className="CardsGrafics"
-                style={{
-                  marginLeft: "20px",
-                  backgroundColor: "#D8AF4D",
-                }}
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
               >
-                <div
-                  className="dashCircle"
-                  style={{ backgroundColor: "#ebeff2" }}
-                >
-                 <BsFillPersonFill size='28px' color="#D8AF4D"/>
-                </div>
-                <div className="dashText">
-                  <p className="dashCardTitle">{Users.length - 1}</p>
-                  <p className="dashCardText">Realtors</p>
-                </div>
+                <BsFillPersonLinesFill size="28px" color="#B0DAF1" />
               </div>
-              </NavLink>
-              <NavLink
-                style={{ textDecoration: "none" }}
-                to={{
-                  pathname: "/realtorsListManager",
-                  aboutProps: { referrals: 'Referral' },
-                }}
-              >
-                <div
-                  className="CardsGrafics"
-                  style={{
-                    marginLeft: "20px",
-                    backgroundColor: "#B0DAF1",
-                  }}
-                >
-                  <div
-                    className="dashCircle"
-                    style={{ backgroundColor: "#ebeff2" }}
-                  >
-                
-                <BsFillPersonLinesFill size='28px' color='#B0DAF1'/>
-                  </div>
-                  <div className="dashText">
-                    <p className="dashCardTitle">{sumRef}</p>
-                    <p className="dashCardText">Referrals</p>
-                  </div>
-                </div>
-              </NavLink>
+              <div className="dashText">
+                <p className="dashCardTitle">{sumRef}</p>
+                <p className="dashCardText">Referrals</p>
+              </div>
+            </div>
+          </NavLink>
 
-              {/* <NavLink
+          {/* <NavLink
                 style={{ textDecoration: "none" }}
                 to={{
                   pathname: "/packageManagement",
@@ -527,25 +586,30 @@ function ManagerGrafics({
                 </div>
               </div>
               </NavLink> */}
-             
-            </div>
-      }
-      {selected &&
+        </div>
+      )}
+      {selected && (
         <BsChevronLeft
-              cursor="pointer"
-              color="grey"
-              style={{
-                minWidth: "30px",
-                minHeight: "30px",
-                position: "fixed",
-                zIndex: 1009,
-                left: "80px",
-                top: "17px",
-                alignSelf: "flex-start",
-              }}
-              onClick={() => {setSelected(false); setCircle('circle4'); setStyleTable('divTable2'); setChevron("bsChevron3")}}
-            />}
-               <img
+          cursor="pointer"
+          color="grey"
+          style={{
+            minWidth: "30px",
+            minHeight: "30px",
+            position: "fixed",
+            zIndex: 1009,
+            left: "80px",
+            top: "17px",
+            alignSelf: "flex-start",
+          }}
+          onClick={() => {
+            setSelected(false);
+            setCircle("circle4");
+            setStyleTable("divTable2");
+            setChevron("bsChevron3");
+          }}
+        />
+      )}
+      <img
         src={Isologo_background}
         style={{
           position: "fixed",

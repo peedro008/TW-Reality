@@ -31,7 +31,7 @@ function Stadistic() {
 
   const onSubmit = () => {
     fetch(
-      `https://truewayrealtorsapi.com/getRealtors?dateFrom=${
+      `http://localhost:8080/getRealtors?dateFrom=${
         dateFrom || "2015-01-24"
       }&dateTo=${dateTo || "2115-01-24"}`,
       {
@@ -63,7 +63,7 @@ function Stadistic() {
 
   const onSubmitPagination = (page) => {
     fetch(
-      `https://truewayrealtorsapi.com/getUsersPagination?page=${page}&size=${size}`,
+      `http://localhost:8080/getUsersPagination?page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
@@ -92,7 +92,7 @@ function Stadistic() {
   };
 
   const onSubmitPaginationSize = () => {
-    fetch(`https://truewayrealtorsapi.com/getUsersSize`, {
+    fetch(`http://localhost:8080/getUsersSize`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -57,7 +57,7 @@ function ManagerRecruit(props) {
 
   const getRefRec = () => {
     axios
-      .get(`https://truewayrealtorsapi.com/getReferred`)
+      .get(`http://localhost:8080/getReferred`)
       .then(function (response) {
         dispatch(getReferred(response.data));
       })
@@ -66,7 +66,7 @@ function ManagerRecruit(props) {
       });
 
     axios
-      .get(`https://truewayrealtorsapi.com/getMyUsers?UserId=${UserId}`)
+      .get(`http://localhost:8080/getMyUsers?UserId=${UserId}`)
       .then(function (response) {
         dispatch(getUsersManager(response.data));
       })
@@ -75,7 +75,7 @@ function ManagerRecruit(props) {
       });
 
     axios
-      .get(`https://truewayrealtorsapi.com/getRealtors`)
+      .get(`http://localhost:8080/getRealtors`)
       .then(function (response) {
         response.status == 200 || response.status == 204
           ? dispatch(getUsers(response.data))
@@ -88,7 +88,7 @@ function ManagerRecruit(props) {
 
   const onSubmit = () => {
     if (form.password) {
-      fetch(`https://truewayrealtorsapi.com/addRealtor`, {
+      fetch(`http://localhost:8080/addRealtor`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

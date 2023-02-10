@@ -15,7 +15,7 @@ function SellsControl() {
 
   useEffect(() => {
     axios
-      .get(`https://truewayrealtorsapi.com/getSells`)
+      .get(`http://localhost:8080/getSells`)
       .then(function (response) {
         response.status == 404
           ? dispatch(getSells([]))
@@ -31,15 +31,12 @@ function SellsControl() {
   }, [paginator]);
 
   const onSubmitPagination = (page) => {
-    fetch(
-      `https://truewayrealtorsapi.com/getSellsPaginate?page=${page}&size=${size}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(`http://localhost:8080/getSellsPaginate?page=${page}&size=${size}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then(async (res) => {
         try {
           const jsonRes = await res.json();

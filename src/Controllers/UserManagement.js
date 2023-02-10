@@ -47,7 +47,7 @@ function UserManagement() {
   );
 
   const onSubmitR = () => {
-    fetch(`https://truewayrealtorsapi.com/addRealtor`, {
+    fetch(`http://localhost:8080/addRealtor`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ function UserManagement() {
       });
   };
   const onSubmitM = () => {
-    fetch(`https://truewayrealtorsapi.com/addManager`, {
+    fetch(`http://localhost:8080/addManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

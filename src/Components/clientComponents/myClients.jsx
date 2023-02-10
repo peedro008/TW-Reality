@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Isologo_background from "../assets/Isologo_background.png";
+import Isologo_background from "../../assets/Isologo_background.png";
 import Select from "react-select";
-import {
-  BsArrowRightShort,
-  BsChevronLeft,
-  BsReverseBackspaceReverse,
-} from "react-icons/bs";
-import CrossMark from "../assets/cross-mark.png";
+import { BsReverseBackspaceReverse } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { AiOutlineFilter, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
@@ -56,7 +51,7 @@ const MyClients = ({
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">My Clients</p>
+        <p className="genericTitle">My Clients / Leads</p>
       </div>
       <div className="input-wrapper-mc">
         <input
@@ -88,7 +83,7 @@ const MyClients = ({
         >
           <button
             className={"PAYbutton"}
-            style={{ backgroundColor: "#d8ae4d6e" }}
+            style={{ backgroundColor: "#D8AF4D" }}
             onClick={() => {
               filterOn("Lead");
             }}
@@ -127,28 +122,43 @@ const MyClients = ({
             style={{
               width: "90vw",
               marginTop: "30px",
-              maxWidth: "90vw",
-              marginLeft: "0px",
+              // marginLeft: "0px",
+              marginInline: "auto",
             }}
           >
             <tbody>
               <tr>
                 <th scope="col" className="column1">
-                  <p className="REPtype2">Lead or Client</p>
+                  <p className="REPtype2" style={{ textAlign: "center" }}>
+                    Lead / Client
+                  </p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype2">Name</p>
+                  <p className="REPtype2" style={{ textAlign: "center" }}>
+                    Name
+                  </p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype2">Phone number</p>
+                  <p className="REPtype2" style={{ textAlign: "center" }}>
+                    Phone number
+                  </p>
                 </th>
 
                 <th scope="col" className="column1">
-                  <p className="REPtype2">Email</p>
+                  <p className="REPtype2" style={{ textAlign: "center" }}>
+                    Email
+                  </p>
                 </th>
 
                 <th scope="col" className="column1">
-                  <p className="REPtype2">Transaction Type</p>
+                  <p className="REPtype2" style={{ textAlign: "center" }}>
+                    Transaction Type
+                  </p>
+                </th>
+                <th scope="col" className="column1">
+                  <p className="REPtype2" style={{ textAlign: "center" }}>
+                    Status / Lead Source
+                  </p>
                 </th>
               </tr>
               {allMyClientsFilter?.map((e, i) => {
@@ -169,6 +179,11 @@ const MyClients = ({
                           : "ClientNameL"
                       }
                       scope="row"
+                      style={{
+                        width: "120px",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
                     >
                       {e.clientType}
                     </td>
@@ -183,6 +198,9 @@ const MyClients = ({
                     </td>
                     <td className="ClientName" scope="row">
                       {e.reason}
+                    </td>
+                    <td className="ClientName" scope="row">
+                      {e.status || e.leadSource}
                     </td>
                   </tr>
                 );
