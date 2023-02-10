@@ -133,7 +133,7 @@ function ShowingControl({ clientData, setReloadInfo, setNewHistory }) {
 
   const dispatchClient = () => {
     axios
-      .get(`http://localhost:8080/getAllMyClients?UserId=${userId}`)
+      .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
       .then(function (response) {
         response.status == 200 || response.status == 204
           ? dispatch(getClients(response.data))
@@ -146,7 +146,7 @@ function ShowingControl({ clientData, setReloadInfo, setNewHistory }) {
 
   const onSubmit = () => {
     onOpenModal();
-    fetch(`http://localhost:8080/client/${ClientId}/detail`, {
+    fetch(`https://truewayrealtorsapi.com/client/${ClientId}/detail`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

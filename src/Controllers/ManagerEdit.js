@@ -43,7 +43,7 @@ function ManagerEditController(props) {
 
   const onSubmit = () => {
     if (form) {
-      fetch(`http://localhost:8080/editManager`, {
+      fetch(`https://truewayrealtorsapi.com/editManager`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

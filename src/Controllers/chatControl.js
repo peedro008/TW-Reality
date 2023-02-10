@@ -21,28 +21,30 @@ function ChatControl() {
   const [mynuevochatconimagenes, setMynuevochatconimagenes] = useState([]);
   const [myImages, setMyImages] = useState([]);
   const [messaggePlusFile, setMessaggePlusFile] = useState([]);
-  const socket = io("http://localhost:8080");
+  const socket = io("https://truewayrealtorsapi.com");
 
   // Get Numbers
 
   useEffect(() => {
-    fetch(`http://localhost:8080/getClientsNumber`).then(async (res) => {
-      try {
-        const jsonRes = await res.json();
-        if (res.status === 200) {
-          setMyLastClients(jsonRes);
-          setLoader(false);
+    fetch(`https://truewayrealtorsapi.com/getClientsNumber`).then(
+      async (res) => {
+        try {
+          const jsonRes = await res.json();
+          if (res.status === 200) {
+            setMyLastClients(jsonRes);
+            setLoader(false);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
       }
-    });
+    );
   }, [getMyLast]);
 
   // Send Message
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/sendMessage`, {
+    fetch(`https://truewayrealtorsapi.com/sendMessage`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +76,7 @@ function ChatControl() {
     if (phone !== "") {
       setForm({ ...form, to: phone });
       setLoaderMessages(true);
-      fetch(`http://localhost:8080/getMyMessages?phone=${phone}`).then(
+      fetch(`https://truewayrealtorsapi.com/getMyMessages?phone=${phone}`).then(
         async (res) => {
           try {
             const jsonRes = await res.json();
@@ -92,7 +94,7 @@ function ChatControl() {
 
   const getMyMessag = (numb) => {
     if (numb === phone) {
-      fetch(`http://localhost:8080/getMyMessages?phone=${numb}`).then(
+      fetch(`https://truewayrealtorsapi.com/getMyMessages?phone=${numb}`).then(
         async (res) => {
           try {
             const jsonRes = await res.json();
@@ -121,7 +123,7 @@ function ChatControl() {
     let contador = 0;
     cantidadConFiles2?.map((e) => {
       let thisJson = "";
-      fetch(`http://localhost:8080/getImages?message_Sid=${e.sid}`)
+      fetch(`https://truewayrealtorsapi.com/getImages?message_Sid=${e.sid}`)
         .then((res) => res.json())
         .then(async (json) => {
           thisJson = json;
@@ -149,7 +151,7 @@ function ChatControl() {
     let contador = 0;
     if (mynuevochatconimagenes.length > 0) {
       fetch(
-        `http://localhost:8080/yourImage?uriImage=${mynuevochatconimagenes[
+        `https://truewayrealtorsapi.com/yourImage?uriImage=${mynuevochatconimagenes[
           mynuevochatconimagenes.length - 1
         ].url?.slice(
           0,
@@ -188,7 +190,7 @@ function ChatControl() {
     if (mynuevochatconimagenes.length > 1) {
       mynuevochatconimagenes.map((e) =>
         fetch(
-          `http://localhost:8080/yourImage?uriImage=${e.url?.slice(
+          `https://truewayrealtorsapi.com/yourImage?uriImage=${e.url?.slice(
             0,
             e.url.length - 5
           )}`

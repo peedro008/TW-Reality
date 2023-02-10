@@ -123,7 +123,7 @@ function ClientHistoryControl(props) {
   ];
 
   useEffect(() => {
-    fetch(`http://localhost:8080/client/${ClientId}`)
+    fetch(`https://truewayrealtorsapi.com/client/${ClientId}`)
       .then(async (res) => {
         const jsonRes = await res.json();
         if (res.status === 200) {
@@ -144,7 +144,7 @@ function ClientHistoryControl(props) {
 
   const dispatchClient = () => {
     axios
-      .get(`http://localhost:8080/getAllMyClients?UserId=${userId}`)
+      .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
       .then(function (response) {
         response.status == 200 || response.status == 204
           ? dispatch(getClients(response.data))
@@ -169,7 +169,7 @@ function ClientHistoryControl(props) {
   console.log(clientDataReload);
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/editClient`, {
+    fetch(`https://truewayrealtorsapi.com/editClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -188,7 +188,7 @@ function ClientHistoryControl(props) {
       }
     });
 
-    fetch(`http://localhost:8080/addClientHistory`, {
+    fetch(`https://truewayrealtorsapi.com/addClientHistory`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -226,7 +226,7 @@ function ClientHistoryControl(props) {
       .then((data) => {
         console.log(data);
 
-        fetch(`http://localhost:8080/editClient`, {
+        fetch(`https://truewayrealtorsapi.com/editClient`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

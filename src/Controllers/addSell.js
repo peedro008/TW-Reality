@@ -53,7 +53,7 @@ function AddSell() {
 
   const getTransactionsCoord = (UserId) => {
     fetch(
-      `http://localhost:8080/getMyTransactionCoordinatorAvailable?id=${UserId}`
+      `https://truewayrealtorsapi.com/getMyTransactionCoordinatorAvailable?id=${UserId}`
     )
       .then((res) => res.json())
       .then((json) => setMyTransactionCoord(json))
@@ -61,7 +61,7 @@ function AddSell() {
   };
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/addSell`, {
+    fetch(`https://truewayrealtorsapi.com/addSell`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +98,7 @@ function AddSell() {
   const onSubmitTrans = () => {
     {
       soldForm.id &&
-        fetch("http://localhost:8080/soldTransactionCoordinator", {
+        fetch("https://truewayrealtorsapi.com/soldTransactionCoordinator", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -13,7 +13,7 @@ const ContactsControl = () => {
   const [contactsSearch, setContactsSearch] = useState([]);
 
   const addContact = () => {
-    fetch("http://localhost:8080/addContact", {
+    fetch("https://truewayrealtorsapi.com/addContact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
@@ -30,7 +30,7 @@ const ContactsControl = () => {
   };
 
   const getContact = () => {
-    fetch("http://localhost:8080/getContacts").then(async (res) => {
+    fetch("https://truewayrealtorsapi.com/getContacts").then(async (res) => {
       const jsonRes = await res.json();
       if (res.status === 200) {
         setContacts(jsonRes);

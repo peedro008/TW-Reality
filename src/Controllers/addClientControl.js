@@ -25,7 +25,7 @@ function AddClientControl() {
   }, []);
   const GetMyClientsAll = () => {
     axios
-      .get(`http://localhost:8080/getAllMyClients?UserId=${userId}`)
+      .get(`https://truewayrealtorsapi.com/getAllMyClients?UserId=${userId}`)
       .then(function (response) {
         response.status == 200 || response.status == 204
           ? dispatch(getClients(response.data))
@@ -131,7 +131,7 @@ function AddClientControl() {
   ];
 
   const onSubmit = () => {
-    fetch(`http://localhost:8080/addClient`, {
+    fetch(`https://truewayrealtorsapi.com/addClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
