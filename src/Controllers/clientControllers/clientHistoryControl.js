@@ -28,7 +28,6 @@ function ClientHistoryControl(props) {
   const onCloseModal = () => setOpen(false);
   const [resp, setResp] = useState([]);
   const [loaderPhoto, setLoaderPhoto] = useState(false);
-  const [goStatus, setGoStatus] = useState("statusHistory");
   const [form, setForm] = useState([]);
   const [newHistory, setNewHistory] = useState("noteTable");
 
@@ -44,33 +43,6 @@ function ClientHistoryControl(props) {
     {
       value: "Renter",
       label: "Renter",
-    },
-  ];
-
-  let optionsStatus = [
-    {
-      value: "Showing",
-      label: "Showing",
-    },
-    {
-      value: "Pre-Qualifying",
-      label: "Pre-Qualifying",
-    },
-    {
-      value: "Under Contract",
-      label: "Under Contract",
-    },
-    {
-      value: "Closed",
-      label: "Closed",
-    },
-    {
-      value: "Archive",
-      label: "Archive",
-    },
-    {
-      value: "Listed",
-      label: "Listed",
     },
   ];
 
@@ -198,7 +170,6 @@ function ClientHistoryControl(props) {
       try {
         if (res.status === 200) {
           onOpenModal();
-          setGoStatus("statusHistory");
           setReloadInfo(history.length + 1);
           dispatchClient();
           setResp([true, "Client record added successfully"]);
@@ -208,12 +179,10 @@ function ClientHistoryControl(props) {
           }, 1000);
         } else {
           onOpenModal();
-          setGoStatus("statusHistory");
           setResp([false, "Error adding Record"]);
         }
       } catch (err) {
         onOpenModal();
-        setGoStatus("statusHistory");
         setResp([false, "Error adding record"]);
       }
     });
@@ -237,7 +206,6 @@ function ClientHistoryControl(props) {
             if (res.status !== 200 || res.status !== 204) {
               onOpenModal();
               dispatchClient();
-              setGoStatus("");
               setReloadInfo(history.length + 1);
               setResp([true, "Photo edited succesfully"]);
               setLoaderPhoto(false);
@@ -246,14 +214,12 @@ function ClientHistoryControl(props) {
               }, 1000);
             } else {
               onOpenModal();
-              setGoStatus("");
               setResp([false, "Photo can not be edited"]);
               setLoaderPhoto(false);
             }
           } catch (err) {
             onOpenModal();
             setLoaderPhoto(false);
-            setGoStatus("");
             setResp([false, "Error adding record"]);
           }
         });
@@ -271,7 +237,6 @@ function ClientHistoryControl(props) {
     <ClientHistory
       myClientHistories={history}
       clientData={clientDataReload}
-      optionsStatus={optionsStatus}
       optionsStatusBuyer={optionsStatusBuyer}
       optionsStatusSelling={optionsStatusSelling}
       optionsStatusRent={optionsStatusRent}
@@ -285,7 +250,6 @@ function ClientHistoryControl(props) {
       setReloadInfo={setReloadInfo}
       upload={upload}
       loaderPhoto={loaderPhoto}
-      goStatus={goStatus}
       Users={Users}
       setNewHistory={setNewHistory}
       newHistory={newHistory}

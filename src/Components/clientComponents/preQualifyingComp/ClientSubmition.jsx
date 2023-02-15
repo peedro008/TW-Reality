@@ -8,32 +8,72 @@ const ClientSubmition = ({ clientData, setComprobate, loadForm }) => {
         backgroundColor: "whitesmoke",
         margin: "20px",
         paddingTop: "20px",
-        height: "75%",
+        height: "auto",
         borderRadius: "10px",
       }}
     >
       <div className="managerInputsubContainer" style={{ width: "70vw" }}>
-        <div className="inputDiv">
-          <p className="PAYtitle" style={{ color: "gray", width: "250px" }}>
-            Self Employee - 1099
-          </p>
-          <p className="PAYtitle">
-            {clientData?.conditions.find((e) => e.key === "selfEmployee")
-              ?.value === true
-              ? "True"
-              : "False"}
-          </p>
-        </div>
-        <div className="inputDiv">
-          <p className="PAYtitle" style={{ color: "gray", width: "250px" }}>
-            W2 - Employee by Others
-          </p>
-          <p className="PAYtitle">
-            {clientData?.conditions.find((e) => e.key === "employeeByOthers")
-              ?.value === true
-              ? "True"
-              : "False"}
-          </p>
+        <div style={{ marginBottom: "-20px" }}>
+          <div style={{ display: "flex", marginBottom: "-20px" }}>
+            <div className="inputDiv" style={{ display: "flex" }}>
+              <p className="PAYtitle" style={{ color: "gray", width: "170px" }}>
+                Self Employee - 1099
+              </p>
+              <p className="PAYtitle" style={{ marginTop: "-2px" }}>
+                {clientData?.conditions.find((e) => e.key === "selfEmployee")
+                  ?.value === true
+                  ? "✅"
+                  : "❎"}
+              </p>
+            </div>
+            <div className="inputDiv" style={{ display: "flex" }}>
+              <p className="PAYtitle" style={{ color: "gray", width: "210px" }}>
+                W2 - Employee by Others
+              </p>
+              <p className="PAYtitle" style={{ marginTop: "-2px" }}>
+                {clientData?.conditions.find(
+                  (e) => e.key === "employeeByOthers"
+                )?.value === true
+                  ? "✅"
+                  : "❎"}
+              </p>
+            </div>
+          </div>
+          <div style={{ display: "flex", marginBottom: "-20px" }}>
+            <div className="inputDiv" style={{ display: "flex" }}>
+              <p className="PAYtitle" style={{ color: "gray", width: "80px" }}>
+                Resident
+              </p>
+              <p className="PAYtitle" style={{ marginTop: "-2px" }}>
+                {clientData?.conditions.find((e) => e.key === "resident")
+                  ?.value === true
+                  ? "✅"
+                  : "❎"}
+              </p>
+            </div>
+            <div className="inputDiv" style={{ display: "flex" }}>
+              <p className="PAYtitle" style={{ color: "gray", width: "85px" }}>
+                Us citicen
+              </p>
+              <p className="PAYtitle" style={{ marginTop: "-2px" }}>
+                {clientData?.conditions.find((e) => e.key === "usCiticen")
+                  ?.value === true
+                  ? "✅"
+                  : "❎"}
+              </p>
+            </div>
+            <div className="inputDiv" style={{ display: "flex" }}>
+              <p className="PAYtitle" style={{ color: "gray", width: "108px" }}>
+                Work Permit
+              </p>
+              <p className="PAYtitle" style={{ marginTop: "-2px" }}>
+                {clientData?.conditions.find((e) => e.key === "workPermit")
+                  ?.value === true
+                  ? "✅"
+                  : "❎"}
+              </p>
+            </div>
+          </div>
         </div>
         <div className="inputDiv" style={{ height: "auto" }}>
           <p className="PAYtitle" style={{ color: "gray", width: "250px" }}>
@@ -101,28 +141,6 @@ const ClientSubmition = ({ clientData, setComprobate, loadForm }) => {
         </div>
         <div className="inputDiv">
           <p className="PAYtitle" style={{ color: "gray", width: "250px" }}>
-            Overtime
-          </p>
-
-          <p className="PAYtitle">
-            {clientData?.attributes.find((e) => e.key === "overtime")?.value}
-          </p>
-        </div>
-      </div>
-      <div className="managerInputsubContainer" style={{ width: "60vw" }}>
-        <div className="inputDiv">
-          <p className="PAYtitle" style={{ color: "gray", width: "250px" }}>
-            List Previus Jobs
-          </p>
-          <p className="PAYtitle">
-            {
-              clientData?.attributes.find((e) => e.key === "listPreviusJobs")
-                ?.value
-            }
-          </p>
-        </div>
-        <div className="inputDiv">
-          <p className="PAYtitle" style={{ color: "gray", width: "250px" }}>
             Desire House Type
           </p>
           <p className="PAYtitle">
@@ -132,6 +150,129 @@ const ClientSubmition = ({ clientData, setComprobate, loadForm }) => {
             }
           </p>
         </div>
+      </div>
+      <div className="managerInputsubContainer" style={{ width: "60vw" }}>
+        <div className="inputDiv">
+          <p className="PAYtitle" style={{ color: "gray", width: "250px" }}>
+            Money for closing
+          </p>
+          <p className="PAYtitle">
+            {
+              clientData?.attributes.find((e) => e.key === "moneyForClosing")
+                ?.value
+            }
+          </p>
+        </div>
+        <div>
+          <p className="PAYtitle" style={{ color: "gray", width: "300px" }}>
+            List Previus Jobs
+          </p>
+          {clientData?.attributes.find((e) => e.key === "sameJob")?.value ===
+            "Yes" &&
+            clientData?.attributes.find((e) => e.key === "previusJobName") && (
+              <div className="inputDiv">
+                <p className="PAYtitle" style={{ marginBottom: "0px" }}>
+                  - Name:{" "}
+                  {
+                    clientData?.attributes.find(
+                      (e) => e.key === "previusJobName"
+                    )?.value
+                  }
+                </p>
+                <p className="PAYtitle">
+                  - Position:{" "}
+                  {
+                    clientData?.attributes.find(
+                      (e) => e.key === "previusJobPosition"
+                    )?.value
+                  }
+                </p>
+              </div>
+            )}
+          {clientData?.attributes.find((e) => e.key === "sameJob").value ===
+            "No" && (
+            <>
+              {clientData?.attributes.find(
+                (e) => e.key === "previusJobName1"
+              ) && (
+                <div className="inputDiv">
+                  <p className="PAYtitle" style={{ marginBottom: "0px" }}>
+                    - Name:{" "}
+                    {
+                      clientData?.attributes.find(
+                        (e) => e.key === "previusJobName1"
+                      )?.value
+                    }
+                  </p>
+                  <p className="PAYtitle">
+                    - Position:{" "}
+                    {
+                      clientData?.attributes.find(
+                        (e) => e.key === "previusJobPosition1"
+                      )?.value
+                    }
+                  </p>
+                </div>
+              )}
+              {clientData?.attributes.find(
+                (e) => e.key === "previusJobName2"
+              ) && (
+                <div className="inputDiv">
+                  <p className="PAYtitle" style={{ marginBottom: "0px" }}>
+                    - Name:{" "}
+                    {
+                      clientData?.attributes.find(
+                        (e) => e.key === "previusJobName2"
+                      )?.value
+                    }
+                  </p>
+                  <p className="PAYtitle">
+                    - Position:{" "}
+                    {
+                      clientData?.attributes.find(
+                        (e) => e.key === "previusJobPosition2"
+                      )?.value
+                    }
+                  </p>
+                </div>
+              )}
+              {clientData?.attributes.find(
+                (e) => e.key === "previusJobName3"
+              ) && (
+                <div className="inputDiv">
+                  <p className="PAYtitle" style={{ marginBottom: "0px" }}>
+                    - Name:{" "}
+                    {
+                      clientData?.attributes.find(
+                        (e) => e.key === "previusJobName3"
+                      )?.value
+                    }
+                  </p>
+                  <p className="PAYtitle">
+                    - Position:{" "}
+                    {
+                      clientData?.attributes.find(
+                        (e) => e.key === "previusJobPosition3"
+                      )?.value
+                    }
+                  </p>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        {clientData?.attributes.find((e) => e.key === "sameJob")?.value ===
+          "Yes" && (
+          <div className="inputDiv">
+            <p className="PAYtitle" style={{ color: "gray", width: "250px" }}>
+              Overtime
+            </p>
+
+            <p className="PAYtitle">
+              {clientData?.attributes.find((e) => e.key === "overtime")?.value}
+            </p>
+          </div>
+        )}
         <div className="inputDiv">
           <p className="PAYtitle" style={{ color: "gray", width: "250px" }}>
             Notes

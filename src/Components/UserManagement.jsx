@@ -24,68 +24,74 @@ function UserManagementComponent({
   setErr,
   validarEmail,
   optionsManager,
-  optionsRealtor
+  optionsRealtor,
 }) {
   let validation =
     form.password?.length < 8 ||
     typeof form.password?.length === "undefined" ||
     !validarEmail(form.email) ||
     form.name?.length < 6 ||
-    typeof form.name?.length === "undefined" || typeof form.ComissionValue?.length === "undefined";
+    typeof form.name?.length === "undefined" ||
+    typeof form.ComissionValue?.length === "undefined";
 
   console.log(form);
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">
-          {!type ? "Add User" : "Add " + type}
-        </p>
+        <p className="genericTitle">{!type ? "Add User" : "Add " + type}</p>
       </div>
       {!type ? (
         <div className="PAYbuttonCont" style={{ justifyContent: "flex-start" }}>
           <button className="PAYbutton" onClick={() => setType("Realtor")}>
-            <MdAdd size="1.5em" className="PAYbuttonIcon" />
+            <MdAdd
+              size="1.5em"
+              className="PAYbuttonIcon"
+              style={{ marginTop: "8px" }}
+            />
             <p className="PAYbuttonText">Add Realtor</p>
           </button>
 
           {userRole == "Admin" ? (
             <>
-            
-            <button
-              className="PAYbutton"
-              style={{ marginLeft: "30px" }}
-              onClick={() => setType("Manager")}
+              <button
+                className="PAYbutton"
+                style={{ marginLeft: "30px" }}
+                onClick={() => setType("Manager")}
               >
-              <MdAdd size="1.5em" className="PAYbuttonIcon"  />
-              <p className="PAYbuttonText">Add Manager</p>
-            </button>
-            <NavLink
-              to="/UserManagement/referred"
-              style={{ textDecoration: "none" }}
-            >
-              <button className="PAYbutton" style={{ marginLeft: "30px" }}>
                 <MdAdd
                   size="1.5em"
                   className="PAYbuttonIcon"
-                 
+                  style={{ marginTop: "8px" }}
                 />
-                <p className="PAYbuttonText">Add Referral</p>
+                <p className="PAYbuttonText">Add Manager</p>
               </button>
-            </NavLink>
-            <NavLink
-              to="/UserManagement/addAdmin"
-              style={{ textDecoration: "none" }}
-            >
-              <button className="PAYbutton" style={{ marginLeft: "30px" }}>
-                <MdAdd
-                  size="1.5em"
-                  className="PAYbuttonIcon"
-                  
-                />
-                <p className="PAYbuttonText">Add Admin</p>
-              </button>
-            </NavLink>
-              </>
+              <NavLink
+                to="/UserManagement/referred"
+                style={{ textDecoration: "none" }}
+              >
+                <button className="PAYbutton" style={{ marginLeft: "30px" }}>
+                  <MdAdd
+                    size="1.5em"
+                    className="PAYbuttonIcon"
+                    style={{ marginTop: "8px" }}
+                  />
+                  <p className="PAYbuttonText">Add Referral</p>
+                </button>
+              </NavLink>
+              <NavLink
+                to="/UserManagement/addAdmin"
+                style={{ textDecoration: "none" }}
+              >
+                <button className="PAYbutton" style={{ marginLeft: "30px" }}>
+                  <MdAdd
+                    size="1.5em"
+                    className="PAYbuttonIcon"
+                    style={{ marginTop: "8px" }}
+                  />
+                  <p className="PAYbuttonText">Add Admin</p>
+                </button>
+              </NavLink>
+            </>
           ) : (
             <NavLink
               to="/UserManagement/referred"
@@ -95,7 +101,7 @@ function UserManagementComponent({
                 <MdAdd
                   size="1.5em"
                   className="PAYbuttonIcon"
-                  color='whitesmoke'
+                  color="whitesmoke"
                 />
                 <p className="PAYbuttonText">Add Referral</p>
               </button>
@@ -170,20 +176,20 @@ function UserManagementComponent({
                   onChange={(e) => setForm({ ...form, managerId: e.value })}
                   className="SelectAddRealtor"
                   // defaultInputValue={yearOptions[0]}
-                  placeholder='Name'
+                  placeholder="Name"
                 />
               </div>
             </div>
             <div className="inputDiv">
-                <p className="PAYtitle">Referral By</p>
-                <Select
-                  options={optionsRealtor}
-                  onChange={(e) => setForm({ ...form, ReferredId: e.value })}
-                  className="SelectAddRealtor"
-                  // defaultInputValue={yearOptions[0]}
-                  placeholder='Name'
-                />
-              </div>
+              <p className="PAYtitle">Referral By</p>
+              <Select
+                options={optionsRealtor}
+                onChange={(e) => setForm({ ...form, ReferredId: e.value })}
+                className="SelectAddRealtor"
+                // defaultInputValue={yearOptions[0]}
+                placeholder="Name"
+              />
+            </div>
           </div>
           <BsChevronLeft
             cursor="pointer"
@@ -332,34 +338,33 @@ function UserManagementComponent({
               marginBottom: "10px",
             }}
           />
-{
-          error ?
-          <>
-           <img
-            src={CrossMark}
-            style={{
-              width: "35px",
-              alignSelf: "center",
-              marginTop: "25px",
-              marginBottom: "10px",
-            }}
-          />
-          <p className="modalText">{error}</p> 
-          </>
-          : 
-          <>
-           <img
-            src={Icon}
-            style={{
-              width: "35px",
-              alignSelf: "center",
-              marginTop: "25px",
-              marginBottom: "10px",
-            }}
-          />
-          <p className="modalText">{type} added successfully</p>
-          </>
-        }
+          {error ? (
+            <>
+              <img
+                src={CrossMark}
+                style={{
+                  width: "35px",
+                  alignSelf: "center",
+                  marginTop: "25px",
+                  marginBottom: "10px",
+                }}
+              />
+              <p className="modalText">{error}</p>
+            </>
+          ) : (
+            <>
+              <img
+                src={Icon}
+                style={{
+                  width: "35px",
+                  alignSelf: "center",
+                  marginTop: "25px",
+                  marginBottom: "10px",
+                }}
+              />
+              <p className="modalText">{type} added successfully</p>
+            </>
+          )}
 
           <button
             className="modalButton"

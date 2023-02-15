@@ -1,30 +1,28 @@
-import React, { useEffect, useState } from "react";
-import Isologo_background from "../../assets/Isologo_background.png";
-import { Modal } from "react-responsive-modal";
+import React, { useState } from "react";
 import Select from "react-select";
-import Icon from "../../assets/Icon.png";
-import CrossMark from "../../assets/cross-mark.png";
-import { BsChevronLeft } from "react-icons/bs";
-
-import { NavLink } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { BsInfoCircle } from "react-icons/bs";
 import EditClientControl from "../../Controllers/clientControllers/editClientControl";
-import { BiCloudUpload, BiPencil } from "react-icons/bi";
-import TimeLineBuyer from "./timeLineBuyer";
 import ContainerTopBar from "./containerTopBar";
 import ClientCard from "./clientCard";
 import CommonModal from "../Modal";
 import IsologoAndBack from "../IsologoAndBack";
 import ShowingControl from "../../Controllers/clientControllers/showingControl/showingControl";
 import PreQualifyingControl from "../../Controllers/clientControllers/preQualifyingControl/preQualifyingControl";
+import ModalInfoClient from "../ModalInfoClient";
 
+const metaDataInitial = {
+  message: "Se agrego informacion de client submition. Campos actualizados:",
+  cambios: [
+    { campo: "Campo 1", value: "Agrego info" },
+    { campo: "Campo 2", value: "Nueva imagen" },
+    { campo: "Campo 3", value: "Nueva address" },
+  ],
+};
 const ClientHistory = ({
   myClientHistories,
   clientData,
-  optionsStatus,
   optionsReason,
   resp,
-  optionsStatusLead,
   onCloseModal,
   setForm,
   form,
@@ -36,11 +34,13 @@ const ClientHistory = ({
   optionsStatusRent,
   upload,
   loaderPhoto,
-  goStatus,
+
   Users,
   setNewHistory,
   newHistory,
 }) => {
+  const [openInfoModal, setOpenInfoModal] = useState(false);
+  const [metaData, setMetaData] = useState(metaDataInitial);
   return (
     <div className="genericDiv">
       <ContainerTopBar
@@ -237,10 +237,9 @@ const ClientHistory = ({
         {newHistory === "noteTable" && (
           <>
             <table
-              className="table5"
+              className="table6"
               style={{
                 width: "89vw",
-
                 borderRadius: "10px",
                 marginTop: "0px",
                 maxWidth: "90vw",
@@ -258,16 +257,21 @@ const ClientHistory = ({
                   <th scope="col" className="column1">
                     <p className="REPtype2">User</p>
                   </th>
+                  <th scope="col" className="column1">
+                    <p className="REPtype2">Notes</p>
+                  </th>
                   <th
                     scope="col"
                     className="column1"
                     style={{
-                      alignSelf: "center",
-                      justifySelf: "center",
+                      maxWidth: "40px",
+                      width: "40px",
                       textAlign: "center",
                     }}
                   >
-                    <p className="REPtype2">Notes</p>
+                    <p className="REPtype2" style={{ textAlign: "center" }}>
+                      Info
+                    </p>
                   </th>
                 </tr>
                 {myClientHistories?.map((e, i) => {
@@ -300,6 +304,27 @@ const ClientHistory = ({
                         style={{ fontWeight: "bold", fontSize: "15px" }}
                       >
                         {e.Notes}
+                      </td>
+                      <td
+                        onClick={() => setOpenInfoModal(true)}
+                        className="ClientName"
+                        scope="row"
+                        style={{
+                          cursor: "pointer",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignContent: "center",
+                          alignItems: "center",
+                          fontWeight: "bold",
+                          fontSize: "15px",
+                          width: "40px",
+                          maxWidth: "40px",
+                        }}
+                      >
+                        <BsInfoCircle
+                          size="30px"
+                          style={{ alignSelf: "center", color: "lightblue" }}
+                        />
                       </td>
                     </tr>
                   );
@@ -370,7 +395,11 @@ const ClientHistory = ({
           </div>
         )}
       </div>
-
+      <ModalInfoClient
+        openInfoModal={openInfoModal}
+        setOpenInfoModal={setOpenInfoModal}
+        metaData={metaData}
+      />
       <CommonModal open={open} onClose={onCloseModal} resp={resp} />
       <IsologoAndBack />
     </div>
