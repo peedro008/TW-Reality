@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
-import ClientHistory from "../Components/clientHistory";
+import ClientHistory from "../../Components/clientComponents/clientHistory";
 import { useDispatch, useSelector } from "react-redux";
-import { GetMyClients } from "../Logic/Fetch";
-import { getClients } from "../Redux/actions";
+import { GetMyClients } from "../../Logic/Fetch";
+import { getClients } from "../../Redux/actions";
 import ReactS3 from "react-s3";
 
 const config = {
@@ -16,6 +16,7 @@ const config = {
 
 function ClientHistoryControl(props) {
   const userId = useSelector((state) => state.UserId);
+  const Users = useSelector((state) => state.Users);
   const dispatch = useDispatch();
   let clientData = props?.location.state.client;
   let ClientId = clientData?.ClientId;
@@ -25,10 +26,10 @@ function ClientHistoryControl(props) {
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
-  const [respEditClient, setRespEditClient] = useState([]);
+  const [resp, setResp] = useState([]);
   const [loaderPhoto, setLoaderPhoto] = useState(false);
-  const [goStatus, setGoStatus] = useState("statusHistory");
   const [form, setForm] = useState([]);
+  const [newHistory, setNewHistory] = useState("noteTable");
 
   let optionsReason = [
     {
@@ -45,37 +46,14 @@ function ClientHistoryControl(props) {
     },
   ];
 
-  let optionsStatus = [
+  let optionsStatusBuyer = [
+    {
+      value: "Pre-qualifying",
+      label: "Pre-qualifying",
+    },
     {
       value: "Showing",
       label: "Showing",
-    },
-    {
-      value: "Pre-Qualifying",
-      label: "Pre-Qualifying",
-    },
-    {
-      value: "Under Contract",
-      label: "Under Contract",
-    },
-    {
-      value: "Closed",
-      label: "Closed",
-    },
-    {
-      value: "Archive",
-      label: "Archive",
-    },
-    {
-      value: "Listed",
-      label: "Listed",
-    },
-  ];
-
-  let optionsStatusListing = [
-    {
-      value: "Active / Listed",
-      label: "Active / Listed",
     },
     {
       value: "Under contract",
@@ -117,12 +95,14 @@ function ClientHistoryControl(props) {
   ];
 
   useEffect(() => {
-    fetch(`https://truewayrealtorsapi.com/getClient?ClientId=${ClientId}`)
+    fetch(`https://truewayrealtorsapi.com/client/${ClientId}`)
       .then(async (res) => {
         const jsonRes = await res.json();
         if (res.status === 200) {
-          setClientDataReload(jsonRes[0]);
-          setHistory(jsonRes[0].ClientHistories.reverse());
+          setClientDataReload(jsonRes);
+          if (reloadInfo !== "client edited") {
+            setHistory(jsonRes.ClientHistories.reverse());
+          }
         } else {
           console.log(`Error in getClientHistory: ${res.status}`);
           setClientDataReload([]);
@@ -153,6 +133,7 @@ function ClientHistoryControl(props) {
       status: clientDataReload?.status,
       reason: clientDataReload?.reason,
       ClientId: ClientId,
+      bossClientId: userId,
       Notes: "",
     });
   }, [clientDataReload]);
@@ -170,6 +151,7 @@ function ClientHistoryControl(props) {
       try {
         if (res.status !== 200 || res.status !== 204) {
           console.log("Client edited succesfully");
+          setNewHistory("noteTable");
         } else {
           console.log("Client can not be edited");
         }
@@ -188,23 +170,20 @@ function ClientHistoryControl(props) {
       try {
         if (res.status === 200) {
           onOpenModal();
-          setGoStatus("statusHistory");
           setReloadInfo(history.length + 1);
           dispatchClient();
-          setRespEditClient([true, "Client record added successfully"]);
+          setResp([true, "Client record added successfully"]);
 
           setTimeout(() => {
             onCloseModal();
           }, 1000);
         } else {
           onOpenModal();
-          setGoStatus("statusHistory");
-          setRespEditClient([false, "Error adding Record"]);
+          setResp([false, "Error adding Record"]);
         }
       } catch (err) {
         onOpenModal();
-        setGoStatus("statusHistory");
-        setRespEditClient([false, "Error adding record"]);
+        setResp([false, "Error adding record"]);
       }
     });
   };
@@ -227,24 +206,21 @@ function ClientHistoryControl(props) {
             if (res.status !== 200 || res.status !== 204) {
               onOpenModal();
               dispatchClient();
-              setGoStatus("");
               setReloadInfo(history.length + 1);
-              setRespEditClient([true, "Photo edited succesfully"]);
+              setResp([true, "Photo edited succesfully"]);
               setLoaderPhoto(false);
               setTimeout(() => {
                 onCloseModal();
               }, 1000);
             } else {
               onOpenModal();
-              setGoStatus("");
-              setRespEditClient([false, "Photo can not be edited"]);
+              setResp([false, "Photo can not be edited"]);
               setLoaderPhoto(false);
             }
           } catch (err) {
             onOpenModal();
             setLoaderPhoto(false);
-            setGoStatus("");
-            setRespEditClient([false, "Error adding record"]);
+            setResp([false, "Error adding record"]);
           }
         });
         // setFileUploaded(data.key);
@@ -261,12 +237,11 @@ function ClientHistoryControl(props) {
     <ClientHistory
       myClientHistories={history}
       clientData={clientDataReload}
-      optionsStatus={optionsStatus}
-      optionsStatusListing={optionsStatusListing}
+      optionsStatusBuyer={optionsStatusBuyer}
       optionsStatusSelling={optionsStatusSelling}
       optionsStatusRent={optionsStatusRent}
       optionsReason={optionsReason}
-      respEditClient={respEditClient}
+      resp={resp}
       form={form}
       setForm={setForm}
       onCloseModal={onCloseModal}
@@ -275,7 +250,9 @@ function ClientHistoryControl(props) {
       setReloadInfo={setReloadInfo}
       upload={upload}
       loaderPhoto={loaderPhoto}
-      goStatus={goStatus}
+      Users={Users}
+      setNewHistory={setNewHistory}
+      newHistory={newHistory}
     />
   );
 }

@@ -24,10 +24,9 @@ import ReferredEditControl from "../Controllers/ReferredEdit";
 import ManagerEditController from "../Controllers/ManagerEdit";
 import SellsControl from "../Controllers/SellsControl";
 import AddClientControl from "../Controllers/addClientControl";
-import MyClientsControl from "../Controllers/myClientsControl";
-import EditClientControl from "../Controllers/editClientControl";
+import MyClientsControl from "../Controllers/clientControllers/myClientsControl";
 import logo from "../assets/realtorsBlanco.png";
-import clientHistoryControl from "../Controllers/clientHistoryControl";
+import clientHistoryControl from "../Controllers/clientControllers/clientHistoryControl";
 import AdminGraficsControl from "../Controllers/AdminGraficsControl";
 import Stadistic from "../Controllers/stadistic";
 import AddAdminControl from "../Controllers/addAdmin";
@@ -35,6 +34,7 @@ import AddReferred from "../Controllers/addReferred";
 import ChatControl from "../Controllers/chatControl";
 import ContactsControl from "../Controllers/contactsControll";
 import MessageCampaignControl from "../Controllers/MessageCampaignControl";
+import EditClientControl from "../Controllers/clientControllers/editClientControl";
 
 const AdminRouter = () => {
   const dispatch = useDispatch();

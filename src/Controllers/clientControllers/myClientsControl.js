@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import MyClients from "../Components/myClients";
+import MyClients from "../../Components/clientComponents/myClients";
 
 function MyClientsControl() {
   const userId = useSelector((state) => state.UserId);
